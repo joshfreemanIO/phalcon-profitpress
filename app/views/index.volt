@@ -11,6 +11,7 @@
         <meta name="author" content="Help Yourself Today, Inc. Team">
     </head>
     <body>
+    <p><?php $this->flashSession->output() ?></p>
         {{ content() }}
         {{ javascript_include('js/jquery.min.js') }}
         {{ javascript_include('bootstrap/js/bootstrap.js') }}

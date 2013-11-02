@@ -112,4 +112,9 @@ class OfferTemplates extends \Phalcon\Mvc\Model
             return false;
         }
     }
+
+    public function serializeAndSetFields($fields) {
+
+        $this->fields = serialize(array_keys($fields));
+    }
 }

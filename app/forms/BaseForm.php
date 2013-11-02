@@ -1,30 +1,37 @@
 <?php
 
 use Phalcon\Forms\Form,
-    Phalcon\Forms\Element\Text,
-    Phalcon\Forms\Element\Select,
     Phalcon\Forms\Element\Hidden,
     Phalcon\Forms\Element\Submit,
-    Phalcon\Validation\Validator\PresenceOf,
-    Phalcon\Validation\Validator\Identical,
-    Phalcon\Validation\Validator\StringLength;
+    Phalcon\Validation\Validator\Identical;
 
 class BaseForm extends Form
 {
 
     public $noLabel;
 
-    public function initialize()
+    public $elements;
+
+    public function __construct()
     {
+
+        $this->defaultFormUri();
+
+        // $this->add($this->setCsrf());
+
+        parent::__construct();
+
 
     }
 
     public function renderFullForm()
     {
+        echo "<form action='/" . $this->getAction() . "' method='POST'>";
         foreach ($this as $element) {
             $this->renderElement($element);
 
         }
+        echo "</form>";
     }
 
     public function renderElement($element)
@@ -36,7 +43,6 @@ class BaseForm extends Form
         $messages = $this->getMessagesFor($element->getName());
 
         if (count($messages)) {
-            //Print each element
             echo '<div class="messages">';
             foreach ($messages as $message) {
                 echo $this->flash->error($message);
@@ -47,18 +53,26 @@ class BaseForm extends Form
             echo $element;
     }
 
-    public function getBaseRoute()
+    protected function defaultFormUri()
     {
-                /** @var $router \Phalcon\Mvc\Router */
-        $router = require APPLICATION_PATH.'/routes/default.php';
-        $router->handle($url);
-        $router->setUriSource(\Phalcon\Mvc\Router::URI_SOURCE_SERVER_REQUEST_URI);
+        $controller = $this->dispatcher->getControllerName();
+        $action = $this->dispatcher-> getActionName();
 
-        /** @var $matched \Phalcon\Mvc\Router\Route */
-        $matched = $router->getMatchedRoute();
-        $paths = $matched->getPaths();
+        $this->setAction($controller . '/' . $action);
+    }
 
-        return $paths['controller'];
+    protected function setCsrf()
+    {
+        $csrf = new Hidden('csrf');
+
+        $csrf->addValidator(
+            new Identical(array(
+                'value' => $this->security->getSessionToken(),
+                'message' => 'CSRF validation failed'
+            ))
+        );
+
+        return $csrf;
     }
 
 }

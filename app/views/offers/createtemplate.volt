@@ -1,4 +1,6 @@
 <?php
 
-var_dump($url->getStaticBaseUri ());
-echo $form->renderFullForm(); ?>
+ echo $form->renderFullForm(); ?>
+
+<?php
+var_dump($success);

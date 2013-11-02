@@ -12,6 +12,8 @@ class OffersController extends ControllerBase
 
     function indexAction()
     {
+        //Set a session variable
+        $this->session->set("user-name", "Michael");
         $response = new \Phalcon\Http\Response();
         return $response->redirect("offers/create");
 
@@ -25,6 +27,10 @@ class OffersController extends ControllerBase
             $response = new \Phalcon\Http\Response();
             return $response->redirect("offers/choosetemplate");
         }
+
+        $offer_template = OfferTemplates::findFirst("offer_template_id = '$template_id'");
+
+        var_dump($offer_template->getFields());
 
     }
 
@@ -44,15 +50,30 @@ class OffersController extends ControllerBase
 
         $form = new OfferTemplateForm;
 
-        if ($this->request->isPost()) {
+        if (!$this->request->isPost()) {
+            return $this->view->form = $form;
+        }
 
-           if( $form->isValid($this->request->getPost())) {
-                var_dump($form->getMessages());
+
+        if ( $form->isValid($this->request->getPost())  ) {
+
+
+            $offer_templates = new OfferTemplates();
+
+            $offer_templates->offer_template_name =  $this->request->getPost('name');
+            $offer_templates->offer_template_type =  $this->request->getPost('type');
+            $offer_templates->serializeAndSetFields($this->request->getPost('template_options'));
+
+            if ($offer_templates->save()) {
+                $this->view->success = 'true';
+            } else {
+
+                $this->view->success = $offer_templates->getMessages();
             }
 
         }
 
-        $this->view->form = $form;
+            $this->view->form = $form;
     }
 
     public function generateTemplateForm()
