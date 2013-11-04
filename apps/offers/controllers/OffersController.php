@@ -28,7 +28,7 @@ class OffersController extends ControllerBase
 
         if ( $offer === false) {
             $response = new \Phalcon\Http\Response();
-            return $response->redirect("offers/choosetemplate");
+            return $response->redirect("/offers/choosetemplate");
         }
 
         $this->view->template_id = $offer->getOfferTemplateId;

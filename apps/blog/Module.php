@@ -63,16 +63,22 @@ class Module implements ModuleDefinitionInterface
                 return $volt;
         }, true);
 
-        $config = include(__DIR__."/config/config.php");
+        $config = include(__DIR__."/../config/config.php");
 
-        // $di->set('db', function() use ($config) {
-        //     return new \Phalcon\Db\Adapter\Pdo\Mysql(array(
-        //         "host" => $config->database->host,
-        //         "username" => $config->database->username,
-        //         "password" => $config->database->password,
-        //         "dbname" => $config->database->name
-        //     ));
-        // });
+        if ($_SERVER['SERVER_NAME'] === 'profitpress.localhost' ) {
+            $database = $config->database_1720;
+        } elseif ($_SERVER['SERVER_NAME'] === 'profitpress.server' ) {
+            $database = $config->database_pp;
+        }
+
+        $di->set('db', function() use ($database) {
+            return new \Phalcon\Db\Adapter\Pdo\Mysql(array(
+                "host" => $database->host,
+                "username" => $database->username,
+                "password" => $database->password,
+                "dbname" => $database->name
+            ));
+        });
     }
 
 }
