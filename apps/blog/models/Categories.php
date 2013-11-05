@@ -1,5 +1,6 @@
 <?php
 
+namespace ProfitPress\Blog\Models;
 
 class Categories extends \Phalcon\Mvc\Model
 {

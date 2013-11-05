@@ -1,13 +1,13 @@
 <?php
 
-namespace ProfitPress\Offers;
+namespace ProfitPress\Blog;
 
-use \Phalcon\Loader,
-    \Phalcon\Mvc\Dispatcher,
-    \Phalcon\Mvc\View,
-    \Phalcon\Mvc\ModuleDefinitionInterface;
+use Phalcon\Loader,
+    Phalcon\Mvc\Dispatcher,
+    Phalcon\Mvc\View,
+    Phalcon\Mvc\ModuleDefinitionInterface;
 
-class Module implements ModuleDefinitionInterface
+class BlogModule implements ModuleDefinitionInterface
 {
 
     /**
@@ -20,9 +20,8 @@ class Module implements ModuleDefinitionInterface
 
         $loader->registerNamespaces(
             array(
-                'ProfitPress\Offers\Controllers' => '../apps/offers/controllers/',
-                'ProfitPress\Offers\Models'      => '../apps/offers/models/',
-                'ProfitPress\Offers\Forms'      => '../apps/offers/forms/',
+                'ProfitPress\Blog\Controllers' => __ROOTDIR__.'/apps/blog/controllers/',
+                'ProfitPress\Blog\Models'      => __ROOTDIR__.'/apps/blog/models/',
             )
         );
 
@@ -37,8 +36,8 @@ class Module implements ModuleDefinitionInterface
 
         //Registering a dispatcher
         $di->set('dispatcher', function() {
-            $dispatcher = new Dispatcher();
-            $dispatcher->setDefaultNamespace("ProfitPress\Offers\Controllers");
+            $dispatcher = new \ProfitPress\Components\Dispatcher();
+            $dispatcher->setDefaultNamespace("ProfitPress\Blog\Controllers");
             return $dispatcher;
         });
 

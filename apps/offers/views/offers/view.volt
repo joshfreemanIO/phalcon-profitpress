@@ -1,5 +1,6 @@
-<?php
+<h1>Boo</h1>
 
+<?php
 
 echo $template_id;
 

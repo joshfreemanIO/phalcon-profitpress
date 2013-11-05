@@ -2,7 +2,7 @@
 
 namespace ProfitPress\Blog\Controllers;
 
-class UsersController extends Phalcon\Mvc\Controller
+class UsersController extends \Phalcon\Mvc\Controller
 {
 
 	public function indexAction()

@@ -10,7 +10,15 @@ class ControllerBase extends \Phalcon\Mvc\Controller
     {
 	    Tag::prependTitle('ProfitPress | ');
 
+	    $this->resetViewsDirectory();
+        $this->view->setViewsDir(__DIR__."/../views/");
+
     }
 
+    protected function resetViewsDirectory()
+    {
+        $module = new \ProfitPress\Offers\OffersModule;
+        $module->registerServices($this->getDi());
+    }
 
 }

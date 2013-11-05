@@ -1,50 +1,49 @@
 <?php
 
-use Phalcon\Mvc\Router,
-    Phalcon\Mvc\Application,
-    Phalcon\DI\FactoryDefault;
+use Phalcon\Mvc\Router as Router,
+    Phalcon\Mvc\Application as Application,
+    Phalcon\DI\FactoryDefault as FactoryDefault;
 
+/**
+ * Error Reporting (disable in production)
+ */
+error_reporting(E_ALL);
+
+$debug = new Phalcon\Debug();
+$debug->listen();
+
+/**
+ * Manage Constant Definitions (mostly directory shortcuts)
+ */
+require_once '../apps/config/definitions.php';
+
+/**
+ * Create Dependency Injector
+ */
 $di = new FactoryDefault();
 
-//Specify routes for modules
-$di->set('router', function () {
+/**
+ * Instantiate Application
+ */
+$application = new Application($di);
 
-    $router = new Router();
+/**
+ * Register Globally Required Namespaces
+ */
+require_once __CONFIGDIR__.'/loader.php';
 
-    $router->setDefaultModule("offers");
+/**
+ * Register Modules
+ */
+require_once __CONFIGDIR__.'/modules.php';
 
-    $router->add(":controller/:action/:parameters", array(
-    	'module' => 'offers',
-        'controller' => 1,
-        'action'     => 2,
-        'parameters' => 3,
-    ));
+/**
+ * Register Services for Dependency Injection
+ */
+require_once __CONFIGDIR__.'/services.php';
 
-    return $router;
-});
 
-try {
-
-    //Create an application
-    $application = new Application($di);
-
-    // Register the installed modules
-    $application->registerModules(
-        array(
-            'blog' => array(
-                'className' => 'ProfitPress\Blog\Module',
-                'path'      => '../apps/blog/Module.php',
-            ),
-            'offers'  => array(
-                'className' => 'ProfitPress\Offers\Module',
-                'path'      => '../apps/offers/Module.php',
-            )
-        )
-    );
-
-    //Handle the request
-    echo $application->handle()->getContent();
-
-} catch(\Exception $e){
-    echo $e->getMessage();
-}
+/**
+ * Execute Application
+ */
+echo $application->handle()->getContent();

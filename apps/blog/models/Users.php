@@ -1,7 +1,8 @@
 <?php
 
+namespace ProfitPress\Blog\Models;
 
-class Users extends \Phalcon\Mvc\Model 
+class Users extends \Phalcon\Mvc\Model
 {
 
     /**
@@ -27,7 +28,7 @@ class Users extends \Phalcon\Mvc\Model
      * Initializer method for model.
      */
     public function initialize()
-    {        
+    {
         $this->hasMany("id", "Posts", "users_id");
     }
 

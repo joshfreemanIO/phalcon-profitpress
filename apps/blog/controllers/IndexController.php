@@ -2,7 +2,6 @@
 
 namespace ProfitPress\Blog\Controllers;
 
-
 class IndexController extends BlogControllerBase
 {
 

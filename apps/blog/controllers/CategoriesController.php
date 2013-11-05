@@ -2,7 +2,6 @@
 
 namespace ProfitPress\Blog\Controllers;
 
-
 use \Phalcon\Tag as Tag,
     \Phalcon\Mvc\Model\Criteria;
 

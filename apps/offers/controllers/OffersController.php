@@ -22,32 +22,32 @@ class OffersController extends ControllerBase
 
     }
 
-    public function viewAction($offer_id)
+    public function viewAction($params)
     {
-        $offer = Offers::isValid($offer_id);
+
+        $offer = Offers::isValid($params);
 
         if ( $offer === false) {
             $response = new \Phalcon\Http\Response();
             return $response->redirect("/offers/choosetemplate");
         }
 
-        $this->view->template_id = $offer->getOfferTemplateId;
+        $this->view->params = $offer->getOfferTemplateId();
         $this->view->offer_data = $offer->getOfferData();
     }
 
-    public function createAction($template_id = 0) {
+    public function createAction($params = 0) {
 
         Tag::setTitle("Create Offer");
 
-        if ( !OfferTemplates::isValid($template_id) ) {
+        if ( !OfferTemplates::isValid($params) ) {
             $response = new \Phalcon\Http\Response();
-            return $response->redirect("offers/choosetemplate");
+            return $response->redirect("/offers/choosetemplate");
         }
 
-        $form = new OffersForm($template_id);
+        $form = new OffersForm($params);
 
         if ($this->request->isPost() && $form->isValid($this->request->getPost())  ) {
-
 
             $offer = new Offers();
 
@@ -57,11 +57,11 @@ class OffersController extends ControllerBase
 
             $offer->date_expires =  $this->request->getPost('date_expires') . '00:00:00';
 
-            $offer->offer_template_id = $template_id;
+            $offer->offer_params = $params;
 
             $offer->offer_template_type =  $this->request->getPost('type');
 
-            $offer->serializeAndSetFields($template_id, $this->request->getPost());
+            $offer->serializeAndSetFields($params, $this->request->getPost());
 
             if ($offer->save()) {
                 $this->view->success = 'true';
@@ -72,7 +72,7 @@ class OffersController extends ControllerBase
 
         }
 
-        $this->view->template_id = $template_id;
+        $this->view->params = $params;
         $this->view->form = $form;
 
     }

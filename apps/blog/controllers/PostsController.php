@@ -2,7 +2,7 @@
 
 namespace ProfitPress\Blog\Controllers;
 
-class PostsController extends Phalcon\Mvc\Controller
+class PostsController extends \Phalcon\Mvc\Controller
 {
 
 	/**
