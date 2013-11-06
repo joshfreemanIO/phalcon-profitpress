@@ -10,8 +10,10 @@ class ControllerBase extends \Phalcon\Mvc\Controller
     {
 	    Tag::prependTitle('ProfitPress | ');
 
-	    $this->resetViewsDirectory();
-        $this->view->setViewsDir(__DIR__."/../views/");
+        print_r($this->view);
+        die();
+	    // $this->resetViewsDirectory();
+        // $this->view->setViewsDir(__DIR__."/../views/");
 
     }
 

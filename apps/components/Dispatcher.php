@@ -11,12 +11,14 @@ class Dispatcher extends \Phalcon\Mvc\Dispatcher
         if(isset($forward['module']))
             $this->moduleForwarder($this->getDi(), $forward);
 
+
         parent::forward($forward);
 
     }
 
     public function beforeException($exception)
     {
+
     }
 
 
@@ -27,24 +29,25 @@ class Dispatcher extends \Phalcon\Mvc\Dispatcher
         if(!isset($modules[ $forward['module'] ])){
             throw new \Phalcon\Mvc\Dispatcher\Exception('Module ' . $forward['module'] . ' has not been registered or does not exist.');
         } else {
-        	$moduleData = $modules[ $forward['module'] ];
+            $moduleName = $forward['module'];
+        	$moduleData = $modules[ $moduleName ];
         }
 
 
         if(!isset($moduleData['metadata']['controllersNamespace'])){
-            throw new \Phalcon\Mvc\Dispatcher\Exception('Module ' . $forward['module'] . ' does not have meta data. Controller namespace must be specified.');
+            throw new \Phalcon\Mvc\Dispatcher\Exception('Module ' . $moduleName . ' does not have meta data. Controller namespace must be specified.');
         } else {
         	$controllersNamespace = $moduleData['metadata']['controllersNamespace'];
         }
 
         $this->setNamespaceName($controllersNamespace);
-        $this->setModuleName($forward['module']);
+        $this->setModuleName($moduleName);
         $this->setDefaultNamespace($controllersNamespace);
 
-        $module = new $modules[$forward['module']]['className'];
+        $module = new $modules[$moduleName]['className'];
 
         $module->registerAutoloaders();
-        $module->registerServices($di);
 
+        $di->getView()->setViewsDir(__APPSDIR__."/$moduleName/views/");
 	}
 }

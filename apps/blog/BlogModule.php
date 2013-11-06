@@ -20,8 +20,8 @@ class BlogModule implements ModuleDefinitionInterface
 
         $loader->registerNamespaces(
             array(
-                'ProfitPress\Blog\Controllers' => __ROOTDIR__.'/apps/blog/controllers/',
-                'ProfitPress\Blog\Models'      => __ROOTDIR__.'/apps/blog/models/',
+                'ProfitPress\Blog\Controllers' => __ROOTDIR__/'apps/blog/controllers/',
+                'ProfitPress\Blog\Models'      => __ROOTDIR__/'apps/blog/models/',
             )
         );
 
@@ -42,10 +42,12 @@ class BlogModule implements ModuleDefinitionInterface
         });
 
         //Registering the view component
-        $di->set('view', function() {
-            $view = new View();
+        $view = $di->get('view');
+
+        $di->set('view', function() use ($di, $view) {
+
             $view->setViewsDir(__DIR__."/views/");
-            $view->registerEngines(array(".volt" => 'volt'));
+
             return $view;
         });
 

@@ -1,11 +1,20 @@
 <?php
 
 /**
+ * Start the session the first time some component request the session service
+ */
+$di->set('session', function() {
+        $session = new \Phalcon\Session\Adapter\Files();
+        $session->start();
+        return $session;
+});
+
+/**
  * Register 'Router' component and specify application routes
  */
 $di->set('router', function () {
 
-    return include __CONFIGDIR__.'/routes.php';
+    return include __CONFIGDIR__/'routes.php';
 
 });
 
@@ -14,7 +23,8 @@ $di->set('router', function () {
  */
 $di->set('view', function() {
     $view = new \Phalcon\Mvc\View();
-    $view->setViewsDir(__APPSDIR__."/views/");
+    $view->setMainView('../../site/views/layouts/main');
+    $view->setLayoutsDir("/layouts/");
     $view->registerEngines(array(".volt" => 'volt'));
     return $view;
 });
@@ -32,15 +42,6 @@ $di->set('volt', function($view, $di) {
 
         return $volt;
 }, true);
-
-/**
- * Start the session the first time some component request the session service
- */
-$di->set('session', function() {
-        $session = new \Phalcon\Session\Adapter\Files();
-        $session->start();
-        return $session;
-});
 
 /**
  * Register 'Database' component and configure connection
@@ -63,35 +64,16 @@ $di->set('db', function() use ($database) {
     ));
 });
 
-// $di->set('dispatcher', function() use ($di) {
-
-//     $dispatcher = new ProfitPress\Components\Dispatcher();
-
-//     //Obtain the standard eventsManager from the DI
-//     $eventsManager = $di->getShared('eventsManager');
-
-//     $eventsManager->attach(
-//         "dispatch:beforeException",
-//         function($event, $dispatcher, $exception)
-//         {
-//             switch ($exception->getCode()) {
-//                 case \Phalcon\Mvc\Dispatcher::EXCEPTION_HANDLER_NOT_FOUND:
-//                 case \Phalcon\Mvc\Dispatcher::EXCEPTION_ACTION_NOT_FOUND:
-//                     $dispatcher->forward(
-//                         array(
-//                             'controller' => 'error',
-//                             'action'     => 'show404',
-//                         )
-//                     );
-//                     return false;
-//             }
-//         }
-//     );
-
-//     return $dispatcher;
-// });
-
-
+/**
+ * Provide a list of Modules for the Permalink functionality
+ */
 $di->set('modulesList', function () use ($application) {
     return $application->getModules();
+});
+
+/**
+ * Register 'Flash-Session' component
+ */
+$di->set('flash', function() {
+    return new \Phalcon\Flash\Session();
 });

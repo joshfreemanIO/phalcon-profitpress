@@ -1,7 +1,3 @@
-<h1>Boo</h1>
-
-<?php
-
-echo $template_id;
-
-var_dump($offer_data);
+<h1>Template ID: {{ offer_data['header'] }}</h1>
+<h1>Template ID: {{ template_id }}</h1>
+<p>{{ offer_data['warning_text'] }}</p>

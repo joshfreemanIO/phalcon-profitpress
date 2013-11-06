@@ -20,9 +20,9 @@ class SiteModule implements ModuleDefinitionInterface
 
         $loader->registerNamespaces(
             array(
-                'ProfitPress\Site\Controllers' => __DIR__.'/controllers',
-                'ProfitPress\Site\Models'      => __DIR__.'/models',
-                'ProfitPress\Site\Forms'       => __DIR__.'/forms',
+                'ProfitPress\Site\Controllers' => __DIR__/'controllers',
+                'ProfitPress\Site\Models'      => __DIR__/'models',
+                'ProfitPress\Site\Forms'       => __DIR__/'forms',
             )
         );
 
@@ -46,9 +46,6 @@ class SiteModule implements ModuleDefinitionInterface
                 function($event, $dispatcher, $exception)
                 {
 
-                    echo $exception->getCode();
-                    die("!!");
-
                     switch ($exception->getCode()) {
                         case \ProfitPress\Components\Dispatcher::EXCEPTION_HANDLER_NOT_FOUND:
                         case \ProfitPress\Components\Dispatcher::EXCEPTION_ACTION_NOT_FOUND:
@@ -70,12 +67,12 @@ class SiteModule implements ModuleDefinitionInterface
         });
 
         //Registering the view component
-        $di->set('view', function() {
-            $view = new View();
+        $view = $di->get('view');
+
+        $di->set('view', function() use ($di, $view) {
+
             $view->setViewsDir(__DIR__."/views/");
-            $view->setLayoutsDir('../../site/views/layouts/');
-            $view->setTemplateAfter('main');
-            $view->registerEngines(array(".volt" => 'volt'));
+
             return $view;
         });
     }

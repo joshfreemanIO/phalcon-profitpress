@@ -20,9 +20,9 @@ class OffersModule implements ModuleDefinitionInterface
 
         $loader->registerNamespaces(
             array(
-                'ProfitPress\Offers\Controllers' => __DIR__.'/controllers',
-                'ProfitPress\Offers\Models'      => __DIR__.'/models',
-                'ProfitPress\Offers\Forms'       => __DIR__.'/forms',
+                'ProfitPress\Offers\Controllers' => __DIR__/'controllers',
+                'ProfitPress\Offers\Models'      => __DIR__/'models',
+                'ProfitPress\Offers\Forms'       => __DIR__/'forms',
             )
         );
 
@@ -34,7 +34,6 @@ class OffersModule implements ModuleDefinitionInterface
      */
     public function registerServices($di)
     {
-
         //Registering a dispatcher
         $di->set('dispatcher', function() {
 
@@ -45,12 +44,12 @@ class OffersModule implements ModuleDefinitionInterface
         });
 
         //Registering the view component
-        $di->set('view', function() {
-            $view = new View();
+        $view = $di->get('view');
+
+        $di->set('view', function() use ($di, $view) {
+
             $view->setViewsDir(__DIR__."/views/");
-            $view->setLayoutsDir('../../site/views/layouts/');
-            $view->setTemplateAfter('main');
-            $view->registerEngines(array(".volt" => 'volt'));
+
             return $view;
         });
 

@@ -20,9 +20,9 @@ class PermalinkModule implements ModuleDefinitionInterface
 
         $loader->registerNamespaces(
             array(
-                'ProfitPress\Permalink\Controllers' => __ROOTDIR__.'/apps/permalink/controllers/',
-                'ProfitPress\Permalink\Models'      => __ROOTDIR__.'/apps/permalink/models/',
-                'ProfitPress\Components'            => __ROOTDIR__.'/apps/components',
+                'ProfitPress\Permalink\Controllers' => __ROOTDIR__/'apps/permalink/controllers/',
+                'ProfitPress\Permalink\Models'      => __ROOTDIR__/'apps/permalink/models/',
+                'ProfitPress\Components'            => __ROOTDIR__/'apps/components',
             )
         );
 
@@ -67,12 +67,13 @@ class PermalinkModule implements ModuleDefinitionInterface
         });
 
         //Registering the view component
-        $di->set('view', function() {
-            $view = new View();
-            $view->setViewsDir(__DIR__."/views/");
-            $view->setLayoutsDir('../../site/views/layouts/');
-            $view->setTemplateAfter('main');
-            $view->registerEngines(array(".volt" => 'volt'));
+        $view = $di->get('view');
+
+        $di->set('view', function() use ($di, $view) {
+// die();
+            // $module = $di->getRedirectModule();
+            // $view->setViewsDir(__DIR__."../$module/views/");
+
             return $view;
         });
     }

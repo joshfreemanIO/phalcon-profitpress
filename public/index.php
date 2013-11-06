@@ -42,6 +42,10 @@ require_once __CONFIGDIR__.'/modules.php';
  */
 require_once __CONFIGDIR__.'/services.php';
 
+/**
+ * Define Default Tags for views
+ */
+require_once __CONFIGDIR__.'/tags.php';
 
 /**
  * Execute Application

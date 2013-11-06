@@ -13,7 +13,7 @@ class PermalinkController extends \Phalcon\Mvc\Controller
 		$permalink_resource = Permalinks::getResources($params);
 
 		if ($permalink_resource === false) {
-			// die("!");
+
 	        return $this->dispatcher->forward(
 	        	array(
 					'module' 	 => 'site',
@@ -31,9 +31,5 @@ class PermalinkController extends \Phalcon\Mvc\Controller
 					'params'     => array('resource_id' => $permalink_resource['resource_id']),
 	        ));
 		}
-	}
-
-	public function testAction()
-	{
 	}
 }

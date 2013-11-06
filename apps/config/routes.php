@@ -8,7 +8,6 @@ $router = new \Phalcon\Mvc\Router();
 /**
  * Handle 404
  */
-
 $router->add("/:params", array(
     'module'     => 'site',
     'controller' => 'error',
@@ -18,7 +17,6 @@ $router->add("/:params", array(
 /**
  * Handle Permalinks
  */
-
 $router->add("/([a-zA-Z0-9_\-]*)", array(
     'module'     => 'permalink',
     'controller' => 'permalink',
@@ -43,7 +41,6 @@ $offers->add('/:action/:params', array(
 
 $router->mount($offers);
 
-
 /**
  * Handle 'Blog' Module-Specific Routes
  */
@@ -54,30 +51,14 @@ $blog = new \Phalcon\Mvc\Router\Group(array(
 
 $blog->setPrefix('/blog');
 
-$blog->add('/:action/:params', array(
-    'action'      => 1,
-    'params'      => 2
+$blog->add('/:controller/:action/:params', array(
+    'controller'  => 1,
+    'action'      => 2,
+    'params'      => 3
     ));
 
 
 $router->mount($blog);
-
-
-
-// $router->add("/permalink-test", array(
-//     'module'     => 'permalink',
-//     'controller' => 'permalink',
-//     'action'     => 'forward',
-//     'permalink'  => 'permalink-test'
-// ));
-
-
-// $router->add('/login', array(
-//     'module' => 'blog',
-//     'controller' => 'users',
-//     'action' => 'login',
-// ));
-
 
 $router->add("/offers/:controller/:action/:parameters", array(
     'module' => 'offers',
