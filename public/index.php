@@ -30,22 +30,22 @@ $application = new Application($di);
 /**
  * Register Globally Required Namespaces
  */
-require_once __CONFIGDIR__.'/loader.php';
+require_once __CONFIGDIR__.'loader.php';
 
 /**
  * Register Modules
  */
-require_once __CONFIGDIR__.'/modules.php';
+require_once __CONFIGDIR__.'modules.php';
 
 /**
  * Register Services for Dependency Injection
  */
-require_once __CONFIGDIR__.'/services.php';
+require_once __CONFIGDIR__.'services.php';
 
 /**
  * Define Default Tags for views
  */
-require_once __CONFIGDIR__.'/tags.php';
+require_once __CONFIGDIR__.'tags.php';
 
 /**
  * Execute Application

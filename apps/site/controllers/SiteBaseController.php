@@ -10,8 +10,6 @@ class SiteBaseController extends \Phalcon\Mvc\Controller
     {
 	    Tag::prependTitle('ProfitPress | ');
 
-        $this->view->setViewsDir(__DIR__."/../views/");
-
     }
 
 

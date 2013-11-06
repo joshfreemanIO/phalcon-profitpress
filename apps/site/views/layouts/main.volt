@@ -11,7 +11,7 @@
         <meta name="author" content="Help Yourself Today, Inc. Team">
     </head>
     <body>
-
+    <?php $this->partial(__LAYOUTDIR__."header"); ?>
 
         {{ content() }}
 <!--         {{ javascript_include('js/jquery.min.js') }}

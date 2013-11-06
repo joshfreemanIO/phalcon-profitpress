@@ -20,9 +20,9 @@ class OffersModule implements ModuleDefinitionInterface
 
         $loader->registerNamespaces(
             array(
-                'ProfitPress\Offers\Controllers' => __DIR__/'controllers',
-                'ProfitPress\Offers\Models'      => __DIR__/'models',
-                'ProfitPress\Offers\Forms'       => __DIR__/'forms',
+                'ProfitPress\Offers\Controllers' => __DIR__.'/controllers/',
+                'ProfitPress\Offers\Models'      => __DIR__.'/models/',
+                'ProfitPress\Offers\Forms'       => __DIR__.'/forms/',
             )
         );
 

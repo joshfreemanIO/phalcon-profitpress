@@ -14,7 +14,7 @@ $di->set('session', function() {
  */
 $di->set('router', function () {
 
-    return include __CONFIGDIR__/'routes.php';
+    return include __CONFIGDIR__.'routes.php';
 
 });
 
@@ -35,9 +35,10 @@ $di->set('view', function() {
 $di->set('volt', function($view, $di) {
 
         $volt = new \Phalcon\Mvc\View\Engine\Volt($view, $di);
+        // die(__ROOTDIR__."cache/volt");
 
         $volt->setOptions(array(
-                "compiledPath" => __ROOTDIR__."/cache/volt/"
+                "compiledPath" => __ROOTDIR__."cache/volt"
         ));
 
         return $volt;
@@ -47,7 +48,7 @@ $di->set('volt', function($view, $di) {
  * Register 'Database' component and configure connection
  */
 
-$config = include(__CONFIGDIR__."/config.php");
+$config = include(__CONFIGDIR__."config.php");
 
 if ($_SERVER['SERVER_NAME'] === 'profitpress.localhost' ) {
     $database = $config->database_1720;

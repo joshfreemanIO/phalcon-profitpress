@@ -20,8 +20,8 @@ class BlogModule implements ModuleDefinitionInterface
 
         $loader->registerNamespaces(
             array(
-                'ProfitPress\Blog\Controllers' => __ROOTDIR__/'apps/blog/controllers/',
-                'ProfitPress\Blog\Models'      => __ROOTDIR__/'apps/blog/models/',
+                'ProfitPress\Blog\Controllers' => __ROOTDIR__.'apps/blog/controllers/',
+                'ProfitPress\Blog\Models'      => __ROOTDIR__.'apps/blog/models/',
             )
         );
 

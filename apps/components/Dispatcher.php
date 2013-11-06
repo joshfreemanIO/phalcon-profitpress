@@ -48,6 +48,6 @@ class Dispatcher extends \Phalcon\Mvc\Dispatcher
 
         $module->registerAutoloaders();
 
-        $di->getView()->setViewsDir(__APPSDIR__."/$moduleName/views/");
+        $di->getView()->setViewsDir(__APPSDIR__."$moduleName/views/");
 	}
 }
