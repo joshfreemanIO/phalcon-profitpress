@@ -4,11 +4,11 @@ namespace ProfitPress\Site\Controllers;
 
 use \Phalcon\Tag as Tag;
 
-class SiteController extends \Phalcon\Mvc\Controller
+class SiteController extends SiteBaseController
 {
 
-	public function 404Action()
+	public function error404Action()
 	{
-
 	}
 }
+

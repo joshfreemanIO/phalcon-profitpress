@@ -36,13 +36,31 @@ class PermalinkModule implements ModuleDefinitionInterface
     {
 
         $di->set('dispatcher', function() use ($di) {
-
             $dispatcher = new \ProfitPress\Components\Dispatcher();
             $dispatcher->setDefaultNamespace("ProfitPress\Permalink\Controllers");
-            //Obtain the standard eventsManager from the DI
             $eventsManager = $di->getShared('eventsManager');
 
-            //Bind the EventsManager to the Dispatcher
+            $eventsManager->attach(
+                "dispatch:beforeException",
+                function($event, $dispatcher, $exception)
+                {
+
+                    switch ($exception->getCode()) {
+                        case \ProfitPress\Components\Dispatcher::EXCEPTION_HANDLER_NOT_FOUND:
+                        case \ProfitPress\Components\Dispatcher::EXCEPTION_ACTION_NOT_FOUND:
+
+                            $dispatcher->forward(
+                                array(
+                                    'module'     => 'site',
+                                    'controller' => 'error',
+                                    'action'     => 'error404',
+                                )
+                            );
+                            return false;
+                    }
+                }
+            );
+
             $dispatcher->setEventsManager($eventsManager);
 
             return $dispatcher;

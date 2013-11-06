@@ -25,11 +25,15 @@ class OffersController extends ControllerBase
     public function viewAction($params)
     {
 
+
         $offer = Offers::isValid($params);
 
         if ( $offer === false) {
             $response = new \Phalcon\Http\Response();
-            return $response->redirect("/offers/choosetemplate");
+            return $response->redirect(array(
+                'for'     => 'error404',
+                'params'  => 1,
+                ));
         }
 
         $this->view->params = $offer->getOfferTemplateId();

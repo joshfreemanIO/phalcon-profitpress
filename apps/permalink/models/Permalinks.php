@@ -68,12 +68,14 @@ class Permalinks extends \Phalcon\Mvc\Model
 
     	$permalink = self::findFirst("permalink = '$permalink'");
 
-    	return array(
-    		'module_name' => $permalink->module_name,
-    		'controller_name' => $permalink->controller_name,
-    		'action_name' => $permalink->action_name,
-    		'resource_id' => $permalink->resource_id,
+        if ($permalink === false)
+            return false;
 
-    		);
+    	return array(
+        		'module_name' => $permalink->module_name,
+        		'controller_name' => $permalink->controller_name,
+        		'action_name' => $permalink->action_name,
+        		'resource_id' => $permalink->resource_id,
+    	);
     }
 }

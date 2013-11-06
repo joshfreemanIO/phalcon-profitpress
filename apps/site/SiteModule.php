@@ -35,9 +35,37 @@ class SiteModule implements ModuleDefinitionInterface
     public function registerServices($di)
     {
         //Registering a dispatcher
-        $di->set('dispatcher', function() {
+        $di->set('dispatcher', function() use ($di) {
             $dispatcher = new \ProfitPress\Components\Dispatcher();
             $dispatcher->setDefaultNamespace("ProfitPress\Site\Controllers");
+
+            $eventsManager = $di->getShared('eventsManager');
+
+            $eventsManager->attach(
+                "dispatch:beforeException",
+                function($event, $dispatcher, $exception)
+                {
+
+                    echo $exception->getCode();
+                    die("!!");
+
+                    switch ($exception->getCode()) {
+                        case \ProfitPress\Components\Dispatcher::EXCEPTION_HANDLER_NOT_FOUND:
+                        case \ProfitPress\Components\Dispatcher::EXCEPTION_ACTION_NOT_FOUND:
+
+                            $dispatcher->forward(
+                                array(
+                                    'module'     => 'site',
+                                    'controller' => 'error',
+                                    'action'     => 'error404',
+                                )
+                            );
+                            return false;
+                    }
+                }
+            );
+
+            $dispatcher->setEventsManager($eventsManager);
             return $dispatcher;
         });
 

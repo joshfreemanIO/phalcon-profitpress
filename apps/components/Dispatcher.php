@@ -4,6 +4,22 @@ namespace ProfitPress\Components;
 
 class Dispatcher extends \Phalcon\Mvc\Dispatcher
 {
+
+    public function forward($forward)
+    {
+
+        if(isset($forward['module']))
+            $this->moduleForwarder($this->getDi(), $forward);
+
+        parent::forward($forward);
+
+    }
+
+    public function beforeException($exception)
+    {
+    }
+
+
 	private function moduleForwarder($di,$forward)
 	{
         $modules = $di->getModulesList();
@@ -31,16 +47,4 @@ class Dispatcher extends \Phalcon\Mvc\Dispatcher
         $module->registerServices($di);
 
 	}
-
-	public function forward($forward)
-	{
-
-
-        if(isset($forward['module']))
-            $this->moduleForwarder($this->getDi(), $forward);
-
-        parent::forward($forward);
-
-	}
-
 }

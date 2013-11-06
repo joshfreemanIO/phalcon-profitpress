@@ -5,17 +5,26 @@
  */
 $router = new \Phalcon\Mvc\Router();
 
-// $router->setDefaultController('site');
-// $router->setDefaultController('error');
-// $router->setDefaultAction('error404');
+/**
+ * Handle 404
+ */
 
-$router->add('/:module/:controller/:action/:params', array(
-    'namespace'   => 'ProfitPress\Offers\Controllers',
-    'module'      => 1,
-    'controller'  => 2,
-    'action'      => 3,
-    'params' => 4,
-    ))->setName('permalink');
+$router->add("/:params", array(
+    'module'     => 'site',
+    'controller' => 'error',
+    'action'     => 'error404',
+))->setName('error404');
+
+/**
+ * Handle Permalinks
+ */
+
+$router->add("/([a-zA-Z0-9_\-]*)", array(
+    'module'     => 'permalink',
+    'controller' => 'permalink',
+    'action'     => 'forward',
+    'permalink'  => 1
+));
 
 /**
  * Handle 'Offers' Module-Specific Routes
@@ -32,55 +41,36 @@ $offers->add('/:action/:params', array(
     'params'      => 2
     ));
 
-$offers->add('/:action', array(
-    'action' => 1,
-    ));
-
-
 $router->mount($offers);
+
 
 /**
  * Handle 'Blog' Module-Specific Routes
  */
+$blog = new \Phalcon\Mvc\Router\Group(array(
+    'module' => 'blog',
+    'controller' => 'blog',
+    ));
 
-// $offers = new \Phalcon\Mvc\Router\Group(array(
-//     'module' => 'blog',
-//     'controller' => 'offers',
-//     ));
+$blog->setPrefix('/blog');
 
-// $router->add("/blog/:controller/:action/:parameters", array(
-//     'module'     => 'offers',
-//     'controller' => 1,
-//     'action'     => 2,
-//     'parameters' => 3,
-// ));
+$blog->add('/:action/:params', array(
+    'action'      => 1,
+    'params'      => 2
+    ));
 
-// $router->removeExtraSlashes(true);
-// // $router->setDefaultModule('offers');
 
-// $router->notFound(array(
-//     'module' => 'site',
-//     'controller' => 'error',
-//     'action' => 'error404',
-//     ));
+$router->mount($blog);
 
-// $router->add("/:parameters", array(
+
+
+// $router->add("/permalink-test", array(
 //     'module'     => 'permalink',
 //     'controller' => 'permalink',
 //     'action'     => 'forward',
-//     'params' => 1
+//     'permalink'  => 'permalink-test'
 // ));
 
-/**
- * Handle Permalinks
- */
-
-$router->add("/permalink-test", array(
-    'module'     => 'permalink',
-    'controller' => 'permalink',
-    'action'     => 'forward',
-    'permalink'  => 'permalink-test'
-));
 
 // $router->add('/login', array(
 //     'module' => 'blog',
@@ -89,14 +79,20 @@ $router->add("/permalink-test", array(
 // ));
 
 
-// $router->add("/:controller/:action/:parameters", array(
-//     'module' => 'offers',
-//     'controller' => 1,
-//     'action'     => 2,
-//     'parameters' => 3,
-// ));
+$router->add("/offers/:controller/:action/:parameters", array(
+    'module' => 'offers',
+    'controller' => 1,
+    'action'     => 2,
+    'parameters' => 3,
+));
 
+$router->add("/:controller/:action/:parameters", array(
+    'module' => 'offers',
+    'controller' => 1,
+    'action'     => 2,
+    'parameters' => 3,
+));
 
+$router->removeExtraSlashes(true);
 
 return $router;
-

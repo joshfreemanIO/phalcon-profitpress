@@ -29,8 +29,7 @@ class OffersModule implements ModuleDefinitionInterface
         $loader->register();
     }
 
-    /**g service resolution¶
-Some services are used in each of the requests made to the application, eliminate the process of resolving the service could add some s
+    /**
      * Register specific services for the module
      */
     public function registerServices($di)
@@ -38,8 +37,10 @@ Some services are used in each of the requests made to the application, eliminat
 
         //Registering a dispatcher
         $di->set('dispatcher', function() {
+
             $dispatcher = new \ProfitPress\Components\Dispatcher();
             $dispatcher->setDefaultNamespace("ProfitPress\Offers\Controllers");
+
             return $dispatcher;
         });
 
