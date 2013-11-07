@@ -26,4 +26,22 @@ class Tag extends \Phalcon\Tag
 
 		return "<html$attributes>";
 	}
+
+	public static function anchor($link)
+	{
+		$uri  = (!empty($link['uri'])) ? $link['uri'] : '';
+		$text = (!empty($link['text'])) ? $link['text'] : '';
+		$attributes = '';
+
+		if (count($link) > 2)
+		{
+			foreach ($link as $attribute => $value) {
+				if ($attribute == 'uri' || $attribute == 'text')
+					continue;
+				$attributes .= " $attribute='$value'";
+			}
+		}
+
+		return "<a href='$uri'$attributes>$text</a>";
+	}
 }

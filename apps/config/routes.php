@@ -25,6 +25,15 @@ $router->add("/([a-zA-Z0-9_\-]*)", array(
 ));
 
 /**
+ * Admin
+ */
+$router->add("/admin", array(
+    'module' => 'site',
+    'controller' => 'site',
+    'action' => 'admin',
+    ));
+
+/**
  * Handle 'Offers' Module-Specific Routes
  */
 $offers = new \Phalcon\Mvc\Router\Group(array(

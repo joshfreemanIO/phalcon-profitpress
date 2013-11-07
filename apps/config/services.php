@@ -34,11 +34,11 @@ $di->set('view', function() {
  */
 $di->set('volt', function($view, $di) {
 
-        $volt = new \Phalcon\Mvc\View\Engine\Volt($view, $di);
-        // die(__ROOTDIR__."cache/volt");
+        $volt = new \ProfitPress\Components\Volt($view, $di);
 
         $volt->setOptions(array(
-                "compiledPath" => __ROOTDIR__."cache/volt"
+                "compiledPath" => __ROOTDIR__."cache/volt/",
+                'macrosFileName' => '../../site/views/layouts/macros',
         ));
 
         return $volt;
@@ -77,4 +77,15 @@ $di->set('modulesList', function () use ($application) {
  */
 $di->set('flash', function() {
     return new \Phalcon\Flash\Session();
+});
+
+/**
+ * Register 'URL' component and set base URI
+ */
+$di->set('url', function(){
+    $url = new Phalcon\Mvc\Url();
+
+    $url->setBaseUri('http://profitpress.localhost/');
+
+    return $url;
 });

@@ -71,7 +71,7 @@ class SiteModule implements ModuleDefinitionInterface
 
         $di->set('view', function() use ($di, $view) {
 
-            // $view->setViewsDir(__DIR__."/views/");
+            $view->setViewsDir(__DIR__."/views/");
 
             return $view;
         });
