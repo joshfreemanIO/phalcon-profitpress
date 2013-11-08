@@ -89,7 +89,7 @@ $di->set('flash', function() {
 $di->set('url', function(){
     $url = new Phalcon\Mvc\Url();
 
-    $url->setBaseUri('http://profitpress.localhost/');
+    $url->setBaseUri('http://'.$_SERVER['SERVER_NAME'].'/');
 
     return $url;
 });
