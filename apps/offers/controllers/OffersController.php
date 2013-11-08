@@ -22,16 +22,15 @@ class OffersController extends ControllerBase
 
     }
 
-    public function viewAction($params)
+    public function viewAction($params = null)
     {
 
         $offer = Offers::isValid($params);
 
         if ( $offer === false) {
+            $this->flash->notice("Please choose a valid offer to view");
             $response = new \Phalcon\Http\Response();
-            return $response->redirect(array(
-                'for'     => 'error404',
-                ));
+            return $response->redirect('offers/viewall');
         }
 
         $this->flash->success("Heyo!");
@@ -43,13 +42,22 @@ class OffersController extends ControllerBase
         $this->view->offer_data = $offer->getOfferData();
     }
 
+    public function viewallAction()
+    {
+        $offers = Offers::find();
+
+        $this->view->offers = $offers;
+    }
+
     public function createAction($params = 0) {
 
         Tag::setTitle("Create Offer");
 
         if ( !OfferTemplates::isValid($params) ) {
+
+            $this->flash->error("You have chosen an unavailable template, please select from below");
             $response = new \Phalcon\Http\Response();
-            return $response->redirect("/offers/choosetemplate");
+            return $response->redirect("offers/choosetemplate");
         }
 
         $form = new OffersForm($params);
@@ -71,8 +79,12 @@ class OffersController extends ControllerBase
             $offer->serializeAndSetFields($params, $this->request->getPost());
 
             if ($offer->save()) {
-                $this->view->success = 'true';
+                $this->flash->success("You have created a new offer!");
+
+                $response = new \Phalcon\Http\Response();
+                return $response->redirect("offers/choosetemplate");
             } else {
+                $this->flash->error("Please correct your data input below:");
 
                 $this->view->success = $offer->getMessages();
             }
@@ -91,8 +103,6 @@ class OffersController extends ControllerBase
         $offer_templates = OfferTemplates::find();
 
         $this->view->setVar('offer_templates', $offer_templates);
-
-
     }
 
     public function createtemplateAction()

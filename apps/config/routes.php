@@ -27,10 +27,10 @@ $router->add("/([a-zA-Z0-9_\-]*)", array(
 /**
  * Admin
  */
-$router->add("/admin", array(
+$router->add("/dashboard", array(
     'module' => 'site',
     'controller' => 'site',
-    'action' => 'admin',
+    'action' => 'dashboard',
     ));
 
 /**

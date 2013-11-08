@@ -16,6 +16,6 @@ class ErrorController extends SiteBaseController
 	{
 		$this->response->setStatusCode(404, 'Not Found');
 
-		$this->view->uri = $this->router->getRewriteUri();
+		$this->view->uri = ltrim($this->router->getRewriteUri(), '/');
 	}
 }

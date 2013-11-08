@@ -5,7 +5,3 @@
 {%- endfor %}
 </ul>
 {%- endmacro %}
-
-<?php
-echo \Phalcon\Tag::linkTo(array($link,$data['name'],$data['attributes']));
- ?>

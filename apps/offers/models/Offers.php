@@ -29,6 +29,10 @@ class Offers extends \Phalcon\Mvc\Model
      */
     protected $date_expires;
 
+    /**
+     * @var string
+     *
+     */
     protected $offer_data;
 
     /**

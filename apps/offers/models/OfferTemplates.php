@@ -108,8 +108,8 @@ class OfferTemplates extends \Phalcon\Mvc\Model
 
         $model = self::findFirst("offer_template_id = '$template_id'");
 
-        if (count($model) > 0) {
-            return true;
+        if ($model !== false) {
+            return $model;
         } else {
             return false;
         }

@@ -1,0 +1,19 @@
+.flash-messages {
+
+}
+
+.flash-message.error{
+	background-color: red;
+}
+
+.flash-message.notice{
+	background-color: yellow;
+}
+
+.flash-message.success{
+	background-color: green;
+}
+
+.flash-message.warning{
+	background-color: orange;
+}

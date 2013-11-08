@@ -1,5 +1,3 @@
-<h1>Views/Layouts/Offers!</h1>
-
-<p>Flashes: <?php $this->flash->output(); ?></p>
+<?php $this->flash->output(); ?>
 
 <?php echo $this->getContent(); ?>

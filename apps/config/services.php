@@ -47,7 +47,6 @@ $di->set('volt', function($view, $di) {
 /**
  * Register 'Database' component and configure connection
  */
-
 $config = include(__CONFIGDIR__."config.php");
 
 if ($_SERVER['SERVER_NAME'] === 'profitpress.localhost' ) {
@@ -76,7 +75,12 @@ $di->set('modulesList', function () use ($application) {
  * Register 'Flash-Session' component
  */
 $di->set('flash', function() {
-    return new \Phalcon\Flash\Session();
+    return new \Phalcon\Flash\Session(array(
+      'error'   => 'flash-message error',
+      'notice'  => 'flash-message notice',
+      'success' => 'flash-message success',
+      'warning' => 'flash-message warning',
+        ));
 });
 
 /**
