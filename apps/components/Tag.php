@@ -29,8 +29,9 @@ class Tag extends \Phalcon\Tag
 
 	public static function anchor($link)
 	{
-		$uri  = (!empty($link['uri'])) ? $link['uri'] : '';
-		$text = (!empty($link['text'])) ? $link['text'] : '';
+		$uri   = self::getUrlService()->getBaseUri();
+		$uri  .= (!empty($link['uri'])) ? $link['uri'] : '';
+		$text  = (!empty($link['text'])) ? $link['text'] : '';
 		$attributes = '';
 
 		if (count($link) > 2)

@@ -9,6 +9,7 @@ use \Phalcon\Forms\Form,
 
 class BaseForm extends Form
 {
+    public $formClass = '';
 
     public $noLabel;
 
@@ -28,7 +29,8 @@ class BaseForm extends Form
 
     public function renderFullForm()
     {
-        echo "<form action='/" . $this->getAction() . "' method='POST'>";
+        $classname = __CLASS__;
+        echo "<form action='/" . $this->getAction() . "' method='POST' class='$this->formClass'>";
         foreach ($this as $element) {
             $this->renderElement($element);
 

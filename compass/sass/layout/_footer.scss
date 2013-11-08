@@ -1,0 +1,10 @@
+@import 'compass/layout';
+@include sticky-footer(85px,"#faux-body-for-sticky-footer","#footer-clear","#main-footer");
+
+// @media only screen and (min-width: 450px) {
+// 	// @include sticky-footer(69px,"#faux-body-for-sticky-footer","#footer-clear","#main-footer");
+// }
+
+#main-footer {
+	background-color: $main-footer-background-color;
+}

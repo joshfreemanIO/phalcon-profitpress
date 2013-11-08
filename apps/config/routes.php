@@ -8,6 +8,15 @@ $router = new \Phalcon\Mvc\Router();
 /**
  * Handle 404
  */
+$router->notFound(array(
+    'module'     => 'site',
+    'controller' => 'error',
+    'action'     => 'error404',
+));
+
+/**
+ * Handle 404
+ */
 $router->add("/:params", array(
     'module'     => 'site',
     'controller' => 'error',
@@ -63,7 +72,7 @@ $blog->setPrefix('/blog');
 $blog->add('/:controller/:action/:params', array(
     'controller'  => 1,
     'action'      => 2,
-    'params'      => 3
+    'params'      => 3,
     ));
 
 

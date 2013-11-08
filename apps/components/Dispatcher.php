@@ -16,12 +16,6 @@ class Dispatcher extends \Phalcon\Mvc\Dispatcher
 
     }
 
-    public function beforeException($exception)
-    {
-
-    }
-
-
 	private function moduleForwarder($di,$forward)
 	{
         $modules = $di->getModulesList();
@@ -49,5 +43,6 @@ class Dispatcher extends \Phalcon\Mvc\Dispatcher
         $module->registerAutoloaders();
 
         $di->getView()->setViewsDir(__APPSDIR__."$moduleName/views/");
+
 	}
 }

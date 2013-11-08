@@ -1,0 +1,24 @@
+$baseline-px: 16px;
+
+@mixin remProperty($property,$size) {
+
+	$baseline-rem: $baseline-px / 1rem;
+	
+	@if $old_IE == true {
+		#{$property}: $size;
+	} @else {
+		
+		$rem-values: unquote("");
+		@each $value in $size {
+			// If the value is zero or a string or a color, return unchanged input
+			@if $value == 0 or type-of($value) == "string" or type-of($value) == "color" {
+				$rem-values: append($rem-values, $value);
+			}
+			@else {
+				$rem-values: append($rem-values, $value / $baseline-rem);
+			} 
+		}
+
+		#{$property}: $rem-values;
+	}
+}

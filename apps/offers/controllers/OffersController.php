@@ -5,7 +5,10 @@ namespace ProfitPress\Offers\Controllers;
 use \Phalcon\Tag as Tag,
     \ProfitPress\Offers\Models\OfferTemplates as OfferTemplates,
     \ProfitPress\Offers\Models\Offers as Offers,
-    \ProfitPress\Offers\Forms\OffersForm as OffersForm;
+    \ProfitPress\Offers\Forms\OffersForm as OffersForm,
+    \ProfitPress\Offers\Forms\OfferTemplateForm as OfferTemplateForm,
+    \ProfitPress\Permalink\PermalinkModule as PermalinkModule,
+    \ProfitPress\Permalink\Controllers\PermalinkController as PermalinkController;
 
 
 class OffersController extends ControllerBase
@@ -33,10 +36,6 @@ class OffersController extends ControllerBase
             return $response->redirect('offers/viewall');
         }
 
-        $this->flash->success("Heyo!");
-
-        // print_r($this->view);
-        // die();
         $this->view->setLayout('offers');
         $this->view->template_id = $offer->getOfferTemplateId();
         $this->view->offer_data = $offer->getOfferData();
@@ -62,7 +61,7 @@ class OffersController extends ControllerBase
 
         $form = new OffersForm($params);
 
-        if ($this->request->isPost() && $form->isValid($this->request->getPost())  ) {
+        if ( $this->request->isPost() && $form->isValid($this->request->getPost()) ) {
 
             $offer = new Offers();
 
@@ -70,25 +69,25 @@ class OffersController extends ControllerBase
 
             $offer->date_created = $date_created->format("Y-m-d H:i:s");
 
-            $offer->date_expires =  $this->request->getPost('date_expires') . '00:00:00';
+            $offer->date_expires = $this->request->getPost('date_expires') . ' 00:00:00';
 
-            $offer->offer_params = $params;
-
-            $offer->offer_template_type =  $this->request->getPost('type');
+            $offer->offer_template_id =  $this->request->getPost('template_id');
 
             $offer->serializeAndSetFields($params, $this->request->getPost());
 
             if ($offer->save()) {
                 $this->flash->success("You have created a new offer!");
 
+                $permalinkModule = new PermalinkModule();
+                $permalinkModule->registerAutoloaders($this->getDi());
+
+                PermalinkController::createPermalink($this->request->getPost('permalink'),'offers','offers','view',$offer->getOfferId());
+
                 $response = new \Phalcon\Http\Response();
                 return $response->redirect("offers/choosetemplate");
             } else {
                 $this->flash->error("Please correct your data input below:");
-
-                $this->view->success = $offer->getMessages();
             }
-
         }
 
         $this->view->params = $params;
@@ -113,7 +112,6 @@ class OffersController extends ControllerBase
         if (!$this->request->isPost()) {
             return $this->view->form = $form;
         }
-
 
         if ( $form->isValid($this->request->getPost())  ) {
 
@@ -140,7 +138,4 @@ class OffersController extends ControllerBase
     {
 
     }
-
-
-
 }

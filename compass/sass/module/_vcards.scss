@@ -1,0 +1,15 @@
+.vcard {
+	max-width: 70%;
+	margin: 0 auto 12px;
+
+	@include respond-to(tabletsandabove) {
+		@include remProperty('margin',0px 32px 12px);
+		@include remProperty('width',300px);
+	}
+
+}
+
+.org {
+	font-style:italic;
+}
+

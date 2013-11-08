@@ -56,13 +56,22 @@ class OffersForm extends BaseForm
         $date = new Date('date_expires');
         $date->setLabel('Date Expires');
 
+        $permalink = new Text('permalink');
+        $permalink->setLabel('Permanent Link');
+        $permalink->addValidator(new PresenceOf(array(
+            "message" => "$permalink Required",
+            )));
+
         $template_id = new Hidden('template_id',array("value" => $this->template_id));
 
         $submit = new Submit('Create New');
 
         $this->add($date);
         $this->add($template_id);
+        $this->add($permalink);
         $this->add($submit);
+
+        $this->formClass = 'offers-create';
 
     }
 

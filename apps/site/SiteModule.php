@@ -62,6 +62,7 @@ class SiteModule implements ModuleDefinitionInterface
                 }
             );
 
+
             $dispatcher->setEventsManager($eventsManager);
             return $dispatcher;
         });

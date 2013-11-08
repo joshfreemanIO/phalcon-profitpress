@@ -32,4 +32,18 @@ class PermalinkController extends \Phalcon\Mvc\Controller
 	        ));
 		}
 	}
+
+	public function createPermalink($permalink_name,$module_name,$controller_name,$action_name,$resource_id)
+	{
+
+		$permalink = new Permalinks();
+
+		$permalink->setPermalink($permalink_name);
+		$permalink->setModuleName($module_name);
+		$permalink->setControllerName($controller_name);
+		$permalink->setActionName($action_name);
+		$permalink->setResourceId($resource_id);
+
+		$permalink->save();
+	}
 }

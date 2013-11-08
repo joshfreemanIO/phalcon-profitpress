@@ -1,0 +1,30 @@
+.thedottedline {
+	float: left;
+	width: 100%;
+	@include remProperty('margin-top',16px);
+
+	@include respond-to(computersandabove) {
+		max-width: 50%;
+
+	}
+}
+
+.signature-line {
+	@include remProperty('height',10px);
+	@include remProperty('margin',12px 32px);
+	border-top: 1px dotted gray;
+	width: 80%;
+	clear: both;
+
+	@include remProperty('font-size',10px);
+	color: gray;
+
+	&:before {
+		content: "Signed Name";
+	}
+
+	&:after {
+		content: "Date";
+		float: right;
+	}
+}

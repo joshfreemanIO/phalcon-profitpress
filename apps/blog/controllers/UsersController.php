@@ -2,6 +2,11 @@
 
 namespace ProfitPress\Blog\Controllers;
 
+
+use ProfitPress\Blog\Models\Posts as Posts,
+    ProfitPress\Blog\Models\Users as Users,
+    ProfitPress\Blog\Models\Categories as Categories;
+
 class UsersController extends \Phalcon\Mvc\Controller
 {
 

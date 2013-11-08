@@ -53,8 +53,19 @@ class Posts extends \Phalcon\Mvc\Model
      */
     public function initialize()
     {
-        $this->belongsTo("users_id", "Users", "id");
-        $this->belongsTo("categories_id", "Categories", "id");
+        $this->belongsTo("users_id", "ProfitPress\Blog\Models\Users", "id");
+        $this->belongsTo("categories_id", "ProfitPress\Blog\Models\Categories", "id");
     }
+
+    public function getUsers()
+    {
+            return $this->getRelated('ProfitPress\Blog\Models\Users');
+    }
+
+    public function getCategories()
+    {
+            return $this->getRelated('ProfitPress\Blog\Models\Categories');
+    }
+
 
 }

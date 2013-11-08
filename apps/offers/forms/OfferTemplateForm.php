@@ -49,6 +49,8 @@ class OfferTemplateForm extends BaseForm
         $this->add($video_box);
         $this->add($submit);
 
+        $this->formClass = 'offer-templates';
+
     }
 
 

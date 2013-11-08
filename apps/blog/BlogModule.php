@@ -35,9 +35,33 @@ class BlogModule implements ModuleDefinitionInterface
     {
 
         //Registering a dispatcher
-        $di->set('dispatcher', function() {
+        $di->set('dispatcher', function() use ($di) {
             $dispatcher = new \ProfitPress\Components\Dispatcher();
             $dispatcher->setDefaultNamespace("ProfitPress\Blog\Controllers");
+
+            $eventsManager = $di->getShared('eventsManager');
+
+            $eventsManager->attach(
+                "dispatch:beforeException",
+                function($event, $dispatcher, $exception)
+                {
+
+                    switch ($exception->getCode()) {
+                        case \ProfitPress\Components\Dispatcher::EXCEPTION_HANDLER_NOT_FOUND:
+                        case \ProfitPress\Components\Dispatcher::EXCEPTION_ACTION_NOT_FOUND:
+
+                            $dispatcher->forward(
+                                array(
+                                    'module'     => 'site',
+                                    'controller' => 'error',
+                                    'action'     => 'error404',
+                                )
+                            );
+                            return false;
+                    }
+                }
+            );
+
             return $dispatcher;
         });
 
@@ -49,37 +73,6 @@ class BlogModule implements ModuleDefinitionInterface
             $view->setViewsDir(__DIR__."/views/");
 
             return $view;
-        });
-
-        /**
-         * Setting up volt
-         */
-        $di->set('volt', function($view, $di) {
-
-                $volt = new \Phalcon\Mvc\View\Engine\Volt($view, $di);
-
-                $volt->setOptions(array(
-                        "compiledPath" => "../cache/volt/"
-                ));
-
-                return $volt;
-        }, true);
-
-        $config = include(__DIR__."/../config/config.php");
-
-        if ($_SERVER['SERVER_NAME'] === 'profitpress.localhost' ) {
-            $database = $config->database_1720;
-        } elseif ($_SERVER['SERVER_NAME'] === 'profitpress.server' ) {
-            $database = $config->database_pp;
-        }
-
-        $di->set('db', function() use ($database) {
-            return new \Phalcon\Db\Adapter\Pdo\Mysql(array(
-                "host" => $database->host,
-                "username" => $database->username,
-                "password" => $database->password,
-                "dbname" => $database->name
-            ));
         });
     }
 

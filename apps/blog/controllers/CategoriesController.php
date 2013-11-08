@@ -3,7 +3,10 @@
 namespace ProfitPress\Blog\Controllers;
 
 use \Phalcon\Tag as Tag,
-    \Phalcon\Mvc\Model\Criteria;
+    \Phalcon\Mvc\Model\Criteria,
+    \ProfitPress\Blog\Models\Posts as Posts,
+    \ProfitPress\Blog\Models\Users as Users,
+    \ProfitPress\Blog\Models\Categories as Categories;
 
 class CategoriesController extends BlogControllerBase
 {

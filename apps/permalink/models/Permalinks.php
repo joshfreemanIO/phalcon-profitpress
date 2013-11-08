@@ -62,6 +62,30 @@ class Permalinks extends \Phalcon\Mvc\Model
     	$this->resource_id = $resource_id;
     }
 
+    public function getPermalink()
+    {
+        return $this->permalink;
+    }
+
+    public function getModuleName()
+    {
+        return $this->module_name;
+    }
+
+    public function getControllerName()
+    {
+        return $this->controller_name;
+    }
+
+    public function getActionName()
+    {
+        return $this->action_name;
+    }
+
+    public function getResourceId()
+    {
+        return $this->resource_id;
+    }
 
     public static function getResources($permalink)
     {

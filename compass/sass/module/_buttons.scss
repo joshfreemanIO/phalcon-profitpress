@@ -1,0 +1,61 @@
+.admin-button,
+.admin-button-disabled {
+	display: table-cell;
+	@include remProperty('height',100px);
+	@include remProperty('width',300px);
+	max-width: 100%;
+	color: $admin-button-color;
+	background-color: $admin-button-background-color;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.admin-button-disabled {
+	color: $admin-button-disabled-color;
+	background-color: $admin-button-disabled-background-color;
+}
+
+.admin-button-container {
+	float:left;
+	@include remProperty('margin',10px);
+		clear:left;
+	@include respond-to(computersandabove) {
+
+		&:nth-child(even) {
+			clear:none;
+		}
+	}
+}
+
+#admin-navigation {
+
+	display: block;
+	overflow: auto;
+	@include remProperty('margin',0px auto);
+	@include remProperty('padding',0px);
+
+	@include respond-to(tabletsandbelow) {
+
+		@include remProperty('width',320px);
+		max-width: 100%;
+	}
+	@include respond-to(computersandabove) {
+
+		@include remProperty('width',640px);
+		max-width: 100%;
+	}
+}
+
+.navigation-button {
+	display: table-cell;
+	@include remProperty('height',60px);
+	@include remProperty('width',150px);
+	color: $admin-button-color;
+	background-color: $admin-button-background-color;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.navigation-button-container {
+	float: left;
+}
