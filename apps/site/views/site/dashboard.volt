@@ -4,13 +4,17 @@
 {% endif %}
 
 {% if links is defined %}
-    <ul id="admin-navigation">
+<section class="row container">
     {% for link, data in links %}
-    	{% if data['noaccess'] is not false %}
-        <li class="admin-button-container"><?php echo \ProfitPress\Components\Tag::anchor($data); ?></li>
-        {% else %}
-        <li class="admin-button-container admin-button-disabled"><?php echo \ProfitPress\Components\Tag::anchor($data); ?></li>
-        {% endif %}
+    	{% if loop.index is odd or loop.first %}
+    	<div class="row">
+    	{% endif %}
+    		<div class="col-sm-6 bottom-buffer">
+	        <?php echo \ProfitPress\Components\Tag::anchor($data); ?></li>
+    		</div>
+		{% if loop.index is even or loop.last %}
+    	</div>
+    	{% endif %}
     {% endfor %}
-    </ul>
+</section>
 {% endif %}

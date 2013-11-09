@@ -21,6 +21,18 @@ class Offers extends \Phalcon\Mvc\Model
      * @var string
      *
      */
+    protected $offer_template_title;
+
+    /**
+     * @var string
+     *
+     */
+    protected $offer_theme = 'bootstrap.min.css';
+
+      /**
+     * @var string
+     *
+     */
     protected $date_created;
 
     /**
@@ -87,6 +99,16 @@ class Offers extends \Phalcon\Mvc\Model
     }
 
     /**
+     * Returns the value of field offer_title
+     *
+     * @return integer
+     */
+    public function getOfferTitle()
+    {
+        return $this->offer_title;
+    }
+
+    /**
      * Returns the value of field offer_template_id
      *
      * @return integer
@@ -126,6 +148,18 @@ class Offers extends \Phalcon\Mvc\Model
     {
         return unserialize($this->offer_data);
     }
+
+    /**
+     * Returns the value of field offer_data
+     *
+     * @return array
+     */
+
+    public function getOfferTheme()
+    {
+        return $this->offer_theme;
+    }
+
 
     /**
      * Initializer method for model.
@@ -168,5 +202,63 @@ class Offers extends \Phalcon\Mvc\Model
         $this->offer_data = serialize($data_to_store);
     }
 
+    public function getOfferLink($attribute_as_name = 'offer_id', $attributes = array())
+    {
 
+        $link = array('uri' => "offers/view/".$this->getOfferId(), 'text' => $this->$attribute_as_name);
+        return \ProfitPress\Components\Tag::anchor(array_merge($attributes, $link));
+    }
+
+    public function getDateModifiedDiff()
+    {
+        if (empty($this->date_modified))
+            return false;
+
+        $now = new \DateTime();
+        $mod = new \DateTime();
+        $mod->setTimeStamp(strtotime($this->date_modified));
+
+        $interval = $mod->diff($now);
+
+        if ($interval->s > 0) {
+
+            $diff  = $interval->s;
+            $unit = ' second';
+        }
+
+        if ($interval->i > 0) {
+
+            $diff  = $interval->i;
+            $unit = ' minute';
+        }
+
+        if ($interval->h > 0) {
+
+            $diff  = $interval->h;
+            $unit = ' hour';
+        }
+
+        if ($interval->d > 0) {
+
+            $diff  = $interval->d;
+            $unit = ' day';
+        }
+
+        if ($interval->m > 0) {
+
+            $diff  = $interval->m;
+            $unit = ' month';
+        }
+
+        if ($interval->y > 0) {
+
+            $diff  = $interval->y;
+            $unit = ' year';
+
+        }
+
+        $s = ($diff > 1 || $diff == 0) ? 's' : '';
+
+        return 'Modified ' . $diff . $unit . $s . ' ago';
+    }
 }

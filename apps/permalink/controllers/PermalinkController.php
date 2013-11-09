@@ -4,7 +4,7 @@ namespace ProfitPress\Permalink\Controllers;
 
 use  ProfitPress\Permalink\Models\Permalinks as Permalinks;
 
-class PermalinkController extends \Phalcon\Mvc\Controller
+class PermalinkController extends \ProfitPress\Components\BaseController
 {
 
 	public function forwardAction($params)

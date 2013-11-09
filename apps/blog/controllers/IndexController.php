@@ -2,7 +2,7 @@
 
 namespace ProfitPress\Blog\Controllers;
 
-class IndexController extends BlogControllerBase
+class IndexController extends \ProfitPress\Components\BaseController
 {
 
     public function indexAction()

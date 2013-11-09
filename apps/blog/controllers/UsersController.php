@@ -7,7 +7,7 @@ use ProfitPress\Blog\Models\Posts as Posts,
     ProfitPress\Blog\Models\Users as Users,
     ProfitPress\Blog\Models\Categories as Categories;
 
-class UsersController extends \Phalcon\Mvc\Controller
+class UsersController extends \ProfitPress\Components\BaseController
 {
 
 	public function indexAction()

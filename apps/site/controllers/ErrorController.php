@@ -2,9 +2,7 @@
 
 namespace ProfitPress\Site\Controllers;
 
-use \Phalcon\Tag as Tag;
-
-class ErrorController extends SiteBaseController
+class ErrorController extends \ProfitPress\Components\BaseController
 {
 
 	public function error403Action()

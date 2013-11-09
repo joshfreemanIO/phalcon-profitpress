@@ -22,6 +22,7 @@ class BlogModule implements ModuleDefinitionInterface
             array(
                 'ProfitPress\Blog\Controllers' => __ROOTDIR__.'apps/blog/controllers/',
                 'ProfitPress\Blog\Models'      => __ROOTDIR__.'apps/blog/models/',
+                'ProfitPress\Blog\Forms' => __ROOTDIR__.'apps/blog/forms/',
             )
         );
 
@@ -62,6 +63,8 @@ class BlogModule implements ModuleDefinitionInterface
                 }
             );
 
+
+            $dispatcher->setEventsManager($eventsManager);
             return $dispatcher;
         });
 

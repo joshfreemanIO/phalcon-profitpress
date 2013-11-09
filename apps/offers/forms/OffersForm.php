@@ -10,7 +10,7 @@ use \Phalcon\Forms\Form,
     \Phalcon\Forms\Element\Date,
     \ProfitPress\Offers\Models\OfferTemplates as OfferTemplates;
 
-class OffersForm extends BaseForm
+class OffersForm extends \ProfitPress\Components\BaseForm
 {
 
     public $template_id;
@@ -47,11 +47,11 @@ class OffersForm extends BaseForm
 
         $this->setFormUri($template_id);
 
+
     }
 
     public function initialize()
     {
-
 
         $date = new Date('date_expires');
         $date->setLabel('Date Expires');
@@ -59,7 +59,7 @@ class OffersForm extends BaseForm
         $permalink = new Text('permalink');
         $permalink->setLabel('Permanent Link');
         $permalink->addValidator(new PresenceOf(array(
-            "message" => "$permalink Required",
+            "message" => "Permanent Link Required",
             )));
 
         $template_id = new Hidden('template_id',array("value" => $this->template_id));
@@ -71,7 +71,7 @@ class OffersForm extends BaseForm
         $this->add($permalink);
         $this->add($submit);
 
-        $this->formClass = 'offers-create';
+        // $this->formClass = 'offers-create';
 
     }
 
@@ -82,4 +82,6 @@ class OffersForm extends BaseForm
 
         $this->setAction($controller . '/' . $action . '/' . $template_id);
     }
+
+
 }

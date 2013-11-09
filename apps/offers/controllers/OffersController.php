@@ -11,7 +11,7 @@ use \Phalcon\Tag as Tag,
     \ProfitPress\Permalink\Controllers\PermalinkController as PermalinkController;
 
 
-class OffersController extends ControllerBase
+class OffersController extends \ProfitPress\Components\BaseController
 {
 
     public function initialize()
@@ -21,7 +21,6 @@ class OffersController extends ControllerBase
 
     public function indexAction($offer_id)
     {
-
 
     }
 
@@ -39,13 +38,30 @@ class OffersController extends ControllerBase
         $this->view->setLayout('offers');
         $this->view->template_id = $offer->getOfferTemplateId();
         $this->view->offer_data = $offer->getOfferData();
+
+        if ($offer->getOfferTheme())
+            $this->view->css = 'css/'.$offer->getOfferTheme();
+
     }
 
     public function viewallAction()
     {
-        $offers = Offers::find();
 
-        $this->view->offers = $offers;
+        $page = 1;
+
+        if (preg_match('/^\d+$/', $this->dispatcher->getParam(0)) === 1)
+            $page = $this->dispatcher->getParam(0);
+
+        //Passing a resultset as data
+        $offers = new \Phalcon\Paginator\Adapter\Model(
+            array(
+                "data"  => Offers::find(),
+                "limit" => 4,
+                "page"  => $page
+            )
+        );
+
+        $this->view->offers_paginater = $offers->getPaginate();
     }
 
     public function createAction($params = 0) {
@@ -68,6 +84,8 @@ class OffersController extends ControllerBase
             $date_created = new \DateTime();
 
             $offer->date_created = $date_created->format("Y-m-d H:i:s");
+
+            $offer->date_modified = $date_created->format("Y-m-d H:i:s");
 
             $offer->date_expires = $this->request->getPost('date_expires') . ' 00:00:00';
 

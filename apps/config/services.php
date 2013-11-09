@@ -76,10 +76,11 @@ $di->set('modulesList', function () use ($application) {
  */
 $di->set('flash', function() {
     return new \Phalcon\Flash\Session(array(
-      'error'   => 'flash-message error',
-      'notice'  => 'flash-message notice',
-      'success' => 'flash-message success',
-      'warning' => 'flash-message warning',
+      'success' => 'alert alert-success',
+      'error'   => 'alert alert-danger',
+      'notice'  => 'alert alert-notice',
+      'info'    => 'alert alert-info',
+      'warning' => 'alert alert-warning',
         ));
 });
 
@@ -93,3 +94,7 @@ $di->set('url', function(){
 
     return $url;
 });
+
+$di->set('assets', function () {
+  return new Phalcon\Assets\Manager();
+}, true);

@@ -10,6 +10,7 @@ $loader->registerNamespaces(
         'ProfitPress\Offers' => __APPSDIR__.'offers',
         'ProfitPress\Blog' => __APPSDIR__.'blog',
         'ProfitPress\Site' => __APPSDIR__.'site',
+        'ProfitPress\Site\Models' => __APPSDIR__.'site/models',
         'ProfitPress\Permalink' => __APPSDIR__.'permalink',
     )
 );

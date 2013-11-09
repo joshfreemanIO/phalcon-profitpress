@@ -2,9 +2,7 @@
 
 namespace ProfitPress\Site\Controllers;
 
-use \Phalcon\Tag as Tag;
-
-class SiteBaseController extends \Phalcon\Mvc\Controller
+class SiteBaseController extends \ProfitPress\Components\BaseController
 {
     protected function initialize()
     {

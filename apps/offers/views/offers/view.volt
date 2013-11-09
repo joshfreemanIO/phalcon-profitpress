@@ -1,3 +1,9 @@
-<h1>Template ID: {{ offer_data['header'] }}</h1>
-<h1>Template ID: {{ template_id }}</h1>
-<p>{{ offer_data['warning_text'] }}</p>
+<?php
+$templates = array(
+	'5' => 'video2',
+	'6' => 'video1',
+	'9' => 'picture-2',
+	);
+$template = $templates[$template_id];
+
+$this->view->partial('offertemplates/'.$template);

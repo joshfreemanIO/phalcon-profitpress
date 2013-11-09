@@ -52,12 +52,19 @@ $offers = new \Phalcon\Mvc\Router\Group(array(
 
 $offers->setPrefix('/offers');
 
-$offers->add('/:action/:params', array(
+$offers->add('/offers/:action/{page:[0-9]+}', array(
     'action'      => 1,
-    'params'      => 2
+    'params'      => 2,
     ));
 
 $router->mount($offers);
+
+$router->add("/offers/:action/:params", array(
+    'module' =>'offers',
+    'controller' => 'offers',
+    'action'      => 1,
+    'params'      => 2,
+    ));
 
 /**
  * Handle 'Blog' Module-Specific Routes
@@ -65,6 +72,7 @@ $router->mount($offers);
 $blog = new \Phalcon\Mvc\Router\Group(array(
     'module' => 'blog',
     'controller' => 'blog',
+    'action' => 'index'
     ));
 
 $blog->setPrefix('/blog');
@@ -77,20 +85,6 @@ $blog->add('/:controller/:action/:params', array(
 
 
 $router->mount($blog);
-
-$router->add("/offers/:controller/:action/:parameters", array(
-    'module' => 'offers',
-    'controller' => 1,
-    'action'     => 2,
-    'parameters' => 3,
-));
-
-$router->add("/:controller/:action/:parameters", array(
-    'module' => 'offers',
-    'controller' => 1,
-    'action'     => 2,
-    'parameters' => 3,
-));
 
 $router->removeExtraSlashes(true);
 

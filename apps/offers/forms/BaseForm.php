@@ -7,7 +7,7 @@ use \Phalcon\Forms\Form,
     \Phalcon\Forms\Element\Submit,
     \Phalcon\Validation\Validator\Identical;
 
-class BaseForm extends Form
+class BaseForm extends \ProfitPress\Components\BaseForm
 {
     public $formClass = '';
 
@@ -29,7 +29,6 @@ class BaseForm extends Form
 
     public function renderFullForm()
     {
-        $classname = __CLASS__;
         echo "<form action='/" . $this->getAction() . "' method='POST' class='$this->formClass'>";
         foreach ($this as $element) {
             $this->renderElement($element);

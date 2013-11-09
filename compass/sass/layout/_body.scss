@@ -1,7 +1,5 @@
 #main-article {
 
-	background-color: $body-color;
-
 	@include remProperty('padding',16px);
 
 	@include respond-to(tabletsandbelow) {
