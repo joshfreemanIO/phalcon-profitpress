@@ -10,8 +10,17 @@ $router = new \Phalcon\Mvc\Router();
  */
 $router->notFound(array(
     'module'     => 'site',
-    'controller' => 'error',
-    'action'     => 'error404',
+    'controller' => 'site',
+    'action'     => 'dashboard',
+));
+
+/**
+ * Handle 404
+ */
+$router->add("", array(
+    'module'     => 'site',
+    'controller' => 'site',
+    'action'     => 'dashboard',
 ));
 
 /**
@@ -87,5 +96,14 @@ $blog->add('/:controller/:action/:params', array(
 $router->mount($blog);
 
 $router->removeExtraSlashes(true);
+
+/**
+ * Handle 404
+ */
+$router->add("/", array(
+    'module'     => 'site',
+    'controller' => 'site',
+    'action'     => 'dashboard',
+));
 
 return $router;
