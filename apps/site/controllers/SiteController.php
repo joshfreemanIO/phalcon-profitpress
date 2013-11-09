@@ -74,7 +74,7 @@ class SiteController extends \ProfitPress\Components\BaseController
 
             $this->flash->success('You have successfully updated your theme!');
         $response = new \Phalcon\Http\Response();
-        return $response->redirect('/accountinfo');
+        return $response->redirect('accountinfo');
 
 
         }
