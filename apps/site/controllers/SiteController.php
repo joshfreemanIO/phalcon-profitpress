@@ -2,6 +2,9 @@
 
 namespace ProfitPress\Site\Controllers;
 
+use ProfitPress\Site\Models\Options as Options,
+	ProfitPress\Site\Forms\OptionForm as OptionForm;
+
 class SiteController extends \ProfitPress\Components\BaseController
 {
 
@@ -24,7 +27,7 @@ class SiteController extends \ProfitPress\Components\BaseController
 		$links[] = array('data-tieraccessible' => 'false', 'class' => 'btn btn-lg btn-block', 'uri' => 'analytics', 'text' => 'View Statistics');
 		$links[] = array('data-tieraccessible' => 'false', 'class' => 'btn btn-lg btn-block', 'uri' => 'trainingResources', 'text' => 'View Training Resources');
 		$links[] = array('data-tieraccessible' => 'false', 'class' => 'btn btn-lg btn-block', 'uri' => 'VIPArea', 'text' => 'VIP Area');
-		$links[] = array('data-tieraccessible' => 'false', 'class' => 'btn btn-lg btn-block', 'uri' => 'accountInfo', 'text' => 'Account Info');
+		$links[] = array('data-tieraccessible' => 'false', 'class' => 'btn btn-lg btn-block', 'uri' => 'accountinfo', 'text' => 'Account Info');
 
 		$min_tier_level = array(
 			'offers/choosetemplate' => 1,
@@ -34,7 +37,7 @@ class SiteController extends \ProfitPress\Components\BaseController
 			'analytics' => 1,
 			'trainingResources' => 1,
 			'VIPArea' => 3,
-			'accountInfo' => 1,
+			'accountinfo' => 1,
 
 			);
 
@@ -53,4 +56,31 @@ class SiteController extends \ProfitPress\Components\BaseController
 
 		return $links;
 	}
+
+	public function accountinfoAction()
+	{
+
+        $form = new OptionForm();
+
+        if ( $this->request->isPost() && $form->isValid($this->request->getPost()) ) {
+
+            $option = new Options();
+
+            $option->options['global_css'] =  $this->request->getPost('global_css');
+
+            foreach ($option->options as $key => $value) {
+            	Options::setOption($key,$value);
+            }
+
+            $this->flash->success('You have successfully updated your theme!');
+        $response = new \Phalcon\Http\Response();
+        return $response->redirect('/accountinfo');
+
+
+        }
+
+        $this->view->form = $form;
+
+
+    }
 }

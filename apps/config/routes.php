@@ -51,6 +51,12 @@ $router->add("/dashboard", array(
     'action' => 'dashboard',
     ));
 
+$router->add("/accountinfo", array(
+    'module' => 'site',
+    'controller' => 'site',
+    'action' => 'accountinfo',
+    ));
+
 /**
  * Handle 'Offers' Module-Specific Routes
  */

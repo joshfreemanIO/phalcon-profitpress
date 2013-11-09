@@ -160,7 +160,6 @@ class Offers extends \Phalcon\Mvc\Model
         return $this->offer_theme;
     }
 
-
     /**
      * Initializer method for model.
      */
