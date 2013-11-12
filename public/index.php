@@ -15,7 +15,7 @@ $debug->listen();
 /**
  * Manage Constant Definitions (mostly directory shortcuts)
  */
-require_once '../apps/config/definitions.php';
+require_once '../config/definitions.php';
 
 /**
  * Create Dependency Injector
@@ -51,3 +51,4 @@ require_once __CONFIGDIR__.'tags.php';
  * Execute Application
  */
 echo $application->handle()->getContent();
+echo memory_get_usage();
