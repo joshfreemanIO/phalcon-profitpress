@@ -7,6 +7,8 @@ $loader = new \Phalcon\Loader();
 $loader->registerNamespaces(
     array(
         'ProfitPress\Components' => __LIBDIR__.'components',
+        'ProfitPress\Dispatcher' => __LIBDIR__.'dispatcher',
+        'ProfitPress\Security' => __LIBDIR__.'security',
         'ProfitPress\Offers' => __APPSDIR__.'offers',
         'ProfitPress\Blog' => __APPSDIR__.'blog',
         'ProfitPress\Backend' => __APPSDIR__.'backend',

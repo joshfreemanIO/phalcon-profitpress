@@ -17,7 +17,7 @@ $acl->addRole($roleGuests);
 $acl->addRole($roleOwner, $roleGuests);
 $acl->addRole($roleAdmins, $roleOwner);
 
-require_once __APPSDIR__.'permalink/config/acl.php';
-require_once __APPSDIR__.'offers/config/acl.php';
+// require_once __APPSDIR__.'permalink/config/acl.php';
+// require_once __APPSDIR__.'offers/config/acl.php';
 
-return $acl;
+// return $acl;

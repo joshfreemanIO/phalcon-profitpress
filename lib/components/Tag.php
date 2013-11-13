@@ -46,6 +46,12 @@ class Tag extends \Phalcon\Tag
 		return "<a href='$uri'$attributes>$text</a>";
 	}
 
+	public static function button($attributes)
+	{
+		$attr = self::buildAttributes($attributes);
+		return "<button$attr>".$attributes['text']."</button>";
+	}
+
 	public static function getPaginatedList($current, $last, $maxPages, $totalPages, $uri)
     {
 
@@ -73,5 +79,16 @@ class Tag extends \Phalcon\Tag
             }
         echo "<li>". \ProfitPress\Components\Tag::anchor(array('uri' => "$uri$last", 'text' => '&raquo;')) ."</li>";
         echo "</ul>";
+    }
+
+    protected static function buildAttributes($attributes)
+    {
+		foreach ($attributes as $attribute => $value) {
+			if ($attribute == 'uri' || $attribute == 'text')
+				continue;
+			$string .= " $attribute='$value'";
+		}
+
+		return $string;
     }
 }

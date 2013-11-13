@@ -36,32 +36,16 @@ class SiteModule implements ModuleDefinitionInterface
     {
         //Registering a dispatcher
         $di->set('dispatcher', function() use ($di) {
-            $dispatcher = new \ProfitPress\Components\Dispatcher();
+            $dispatcher = new \ProfitPress\Dispatcher\Dispatcher();
+
             $dispatcher->setDefaultNamespace("ProfitPress\Site\Controllers");
 
             $eventsManager = $di->getShared('eventsManager');
 
             $eventsManager->attach(
-                "dispatch:beforeException",
-                function($event, $dispatcher, $exception)
-                {
-
-                    switch ($exception->getCode()) {
-                        case \ProfitPress\Components\Dispatcher::EXCEPTION_HANDLER_NOT_FOUND:
-                        case \ProfitPress\Components\Dispatcher::EXCEPTION_ACTION_NOT_FOUND:
-
-                            $dispatcher->forward(
-                                array(
-                                    'module'     => 'site',
-                                    'controller' => 'error',
-                                    'action'     => 'error404',
-                                )
-                            );
-                            return false;
-                    }
-                }
+                'dispatch',
+                new \ProfitPress\Dispatcher\DispatcherListener()
             );
-
 
             $dispatcher->setEventsManager($eventsManager);
             return $dispatcher;
@@ -78,15 +62,17 @@ class SiteModule implements ModuleDefinitionInterface
         });
 
         /**
-         * Set access control for module
+         * Register 'Authorizer' Component
          */
-        // $acl = $di->get('acl');
+        $di->set('authorizer', function() use ($di) {
 
-        $di->set('acl', function() use ($di) {
+            $authorizer = new \ProfitPress\Security\Authorizer($di);
+            $authorizer->setConfigPath(__DIR__.'/config/AccessControlList.php');
 
-            $acl = new \ProfitPress\Components\ACL($di);
+            $eventsManager = $di->getShared('eventsManager');
+            $authorizer->setEventsManager($eventsManager);
 
-            return $acl;
+            return $authorizer;
         });
     }
 }

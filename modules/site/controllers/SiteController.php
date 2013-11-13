@@ -31,7 +31,7 @@ class SiteController extends \ProfitPress\Components\BaseController
 
 		$min_tier_level = array(
 			'offers/choosetemplate' => 1,
-			'offers/viewoffers' => 1,
+			'offers/viewall' => 1,
 			'blog/posts/create' => '1+',
 			'blog/posts/viewall' => '1+',
 			'analytics' => 1,
@@ -45,14 +45,17 @@ class SiteController extends \ProfitPress\Components\BaseController
 
 			if ($min_tier_level[$linkArray['uri']] <= $tier_level) {
 				$linkArray['class'] .= ' btn-default';
-				$linkArray['title'] .= $linkArray['text'];
+				$linkArray['title'] = $linkArray['text'];
 				$linkArray['data-tieraccessible'] = 'true';
 			} else {
 				$linkArray['uri'] = 'upgradetierlevel';
 				$linkArray['class'] .= ' btn-warning';
-				$linkArray['title'] = 'Increase Your Tier Level to access these features!';
+				$linkArray['data-toggle'] = 'modal';
+				$linkArray['data-target'] = '#myModal';
+				$this->view->modal = true;
 			}
 		}
+
 
 		return $links;
 	}

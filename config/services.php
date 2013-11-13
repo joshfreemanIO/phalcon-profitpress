@@ -5,7 +5,11 @@
  */
 $di->set('session', function() {
         $session = new \Phalcon\Session\Adapter\Files();
-        $session->start();
+
+        if (!$session->isStarted()) {
+          $session->start();
+        }
+
         return $session;
 });
 
