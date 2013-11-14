@@ -6,7 +6,7 @@ return new \Phalcon\Config(array(
                 'host'     => 'localhost',
                 'port'     => '3306',
                 'username' => 'profitpress_main',
-                'password' => 'js$5=Kntoc7A-$mSh[B1NSa',
+                'password' => 'C8jTTCWZPpLY2UTU',
                 'dbname'   => 'profitpress_main',
         ),
 
