@@ -1,9 +1,9 @@
 <?php
 
-namespace ProfitPress\Backend\Models;
+namespace ProfitPress\Account\Models;
 
 
-class DatabaseConnections extends BackendBaseModel
+class DatabaseConnections extends AccountBaseModel
 {
 
 	protected $database_connection_id;
@@ -17,6 +17,10 @@ class DatabaseConnections extends BackendBaseModel
 	protected $username;
 
 	protected $password;
+
+	public function initialize()
+	{
+	}
 
 	public static function getDatabaseConnectionArray($database_connection_id = 1)
 	{

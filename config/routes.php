@@ -57,6 +57,13 @@ $router->add("/accountinfo", array(
     'action' => 'accountinfo',
     ));
 
+
+$router->add("/createaccount", array(
+    'module' => 'account',
+    'controller' => 'account',
+    'action' => 'create',
+    ));
+
 /**
  * Handle 'Offers' Module-Specific Routes
  */

@@ -55,9 +55,6 @@ class PermalinkModule implements ModuleDefinitionInterface
         $view = $di->get('view');
 
         $di->set('view', function() use ($di, $view) {
-// die();
-            // $module = $di->getRedirectModule();
-            // $view->setViewsDir(__DIR__."../$module/views/");
 
             return $view;
         });

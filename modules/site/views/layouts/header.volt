@@ -32,4 +32,5 @@ if ($this->session->get('authenticated') === true) {
         </ul>
       </li>
     </ul>
+  </div>
 </nav>

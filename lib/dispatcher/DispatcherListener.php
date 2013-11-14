@@ -9,7 +9,10 @@ class DispatcherListener
 		$controller_name = $dispatcher->getControllerName();
 		$action_name = $dispatcher->getActionName();
 
-		$dispatcher->getDi()->getAuthorizer()->isAllowed($controller_name,$action_name, $dispatcher);
+		$di = $dispatcher->getDi();
+
+		if (isset($di['authorizer']))
+			$dispatcher->getDi()->getAuthorizer()->isAllowed($controller_name,$action_name, $dispatcher);
 	}
 
 	public function beforeException($event, $dispatcher, $exception)

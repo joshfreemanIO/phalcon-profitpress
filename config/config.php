@@ -5,9 +5,9 @@ return new \Phalcon\Config(array(
                 'adapter'  => 'mysql',
                 'host'     => 'localhost',
                 'port'     => '3306',
-                'username' => 'profitpress_0001',
-                'password' => 'UjsRXJSxvxxhAS5K',
-                'dbname'   => 'profitpress_0001',
+                'username' => 'profitpress_main',
+                'password' => 'js$5=Kntoc7A-$mSh[B1NSa',
+                'dbname'   => 'profitpress_main',
         ),
 
         'database_1720' => array(

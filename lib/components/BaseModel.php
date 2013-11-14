@@ -13,19 +13,19 @@ class BaseModel extends Model
         $this->setConnectionService('dbapplication');
 	}
 
-	// public function set($property, $value)
-	// {
-	// 	if(!property_exists($this, $property))
-	// 		throw new \Phalcon\Exception($property.' does not exist in '.__CLASS__);
+	public function set($property, $value)
+	{
+		if(!property_exists($this, $property))
+			throw new \Phalcon\Exception($property.' does not exist in '.__CLASS__);
 
-	// 	$this->$property = $value;
-	// }
+		$this->$property = $value;
+	}
 
-	// public function get($property, $value)
-	// {
-	// 	if(!property_exists($this, $property))
-	// 		throw new \Phalcon\Exception($property.' does not exist in '.__CLASS__);
+	public function get($property, $value)
+	{
+		if(!property_exists($this, $property))
+			throw new \Phalcon\Exception($property.' does not exist in '.__CLASS__);
 
-	// 	return $this->$property;
-	// }
+		return $this->$property;
+	}
 }

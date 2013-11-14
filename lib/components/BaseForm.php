@@ -30,26 +30,28 @@ class BaseForm extends Form
     public function renderFullForm()
     {
         echo "<form action='/" . $this->getAction() . "' method='POST' class='$this->formClass' role='form'>";
+
         foreach ($this as $element) {
             $this->renderElement($element);
 
         }
+
         echo "</form>";
     }
 
     public function renderElement($element)
     {
-        $message = $this->getMessagesFor($element->getName());
+        $messages = $this->getMessagesFor($element->getName());
+            $val = $this->request->getPost($element->getName());
 
-        if (count($message)) {
-            $element->setAttribute('placeHolder', $message[0]->getMessage());
-            echo '<div class="form-group has-error">';
+        if (count($messages)) {
+            echo '<div class="form-group has-error well">';
         } else {
             echo '<div class="form-group">';
         }
 
         if (!in_array(get_class($element), $this->noLabel)) {
-            $this->renderLabel($element, array('class' => 'control-label col-sm-3'));
+            $this->renderLabel($element, array('class' => 'control-label col-sm-3'),$messages);
         }
 
         if(get_class($element) === 'Phalcon\Forms\Element\Submit') {
@@ -62,14 +64,14 @@ class BaseForm extends Form
         }
 
         echo $element;
+        $this->buildMessages($messages);
+
         echo "</div></div>";
     }
 
     public function renderLabel($element, $attributesArray)
     {
         $attributes = '';
-
-        $attributesArray['for'] = $element->getName();
 
         if (!empty($attributesArray)) {
             foreach ($attributesArray as $attribute => $value) {
@@ -97,6 +99,21 @@ class BaseForm extends Form
         );
 
         return $csrf;
+    }
+
+    protected function buildMessages($messages)
+    {
+        if (count($messages) < 1)
+            return false;
+
+        echo '<dl class="dl-horizontal">';
+        echo '<dt class="input-group input-group-large"><span class="input-group-addon input-group-addon "><span class="glyphicon glyphicon-warning-sign"></span></span></dt>';
+        foreach ($messages as $message) {
+            echo '<dd>';
+            echo $message->getMessage();
+            echo '</dd>';
+        }
+        echo '</dl>';
     }
 
 }

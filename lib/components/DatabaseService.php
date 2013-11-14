@@ -62,6 +62,6 @@ class DatabaseService extends Component
 
 	protected function getApplicationDatabase()
 	{
-		return \ProfitPress\Backend\Models\DatabaseConnections::getDatabaseConnectionArray(1);
+		return \ProfitPress\Account\Models\DatabaseConnections::getDatabaseConnectionArray(1);
 	}
 }

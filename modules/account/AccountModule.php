@@ -1,13 +1,13 @@
 <?php
 
-namespace ProfitPress\Backend;
+namespace ProfitPress\Account;
 
 use \Phalcon\Loader,
     \Phalcon\Mvc\Dispatcher,
     \Phalcon\Mvc\View,
     \Phalcon\Mvc\ModuleDefinitionInterface;
 
-class BackendModule implements ModuleDefinitionInterface
+class AccountModule implements ModuleDefinitionInterface
 {
 
     /**
@@ -20,9 +20,9 @@ class BackendModule implements ModuleDefinitionInterface
 
         $loader->registerNamespaces(
             array(
-                'ProfitPress\Backend\Controllers' => __DIR__.'/controllers',
-                'ProfitPress\Backend\Models'      => __DIR__.'/models',
-                'ProfitPress\Backend\Forms'       => __DIR__.'/forms',
+                'ProfitPress\Account\Controllers' => __DIR__.'/controllers',
+                'ProfitPress\Account\Models'      => __DIR__.'/models',
+                'ProfitPress\Account\Forms'       => __DIR__.'/forms',
             )
         );
 
@@ -38,7 +38,7 @@ class BackendModule implements ModuleDefinitionInterface
         $di->set('dispatcher', function() use ($di) {
             $dispatcher = new \ProfitPress\Dispatcher\Dispatcher();
 
-            $dispatcher->setDefaultNamespace("ProfitPress\Backend\Controllers");
+            $dispatcher->setDefaultNamespace("ProfitPress\Account\Controllers");
 
             $eventsManager = $di->getShared('eventsManager');
 
@@ -51,10 +51,6 @@ class BackendModule implements ModuleDefinitionInterface
             return $dispatcher;
         });
 
-
-            $dispatcher->setEventsManager($eventsManager);
-            return $dispatcher;
-        });
 
         //Registering the view component
         $view = $di->get('view');
