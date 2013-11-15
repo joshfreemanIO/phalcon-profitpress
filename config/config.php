@@ -18,6 +18,16 @@ return new \Phalcon\Config(array(
                 'password' => 'EBBFhDv2NMpVc59h',
                 'dbname'   => 'profitpress_main',
         ),
+
+        'database_creator' => array(
+                'adapter'  => 'Mysql',
+                'host'     => 'localhost',
+                'port'     => '3306',
+                'username' => 'pp_creator',
+                'password' => 'AJsv34GK8V996xcy',
+                'dbname'   => 'pp_creator',
+        ),
+
         'application' => array(
                 'controllersDir' => __DIR__.'../app/controllers/',
                 'modelsDir'      => __DIR__.'../app/models/',

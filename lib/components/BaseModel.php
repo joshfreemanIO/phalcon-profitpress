@@ -8,6 +8,17 @@ use Phalcon\Mvc\Model,
 class BaseModel extends Model
 {
 
+	public function getSource()
+	{
+		preg_match('/[\w+]+$/', get_class($this), $matches);
+
+		$class = $matches[0];
+    	$class = preg_replace( '/([a-z0-9])([A-Z])/', "$1_$2", $class );
+    	$class = strtolower($class);
+
+		return 'profitpress_'.$class;
+	}
+
 	public function onConstruct()
 	{
         $this->setConnectionService('dbapplication');

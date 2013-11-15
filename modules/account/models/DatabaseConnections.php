@@ -2,6 +2,11 @@
 
 namespace ProfitPress\Account\Models;
 
+/**
+ * Validators
+ */
+use Phalcon\Mvc\Model\Validator\Regex,
+    Phalcon\Mvc\Model\Validator\Uniqueness;
 
 class DatabaseConnections extends AccountBaseModel
 {
@@ -18,26 +23,86 @@ class DatabaseConnections extends AccountBaseModel
 
 	protected $password;
 
+	protected $dbname;
+
 	public function initialize()
 	{
+		$this->hasOne('database_connection_id', 'Accounts', 'database_connection_id', array(
+			'alias' => 'Account'));
 	}
 
-	public static function getDatabaseConnectionArray($database_connection_id = 1)
+	public function getDatabaseConnectionArray()
 	{
-
-		$condition = 'database_connection_id = :database_connection_id:';
-		$bind = array('database_connection_id' => $database_connection_id);
-
-		$db = self::findFirst('database_connection_id = 1');//array($condition, 'bind'=>$bind));
-
 		return (object) array(
-                'adapter'  => $db->adapter,
-                'host'     => $db->host,
-                'port'     => $db->port,
-                'username' => $db->username,
-                'password' => $db->password,
-                'dbname'     => $db->database_name,
+                'adapter'  => $this->adapter,
+                'host'     => $this->host,
+                'port'     => $this->port,
+                'username' => $this->username,
+                'password' => $this->password,
+                'dbname'   => $this->dbname,
 			);
 	}
 
+
+	public static function createNewConnection()
+	{
+		$connection = new self();
+
+		$id = self::maximum(array('column' => 'database_connection_id')) + 1;
+
+		$name = 'pp_'.$id;
+
+		$password = \ProfitPress\Security\Authenticator::generatePassword();
+
+		$connection->set('adapter', 'mysql');
+		$connection->set('host', 'localhost');
+		$connection->set('port', 3306);
+		$connection->set('username', $name);
+		$connection->set('password', $password);
+		$connection->set('dbname', $name);
+
+		if ($connection->validation()) {
+			return $connection;
+		}
+	}
+
+	public function validation()
+	{
+
+		$this->validate(new Regex (array(
+			'field' => 'port',
+			'pattern' => '/^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$/',
+			)));
+
+		return $this->validationHasFailed() != true;
+	}
+
+	public function createDatabase()
+	{
+
+		$dbname   = $this->dbname;
+		$username = $this->username;
+		$password = $this->password;
+
+		$dbconfig = require_once(__APPSDIR__."account/config/config.php");
+
+		$connection = new \Phalcon\Db\Adapter\Pdo\Mysql((array) $dbconfig->database_creator);
+
+		$sql  = "CREATE DATABASE `$dbname`;";
+
+		$sql .= "CREATE USER '$username'@'localhost' IDENTIFIED BY '$password';";
+
+		$sql .= "GRANT ALL ON `$dbname`.* TO '$username'@'localhost';";
+
+		$sql .= "FLUSH PRIVILEGES;";
+
+		$connection->execute($sql);
+
+		$connection2 = new \Phalcon\Db\Adapter\Pdo\Mysql((array) $this->getDatabaseConnectionArray());
+
+		$schema = file_get_contents(__ROOTDIR__.'schema/schema.sql');
+
+		$connection2->execute($schema);
+
+	}
 }

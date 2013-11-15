@@ -6,7 +6,6 @@ namespace ProfitPress\Offers\Models;
 class OfferTemplates extends \ProfitPress\Components\BaseModel
 {
 
-
     /**
      * @var string
      *

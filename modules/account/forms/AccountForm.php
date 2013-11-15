@@ -11,6 +11,7 @@ use \Phalcon\Forms\Element\Text,
 
 Use \Phalcon\Validation\Validator\PresenceOf,
     \Phalcon\Validation\Validator\Email,
+    \Phalcon\Validation\Validator\Regex,
     \Phalcon\Validation\Validator\InclusionIn,
     \Phalcon\Validation\Validator\StringLength;
 

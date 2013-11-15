@@ -51,4 +51,3 @@ require_once __CONFIGDIR__.'tags.php';
  * Execute Application
  */
 echo $application->handle()->getContent();
-echo memory_get_usage();

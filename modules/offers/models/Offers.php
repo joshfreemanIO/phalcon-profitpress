@@ -5,7 +5,6 @@ namespace ProfitPress\Offers\Models;
 class Offers extends \ProfitPress\Components\BaseModel
 {
 
-
     /**
      * @var integer
      *
