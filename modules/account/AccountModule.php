@@ -61,19 +61,5 @@ class AccountModule implements ModuleDefinitionInterface
 
             return $view;
         });
-
-        /**
-         * Register 'Authorizer' Component
-         */
-        $di->set('authorizer', function() use ($di) {
-
-            $authorizer = new \ProfitPress\Security\Authorizer($di);
-            $authorizer->setConfigPath(__DIR__.'/config/AccessControlList.php');
-
-            $eventsManager = $di->getShared('eventsManager');
-            $authorizer->setEventsManager($eventsManager);
-
-            return $authorizer;
-        });
     }
 }

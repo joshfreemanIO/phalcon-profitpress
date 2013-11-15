@@ -3,159 +3,177 @@
 namespace ProfitPress\Security;
 
 use Phalcon\Mvc\User\Component,
-    Phalcon\DiInterface,
-    Phalcon\Acl as PhAcl,
-    Phalcon\Acl\Resource as AclResource,
-    Phalcon\Acl\Adapter\Memory as AclMemory,
-    Phalcon\Events\EventsAwareInterface;
+		Phalcon\DiInterface,
+		Phalcon\Acl as PhAcl,
+		Phalcon\Acl\Resource as AclResource,
+		Phalcon\Acl\Adapter\Memory as AclMemory,
+		Phalcon\Events\EventsAwareInterface;
 
 class Authorizer extends Component implements EventsAwareInterface
 {
-    protected $_di;
+	protected $_di;
 
-    protected $_config_path;
+	protected $_config_path;
 
-	protected $_acl_roles = '/var/www/profitpress/config/aclroles.php';
+	protected $_acl_roles = '/var/www/profitpress/config/AccessControlList.php';
 
-    /**
-     * Shared application EventsManager
-     * @var object
-     */
-    protected $_eventsManager;
+	/**
+	 * Shared application EventsManager
+	 * @var object
+	 */
+	protected $_eventsManager;
 
-    protected $_acl;
+	/**
+	 * Phalcon Access Control List
+	 * @var object
+	 */
+	protected $_acl;
 
-    public function __construct($di)
-    {
-        $this->_di = $di;
-    }
+	public function __construct($di)
+	{
+			$this->_di = $di;
+	}
 
-    public function setConfigPath($config_path)
-    {
-        $this->_config_path = $config_path;
-    }
+	public function setConfigPath($config_path)
+	{
+			$this->_config_path = $config_path;
+	}
 
-    /**
-     * Checks if the current profile is allowed to access a resource
-     *
-     * @param string $profile
-     * @param string $controller
-     * @param string $action
-     * @return boolean
-     */
-    public function isAllowed($controller, $action, $dispatcher, $nofollow = false)
-    {
-        $profile = $this->getRole();
+	/**
+	 * Checks if the current profile is allowed to access a resource
+	 *
+	 * @param string $profile
+	 * @param string $controller
+	 * @param string $action
+	 * @return boolean
+	 */
+	public function isAllowed($controller, $action, $dispatcher = null)
+	{
+		$role = $this->getRole();
 
-        if ($this->getAcl()->isAllowed($profile, $controller, $action)) {
-            return true;
-        } else {
+		if ($this->getAcl()->isAllowed($role, $controller, $action)) {
+			return true;
+		} else {
 
-            if ($nofollow) {
-                return false;
-            } else {
-                $this->_eventsManager->fire('authorizer:forbidden', $dispatcher);
-            }
-        }
-    }
+			if (empty($dispatcher)) {
+				return false;
+			} else if ($role === 'Guest') {
+				$this->_eventsManager->fire('dispatch:unauthenticated', $dispatcher);
+			} else {
+				$this->_eventsManager->fire('dispatch:forbidden', $dispatcher);
+			}
+		}
+	}
 
-    /**
-     * Returns the ACL list
-     *
-     * @return Phalcon\Acl\Adapter\Memory
-     */
-    protected function getAcl()
-    {
+	public function isAvailable($controller, $action)
+	{
+		$role = $this->session->get('tier_level');
 
-        if (is_object($this->_acl)) {
-                return $this->_acl;
-        }
+		return $this->getAcl()->isAllowed($role, $controller, $action);
+	}
 
-        if (!$this->getCachedACL()) {
-            $this->_acl = $this->rebuild();
-        }
+	/**
+	 * Returns the ACL list
+	 *
+	 * @return Phalcon\Acl\Adapter\Memory
+	 */
+	protected function getAcl()
+	{
 
-        return $this->_acl;
-    }
+			if (is_object($this->_acl)) {
+							return $this->_acl;
+			}
 
-    /**
-     * Rebuilds the access list into a file
-     *
-     */
-    public function rebuild()
-    {
-        $acl = new AclMemory();
+			if (!$this->getCachedACL()) {
+					$this->_acl = $this->rebuild();
+			}
 
-        require_once($this->_config_path);
-        // $this->cacheACL();
-        // if (is_writable(__DIR__ . $this->_filePath)) {
+			return $this->_acl;
+	}
 
-        //         file_put_contents(__DIR__ . $this->_filePath, serialize($acl));
+	/**
+	 * Rebuilds the access list into a file
+	 *
+	 */
+	public function rebuild()
+	{
+			$acl = new AclMemory();
 
-        //         //Store the ACL in APC
-        //         if (function_exists('apc_store')) {
-        //                 apc_store('vokuro-acl', $acl);
-        //         }
+			require_once($this->_config_path);
+			// $this->cacheACL();
+			// if (is_writable(__DIR__ . $this->_filePath)) {
 
-        // } else {
-        //         $this->flash->error('The user does not have write permissions');
-        // }
+			//         file_put_contents(__DIR__ . $this->_filePath, serialize($acl));
 
-        return $acl;
-    }
+			//         //Store the ACL in APC
+			//         if (function_exists('apc_store')) {
+			//                 apc_store('vokuro-acl', $acl);
+			//         }
 
-    public function cacheACL()
-    {
-        $backcache = new Phalcon\Cache\Backend\Data(array(
-            'lifetime' => 172800
-        ));
+			// } else {
+			//         $this->flash->error('The user does not have write permissions');
+			// }
 
-        $cache = new \Phalcon\Cache\Backend\File($backcache, array(
-          'prefix' => 'app-data',
-          'cacheDir' => '/var/www/profitpress/cache/acl/',
-        ));
+			return $acl;
+	}
 
-        $cache->save('my-data', array(1, 2, 3, 4, 5));
+	public function cacheACL()
+	{
+			$backcache = new Phalcon\Cache\Backend\Data(array(
+					'lifetime' => 172800
+			));
 
-        return false;
-    }
+			$cache = new \Phalcon\Cache\Backend\File($backcache, array(
+				'prefix' => 'app-data',
+				'cacheDir' => '/var/www/profitpress/cache/acl/',
+			));
 
-    public function getCachedACL()
-    {
-        return false;
-        $cache = new \Phalcon\Cache\Backend\File($backcache, array(
-          'prefix' => 'app-data',
-          'cacheDir' => '/var/www/profitpress/cache/acl/',
-        ));
+			$cache->save('my-data', array(1, 2, 3, 4, 5));
 
-        $data = $cache->get('my-data');
-        return $data;
+			return false;
+	}
 
-    }
+	public function getCachedACL()
+	{
+			return false;
+			$cache = new \Phalcon\Cache\Backend\File($backcache, array(
+				'prefix' => 'app-data',
+				'cacheDir' => '/var/www/profitpress/cache/acl/',
+			));
 
-    protected function getRole()
-    {
-        if (!$this->_di->getSession()->get('role'))
-            return 'Guest';
+			$data = $cache->get('my-data');
+			return $data;
 
-        return $this->_di->getSession()->get('role');
-    }
+	}
 
-    /**
-     * Set the event manager, required by EventAwareInterface
-     * @param object $eventsManager
-     */
-    public function setEventsManager($eventsManager)
-    {
-        $this->_eventsManager = $eventsManager;
-    }
+	protected function getRole()
+	{
+			if (!$this->_di->getSession()->get('role'))
+					return 'Guest';
 
-    /**
-     * Get the event manager, required by EventAwareInterface
-     * @return object The events manager
-     */
-    public function getEventsManager()
-    {
-        return $this->_eventsManager;
-    }
+			return $this->_di->getSession()->get('role');
+	}
+
+	protected function getTierLevel()
+	{
+			return $this->_di->getSession()->get('tier_level');
+	}
+
+	/**
+	 * Set the event manager, required by EventAwareInterface
+	 * @param object $eventsManager
+	 */
+	public function setEventsManager($eventsManager)
+	{
+			$this->_eventsManager = $eventsManager;
+	}
+
+	/**
+	 * Get the event manager, required by EventAwareInterface
+	 * @return object The events manager
+	 */
+	public function getEventsManager()
+	{
+		return $this->_eventsManager;
+	}
 }

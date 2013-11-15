@@ -61,18 +61,15 @@ class SiteModule implements ModuleDefinitionInterface
             return $view;
         });
 
-        /**
-         * Register 'Authorizer' Component
-         */
-        $di->set('authorizer', function() use ($di) {
+        $di->set('security', function(){
 
-            $authorizer = new \ProfitPress\Security\Authorizer($di);
-            $authorizer->setConfigPath(__DIR__.'/config/AccessControlList.php');
+            $security = new \Phalcon\Security();
 
-            $eventsManager = $di->getShared('eventsManager');
-            $authorizer->setEventsManager($eventsManager);
+            //Set the password hashing factor to 12 rounds
+            $security->setWorkFactor(12);
 
-            return $authorizer;
-        });
+            return $security;
+        }, true);
+
     }
 }

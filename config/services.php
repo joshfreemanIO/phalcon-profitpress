@@ -1,13 +1,32 @@
 <?php
+/**
+ * Register 'Database' component and configure connection
+ */
+\ProfitPress\Components\DatabaseService::getLoadedDI();
+
+/**
+ * Provide a list of Modules for the Permalink functionality
+ */
+$di->set('modulesList', function () use ($application) {
+    return $application->getModules();
+});
 
 /**
  * Start the session the first time some component request the session service
  */
-$di->set('session', function() {
+$di->setShared('session', function() {
         $session = new \Phalcon\Session\Adapter\Files();
 
-        if (!$session->isStarted()) {
-          $session->start();
+        $session->start();
+
+        if (!$session->has('tier_level')) {
+          $tier_level = \ProfitPress\Account\Models\Accounts::getCurrentTierLevel();
+          $session->set('tier_level',  $tier_level);
+        }
+
+        if (!$session->has('role')) {
+          $tier_level = \ProfitPress\Account\Models\Accounts::getCurrentTierLevel();
+          $session->set('Guest',  $tier_level);
         }
 
         return $session;
@@ -48,17 +67,6 @@ $di->set('volt', function($view, $di) {
         return $volt;
 }, true);
 
-/**
- * Register 'Database' component and configure connection
- */
-\ProfitPress\Components\DatabaseService::getLoadedDI();
-
-/**
- * Provide a list of Modules for the Permalink functionality
- */
-$di->set('modulesList', function () use ($application) {
-    return $application->getModules();
-});
 
 /**
  * Register 'Flash-Session' component
@@ -91,3 +99,19 @@ $di->set('url', function(){
 $di->set('assets', function () {
   return new Phalcon\Assets\Manager();
 }, true);
+
+
+
+/**
+ * Register 'Authorizer' Component
+ */
+$di->setShared('authorizer', function() use ($di) {
+
+    $authorizer = new \ProfitPress\Security\Authorizer($di);
+    $authorizer->setConfigPath(__CONFIGDIR__.'AccessControlList.php');
+
+    $eventsManager = $di->getShared('eventsManager');
+    $authorizer->setEventsManager($eventsManager);
+
+    return $authorizer;
+});

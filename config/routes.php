@@ -57,6 +57,17 @@ $router->add("/accountinfo", array(
     'action' => 'accountinfo',
     ));
 
+$router->add("/logout", array(
+    'module' => 'site',
+    'controller' => 'site',
+    'action' => 'logout',
+    ));
+
+$router->add("/login", array(
+    'module' => 'site',
+    'controller' => 'site',
+    'action' => 'login',
+    ));
 
 $router->add("/createaccount", array(
     'module' => 'account',

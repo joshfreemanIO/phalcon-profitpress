@@ -66,23 +66,32 @@ class DatabaseService extends Component
 
 	protected function getApplicationDatabase()
 	{
-		$has_error = false;
+
+		$dbarray = \ProfitPress\Account\Models\Accounts::getAccountDatabaseConnection();
+
+		if ($dbarray === false) {
+            $response = new \Phalcon\Http\Response();
+            return $response->redirect("http://profitpress.localhost");
+		} else {
+			return $dbarray;
+		}
+	}
+
+	public static function getHostName()
+	{
+		$server_name = $_SERVER['SERVER_NAME'];
+
+		$hostname['type'] = 'domain';
+		$hostname['name'] = $server_name;
 
 		$domain_parts = explode('.', $_SERVER['SERVER_NAME']);
 
-		if ( count($domain_parts) !== 3)
-			$has_error = true;
+		if (count($domain_parts) > 2) {
 
-		$subdomain = $domain_parts[0];
+			$hostname['type'] = 'subdomain';
+			$hostname['name'] = $domain_parts[0];
 
-		if (!preg_match('/^[a-zA-Z0-9]+([a-zA-Z0-9\-]+[a-zA-Z0-9]+)$/', $subdomain))
-			$has_error = true;
-
-		if ($has_error === true) {
-            $response = new \Phalcon\Http\Response();
-            return $response->redirect("http://profitpress.localhost");
 		}
-
-		return \ProfitPress\Account\Models\Accounts::getAccountDatabaseConnection($subdomain);
+		return $hostname;
 	}
 }

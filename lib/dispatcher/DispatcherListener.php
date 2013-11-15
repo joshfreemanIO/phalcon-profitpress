@@ -6,7 +6,8 @@ class DispatcherListener
 {
 	public function beforeExecuteRoute($event, $dispatcher)
 	{
-		$controller_name = $dispatcher->getControllerName();
+
+		$controller_name = $dispatcher->getHandlerClass();
 		$action_name = $dispatcher->getActionName();
 
 		$di = $dispatcher->getDi();
@@ -32,14 +33,31 @@ class DispatcherListener
 	    }
 	}
 
-	public function error403($event, $dispatcher)
+	public function forbidden($event, $dispatcher)
 	{
 		return $dispatcher->forward(
-	                array(
-	                    'module'     => 'site',
-	                    'controller' => 'error',
-	                    'action'     => 'error403',
-	                )
-	            );
+            array(
+                'module'     => 'site',
+                'controller' => 'error',
+                'action'     => 'error403',
+            )
+        );
+	}
+
+	public function unauthenticated($event, $dispatcher)
+	{
+
+		$dispatcher->forward(
+            array(
+                'module'     => 'site',
+                'controller' => 'site',
+                'action'     => 'login',
+            )
+        );
+
+		$response = new \Phalcon\Http\Response();
+        $response->redirect('login');
+
+        $response->send();
 	}
 }

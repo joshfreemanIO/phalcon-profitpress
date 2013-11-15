@@ -11,7 +11,9 @@ class BaseForm extends Form
 {
     public $formClass = 'form-horizontal';
 
-    public $noLabel;
+    public $noLabel = array(
+        'Phalcon\Forms\Element\Hidden',
+        'Phalcon\Forms\Element\Submit');
 
     public $elements;
 

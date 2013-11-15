@@ -35,7 +35,9 @@ class Accounts extends AccountBaseModel
 			'alias' => 'database'
 			));
 
-		$this->hasOne('tier_level_id', 'ProfitPress\Account\Models\TierLevels', 'tier_id');
+		$this->belongsTo('tier_level_id', 'ProfitPress\Account\Models\TierLevels', 'tier_id', array(
+			'alias' => 'tier_level',
+			));
 
 	}
 
@@ -64,13 +66,58 @@ class Accounts extends AccountBaseModel
 		$this->set('date_created',$date_created->format("Y-m-d H:i:s"));
 	}
 
-	public static function getAccountDatabaseConnection($subdomain)
+	public static function getAccountDatabaseConnection()
 	{
-		$condition = 'subdomain = :subdomain:';
-		$bind = array('subdomain' => $subdomain);
 
-		$account = self::findFirst(array($condition, 'bind' => $bind));
+		$account = self::getCurrentAccount();
 
-		return $account->database->getDatabaseConnectionArray();
+		if (empty($account)) {
+			return false;
+		} else {
+			return $account->database->getDatabaseConnectionArray();
+		}
+
+	}
+
+	public static function getCurrentTierLevel()
+	{
+		$account = self::getCurrentAccount();
+
+		return $account->tier_level->get('tier_name');
+	}
+
+	public static function getCurrentAccount()
+	{
+
+		$hostname = self::getHostName();
+
+		if ($hostname['type'] === 'domain') {
+			$condition = 'domain = :domain:';
+			$bind = array('domain' => $hostname['name']);
+		} else {
+			$condition = 'subdomain = :subdomain:';
+			$bind = array('subdomain' => $hostname['name']);
+		}
+
+		return self::findFirst(array($condition, 'bind' => $bind));
+
+	}
+
+	private static function getHostName()
+	{
+		$server_name = $_SERVER['SERVER_NAME'];
+
+		$hostname['type'] = 'domain';
+		$hostname['name'] = $server_name;
+
+		$domain_parts = explode('.', $_SERVER['SERVER_NAME']);
+
+		if (count($domain_parts) > 2) {
+
+			$hostname['type'] = 'subdomain';
+			$hostname['name'] = $domain_parts[0];
+
+		}
+		return $hostname;
 	}
 }

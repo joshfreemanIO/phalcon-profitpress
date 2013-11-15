@@ -1,35 +1,32 @@
 <?php
 
-$acl = new \Phalcon\Acl\Adapter\Memory();
-
-// Default action is deny access
-$acl->setDefaultAction(Phalcon\Acl::DENY);
-
 /**
- * Create Roles
+ * Site Controller
  */
-$roleAdmins = new \Phalcon\Acl\Role("Administrators", "Application Super User");
-$roleOwner  = new \Phalcon\Acl\Role("Owner", "Site Owner");
-$roleGuests = new \Phalcon\Acl\Role("Guests", "Unauthenticated users");
+$controller = "ProfitPress\Site\Controllers\SiteController";
 
-$acl->addRole($roleGuests);
-$acl->addRole($roleOwner, $roleGuests);
-$acl->addRole($roleAdmins, $roleOwner);
+$resource = new \Phalcon\Acl\Resource($controller);
 
-$acl->setDefaultAction(\Phalcon\Acl::DENY);
+$acl->addResource($resource, "dashboard");
+$acl->allow("Tier 1", $controller, "dashboard");
 
-$resourceName = "ProfitPress\Offers\Controllers\OffersController";
+$acl->addResource($resource, "accountinfo");
+$acl->allow("Tier 1", $controller, "accountinfo");
 
-$resourceOffers = new \Phalcon\Acl\Resource($resourceName);
+$acl->addResource($resource, "login");
+$acl->allow("Guest", $controller, "login");
 
-$acl->addResource($resourceOffers, "view");
-$acl->allow("Guests", $resourceName, "view");
+$acl->addResource($resource, "logout");
+$acl->allow("Guest", $controller, "logout");
+/**
+ * Error Controller
+ */
+$controller = "ProfitPress\Site\Controllers\ErrorController";
 
-$acl->addResource($resourceOffers, "viewall");
-$acl->allow("Guests", $resourceName, "viewall");
+$resource = new \Phalcon\Acl\Resource($controller);
 
-$acl->addResource($resourceOffers, "create");
-$acl->allow("Guests", $resourceName, "create");
+$acl->addResource($resource, "error403");
+$acl->allow("Tier 1", $controller, "error403");
 
-$acl->addResource($resourceOffers, "choosetemplate");
-$acl->allow("Guests", $resourceName, "choosetemplate");
+$acl->addResource($resource, "error404");
+$acl->allow("Guest", $controller, "error404");

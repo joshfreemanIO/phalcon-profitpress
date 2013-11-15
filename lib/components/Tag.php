@@ -83,6 +83,8 @@ class Tag extends \Phalcon\Tag
 
     protected static function buildAttributes($attributes)
     {
+    	$string = '';
+
 		foreach ($attributes as $attribute => $value) {
 			if ($attribute == 'uri' || $attribute == 'text')
 				continue;

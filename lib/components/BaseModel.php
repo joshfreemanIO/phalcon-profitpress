@@ -32,7 +32,7 @@ class BaseModel extends Model
 		$this->$property = $value;
 	}
 
-	public function get($property, $value)
+	public function get($property)
 	{
 		if(!property_exists($this, $property))
 			throw new \Phalcon\Exception($property.' does not exist in '.__CLASS__);

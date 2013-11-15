@@ -1,35 +1,17 @@
 <?php
 
-$acl = new \Phalcon\Acl\Adapter\Memory();
+// $resourceName = "ProfitPress\Offers\Controllers\OffersController";
 
-// Default action is deny access
-$acl->setDefaultAction(Phalcon\Acl::DENY);
+// $resourceOffers = new \Phalcon\Acl\Resource($resourceName);
 
-/**
- * Create Roles
- */
-$roleAdmins = new \Phalcon\Acl\Role("Administrators", "Application Super User");
-$roleOwner  = new \Phalcon\Acl\Role("Owner", "Site Owner");
-$roleGuests = new \Phalcon\Acl\Role("Guests", "Unauthenticated users");
+// $acl->addResource($resourceOffers, "view");
+// $acl->allow("Guest", $resourceName, "view");
 
-$acl->addRole($roleGuests);
-$acl->addRole($roleOwner, $roleGuests);
-$acl->addRole($roleAdmins, $roleOwner);
+// $acl->addResource($resourceOffers, "viewall");
+// $acl->allow("Guest", $resourceName, "viewall");
 
-$acl->setDefaultAction(\Phalcon\Acl::DENY);
+// $acl->addResource($resourceOffers, "create");
+// $acl->allow("Tier 1", $resourceName, "create");
 
-$resourceName = "ProfitPress\Offers\Controllers\OffersController";
-
-$resourceOffers = new \Phalcon\Acl\Resource($resourceName);
-
-$acl->addResource($resourceOffers, "view");
-$acl->allow("Guests", $resourceName, "view");
-
-$acl->addResource($resourceOffers, "viewall");
-$acl->allow("Guests", $resourceName, "viewall");
-
-$acl->addResource($resourceOffers, "create");
-$acl->allow("Guests", $resourceName, "create");
-
-$acl->addResource($resourceOffers, "choosetemplate");
-$acl->allow("Guests", $resourceName, "choosetemplate");
+// $acl->addResource($resourceOffers, "choosetemplate");
+// $acl->allow("Tier 1", $resourceName, "choosetemplate");

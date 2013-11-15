@@ -3,7 +3,8 @@
 namespace ProfitPress\Site\Controllers;
 
 use ProfitPress\Site\Models\Options as Options,
-	ProfitPress\Site\Forms\OptionForm as OptionForm;
+	ProfitPress\Site\Forms\OptionForm as OptionForm,
+	ProfitPress\Site\Forms\LoginForm as LoginForm;
 
 class SiteController extends \ProfitPress\Components\BaseController
 {
@@ -19,50 +20,42 @@ class SiteController extends \ProfitPress\Components\BaseController
 
 	private function getTieredAccessLinks($tier_level = 1)
 	{
+		$class = 'btn btn-lg btn-block';
 
-		$links[] = array('data-tieraccessible' => 'false', 'class' => 'btn btn-lg btn-block', 'uri' => 'blog/posts/create', 'text' => 'Create a Blog Post');
-		$links[] = array('data-tieraccessible' => 'false', 'class' => 'btn btn-lg btn-block', 'uri' => 'offers/choosetemplate', 'text' => 'Create a New Offer');
-		$links[] = array('data-tieraccessible' => 'false', 'class' => 'btn btn-lg btn-block', 'uri' => 'blog/posts/viewall', 'text' => 'View Blog Posts');
-		$links[] = array('data-tieraccessible' => 'false', 'class' => 'btn btn-lg btn-block', 'uri' => 'offers/viewall', 'text' => 'View Offers');
-		$links[] = array('data-tieraccessible' => 'false', 'class' => 'btn btn-lg btn-block', 'uri' => 'analytics', 'text' => 'View Statistics');
-		$links[] = array('data-tieraccessible' => 'false', 'class' => 'btn btn-lg btn-block', 'uri' => 'trainingResources', 'text' => 'View Training Resources');
-		$links[] = array('data-tieraccessible' => 'false', 'class' => 'btn btn-lg btn-block', 'uri' => 'VIPArea', 'text' => 'VIP Area');
-		$links[] = array('data-tieraccessible' => 'false', 'class' => 'btn btn-lg btn-block', 'uri' => 'accountinfo', 'text' => 'Account Info');
+		$linksConfig = new \Phalcon\Config\Adapter\Ini(__APPSDIR__.'site/config/dashboard.ini');
 
-		$min_tier_level = array(
-			'offers/choosetemplate' => 1,
-			'offers/viewall' => 1,
-			'blog/posts/create' => '1+',
-			'blog/posts/viewall' => '1+',
-			'analytics' => 1,
-			'trainingResources' => 1,
-			'VIPArea' => 3,
-			'accountinfo' => 1,
+		$links = array();
 
-			);
+		foreach ($linksConfig as $link) {
 
-		foreach ($links as &$linkArray) {
+			$anchor = array('');
 
-			if ($min_tier_level[$linkArray['uri']] <= $tier_level) {
-				$linkArray['class'] .= ' btn-default';
-				$linkArray['title'] = $linkArray['text'];
-				$linkArray['data-tieraccessible'] = 'true';
+			$anchor['uri'] = $link->uri;
+			$anchor['title'] = $link->text;
+			$anchor['text'] = $link->text;
+			$anchor['class'] = $class;
+
+			$a[] = $this->authorizer->isAvailable($link->namespace,$link->action);
+
+			if ($this->authorizer->isAvailable($link->namespace,$link->action)) {
+				$anchor['class'] .= ' btn-default';
+				$anchor['data-tieraccessible'] = 'true';
 			} else {
-				$linkArray['uri'] = 'upgradetierlevel';
-				$linkArray['class'] .= ' btn-warning';
-				$linkArray['data-toggle'] = 'modal';
-				$linkArray['data-target'] = '#myModal';
+				$anchor['uri'] = 'upgradetierlevel';
+				$anchor['class'] .= ' btn-warning';
+				$anchor['data-toggle'] = 'modal';
+				$anchor['data-target'] = '#myModal';
 				$this->view->modal = true;
 			}
+
+			$links[] = $anchor;
 		}
-
-
 		return $links;
 	}
 
 	public function accountinfoAction()
 	{
-
+		$this->session->destroy();
         $form = new OptionForm();
 
         if ( $this->request->isPost() && $form->isValid($this->request->getPost()) ) {
@@ -76,14 +69,47 @@ class SiteController extends \ProfitPress\Components\BaseController
             }
 
             $this->flash->success('You have successfully updated your theme!');
-        $response = new \Phalcon\Http\Response();
-        return $response->redirect('accountinfo');
 
+	        $response = new \Phalcon\Http\Response();
+	        return $response->redirect('accountinfo');
 
         }
 
         $this->view->form = $form;
+    }
+
+    public function loginAction()
+    {
+    	$form = new LoginForm();
+
+        if ( $this->request->isPost() && $form->isValid($this->request->getPost()) ) {
+
+        	$user = \ProfitPress\Site\Models\Users::findByEmail($this->request->getPost('email_address'));
+
+        	$valid_password = $user->validatePassword($this->request->getPost('password'));
 
 
+        	if (!$valid_password) {
+        		$this->flash->warning('Invalid email or password');
+        	} else {
+
+        		$this->flash->success('Successfully Logged In');
+
+        		$tier_level = \ProfitPress\Account\Models\Accounts::getCurrentTierLevel();
+
+        		$this->session->set('role',$tier_level);
+
+        		$response = new \Phalcon\Http\Response();
+	        	return $response->redirect('dashboard');
+
+        	}
+        }
+
+ 		$this->view->form = $form;
+    }
+
+    public function logoutAction()
+    {
+    	$this->session->destroy();
     }
 }
