@@ -48,8 +48,4 @@ class Dispatcher extends \Phalcon\Mvc\Dispatcher
 
 	}
 
-    public function throwException($message, $code)
-    {
-        $this->_throwDispatchException($message, $code);
-    }
 }

@@ -19,15 +19,10 @@ class OffersController extends \ProfitPress\Components\BaseController
         parent::initialize();
     }
 
-    public function indexAction($offer_id)
+    public function viewAction($id = null)
     {
 
-    }
-
-    public function viewAction($params = null)
-    {
-
-        $offer = Offers::isValid($params);
+        $offer = Offers::isValid($id);
 
         if ( $offer === false) {
             $this->flash->notice("Please choose a valid offer to view");
@@ -64,18 +59,18 @@ class OffersController extends \ProfitPress\Components\BaseController
         $this->view->offers_paginater = $offers->getPaginate();
     }
 
-    public function createAction($params = 0) {
+    public function createAction($template_id = 0) {
 
         Tag::setTitle("Create Offer");
 
-        if ( !OfferTemplates::isValid($params) ) {
+        if ( !OfferTemplates::isValid($template_id) ) {
 
             $this->flash->error("You have chosen an unavailable template, please select from below");
             $response = new \Phalcon\Http\Response();
             return $response->redirect("offers/choosetemplate");
         }
 
-        $form = new OffersForm($params);
+        $form = new OffersForm($template_id);
 
         if ( $this->request->isPost() && $form->isValid($this->request->getPost()) ) {
 
@@ -91,7 +86,7 @@ class OffersController extends \ProfitPress\Components\BaseController
 
             $offer->offer_template_id =  $this->request->getPost('template_id');
 
-            $offer->serializeAndSetFields($params, $this->request->getPost());
+            $offer->serializeAndSetFields($template_id, $this->request->getPost());
 
             if ($offer->save()) {
                 $this->flash->success("You have created a new offer!");

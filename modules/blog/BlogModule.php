@@ -2,10 +2,10 @@
 
 namespace ProfitPress\Blog;
 
-use Phalcon\Loader,
-    Phalcon\Mvc\Dispatcher,
-    Phalcon\Mvc\View,
-    Phalcon\Mvc\ModuleDefinitionInterface;
+use \Phalcon\Loader,
+    \Phalcon\Mvc\Dispatcher,
+    \Phalcon\Mvc\View,
+    \Phalcon\Mvc\ModuleDefinitionInterface;
 
 class BlogModule implements ModuleDefinitionInterface
 {
@@ -20,9 +20,9 @@ class BlogModule implements ModuleDefinitionInterface
 
         $loader->registerNamespaces(
             array(
-                'ProfitPress\Blog\Controllers' => __ROOTDIR__.'apps/blog/controllers/',
-                'ProfitPress\Blog\Models'      => __ROOTDIR__.'apps/blog/models/',
-                'ProfitPress\Blog\Forms' => __ROOTDIR__.'apps/blog/forms/',
+                'ProfitPress\Blog\Controllers' => __DIR__.'/controllers',
+                'ProfitPress\Blog\Models'      => __DIR__.'/models',
+                'ProfitPress\Blog\Forms'       => __DIR__.'/forms',
             )
         );
 
