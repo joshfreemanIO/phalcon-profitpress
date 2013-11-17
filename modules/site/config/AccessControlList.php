@@ -18,6 +18,7 @@ $acl->allow("Guest", $controller, "login");
 
 $acl->addResource($resource, "logout");
 $acl->allow("Guest", $controller, "logout");
+
 /**
  * Error Controller
  */

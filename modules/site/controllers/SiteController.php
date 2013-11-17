@@ -3,7 +3,9 @@
 namespace ProfitPress\Site\Controllers;
 
 use ProfitPress\Site\Models\Options as Options,
-	ProfitPress\Site\Forms\OptionForm as OptionForm,
+	ProfitPress\Site\Models\Users as Users;
+
+use	ProfitPress\Site\Forms\OptionForm as OptionForm,
 	ProfitPress\Site\Forms\LoginForm as LoginForm;
 
 class SiteController extends \ProfitPress\Components\BaseController
@@ -55,8 +57,19 @@ class SiteController extends \ProfitPress\Components\BaseController
 
 	public function accountinfoAction()
 	{
-		$this->session->destroy();
         $form = new OptionForm();
+
+        $user = Users::findFirst(2);
+
+        $user->set('email_address', 'admin@admin.com');
+        $user->set('first_name', 'First Name');
+        $user->set('last_name', 'Last Name');
+
+        var_dump($user->get('first_name'));
+        var_dump($user->first_name);
+        die();
+
+
 
         if ( $this->request->isPost() && $form->isValid($this->request->getPost()) ) {
 

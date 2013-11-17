@@ -1,6 +1,6 @@
 <?php
 
-// $resourceName = "ProfitPress\Offers\Controllers\OffersController";
+// $resourceName = "ProfitPress\Account\Controllers\AccountController";
 
 // $resourceOffers = new \Phalcon\Acl\Resource($resourceName);
 

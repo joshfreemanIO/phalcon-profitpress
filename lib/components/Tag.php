@@ -4,7 +4,7 @@ namespace ProfitPress\Components;
 
 class Tag extends \Phalcon\Tag
 {
-	private static $_attributes = array();
+	protected static $_attributes = array();
 
 	public static function setAttributes( $attributes )
 	{
@@ -18,7 +18,7 @@ class Tag extends \Phalcon\Tag
 		if (!empty(self::$_attributes['html'])) {
 
 			foreach (self::$_attributes['html'] as $attribute => $value) {
-				$attributes .= " $attribute='$value'";
+				$attributes .= " $attribute=\"$value\"";
 			}
 		}
 
@@ -39,11 +39,11 @@ class Tag extends \Phalcon\Tag
 			foreach ($link as $attribute => $value) {
 				if ($attribute == 'uri' || $attribute == 'text')
 					continue;
-				$attributes .= " $attribute='$value'";
+				$attributes .= " $attribute=\"$value\"";
 			}
 		}
 
-		return "<a href='$uri'$attributes>$text</a>";
+		return "<a href=\"$uri\"$attributes>$text</a>";
 	}
 
 	public static function button($attributes)
@@ -66,19 +66,25 @@ class Tag extends \Phalcon\Tag
             $start = $last - $maxPages + 1;
         }
 
-        echo "<ul class='pagination pagination-lg'>";
-        echo "<li>". \ProfitPress\Components\Tag::anchor(array('uri' => "$uri", 'text' => '&laquo;')) ."</li>";
+        $output = '';
+
+        $output .= "<ul class=\"pagination pagination-lg\">";
+        $output .= "<li>". \ProfitPress\Components\Tag::anchor(array('uri' => "$uri", 'text' => '&laquo;')) ."</li>";
             for ($i=$start, $j = 0; $j < $maxPages; $i++, $j++) {
                 $link = array('uri' => "$uri$i", 'text' => $i);
-                if ($i == $current)
-                	echo "<li class='active'>";
-                else
-                	echo "<li>";
 
-                echo \ProfitPress\Components\Tag::anchor($link) . "</li>";
+                if ($i == $current)
+                	$output .= "<li class=\"active\">";
+                else
+                	$output .= "<li>";
+
+                $output .= \ProfitPress\Components\Tag::anchor($link) . "</li>";
             }
-        echo "<li>". \ProfitPress\Components\Tag::anchor(array('uri' => "$uri$last", 'text' => '&raquo;')) ."</li>";
-        echo "</ul>";
+        $output .= "<li>". \ProfitPress\Components\Tag::anchor(array('uri' => "$uri$last", 'text' => '&raquo;')) ."</li>";
+        $output .= "</ul>";
+
+        echo $output;
+        return $output;
     }
 
     protected static function buildAttributes($attributes)
@@ -88,7 +94,7 @@ class Tag extends \Phalcon\Tag
 		foreach ($attributes as $attribute => $value) {
 			if ($attribute == 'uri' || $attribute == 'text')
 				continue;
-			$string .= " $attribute='$value'";
+			$string .= " $attribute=\"$value\"";
 		}
 
 		return $string;

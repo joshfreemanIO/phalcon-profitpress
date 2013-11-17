@@ -2,12 +2,20 @@
 
 namespace ProfitPress\Site\Models;
 
-class Users extends \ProfitPress\Components\BaseModel
+class Users extends \ProfitPress\Security\BaseSecurityModel
 {
 
     protected $user_id;
 
+    protected $username;
+
     protected $email_address;
+
+    protected $first_name;
+
+    protected $last_name;
+
+    protected $_unencrypted_properties = array('user_id', 'username', 'email_address');
 
     public function intialize()
     {
