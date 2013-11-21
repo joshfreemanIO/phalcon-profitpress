@@ -121,3 +121,20 @@ $di->setShared('authorizer', function() use ($di) {
 
     return $authorizer;
 });
+
+//Registering a dispatcher
+$di->set('dispatcher', function() use ($di) {
+    $dispatcher = new \ProfitPress\Dispatcher\Dispatcher();
+
+    $dispatcher->setDefaultNamespace("ProfitPress\Site\Controllers");
+
+    $eventsManager = $di->getShared('eventsManager');
+
+    $eventsManager->attach(
+        'dispatch',
+        new \ProfitPress\Dispatcher\DispatcherListener()
+    );
+
+    $dispatcher->setEventsManager($eventsManager);
+    return $dispatcher;
+});
