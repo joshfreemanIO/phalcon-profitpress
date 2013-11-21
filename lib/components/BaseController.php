@@ -12,10 +12,16 @@ class BaseController extends Controller
 
     }
 
+    public function afterExecuteRoute(\ProfitPress\Dispatcher\Dispatcher $dispatcher)
+    {
+        \Phalcon\Tag::appendTitle(' | ProfitPress.com');
+
+    }
+
     protected function initialize()
     {
 
-        \Phalcon\Tag::prependTitle('ProfitPress | ');
+        \Phalcon\Tag::appendTitle('ProfitPress | ');
 
         $this->setCss();
     }

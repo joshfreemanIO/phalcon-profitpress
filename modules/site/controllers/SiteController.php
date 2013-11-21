@@ -2,20 +2,30 @@
 
 namespace ProfitPress\Site\Controllers;
 
+use Phalcon\Tag as Tag;
+
 use ProfitPress\Site\Models\Options as Options,
 	ProfitPress\Site\Models\Users as Users;
 
 use	ProfitPress\Site\Forms\OptionForm as OptionForm,
 	ProfitPress\Site\Forms\LoginForm as LoginForm;
 
+use Phalcon\Mvc\View as View;
+
 class SiteController extends \ProfitPress\Components\BaseController
 {
+
+	public function homeAction()
+	{
+	    Tag::setTitle('Home');
+	}
 
 	public function dashboardAction()
 	{
 		$this->session->set("username", "Michael");
 		$this->session->set("authenticated", true);
 
+        $this->view->setLayout('admin');
 		$this->view->username = $this->session->get('username');
 		$this->view->links = $this->getTieredAccessLinks();
 	}
@@ -65,11 +75,6 @@ class SiteController extends \ProfitPress\Components\BaseController
         $user->set('first_name', 'First Name');
         $user->set('last_name', 'Last Name');
 
-        var_dump($user->get('first_name'));
-        var_dump($user->first_name);
-        die();
-
-
 
         if ( $this->request->isPost() && $form->isValid($this->request->getPost()) ) {
 
@@ -88,6 +93,7 @@ class SiteController extends \ProfitPress\Components\BaseController
 
         }
 
+        $this->view->setLayout('admin');
         $this->view->form = $form;
     }
 
@@ -118,11 +124,19 @@ class SiteController extends \ProfitPress\Components\BaseController
         	}
         }
 
+
+        $this->view->setLayout('admin');
  		$this->view->form = $form;
     }
 
     public function logoutAction()
     {
     	$this->session->destroy();
+
+    	// Will need a workaround
+        $this->flash->warning('Logged Out');
+
+		$response = new \Phalcon\Http\Response();
+    	return $response->redirect();
     }
 }

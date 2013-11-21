@@ -19,6 +19,10 @@ $acl->allow("Guest", $controller, "login");
 $acl->addResource($resource, "logout");
 $acl->allow("Guest", $controller, "logout");
 
+$acl->addResource($resource, "home");
+$acl->allow("Guest", $controller, "home");
+
+
 /**
  * Error Controller
  */

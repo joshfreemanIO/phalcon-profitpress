@@ -39,4 +39,11 @@ class BaseModel extends Model
 
 		return $this->$property;
 	}
+
+	public function createCurrentTimeStamp()
+	{
+		$date_created = new \DateTime();
+
+		return $date_created->format("Y-m-d H:i:s");
+	}
 }

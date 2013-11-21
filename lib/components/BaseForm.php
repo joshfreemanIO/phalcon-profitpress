@@ -53,7 +53,7 @@ class BaseForm extends Form
         }
 
         if (!in_array(get_class($element), $this->noLabel)) {
-            $this->renderLabel($element, array('class' => 'control-label col-sm-3'),$messages);
+            $this->renderLabel($element, array('class' => 'control-label col-sm-2'),$messages);
         }
 
         if(get_class($element) === 'Phalcon\Forms\Element\Submit') {
@@ -62,7 +62,7 @@ class BaseForm extends Form
         }
         else {
             $element->setAttribute('class', 'form-control');
-            echo "<div class='col-sm-9'>";
+            echo "<div class='col-sm-10'>";
         }
 
         echo $element;
@@ -74,6 +74,8 @@ class BaseForm extends Form
     public function renderLabel($element, $attributesArray)
     {
         $attributes = '';
+
+        $attributesArray['for'] = $element->getName();
 
         if (!empty($attributesArray)) {
             foreach ($attributesArray as $attribute => $value) {

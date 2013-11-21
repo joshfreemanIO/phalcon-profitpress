@@ -6,6 +6,6 @@ return new \Phalcon\Config(array(
             'host'     => 'localhost',
             'port'     => '3306',
             'username' => 'pp_creator',
-            'password' => '6cHy3TtM6ytcdfLv',
+            'password' => 'Rjzx7G5wxCPuWPTR',
     ),
 ));

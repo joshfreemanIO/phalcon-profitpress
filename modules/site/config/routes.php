@@ -1,13 +1,9 @@
 <?php
 
-/**
- * Admin
- */
-
 $router->add("/", array(
     'module'     => 'site',
     'controller' => 'site',
-    'action'     => 'dashboard',
+    'action'     => 'home',
 ));
 
 $router->add("/dashboard", array(

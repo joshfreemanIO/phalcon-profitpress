@@ -37,7 +37,7 @@ class PostForm extends \ProfitPress\Components\BaseForm
 
         $content = new TextArea('content');
         $content->setLabel('Content');
-        $content->setAttribute('id', 'editer');
+        $content->setAttribute('id', 'editor');
         // $content->addValidator(new PresenceOf(array('message' => 'Please, write something!')));
 
         $submit = new Submit('Create New');
@@ -46,5 +46,19 @@ class PostForm extends \ProfitPress\Components\BaseForm
         $this->add($permalink);
         $this->add($content);
         $this->add($submit);
+
+        $this->registerAssets();
+    }
+
+    protected function registerAssets()
+    {
+        $this->assets->collection('head')
+            // ->addJs('//tinymce.cachefly.net/4.0/tinymce.min.js', false);
+            ->addJs('lib/tinymce/js/tinymce/tinymce.min.js');
+
+        $this->assets->collection('footer')
+            ->addJs('js/permalink.js');
+
+        $this->assets->addCss('aloha/css/aloha.css');
     }
 }

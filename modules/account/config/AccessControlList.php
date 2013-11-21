@@ -1,11 +1,15 @@
 <?php
 
-// $resourceName = "ProfitPress\Account\Controllers\AccountController";
+$resourceName = "ProfitPress\Account\Controllers\AccountController";
 
-// $resourceOffers = new \Phalcon\Acl\Resource($resourceName);
+$resourceOffers = new \Phalcon\Acl\Resource($resourceName);
 
-// $acl->addResource($resourceOffers, "view");
-// $acl->allow("Guest", $resourceName, "view");
+$acl->addResource($resourceOffers, "create");
+$acl->allow("Guest", $resourceName, "create");
+
+$acl->addResource($resourceOffers, "delete");
+$acl->allow("Guest", $resourceName, "delete");
+
 
 // $acl->addResource($resourceOffers, "viewall");
 // $acl->allow("Guest", $resourceName, "viewall");

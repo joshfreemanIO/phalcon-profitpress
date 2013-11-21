@@ -15,21 +15,20 @@ $di->set('modulesList', function () use ($application) {
  * Start the session the first time some component request the session service
  */
 $di->setShared('session', function() {
-        $session = new \Phalcon\Session\Adapter\Files();
+    $session = new \Phalcon\Session\Adapter\Files();
 
-        $session->start();
+    $session->start();
 
-        if (!$session->has('tier_level')) {
-          $tier_level = \ProfitPress\Account\Models\Accounts::getCurrentTierLevel();
-          $session->set('tier_level',  $tier_level);
-        }
+    if (!$session->has('tier_level')) {
+      $tier_level = \ProfitPress\Account\Models\Accounts::getCurrentTierLevel();
+      $session->set('tier_level',  $tier_level);
+    }
 
-        if (!$session->has('role')) {
-          $tier_level = \ProfitPress\Account\Models\Accounts::getCurrentTierLevel();
-          $session->set('Guest',  $tier_level);
-        }
+    if (!$session->has('role')) {
+      $session->set('role',  'Guest');
+    }
 
-        return $session;
+    return $session;
 });
 
 /**
@@ -47,7 +46,8 @@ $di->set('router', function () {
 $di->set('view', function() {
     $view = new \Phalcon\Mvc\View();
     $view->setMainView('../../site/views/layouts/main');
-    $view->setLayoutsDir("/layouts/");
+    $view->setLayoutsDir('/layouts/');
+    $view->setLayout('layout-guest');
     $view->registerEngines(array(".volt" => 'volt'));
     return $view;
 });
@@ -96,9 +96,15 @@ $di->set('url', function(){
 /**
  * Register 'Assets' component
  */
-$di->set('assets', function () {
-  return new Phalcon\Assets\Manager();
-}, true);
+$di->setShared('assets', function () {
+
+    $assets =  new Phalcon\Assets\Manager();
+
+    $assets->collection('head');
+    $assets->collection('footer');
+
+    return $assets;
+});
 
 
 

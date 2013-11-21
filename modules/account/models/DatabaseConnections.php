@@ -105,4 +105,30 @@ class DatabaseConnections extends AccountBaseModel
 		$connection2->execute($schema);
 
 	}
+
+	public function deleteDatabase()
+	{
+		$dbname   = $this->dbname;
+		$username = $this->username;
+		$host 	  = $this->host;
+
+		$dbconfig = require_once(__APPSDIR__."account/config/config.php");
+
+		$connection = new \Phalcon\Db\Adapter\Pdo\Mysql((array) $dbconfig->database_creator);
+
+		// Delete User
+		$sql  = "GRANT USAGE ON *.* TO '$username'@'$host';";
+
+		$sql .= "DROP USER '$username'@'$host';";
+
+		$sql .= "FLUSH PRIVILEGES";
+
+		$connection->execute($sql);
+
+		// Delete Database
+		$sql  = "DROP DATABASE IF EXISTS `$dbname`;";
+
+		$connection->execute($sql);
+
+	}
 }

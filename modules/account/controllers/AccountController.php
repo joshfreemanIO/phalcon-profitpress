@@ -14,8 +14,6 @@ class AccountController extends \ProfitPress\Components\BaseController
 	public function createAction()
 	{
 
-		DatabaseConnectionsModel::createNewConnection();
-
 		$form = new AccountForm;
 
         if ( $this->request->isPost() && $form->isValid($this->request->getPost()) ) {
@@ -38,11 +36,17 @@ class AccountController extends \ProfitPress\Components\BaseController
 			} else {
 				$this->flash->success('Account created!');
 
-				$database->createDatabase($dbname, $username,$password);
+				$database->createDatabase();
 			}
 		}
 
 		$this->view->form = $form;
+	}
+
+	public function deleteAction($subdomain = null)
+	{
+
+		AccountsModel::deleteBySubdomain($subdomain);
 	}
 
 }

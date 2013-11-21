@@ -22,6 +22,8 @@ class Accounts extends AccountBaseModel
 
 	protected $tier_level_id;
 
+	protected $files_directory;
+
 	protected $date_created;
 
 	public function getSource()
@@ -63,6 +65,7 @@ class Accounts extends AccountBaseModel
 	{
     	$date_created = new \DateTime();
 
+    	$this->set('files_directory', self::generateFilesPath($this->subdomain));
 		$this->set('date_created',$date_created->format("Y-m-d H:i:s"));
 	}
 
@@ -99,6 +102,7 @@ class Accounts extends AccountBaseModel
 			$bind = array('subdomain' => $hostname['name']);
 		}
 
+
 		return self::findFirst(array($condition, 'bind' => $bind));
 
 	}
@@ -119,5 +123,58 @@ class Accounts extends AccountBaseModel
 
 		}
 		return $hostname;
+	}
+
+	private static function generateFilesPath($name)
+	{
+        $dirname = substr(base64_encode(hash('sha1', $name)),0,8);
+
+		$condition = 'files_directory = :files_directory:';
+
+        do {
+			$bind = array('files_directory' => $dirname);
+			$model = self::findFirst(array($condition, 'bind' => $bind));
+        } while ($model !== false);
+
+        mkdir(__PUBDIR__.'files/'.$dirname);
+
+        return $dirname;
+	}
+
+	private static function removeFilesPath($dirname)
+	{
+		$dir = __PUBDIR__.'files/'.$dirname;
+		$it = new \RecursiveDirectoryIterator($dir);
+		$files = new \RecursiveIteratorIterator($it,
+		             \RecursiveIteratorIterator::CHILD_FIRST);
+
+		foreach($files as $file) {
+		    if ($file->getFilename() === '.' || $file->getFilename() === '..') {
+		        continue;
+		    }
+		    if ($file->isDir()){
+		        rmdir($file->getRealPath());
+		    } else {
+		        unlink($file->getRealPath());
+		    }
+		}
+		rmdir($dir);
+	}
+
+	public static function deleteBySubdomain($subdomain)
+	{
+
+		$condition = 'subdomain = :subdomain:';
+		$bind = array('subdomain' => $subdomain);
+
+		$model = self::findFirst(array($condition, 'bind' => $bind));
+
+		$model->database->deleteDatabase();
+
+		$model->database->delete();
+
+		self::removeFilesPath($model->files_directory);
+
+		$model->delete();
 	}
 }

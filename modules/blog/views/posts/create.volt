@@ -1,13 +1,20 @@
-<?php
-	$this->getDi()->getAssets()
-		 ->addCss('bootstrap-wysihtml5/src/bootstrap-wysihtml5.css')
-		 ->addCss('bootstrap-wysihtml5/lib/css/bootstrap.min.css');
-    //and some local javascript resources
-    $this->getDi()->getAssets()
-         ->addJs('bootstrap-wysihtml5/lib/js/wysihtml5-0.3.0.min.js')
-         ->addJs('/js/permalink.js')
-         ->addJs('bootstrap-wysihtml5/lib/js/bootstrap.min.js')
-         ->addJs('bootstrap-wysihtml5/src/bootstrap-wysihtml5.js');
-?>
-<script type="text/javascript"></script>
 <?php $form->renderFullForm(); ?>
+<script type="text/javascript">
+tinymce.init({
+    selector: "#editor",
+    menu:{},
+    theme_advanced_buttons3_add: 'code',
+    height: 300,
+    plugins: [
+         "advlist autolink link image lists charmap print preview hr anchor pagebreak",
+         "searchreplace wordcount visualblocks visualchars insertdatetime media nonbreaking",
+         "table contextmenu directionality emoticons paste textcolor responsivefilemanager"
+	],
+	image_advtab: true ,
+	external_filemanager_path:"/lib/ResponsiveFilemanager/filemanager/",
+	filemanager_title:"Responsive Filemanager" ,
+    toolbar2: "| filemanager | link unlink anchor | image media | forecolor backcolor  | print preview code ",
+   	external_plugins: { "filemanager" : "/lib/ResponsiveFilemanager/filemanager/plugin.min.js"},
+   	image_advtab: true ,
+ });
+</script>

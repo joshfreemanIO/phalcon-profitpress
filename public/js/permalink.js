@@ -6,7 +6,7 @@ function sync(title, permalink)
 }
 
 function linkify(string) {
-	var a = string.replace(/([^a-zA-Z0-9\-\_])+/gi, '-').toLowerCase();
+	var a = string.replace(/([^a-zA-Z0-9])+|[\-\_]+/gi, '-').toLowerCase();
 	return a.replace(/^[^a-zA-Z0-9]|[^a-zA-Z0-9]$/gi, '');
 }
 
