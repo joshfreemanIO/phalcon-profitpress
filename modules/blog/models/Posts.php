@@ -2,6 +2,8 @@
 
 namespace ProfitPress\Blog\Models;
 
+use ProfitPress\Components\Tag as Tag;
+
 class Posts extends \ProfitPress\Components\BaseModel
 {
 
@@ -9,45 +11,61 @@ class Posts extends \ProfitPress\Components\BaseModel
      * @var integer
      *
      */
-    public $id;
+    protected $id;
 
     /**
      * @var string
      *
      */
-    public $title;
+    protected $title;
 
     /**
      * @var string
      *
      */
-    public $slug;
+    protected $slug;
 
     /**
      * @var string
      *
      */
-    public $content;
+    protected $content;
 
     /**
      * @var string
      *
      */
-    public $created;
+    protected $created;
 
     /**
      * @var integer
      *
      */
-    public $users_id;
+    protected $users_id;
 
     /**
      * @var integer
      *
      */
-    public $categories_id;
+    protected $categories_id;
 
+    /**
+     * @var integer
+     *
+     */
+    protected $allow_comments = 1;
 
+    /**
+     * @var integer
+     *
+     */
+    protected $authorize_comments = 0;
+
+    /**
+     * @var integer
+     *
+     */
+    protected $published = 1;
     /**
      * Initializer method for model.
      */
@@ -125,5 +143,20 @@ class Posts extends \ProfitPress\Components\BaseModel
         $s = ($diff > 1 || $diff == 0) ? 's' : '';
 
         return 'Modified ' . $diff . $unit . $s . ' ago';
+    }
+
+    public function getNotices()
+    {
+        $notices = '';
+
+        if ($this->published != 1)
+            $notices .= '<span class="label label-warning">Unpublished</span>';
+
+        return $notices;
+    }
+
+    public function countComments()
+    {
+        return '<span class="badge">0 Comments</span>';
     }
 }

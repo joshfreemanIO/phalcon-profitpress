@@ -2,12 +2,12 @@
 
 namespace ProfitPress\Blog\Controllers;
 
-use \Phalcon\Tag as Tag,
-    \ProfitPress\Blog\Models\Posts as Posts,
-    \ProfitPress\Blog\Models\Users as Users,
-    \ProfitPress\Blog\Models\Categories as Categories,
-    \ProfitPress\Permalink\PermalinkModule as PermalinkModule,
-    \ProfitPress\Permalink\Controllers\PermalinkController as PermalinkController;
+use Phalcon\Tag as Tag,
+    ProfitPress\Blog\Models\Posts as Posts,
+    ProfitPress\Blog\Models\Users as Users,
+    ProfitPress\Blog\Models\Categories as Categories,
+    ProfitPress\Permalink\PermalinkModule as PermalinkModule,
+    ProfitPress\Permalink\Controllers\PermalinkController as PermalinkController;
 
 
 
@@ -30,7 +30,7 @@ class PostsController extends \ProfitPress\Components\BaseController
             array(
                 "data"  => Posts::find(),
                 "limit" => 10,
-                "page"  => $page
+                "page"  => $page,
             )
         );
 
@@ -45,12 +45,10 @@ class PostsController extends \ProfitPress\Components\BaseController
     public function showAction()
     {
 
-    	$post = Posts::findFirst(array(
-			'id = :id:',
-			'bind' => array(
-				'id' => $this->dispatcher->getParam(0),
-			)
-		));
+        $condition = 'id = :id:';
+        $bind = array('id' => $this->dispatcher->getParam(0));
+
+    	$post = Posts::findFirst(array($condition, 'bind' => $bind));
 
 		if ($post === false) {
 			$this->dispatcher->forward(array(
@@ -68,13 +66,11 @@ class PostsController extends \ProfitPress\Components\BaseController
 
     	Tag::setTitle("Create Blog Post");
 
-        $form = new \ProfitPress\Blog\Forms\PostForm();;
+        $form = new \ProfitPress\Blog\Forms\PostForm();
 
         if ( $this->request->isPost() && $form->isValid($this->request->getPost()) ) {
 
             $post = new Posts();
-
-            $date_created = new \DateTime();
 
             $post->title = $this->request->getPost('title');
 
@@ -82,8 +78,11 @@ class PostsController extends \ProfitPress\Components\BaseController
 
             $post->content = $this->request->getPost('content');
 
+            $post->created = $post->createCurrentTimeStamp();
 
-            $post->created = $date_created->format("Y-m-d H:i:s");
+            if ($this->request->getPost('publish') === null) {
+                $post->published = 0;
+            }
 
             $post->users_id =1;
             $post->categories_id =2;
@@ -92,21 +91,30 @@ class PostsController extends \ProfitPress\Components\BaseController
                 $this->flash->success("You have created a new blog post!");
 
                 $permalinkModule = new PermalinkModule();
-                $permalinkModule->registerAutoloaders($this->getDi());
+                $permalinkModule->registerAutoloaders();
 
                 PermalinkController::createPermalink($this->request->getPost('permalink'),'blog','posts','show',$post->id);
 
                 $response = new \Phalcon\Http\Response();
                 return $response->redirect("dashboard");
             } else {
-                $this->flash->error("There is an unknown problem with your data");
+                foreach ($post->getMessages() as $message) {
+                    $this->flash->error($message);
+                }
             }
         }
 
         $this->view->form = $form;
     }
-    public function updateAction()
+
+    public function editAction()
     {
+
+    }
+
+    public function workForm(\ProfitPress\Blog\Forms\PostForm $form)
+    {
+
     }
 
     public function deleteAction($slug)

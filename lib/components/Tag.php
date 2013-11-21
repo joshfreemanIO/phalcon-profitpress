@@ -69,7 +69,7 @@ class Tag extends \Phalcon\Tag
         $output = '';
 
         $output .= "<ul class=\"pagination pagination-lg\">";
-        $output .= "<li>". \ProfitPress\Components\Tag::anchor(array('uri' => "$uri", 'text' => '&laquo;')) ."</li>";
+        $output .= "<li>". \ProfitPress\Components\Tag::anchor(array('uri' => $uri . 1, 'text' => '&laquo;')) ."</li>";
             for ($i=$start, $j = 0; $j < $maxPages; $i++, $j++) {
                 $link = array('uri' => "$uri$i", 'text' => $i);
 

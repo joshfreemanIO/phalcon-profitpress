@@ -1,6 +1,5 @@
 <?php
-
-$navigation_links[] = array('class' => 'navigation-button', 'uri' => 'blog/view', 'text' => 'Blog');
+$site_brand = array('class' => 'navbar-brand', 'uri' => '', 'text' => 'ProfitPress');
 
 if ($this->session->get('role') !== 'Guest') {
   $navigation_links[] = array('class' => 'navigation-button', 'uri' => 'dashboard', 'text' => 'Dashboard');
@@ -18,9 +17,8 @@ if ($this->session->get('role') !== 'Guest') {
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="#">Site Name</a>
+    <?php echo \ProfitPress\Components\Tag::anchor($site_brand); ?>
   </div>
-  <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav navbar-right">
     <?php foreach ($navigation_links as $link_array): ?>

@@ -10,6 +10,8 @@
 			<th>Name</th>
 			<th>Permalink</th>
 			<th>Date</th>
+			<th></th>
+			<th></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -18,7 +20,9 @@
 	<td>{{post.getPostLink()}}</td>
 	<td>{{post.getPostLink('title')}}</td>
 	<td>{{post.getPostLink('slug')}}</td>
-	<td>{{post.created}}<br/>{{post.getDateModifiedDiff()}}</td>
+	<td>{{post.get('created')}}<br/>{{post.getDateModifiedDiff()}}</td>
+	<td>{{post.countComments()}}</td>
+	<td>{{post.getNotices()}}</td>
 </tr>
 {% endfor %}
 	</tbody>

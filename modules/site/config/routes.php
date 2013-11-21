@@ -6,6 +6,13 @@ $router->add("/", array(
     'action'     => 'home',
 ));
 
+$router->add("/page/:int", array(
+    'module' => 'site',
+    'controller' => 'site',
+    'action' => 'home',
+    'page' => 1
+    ));
+
 $router->add("/dashboard", array(
     'module' => 'site',
     'controller' => 'site',

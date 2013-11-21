@@ -30,5 +30,3 @@ $router->add('/blog/posts/viewall', array(
     ));
 
 $router->mount($blog);
-
-

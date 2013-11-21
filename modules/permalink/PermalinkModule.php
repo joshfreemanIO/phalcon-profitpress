@@ -20,9 +20,8 @@ class PermalinkModule implements ModuleDefinitionInterface
 
         $loader->registerNamespaces(
             array(
-                'ProfitPress\Permalink\Controllers' => __ROOTDIR__.'apps/permalink/controllers/',
-                'ProfitPress\Permalink\Models'      => __ROOTDIR__.'apps/permalink/models/',
-                'ProfitPress\Components'            => __ROOTDIR__.'apps/components',
+                'ProfitPress\Permalink\Controllers' => __DIR__.'/controllers/',
+                'ProfitPress\Permalink\Models'      => __DIR__.'/models/',
             )
         );
 

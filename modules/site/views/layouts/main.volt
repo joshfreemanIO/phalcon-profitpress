@@ -19,7 +19,6 @@
             <?php $this->partial(__LAYOUTDIR__."header-admin"); ?>
             <div class='container'>
                 <?php $this->flash->output(); ?>
-                <?php $this->flashSession->output(); ?>
 
                 {{ content() }}
             </div>

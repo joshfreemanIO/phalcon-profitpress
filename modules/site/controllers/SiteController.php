@@ -5,6 +5,8 @@ namespace ProfitPress\Site\Controllers;
 use Phalcon\Tag as Tag;
 
 use ProfitPress\Site\Models\Options as Options,
+	ProfitPress\Offers\Models\Offers as Offers,
+	ProfitPress\Blog\Models\Posts as Posts,
 	ProfitPress\Site\Models\Users as Users;
 
 use	ProfitPress\Site\Forms\OptionForm as OptionForm,
@@ -17,7 +19,25 @@ class SiteController extends \ProfitPress\Components\BaseController
 
 	public function homeAction()
 	{
+		\ProfitPress\Blog\BlogModule::registerAutoloaders();
+
 	    Tag::setTitle('Home');
+
+        $page = 1;
+
+        if (preg_match('/^\d+$/', $this->dispatcher->getParam('page')) === 1)
+            $page = $this->dispatcher->getParam('page');
+
+        //Passing a resultset as data
+        $posts = new \Phalcon\Paginator\Adapter\Model(
+            array(
+                "data"  => Posts::find('published = 1'),
+                "limit" => 2,
+                "page"  => $page,
+            )
+        );
+
+        $this->view->posts_paginater = $posts->getPaginate();
 	}
 
 	public function dashboardAction()

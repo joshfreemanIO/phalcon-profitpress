@@ -3,7 +3,7 @@
 namespace ProfitPress\Permalink\Models;
 
 
-class Permalinks extends \Phalcon\Mvc\Model
+class Permalinks extends \ProfitPress\Components\BaseModel
 {
 
 

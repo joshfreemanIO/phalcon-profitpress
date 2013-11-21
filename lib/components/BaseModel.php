@@ -46,4 +46,22 @@ class BaseModel extends Model
 
 		return $date_created->format("Y-m-d H:i:s");
 	}
+
+	public function getTruncated($property, $chars = 300) {
+
+		$filter = new \Phalcon\Filter;
+
+		$text = $this->get($property);
+
+		$text = $filter->sanitize($text, 'striptags');
+
+		$text = $filter->sanitize($text, 'trim');
+
+		$text = substr($text,0,$chars);
+
+	    if (strlen($text) === $chars) {
+	    	$text .= '&hellip;';
+	    }
+	    return $text;
+	}
 }
