@@ -2,6 +2,8 @@
 
 namespace ProfitPress\Components;
 
+use ProfitPress\Components\Tag as Tag;
+
 use \Phalcon\Forms\Form as Form,
     \Phalcon\Forms\Element\Hidden,
     \Phalcon\Forms\Element\Submit,
@@ -9,11 +11,15 @@ use \Phalcon\Forms\Form as Form,
 
 class BaseForm extends Form
 {
-    public $formClass = 'form-horizontal';
+    public $form_attributes = array('class' => 'form-horizontal','role' => 'form','method' => 'POST');
 
-    public $noLabel = array(
-        'Phalcon\Forms\Element\Hidden',
-        'Phalcon\Forms\Element\Submit');
+    public $form_group_attributes = array('class' => 'form-group');
+
+    public $label_attributes = array('class' => 'control-label col-sm-2');
+
+    public $element_wrapper_attributes = array('class' => 'col-sm-10');
+
+    public $element_attributes = array('class' => 'form-control');
 
     public $elements;
 
@@ -26,69 +32,113 @@ class BaseForm extends Form
 
         parent::__construct();
 
-
     }
 
     public function renderFullForm()
     {
-        echo "<form action='/" . $this->getAction() . "' method='POST' class='$this->formClass' role='form'>";
+        $this->renderFormStart();
 
         foreach ($this as $element) {
-            $this->renderElement($element);
-
+            $this->renderFormGroup($element);
         }
 
-        echo "</form>";
+        $this->renderFormEnd();
+    }
+
+    public function renderFormStart()
+    {
+        $form_attributes = $this->form_attributes;
+
+        $form_attributes['action'] =  $this->getAction();
+
+        echo Tag::tagHtml('form', $form_attributes);
+    }
+
+    public function renderFormGroup($element)
+    {
+
+        if (gettype($element) === 'string')
+            $element = $this->get($element);
+
+        $form_group_attributes = $this->form_group_attributes;
+
+        if ($element->getUserOption('form_group_attributes') !== null)
+            $form_group_attributes = $this->modifyAttributes($form_group_attributes,$element->getUserOption('form_group_attributes'));
+
+        $messages = $this->getMessagesFor($element->getName());
+
+        if (count($messages))
+            $form_group_attributes['class'] .= ' form-group has-error well';
+
+        echo Tag::tagHtml('div', $form_group_attributes);
+        $this->renderLabel($element);
+        $this->renderElement($element);
+        $this->buildMessages($messages);
+        echo Tag::tagHtmlClose('div');
+    }
+
+    public function renderLabel($element)
+    {
+        if ($element->getUserOption('no_label') === true)
+            return false;
+
+        $label_attributes = $this->label_attributes;
+
+        if ($element->getUserOption('label_attributes') !== null)
+            $label_attributes = $this->modifyAttributes($label_attributes,$element->getUserOption('label_attributes'));
+
+        $label_attributes['for'] = $element->getName();
+
+        echo Tag::tagHtml('label', $label_attributes);
+        echo $element->getLabel();
+        echo Tag::tagHtmlClose('label');
     }
 
     public function renderElement($element)
     {
-        $messages = $this->getMessagesFor($element->getName());
-            $val = $this->request->getPost($element->getName());
+        $element_wrapper_attributes = $this->element_wrapper_attributes;
 
-        if (count($messages)) {
-            echo '<div class="form-group has-error well">';
-        } else {
-            echo '<div class="form-group">';
-        }
+        if ($element->getUserOption('element_wrapper_attributes') !== null)
+            $element_wrapper_attributes = $this->modifyAttributes($element_wrapper_attributes,$element->getUserOption('element_wrapper_attributes'));
 
-        if (!in_array(get_class($element), $this->noLabel)) {
-            $this->renderLabel($element, array('class' => 'control-label col-sm-2'),$messages);
-        }
+        $element_attributes = $this->element_attributes;
 
-        if(get_class($element) === 'Phalcon\Forms\Element\Submit') {
-            $element->setAttribute('class', 'btn btn-success btn-large btn-block');
-            echo "<div class='col-sm-12'>";
-        }
-        else {
-            $element->setAttribute('class', 'form-control');
-            echo "<div class='col-sm-10'>";
-        }
+        if ($element->getUserOption('element_attributes') !== null)
+            $element_attributes = $this->modifyAttributes($element_attributes,$element->getUserOption('element_attributes'));
 
+        $element->setAttributes($element_attributes);
+
+        if ($element->getUserOption('no_element_wrapper') === true) {
+            echo $element;
+            return true;
+        }
+        echo Tag::tagHtml('div', $element_wrapper_attributes);
         echo $element;
-        $this->buildMessages($messages);
-
-        echo "</div></div>";
+        echo Tag::tagHtmlClose('div');
     }
 
-    public function renderLabel($element, $attributesArray)
+    public function renderFormEnd()
     {
-        $attributes = '';
+        echo Tag::tagHtmlClose('form');
+    }
 
-        $attributesArray['for'] = $element->getName();
+    protected function modifyAttributes($attributes, $attributes_to_append)
+    {
+        foreach ($attributes_to_append as $attribute => $value) {
 
-        if (!empty($attributesArray)) {
-            foreach ($attributesArray as $attribute => $value) {
-                $attributes .= " $attribute='$value'";
+            if (!preg_match('/(\-append)$/', $attribute, $match)) {
+                $attributes[$attribute] = $value;
+            } else {
+                $attributes[$attribute] .= ' ' . $value;
             }
         }
 
-        echo "<label$attributes>".$element->getLabel()."</label>";
+        return $attributes;
     }
 
     protected function defaultFormUri()
     {
-        $this->setAction(ltrim($this->router->getRewriteUri(),'/'));
+        $this->setAction(ltrim($this->router->getRewriteUri()));
     }
 
     protected function setCsrf()
@@ -110,14 +160,24 @@ class BaseForm extends Form
         if (count($messages) < 1)
             return false;
 
-        echo '<dl class="dl-horizontal">';
-        echo '<dt class="input-group input-group-large"><span class="input-group-addon input-group-addon "><span class="glyphicon glyphicon-warning-sign"></span></span></dt>';
-        foreach ($messages as $message) {
-            echo '<dd>';
-            echo $message->getMessage();
-            echo '</dd>';
-        }
-        echo '</dl>';
-    }
+        $html = '';
 
+        $html .= Tag::tagHtml('dl', array('class' => 'dl-horizontal'));
+            $html .= Tag::tagHtml('dt', array('class' => 'input-group input-group-large'));
+                $html .= Tag::tagHtml('span', array('class' => 'input-group-addon input-group-addon'));
+                    $html .= Tag::tagHtml('span', array('class' => 'glyphicon glyphicon-warning-sign'));
+                    $html .= Tag::tagHtmlClose('span');
+                $html .= Tag::tagHtmlClose('span');
+            $html .= Tag::tagHtmlClose('dt');
+
+        foreach ($messages as $message) {
+            $html .= Tag::tagHtml('dd');
+                $html .= $message->getMessage();
+            $html .= Tag::tagHtmlClose('dd');
+        }
+
+        $html .= Tag::tagHtmlClose('dl');
+
+        echo $html;
+    }
 }

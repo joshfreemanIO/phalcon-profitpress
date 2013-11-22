@@ -15,10 +15,6 @@ use \Phalcon\Validation\Validator\Regex,
 class PostForm extends \ProfitPress\Components\BaseForm
 {
 
-    public $noLabel = array(
-        'Phalcon\Forms\Element\Hidden',
-        'Phalcon\Forms\Element\Submit');
-
     public function __construct()
     {
         parent::__construct();
@@ -26,13 +22,13 @@ class PostForm extends \ProfitPress\Components\BaseForm
     }
     public function initialize()
     {
-        $title = new Text("title");
-        $title->setLabel("Title");
+        $title = new Text('title');
+        $title->setLabel('Title');
         $title->addValidator(new PresenceOf(array('message' => 'Title Required')));
         $this->add($title);
 
-        $permalink = new Text("permalink");
-        $permalink->setLabel("Permanent Url");
+        $permalink = new Text('permalink');
+        $permalink->setLabel('Permanent Url');
         $permalink->addValidator(new Regex(array(
             'message' => 'Only use letters, numbers, underscores, or hyphens',
             'pattern' => '/[a-zA-Z0-9\_\-]+/',
@@ -48,21 +44,48 @@ class PostForm extends \ProfitPress\Components\BaseForm
 
         $allow_comments = new Check('allow_comments', array('value' => 1, 'checked' => 'checked'));
         $allow_comments->setLabel('Allow Comments for this Post');
+        $allow_comments->setUserOption('form_group_attributes', array('class' => 'col-md-6'));
+        $allow_comments->setUserOption('label_attributes', array('class' => 'col-md-8'));
+        $allow_comments->setUserOption('element_wrapper_attributes', array('class' => 'col-md-4'));
         $this->add($allow_comments);
 
 
         $authorize_comments = new Check('authorize_comments', array('value' => 1));
         $authorize_comments->setLabel('Every Comment Must be Authorized');
+        $authorize_comments->setUserOption('form_group_attributes', array('class' => 'col-md-6'));
+        $authorize_comments->setUserOption('label_attributes', array('class' => 'col-md-8'));
+        $authorize_comments->setUserOption('element_wrapper_attributes', array('class' => 'col-md-4'));
         $this->add($authorize_comments);
 
 
-        $save_draft = new Submit('Save in Drafts', array('name' => 'save_draft'));
+        $save_draft = new Submit('Save in Drafts', array('name' => 'save_draft', 'class' => 'btn btn-block btn-primary'));
+        $save_draft->setUserOption('element_attributes', array('class' => 'btn btn-block btn-info'));
+        $save_draft->setUserOption('no_element_wrapper', true);
+        $save_draft->setUserOption('no_label', true);
         $this->add($save_draft);
 
-        $publish = new Submit('Create New Post', array('name' => 'publish'));
+        $publish = new Submit('Publish New Post', array('name' => 'publish', 'class' => 'btn btn-block btn-success'));
+        $publish->setUserOption('element_attributes', array('class' => 'btn btn-block btn-success'));
+        $publish->setUserOption('no_element_wrapper', true);
+        $publish->setUserOption('no_label', true);
         $this->add($publish);
 
+        $this->advancedOptions();
+
         $this->registerAssets();
+    }
+
+
+    protected function advancedOptions()
+    {
+        $head_title = new Text("head-title", array('id' => 'head-title'));
+        $head_title->setUserOption('element_attributes', array('class' => 'col-md-5'));
+        $head_title->setUserOption('form_group_attributes', array('class-append' => 'col-md-8'));
+        $head_title->setLabel('Title Tag');
+        $this->add($head_title);
+
+        // $head_meta = new Text("head['author']", array());
+
     }
 
     protected function registerAssets()
@@ -74,6 +97,5 @@ class PostForm extends \ProfitPress\Components\BaseForm
         $this->assets->collection('footer')
             ->addJs('js/permalink.js');
 
-        $this->assets->addCss('aloha/css/aloha.css');
     }
 }

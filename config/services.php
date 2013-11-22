@@ -106,8 +106,6 @@ $di->setShared('assets', function () {
     return $assets;
 });
 
-
-
 /**
  * Register 'Authorizer' Component
  */
