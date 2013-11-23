@@ -28,7 +28,7 @@ class BaseController extends Controller
 
     protected function setCss()
     {
-    	$css = \ProfitPress\Site\Models\Options::getOption('global_css');
+    	$css = \ProfitPress\Site\Models\Settings::getSetting('global_css');
 
     	if (empty($css)) {
     		$css = 'bootstrap.min.css';

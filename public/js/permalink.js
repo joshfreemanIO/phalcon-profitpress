@@ -1,16 +1,23 @@
-function sync(sourceElement, targetElement, linkifyFlag)
+function sync(sourceElement, targetElement)
 {
-	var n1 = document.getElementById(sourceElement);
-	var n2 = document.getElementById(targetElement);
+	var source = $(sourceElement);
+	var text = source.val();
+	var target = $(targetElement);
 
-	if (n2.getAttribute('data-update') == 'false') {
+	console.log(target);
+	if (target.attr('data-update') == 'false') {
 		return false;
 	}
+		console.log('text:'+text);
 
-	if (typeof(linkifyFlag) !== 'undefined') {
-		n2.value = linkify(n1.value);
+	if (target.attr('data-copy-linkify') === 'true') {
+		target.val(linkify(text));
+		target.html(linkify(text));
+		console.log('linkify:'+source.attr('id')+'-->'+target.attr('id')+' '+'('+text+')');
 	} else {
-		n2.value = n1.value;
+		target.val(text);
+		target.html(text);
+		console.log('no-linkify:'+source.attr('id')+'-->'+target.attr('id')+' '+'('+text+')');
 	}
 }
 
@@ -19,55 +26,19 @@ function linkify(string) {
 	return a.replace(/^[^a-zA-Z0-9]|[^a-zA-Z0-9]$/gi, '');
 }
 
-document.getElementById('title').onkeyup = function() {
-	sync('title', 'permalink', true);
-	sync('title', 'head-title');
-}
+$(document).ready(function(){
 
-document.getElementById('permalink').onkeydown = function(event) {
-	event.target.setAttribute('data-update', false);
-}
+	$('[data-copy-target]').each(
+		function(index, element) {
 
-$(document).ready(
-	function(){
+			var id = $(element).attr('data-copy-target');
 
-		$('[data-role="advanced-options-toggle"]').click(
+			var source = '[data-copy-source="'+id+'"]';
 
-			function() {
-				if($(this).hasClass('btn-default')) {
-					$(this).removeClass('btn-default');
-					$(this).addClass('btn-warning');
-				} else {
-					$(this).removeClass('btn-warning');
-					$(this).addClass('btn-default');
-				}
-
-				$(this).blur();
-
-				$('[data-role="advanced-options"]').toggleClass('hidden', 100);
-
+			$(source).on('change input',function(e){
+				sync(source, element);
+				$(element).trigger('change');
 			});
-
-		$('[data-meta-copy]').each(
-			function(){
-				target = $(this).attr('data-meta-copy');
-				that = this
-				console.log($('[name="'+target+'"]'));
-
-				$('[name="'+target+'"]').keyup(function(){
-					innerHtml =  $(this).val();
-					$(that).html(innerHtml);
-				});
-
-
-			}
-		);
-
-	}
-);
-$('#nav-tab a').click(function (e) {
-  e.preventDefault()
-  $(this).tab('show')
+		}
+	);
 });
-
-$(document)

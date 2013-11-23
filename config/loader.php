@@ -1,5 +1,7 @@
 <?php
 
+require_once "definitions.php";
+
 $eventsManager = new \Phalcon\Events\Manager();
 
 $loader = new \Phalcon\Loader();
@@ -16,7 +18,6 @@ $loader->registerNamespaces(
         'ProfitPress\Site' => __APPSDIR__.'site',
         'ProfitPress\Site\Models' => __APPSDIR__.'site/models',
         'ProfitPress\Permalink' => __APPSDIR__.'permalink',
-        'Vendor' => __LIBDIR__.'vendor',
     )
 );
 

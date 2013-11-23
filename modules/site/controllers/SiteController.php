@@ -4,12 +4,12 @@ namespace ProfitPress\Site\Controllers;
 
 use Phalcon\Tag as Tag;
 
-use ProfitPress\Site\Models\Options as Options,
+use ProfitPress\Site\Models\Settings as Settings,
 	ProfitPress\Offers\Models\Offers as Offers,
 	ProfitPress\Blog\Models\Posts as Posts,
 	ProfitPress\Site\Models\Users as Users;
 
-use	ProfitPress\Site\Forms\OptionForm as OptionForm,
+use	ProfitPress\Site\Forms\SettingsForm as SettingsForm,
 	ProfitPress\Site\Forms\LoginForm as LoginForm;
 
 use Phalcon\Mvc\View as View;
@@ -87,7 +87,7 @@ class SiteController extends \ProfitPress\Components\BaseController
 
 	public function accountinfoAction()
 	{
-        $form = new OptionForm();
+        $form = new SettingsForm();
 
         $user = Users::findFirst(2);
 
@@ -98,12 +98,12 @@ class SiteController extends \ProfitPress\Components\BaseController
 
         if ( $this->request->isPost() && $form->isValid($this->request->getPost()) ) {
 
-            $option = new Options();
+            $setting = new Settings();
 
-            $option->options['global_css'] =  $this->request->getPost('global_css');
+            $setting->settings['global_css'] =  $this->request->getPost('global_css');
 
-            foreach ($option->options as $key => $value) {
-            	Options::setOption($key,$value);
+            foreach ($setting->settings as $key => $value) {
+            	Settings::setSetting($key,$value);
             }
 
             $this->flash->success('You have successfully updated your theme!');

@@ -22,12 +22,12 @@ class PostForm extends \ProfitPress\Components\BaseForm
     }
     public function initialize()
     {
-        $title = new Text('title');
+        $title = new Text('title', array('data-copy-source' => 'title'));
         $title->setLabel('Title');
         $title->addValidator(new PresenceOf(array('message' => 'Title Required')));
         $this->add($title);
 
-        $permalink = new Text('permalink');
+        $permalink = new Text('permalink',array('data-copy-target' => 'title', 'data-copy-linkify' => 'true'));
         $permalink->setLabel('Permanent Url');
         $permalink->addValidator(new Regex(array(
             'message' => 'Only use letters, numbers, underscores, or hyphens',
@@ -37,7 +37,6 @@ class PostForm extends \ProfitPress\Components\BaseForm
 
         $content = new TextArea('content');
         $content->setLabel('Content');
-        $content->setAttribute('id', 'editor');
         $content->addValidator(new PresenceOf(array('message' => 'Please, write something!')));
         $this->add($content);
 
@@ -78,14 +77,19 @@ class PostForm extends \ProfitPress\Components\BaseForm
 
     protected function advancedOptions()
     {
-        $head_title = new Text("head-title", array('id' => 'head-title'));
-        $head_title->setUserOption('element_attributes', array('class' => 'col-md-5'));
+        $head_title = new Text("head-title", array('data-copy-source' => 'head-title', 'data-copy-target' => 'title','data-copy-linkify' => 'false'));
+        $head_title->setUserOption('label_attributes', array('class' => 'control-label col-sm-4'));
+        $head_title->setUserOption('element_wrapper_attributes', array('class' => 'col-md-8'));
         $head_title->setUserOption('form_group_attributes', array('class-append' => 'col-md-8'));
         $head_title->setLabel('Title Tag');
         $this->add($head_title);
 
-        // $head_meta = new Text("head['author']", array());
-
+        $head_description = new Text("head-description", array('data-copy-source' => 'head-description'));
+        $head_description->setUserOption('label_attributes', array('class' => 'control-label col-sm-4'));
+        $head_description->setUserOption('element_wrapper_attributes', array('class' => 'col-md-8'));
+        $head_description->setUserOption('form_group_attributes', array('class-append' => 'col-md-8'));
+        $head_description->setLabel('Meta Description');
+        $this->add($head_description);
     }
 
     protected function registerAssets()
@@ -95,7 +99,8 @@ class PostForm extends \ProfitPress\Components\BaseForm
             ->addJs('lib/tinymce/js/tinymce/tinymce.min.js');
 
         $this->assets->collection('footer')
-            ->addJs('js/permalink.js');
+            ->addJs('js/permalink.js')
+            ->addJs('js/advanced.js');
 
     }
 }

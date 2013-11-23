@@ -2,6 +2,8 @@
 
 namespace ProfitPress\Site\Forms;
 
+use \ProfitPress\Site\Models\Settings as Settings;
+
 use \Phalcon\Forms\Form,
     \Phalcon\Forms\Element\Text,
     \Phalcon\Forms\Element\Submit,
@@ -11,7 +13,7 @@ use \Phalcon\Forms\Form,
     \Phalcon\Forms\Element\Date,
     \ProfitPress\Offers\Models\OfferTemplates as OfferTemplates;
 
-class OptionForm extends \ProfitPress\Components\BaseForm
+class SettingsForm extends \ProfitPress\Components\BaseForm
 {
 
     public $template_id;
@@ -64,8 +66,17 @@ class OptionForm extends \ProfitPress\Components\BaseForm
         $this->setAction($controller . '/' . $action);
     }
 
-    private function getCss()
+    private function getSettings()
     {
-        return \ProfitPress\Site\Models\Options::getOption('global_css');
+        return \ProfitPress\Site\Models\Settings::getSetting('global_css');
+    }
+
+    private function buildForm()
+    {
+        $settings = Settings::getSettings();
+
+        foreach ($settings as $setting_name => $setting_value) {
+
+        }
     }
 }

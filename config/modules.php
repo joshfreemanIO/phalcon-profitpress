@@ -39,3 +39,8 @@ $application->registerModules(
         ),
     )
 );
+
+// foreach ($application->getModules() as $module_name) {
+//     $module = new $module_name['className'];
+//     $module->registerAutoLoaders();
+// }

@@ -12,7 +12,14 @@ $form->renderFormStart();
         <ul id="nav-tab" class="nav nav-tabs">
           <li class="active"><a href="#general-options" >General Options</a></li>
           <li><a href="#metadata" >Metadata</a></li>
-          <li><a href="#metadata">Social Graphs</a></li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Social Graphs</a>
+              <ul class="dropdown-menu">
+                <li><a href="#twitter-cards">Twitter Cards</a></li>
+                <li><a href="#facebook-og">Facebook Open Graph</a></li>
+                <li><a href="#google+">Google+ Graph</a></li>
+              </ul>
+          </li>
         </ul>
         <div class="tab-content">
         <section id="general-options" class="tab-pane fade in active">
@@ -28,11 +35,25 @@ $form->renderFormStart();
             $form->renderFormGroup("head-title");
              ?>
              <div class="col-md-4">
-                <p>&lt;title&gt;<span data-meta-copy="head-title"></span>&lt;/title&gt;</p>
+                <p>&lt;title&gt;<span id="head-title-viewer" data-copy-target="head-title"></span>&lt;/title&gt;</p>
+             </div>
+            <?php
+            $form->renderFormGroup("head-description");
+             ?>
+             <div class="col-md-4">
+                <p>&lt;meta name="description" value="<span id="head-description-viewer" data-copy-target="head-description"></span>" /&gt;</p>
              </div>
         </section>
+        <section id="twitter-cards" class="tab-pane fade">
+            <h3>Twitter Card</h3>
+        </section>
+        <section id="facebook-og" class="tab-pane fade">
+            <h3>Facebook Open Graph</h3>
+        </section>
+        <section id="google+" class="tab-pane fade">
+            <h3>Google+ Graph</h3>
+        </section>
         </div>
-
      </div>
 </div>
 <div class="col-md-3">
@@ -67,3 +88,5 @@ tinymce.init({
    	image_advtab: true ,
  });
 </script>
+
+<p data-copy-></p>

@@ -14,21 +14,57 @@ $di->set('modulesList', function () use ($application) {
 /**
  * Start the session the first time some component request the session service
  */
-$di->setShared('session', function() {
+$di->setShared('session', function() use ($di) {
     $session = new \Phalcon\Session\Adapter\Files();
 
     $session->start();
 
     if (!$session->has('tier_level')) {
-      $tier_level = \ProfitPress\Account\Models\Accounts::getCurrentTierLevel();
-      $session->set('tier_level',  $tier_level);
+        $tier_level = \ProfitPress\Account\Models\Accounts::getCurrentTierLevel();
+        $session->set('tier_level',  $tier_level);
     }
 
     if (!$session->has('role')) {
-      $session->set('role',  'Guest');
+        $session->set('role',  'Guest');
     }
 
+    // if (!$di->has('settings')) {
+
+    //     $settings_bag = new \Phalcon\Session\Bag('setting');
+
+    //     $settings_bag->setDI($di);
+
+    //     $settings = \ProfitPress\Site\Models\Settings::createSettingsSessionBag();
+
+    //     foreach ($settings as $key => $value) {
+    //         $settings_bag->set($key, $value);
+    //     }
+    // }
+
     return $session;
+});
+
+// Need to be optimized so db query isn't called each time.
+$di->setShared('settings', function () use ($di) {
+
+    $settings_bag = new \Phalcon\Session\Bag('settings');
+
+
+    if (!\ProfitPress\Site\Models\Settings::settingsVersionIsCurrent($settings_bag->get('settings_version'))) {
+
+        $settings_bag->setDI($di);
+
+        $settings = \ProfitPress\Site\Models\Settings::getSettings();
+        $settings_bag->initialize();
+
+        foreach ($settings as $key => $value) {
+            $settings_bag->set($key, $value);
+        }
+    }
+
+
+    return $settings_bag;
+
 });
 
 /**

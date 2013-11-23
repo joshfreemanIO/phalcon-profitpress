@@ -101,7 +101,7 @@ class BaseForm extends Form
         if ($element->getUserOption('element_wrapper_attributes') !== null)
             $element_wrapper_attributes = $this->modifyAttributes($element_wrapper_attributes,$element->getUserOption('element_wrapper_attributes'));
 
-        $element_attributes = $this->element_attributes;
+        $element_attributes = $this->modifyAttributes($this->element_attributes, $element->getAttributes());
 
         if ($element->getUserOption('element_attributes') !== null)
             $element_attributes = $this->modifyAttributes($element_attributes,$element->getUserOption('element_attributes'));
@@ -124,12 +124,13 @@ class BaseForm extends Form
 
     protected function modifyAttributes($attributes, $attributes_to_append)
     {
+
         foreach ($attributes_to_append as $attribute => $value) {
 
-            if (!preg_match('/(\-append)$/', $attribute, $match)) {
-                $attributes[$attribute] = $value;
+            if (preg_match('/.*(?=\-append$)/', $attribute, $match)) {
+                $attributes[$match[0]] .= ' ' . $value;
             } else {
-                $attributes[$attribute] .= ' ' . $value;
+                $attributes[$attribute] = $value;
             }
         }
 
