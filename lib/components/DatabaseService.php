@@ -79,19 +79,6 @@ class DatabaseService extends Component
 
 	public static function getHostName()
 	{
-		$server_name = $_SERVER['SERVER_NAME'];
-
-		$hostname['type'] = 'domain';
-		$hostname['name'] = $server_name;
-
-		$domain_parts = explode('.', $_SERVER['SERVER_NAME']);
-
-		if (count($domain_parts) > 2) {
-
-			$hostname['type'] = 'subdomain';
-			$hostname['name'] = $domain_parts[0];
-
-		}
-		return $hostname;
+		return $this->getSite()->hostname;
 	}
 }

@@ -16,7 +16,7 @@ class Authenticator extends Component
 
 		$string = base64_encode($bytes);
 
-		return rtrim($string, '=');;
+		return rtrim($string, '=');
 	}
 
 }

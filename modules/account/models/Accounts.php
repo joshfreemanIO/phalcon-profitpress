@@ -91,38 +91,18 @@ class Accounts extends AccountBaseModel
 
 	public static function getCurrentAccount()
 	{
+		$site = \Phalcon\DI::getDefault()->getSite();
 
-		$hostname = self::getHostName();
-
-		if ($hostname['type'] === 'domain') {
+		if ($site->type === 'domain') {
 			$condition = 'domain = :domain:';
-			$bind = array('domain' => $hostname['name']);
+			$bind = array('domain' => $site->hostname);
 		} else {
 			$condition = 'subdomain = :subdomain:';
-			$bind = array('subdomain' => $hostname['name']);
+			$bind = array('subdomain' => $site->hostname);
 		}
-
 
 		return self::findFirst(array($condition, 'bind' => $bind));
 
-	}
-
-	private static function getHostName()
-	{
-		$server_name = $_SERVER['SERVER_NAME'];
-
-		$hostname['type'] = 'domain';
-		$hostname['name'] = $server_name;
-
-		$domain_parts = explode('.', $_SERVER['SERVER_NAME']);
-
-		if (count($domain_parts) > 2) {
-
-			$hostname['type'] = 'subdomain';
-			$hostname['name'] = $domain_parts[0];
-
-		}
-		return $hostname;
 	}
 
 	private static function generateFilesPath($name)

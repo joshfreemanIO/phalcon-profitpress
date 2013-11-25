@@ -5,7 +5,7 @@ namespace ProfitPress\Components;
 use Phalcon\Mvc\Model,
     ProfitPress\Components\Dispatcher;
 
-class BaseModel extends Model
+abstract class BaseModel extends Model
 {
 
 	public function getSource()

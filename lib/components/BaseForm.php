@@ -9,7 +9,7 @@ use \Phalcon\Forms\Form as Form,
     \Phalcon\Forms\Element\Submit,
     \Phalcon\Validation\Validator\Identical;
 
-class BaseForm extends Form
+abstract class BaseForm extends Form
 {
     public $form_attributes = array('class' => 'form-horizontal','role' => 'form','method' => 'POST');
 

@@ -32,5 +32,6 @@
         {{ javascript_include('bootstrap/js/bootstrap.min.js') }}
         <?php $this->assets->outputJs('footer') ?>
     <?php $this->partial(__LAYOUTDIR__."piwik"); ?>
+    <script type="text/javascript"></script>
     </body>
 </html>

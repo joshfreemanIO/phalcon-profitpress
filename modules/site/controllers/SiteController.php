@@ -42,6 +42,7 @@ class SiteController extends \ProfitPress\Components\BaseController
 
 	public function dashboardAction()
 	{
+
 		$this->session->set("username", "Michael");
 		$this->session->set("authenticated", true);
 

@@ -10,7 +10,9 @@ use Phalcon\Mvc\Router as Router,
 error_reporting(E_ALL);
 
 $debug = new Phalcon\Debug();
+$debug->setUri('https://static.phalconphp.com/debug/1.2.0/');
 $debug->listen();
+// die();
 
 /**
  * Manage Constant Definitions (mostly directory shortcuts)
