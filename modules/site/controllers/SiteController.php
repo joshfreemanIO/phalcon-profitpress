@@ -154,10 +154,15 @@ class SiteController extends \ProfitPress\Components\BaseController
     {
     	$this->session->destroy();
 
+        setcookie('PHPSESSID', 'null', time() - 24*3600);
+
     	// Will need a workaround
-        $this->flash->warning('Logged Out');
+        // $this->flash->warning('Logged Out');
+        //
+        // var
+        $url = 'https://auth.profitpress.localhost/cookieeater/'. $this->site->protocol .'/'.$this->site->domain_name;
 
 		$response = new \Phalcon\Http\Response();
-    	return $response->redirect();
+    	return $response->redirect($url,true);
     }
 }

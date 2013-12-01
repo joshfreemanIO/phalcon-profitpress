@@ -40,14 +40,6 @@ $di->setShared('site', function () use ($di) {
 
     // $cookie_bag->send();
 
-
-
-
-$di->setShared('cookies', function () use ($di) {
-
-});
-
-
 /**
  * Register 'Database' component and configure connection
  */
@@ -67,56 +59,37 @@ $di->setShared('session', function() use ($di) {
 
     $session = new \Phalcon\Session\Adapter\Files();
 
-    $cookie_jar = new \Phalcon\Http\Response\Cookies();
-
-    if ($cookie_jar->has('PHPSESSID') !== true) {
-
-        if (empty($_GET['auth_id'])) {
-
-
-            $return_url = $di->getSite()->protocol . '/' .$di->getSite()->domain_name .  $_SERVER['REQUEST_URI'];
-
-            $auth_url = 'https://auth.profitpress.localhost/cookiebaker/';
-
-            $location = 'Location: '.$auth_url.$return_url;
-
-            return header($location);
-
-        } else {
-
-            $auth_id = $_GET['auth_id'];
-
-            $session_id = apc_fetch($auth_id);
-
-            $cookie = new \Phalcon\Http\Cookie('PHPSESSID', $session_id);
-
-            $cookie->send();
-
-            $cookie->restore();
-        }
-
-    }
-
-    session_id($cookie_jar->get('PHPSESSID'));
-
-    $session->start();
-
     $session->setOptions(array(
         'uniqueId' => $di->getSite()->domain_name.':',
         ));
 
-    if (!$session->has('tier_level')) {
-        $tier_level = \ProfitPress\Account\Models\Accounts::getCurrentTierLevel();
-        $session->set('tier_level',  $tier_level);
-    }
+    $shared_session = new \ProfitPress\Components\SharedSessions();
 
-    if (!$session->has('role')) {
-        $session->set('role',  'Guest');
+    $requested_url = $di->getSite()->protocol . '/' . $di->getSite()->domain_name .  $_SERVER['REQUEST_URI'];
+
+    if ( $shared_session->sessionSlaveIsStarted() !== true ) {
+
+        $redirect_location = $shared_session->startSlaveSession($requested_url);
+
+        $shared_session->startSession();
+
+        if (!$session->has('tier_level')) {
+            $tier_level = \ProfitPress\Account\Models\Accounts::getCurrentTierLevel();
+            $session->set('tier_level',  $tier_level);
+        }
+
+        if (!$session->has('role')) {
+            $session->set('role',  'Guest');
+        }
+
+        $shared_session->redirect($redirect_location);
+
+    } else {
+        $shared_session->startSession();
     }
 
     return $session;
 });
-
 
 // Need to be optimized so db query isn't called each time.
 $di->setShared('settings', function () use ($di) {
@@ -247,6 +220,3 @@ $di->set('dispatcher', function() use ($di) {
     return $dispatcher;
 });
 
-echo $di->getSession()->get('role');
-// echo $di->getSession()->remove('role');
-die();
