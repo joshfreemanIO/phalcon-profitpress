@@ -8,12 +8,12 @@ $acl->setDefaultAction(Phalcon\Acl::DENY);
 /**
  * Create Roles
  */
-$roleAdmins 	= new \Phalcon\Acl\Role("Administrators", "Application Super User");
-$roleTier3  	= new \Phalcon\Acl\Role("Tier 3", "Tier 3 Owner");
-$roleTier2  	= new \Phalcon\Acl\Role("Tier 2", "Tier 2 Owner");
-$roleTier1Plus  = new \Phalcon\Acl\Role("Tier 1+", "Tier 1+ Owner");
-$roleTier1  	= new \Phalcon\Acl\Role("Tier 1", "Tier 1 Owner");
-$roleGuests 	= new \Phalcon\Acl\Role("Guest", "Unauthenticated users");
+$roleAdmins 	= new \Phalcon\Acl\Role('Administrators', 'Application Super User');
+$roleTier3  	= new \Phalcon\Acl\Role('Tier 3', 'Tier 3 Owner');
+$roleTier2  	= new \Phalcon\Acl\Role('Tier 2', 'Tier 2 Owner');
+$roleTier1Plus  = new \Phalcon\Acl\Role('Tier 1+', 'Tier 1+ Owner');
+$roleTier1  	= new \Phalcon\Acl\Role('Tier 1', 'Tier 1 Owner');
+$roleGuests 	= new \Phalcon\Acl\Role('Guest', 'Unauthenticated users');
 
 /**
  * Generate Role Hierarchy

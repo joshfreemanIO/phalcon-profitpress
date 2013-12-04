@@ -17,8 +17,6 @@ class SharedSessions
 
 	protected $_domain;
 
-	protected $_max_lifetime = '+2 days';
-
 
 	public function __construct()
 	{
@@ -27,40 +25,60 @@ class SharedSessions
 		$this->loadCookieJar();
 	}
 
-	public function startMasterSession($key)
+	public function startMasterSession($return_url)
 	{
-
-		$apc_array = unserialize(apc_fetch($key));
-		apc_delete($key);
-
-		session_id($apc_array['session_id']);
-
 		session_start();
 
-        $this->bakeCookie($this->_session_name,session_id(), strtotime($this->_max_lifetime), '/', $this->_master_hostname);
+		do {
+			$bytes = openssl_random_pseudo_bytes(24, $strong);
+		} while ($strong !== true);
 
-		return $apc_array['return_url'];
+		$string = base64_encode($bytes);
+
+		$key =  rtrim($string, '=');
+
+        $this->bakeCookie($this->_session_name,session_id(), time() - 3600*24, '/', $this->_master_hostname);
+
+		apc_add($key, session_id());
+
+		$redirect_url = $return_url . '?' . $this->_query_key.'='.$key;
+
+		return $redirect_url;
 
 	}
 
 	public function startSlaveSession($return_url)
 	{
 
-		$key = $this->getRandomUrlBytes();
+		if ( $this->sessionSlaveIsStarted() !== true && empty($_GET[$this->_query_key]) ) {
 
-		session_start();
+            $location = $this->_master_url.$return_url;
 
-        $this->bakeCookie($this->_session_name, session_id(), strtotime($this->_max_lifetime), '/', $this->_master_hostname);
+            return $location;
 
-		$url_parts = parse_url($return_url);
-        $this->bakeCookie($this->_session_name, session_id(), strtotime($this->_max_lifetime), '/', $url_parts['host']);
+		} elseif (  $this->sessionSlaveIsStarted() !== true && !empty($_GET[$this->_query_key]) ) {
 
-        $apc_array = array('return_url' => $return_url, 'session_id' => session_id());
+            $auth_id = $_GET[$this->_query_key];
 
-        apc_store($key, serialize($apc_array),10);
+            $session_id = apc_fetch($auth_id);
+            apc_delete($auth_id);
 
-        return $key;
+            $url_parts = parse_url($return_url);
 
+            $this->bakeCookie($this->_session_name, $session_id, time() - 3600*24, '/', $this->_master_hostname);
+
+   			session_id($session_id);
+
+   			$match = array('/(\?auth_id).*/', '/^(https?)\//');
+   			$replace = array('', '$1://');
+
+   			$location = preg_replace($match, $replace, $return_url);
+
+   			return $location;
+
+	    } else {
+	    	return null;
+	    }
 	}
 
 
@@ -138,17 +156,6 @@ class SharedSessions
 	protected function loadCookieJar()
 	{
 		$this->_cookie_jar = $_COOKIE;
-	}
-
-	private function getRandomUrlBytes($min_bytes = 36)
-	{
-		do {
-			$bytes = openssl_random_pseudo_bytes($min_bytes, $strong);
-		} while ($strong !== true);
-
-		$string = base64_encode($bytes);
-
-		return preg_replace('/[^a-zA-Z0-9]/', '', $string );
 	}
 
 }

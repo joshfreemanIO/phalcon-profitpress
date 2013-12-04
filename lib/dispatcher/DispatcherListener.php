@@ -13,7 +13,11 @@ class DispatcherListener
 		$di = $dispatcher->getDi();
 
 		if (isset($di['authorizer']))
-			$dispatcher->getDi()->getAuthorizer()->isAllowed($controller_name,$action_name, $dispatcher);
+			$dispatcher->getDi()->getAuthorizer()->isAllowed($controller_name, $action_name, $dispatcher);
+
+
+		// if (isset($di['tier_authorizer']))
+			// $dispatcher->getDi()->getShared('tier_authorizer')->isAllowed($controller_name, $action_name, $dispatcher);
 	}
 
 	public function beforeException($event, $dispatcher, $exception)

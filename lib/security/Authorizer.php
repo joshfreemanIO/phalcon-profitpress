@@ -15,8 +15,6 @@ class Authorizer extends Component implements EventsAwareInterface
 
 	protected $_config_path;
 
-	protected $_acl_roles = '/var/www/profitpress/config/AccessControlList.php';
-
 	/**
 	 * Shared application EventsManager
 	 * @var object
@@ -31,12 +29,16 @@ class Authorizer extends Component implements EventsAwareInterface
 
 	public function __construct($di)
 	{
-			$this->_di = $di;
+		$this->_di = $di;
 	}
 
+	/**
+	 * [setConfigPath description]
+	 * @param [type] $config_path [description]
+	 */
 	public function setConfigPath($config_path)
 	{
-			$this->_config_path = $config_path;
+		$this->_config_path = $config_path;
 	}
 
 	/**
@@ -80,83 +82,53 @@ class Authorizer extends Component implements EventsAwareInterface
 	protected function getAcl()
 	{
 
-			if (is_object($this->_acl)) {
-							return $this->_acl;
-			}
-
-			if (!$this->getCachedACL()) {
-					$this->_acl = $this->rebuild();
-			}
-
+		if (is_object($this->_acl)) {
 			return $this->_acl;
-	}
+		}
 
-	/**
-	 * Rebuilds the access list into a file
-	 *
-	 */
-	public function rebuild()
-	{
-			$acl = new AclMemory();
+		$this->_acl = $this->getCachedACL();
 
-			require_once($this->_config_path);
-			// $this->cacheACL();
-			// if (is_writable(__DIR__ . $this->_filePath)) {
-
-			//         file_put_contents(__DIR__ . $this->_filePath, serialize($acl));
-
-			//         //Store the ACL in APC
-			//         if (function_exists('apc_store')) {
-			//                 apc_store('vokuro-acl', $acl);
-			//         }
-
-			// } else {
-			//         $this->flash->error('The user does not have write permissions');
-			// }
-
-			return $acl;
-	}
-
-	public function cacheACL()
-	{
-			$backcache = new Phalcon\Cache\Backend\Data(array(
-					'lifetime' => 172800
-			));
-
-			$cache = new \Phalcon\Cache\Backend\File($backcache, array(
-				'prefix' => 'app-data',
-				'cacheDir' => '/var/www/profitpress/cache/acl/',
-			));
-
-			$cache->save('my-data', array(1, 2, 3, 4, 5));
-
-			return false;
+		return $this->_acl;
 	}
 
 	public function getCachedACL()
 	{
-			return false;
-			$cache = new \Phalcon\Cache\Backend\File($backcache, array(
-				'prefix' => 'app-data',
-				'cacheDir' => '/var/www/profitpress/cache/acl/',
-			));
 
-			$data = $cache->get('my-data');
-			return $data;
+		$frontCache = new \Phalcon\Cache\Frontend\Data(array(
+			'lifetime' => 15,
+		));
 
+		$cache = new \Phalcon\Cache\Backend\File($frontCache, array(
+			'cacheDir' => __CACHEDIR__.'acl/',
+		));
+
+		$cache_key = basename($this->_config_path).'.cache';
+
+		$acl = $cache->get($cache_key);
+
+		if ($acl === null) {
+
+			$acl = new AclMemory();
+			require_once($this->_config_path);
+
+			$cache->save($cache_key, $acl);
+		}
+
+		return $acl;
 	}
+
 
 	protected function getRole()
 	{
-			if (!$this->_di->getSession()->get('role'))
-					return 'Guest';
+		if (!$this->_di->getSession()->get('role'))
+				return 'Guest';
 
-			return $this->_di->getSession()->get('role');
+		return $this->_di->getSession()->get('role');
 	}
 
 	protected function getTierLevel()
 	{
-			return $this->_di->getSession()->get('tier_level');
+		return $this->_di->getSession()->get('tier_level');
 	}
 
 	/**
@@ -165,7 +137,7 @@ class Authorizer extends Component implements EventsAwareInterface
 	 */
 	public function setEventsManager($eventsManager)
 	{
-			$this->_eventsManager = $eventsManager;
+		$this->_eventsManager = $eventsManager;
 	}
 
 	/**

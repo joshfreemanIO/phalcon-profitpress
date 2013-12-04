@@ -7,7 +7,6 @@ use Phalcon\Mvc\User\Component;
 class Authenticator extends Component
 {
 
-
 	public static function generatePassword()
 	{
 		do {

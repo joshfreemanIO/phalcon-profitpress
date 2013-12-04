@@ -65,21 +65,30 @@ class Accounts extends AccountBaseModel
 	{
     	$date_created = new \DateTime();
 
-    	$this->set('files_directory', self::generateFilesPath($this->subdomain));
 		$this->set('date_created',$date_created->format("Y-m-d H:i:s"));
 	}
 
 	public static function getAccountDatabaseConnection()
 	{
-
 		$account = self::getCurrentAccount();
 
 		if (empty($account)) {
 			return false;
 		} else {
-			return $account->database->getDatabaseConnectionArray();
-		}
 
+			$cache_key = 'database_connection_array.cache';
+
+			$array = \Phalcon\DI::getDefault()->getShared('cache')->get($cache_key);
+
+			if ($array === null) {
+
+				$array = $account->database->getDatabaseConnectionArray();
+
+				\Phalcon\DI::getDefault()->getShared('cache')->save($cache_key, $array);
+			}
+
+			return $array;
+		}
 	}
 
 	public static function getCurrentTierLevel()
@@ -105,42 +114,6 @@ class Accounts extends AccountBaseModel
 
 	}
 
-	private static function generateFilesPath($name)
-	{
-        $dirname = substr(base64_encode(hash('sha1', $name)),0,8);
-
-		$condition = 'files_directory = :files_directory:';
-
-        do {
-			$bind = array('files_directory' => $dirname);
-			$model = self::findFirst(array($condition, 'bind' => $bind));
-        } while ($model !== false);
-
-        mkdir(__PUBDIR__.'files/'.$dirname);
-
-        return $dirname;
-	}
-
-	private static function removeFilesPath($dirname)
-	{
-		$dir = __PUBDIR__.'files/'.$dirname;
-		$it = new \RecursiveDirectoryIterator($dir);
-		$files = new \RecursiveIteratorIterator($it,
-		             \RecursiveIteratorIterator::CHILD_FIRST);
-
-		foreach($files as $file) {
-		    if ($file->getFilename() === '.' || $file->getFilename() === '..') {
-		        continue;
-		    }
-		    if ($file->isDir()){
-		        rmdir($file->getRealPath());
-		    } else {
-		        unlink($file->getRealPath());
-		    }
-		}
-		rmdir($dir);
-	}
-
 	public static function deleteBySubdomain($subdomain)
 	{
 
@@ -152,8 +125,6 @@ class Accounts extends AccountBaseModel
 		$model->database->deleteDatabase();
 
 		$model->database->delete();
-
-		self::removeFilesPath($model->files_directory);
 
 		$model->delete();
 	}

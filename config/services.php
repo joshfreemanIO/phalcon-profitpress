@@ -1,7 +1,6 @@
 <?php
 
-
-$di->setShared('site', function () use ($di) {
+$di->setShared('site',function () use ($di) {
 
     $SERVER_SOFTWARE = $_SERVER['SERVER_SOFTWARE'];
 
@@ -32,13 +31,40 @@ $di->setShared('site', function () use ($di) {
     return $obj;
 
 });
-    // $cookie_bag = new Phalcon\Http\Response\Cookies($di);
-    // $cookie_bag->setDI($di);
-    // $cookie_bag->useEncryption(false);
-    // $cookie_bag->set('mastesr', 'vsalsue??', 120, '/',false, 'alpha.profitpress.localhost');
-    // // $cookie_bag->set('master', 'value??', 120, '/',false, '.profitpress.localhost');
 
-    // $cookie_bag->send();
+$di->setShared('cache', function() use ($di) {
+
+    $ultraFastFrontend = new \Phalcon\Cache\Frontend\Data (array(
+        "lifetime" => 3600
+    ));
+
+    // $fastFrontend = new \Phalcon\Cache\Frontend\Data (array(
+    //     "lifetime" => 86400
+    // ));
+
+    $slowFrontend = new \Phalcon\Cache\Frontend\Data (array(
+        "lifetime" => 604800
+    ));
+
+    //Backends are registered from the fastest to the slower
+    $cache = new \Phalcon\Cache\Multiple(array(
+        new \Phalcon\Cache\Backend\Apc($ultraFastFrontend, array(
+            "prefix" => $di->getShared('site')->domain_name . '-',
+        )),
+        // new \Phalcon\Cache\Backend\Memcache($fastFrontend, array(
+        //     "prefix" => 'cache',
+        //     "host" => "localhost",
+        //     "port" => "11211"
+        // )),
+        new \Phalcon\Cache\Backend\File($slowFrontend, array(
+            "prefix" => $di->getShared('site')->domain_name . '-',
+            "cacheDir" => __CACHEDIR__.'config/',
+        )),
+    ));
+
+    return $cache;
+
+});
 
 /**
  * Register 'Database' component and configure connection
@@ -59,17 +85,19 @@ $di->setShared('session', function() use ($di) {
 
     $session = new \Phalcon\Session\Adapter\Files();
 
-    $session->setOptions(array(
-        'uniqueId' => $di->getSite()->domain_name.':',
-        ));
-
     $shared_session = new \ProfitPress\Components\SharedSessions();
 
-    $requested_url = $di->getSite()->protocol . '/' . $di->getSite()->domain_name .  $_SERVER['REQUEST_URI'];
+    $return_url = $di->getSite()->protocol . '://' . $di->getSite()->domain_name .  $_SERVER['REQUEST_URI'];
 
     if ( $shared_session->sessionSlaveIsStarted() !== true ) {
 
-        $redirect_location = $shared_session->startSlaveSession($requested_url);
+        $key = $shared_session->startSlaveSession($return_url);
+
+        $location = 'https://auth.profitpress.localhost/cookiebaker/'.$key;
+
+        $shared_session->redirect($location);
+
+    } else {
 
         $shared_session->startSession();
 
@@ -81,11 +109,6 @@ $di->setShared('session', function() use ($di) {
         if (!$session->has('role')) {
             $session->set('role',  'Guest');
         }
-
-        $shared_session->redirect($redirect_location);
-
-    } else {
-        $shared_session->startSession();
     }
 
     return $session;
@@ -138,7 +161,7 @@ $di->set('view', function() {
 /**
  * Register 'Volt' templating engine
  */
-$di->set('volt', function($view, $di) {
+$di->setShared('volt', function($view, $di) {
 
         $volt = new \ProfitPress\Components\Volt($view, $di);
 
@@ -148,7 +171,7 @@ $di->set('volt', function($view, $di) {
         ));
 
         return $volt;
-}, true);
+});
 
 
 /**
@@ -174,7 +197,6 @@ $di->set('url', function() use ($di) {
 
     return $url;
 });
-
 
 /**
  * Register 'Assets' component
@@ -203,6 +225,20 @@ $di->setShared('authorizer', function() use ($di) {
     return $authorizer;
 });
 
+/**
+ * Register 'Authorizer' Component
+ */
+$di->setShared('tier_authorizer', function() use ($di) {
+
+    $tier_authorizer = new \ProfitPress\Security\Authorizer($di);
+    $tier_authorizer->setConfigPath(__CONFIGDIR__.'AccessControlList-Tier.php');
+
+    $eventsManager = $di->getShared('eventsManager');
+    $tier_authorizer->setEventsManager($eventsManager);
+
+    return $tier_authorizer;
+});
+
 //Registering a dispatcher
 $di->set('dispatcher', function() use ($di) {
     $dispatcher = new \ProfitPress\Dispatcher\Dispatcher();
@@ -219,4 +255,3 @@ $di->set('dispatcher', function() use ($di) {
     $dispatcher->setEventsManager($eventsManager);
     return $dispatcher;
 });
-

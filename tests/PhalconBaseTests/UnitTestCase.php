@@ -95,12 +95,19 @@ abstract class UnitTestCase extends \PHPUnit_Framework_TestCase
 
     protected function autoLoadTestedClass()
     {
+
         $class = get_class($this);
 
         $tested_class = preg_replace('/\\\Tests/','', $class);
         $tested_class = preg_replace('/Test$/','', $tested_class);
 
-        $this->_object = new $tested_class;
+        $reflection = new \ReflectionClass($tested_class);
+
+        if ($reflection->isAbstract()) {
+            $this->_object = $this->getMockForAbstractClass($tested_class);
+        } else {
+            $this->_object = new $tested_class;
+        }
     }
 
     /**
