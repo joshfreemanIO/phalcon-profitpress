@@ -3,7 +3,7 @@
 namespace ProfitPress\Components;
 
 use \Phalcon\Mvc\User\Component,
-\ProfitPress\Backend\Models\DatabaseConnections;
+	\ProfitPress\Backend\Models\DatabaseConnections;
 
 class DatabaseService extends Component
 {

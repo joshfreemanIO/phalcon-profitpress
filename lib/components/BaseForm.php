@@ -23,14 +23,14 @@ abstract class BaseForm extends Form
 
     public $elements;
 
-    public function __construct()
+    public function __construct($entity = null, $options = null)
     {
 
         $this->defaultFormUri();
 
         // $this->add($this->setCsrf());
 
-        parent::__construct();
+        parent::__construct($entity, $options);
 
     }
 

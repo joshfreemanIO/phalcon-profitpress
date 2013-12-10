@@ -10,6 +10,8 @@ use \ProfitPress\Components\Tag as Tag;
 	</article>
 <?php endforeach ?>
 
+<?php if ($posts_paginater->total_pages > 1): ?>
 <div class="nav">
 <?php Tag::getPaginatedList($posts_paginater->current, $posts_paginater->last, 5, $posts_paginater->total_pages, 'page/'); ?>
 </div>
+<?php endif ?>

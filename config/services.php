@@ -1,75 +1,17 @@
 <?php
 
-$di->setShared('site',function () use ($di) {
+$di->setShared('site', new \ProfitPress\Services\Hostname);
 
-    $SERVER_SOFTWARE = $_SERVER['SERVER_SOFTWARE'];
+$config_array = array(
+    'Apc' => array('lifetime' => 15, 'prefix' => 'site-'),
+    'File' => array('lifetime' => 15, 'prefix' => 'site-', 'cacheDir' => __CACHEDIR__.'config/',)
+    );
 
-    $obj = new stdClass();
+$di->setShared('cache', new \ProfitPress\Services\Cache($config_array));
 
-    if (strpos($SERVER_SOFTWARE, 'nginx') !== false) {
-        $obj->domain_name = $_SERVER['HTTP_HOST'];
-    } else {
-        $obj->domain_name = $_SERVER['SERVER_NAME'];
-    }
+$di->setShared('dbbackend',  new \ProfitPress\Services\Database('dbbackend'));
 
-    $obj->hostname = $obj->domain_name;
-
-    $domain_parts = explode('.', $obj->hostname);
-
-    if (count($domain_parts) > 2) {
-        $obj->type = 'subdomain';
-        $obj->hostname = $domain_parts[0];
-    }
-
-    $obj->protocol = 'https';
-
-    $obj->base_url = $obj->protocol . '://' . $obj->domain_name;
-
-    if (empty($_SERVER['HTTPS']))
-        $obj->protocol = 'http';
-
-    return $obj;
-
-});
-
-$di->setShared('cache', function() use ($di) {
-
-    $ultraFastFrontend = new \Phalcon\Cache\Frontend\Data (array(
-        "lifetime" => 3600
-    ));
-
-    // $fastFrontend = new \Phalcon\Cache\Frontend\Data (array(
-    //     "lifetime" => 86400
-    // ));
-
-    $slowFrontend = new \Phalcon\Cache\Frontend\Data (array(
-        "lifetime" => 604800
-    ));
-
-    //Backends are registered from the fastest to the slower
-    $cache = new \Phalcon\Cache\Multiple(array(
-        new \Phalcon\Cache\Backend\Apc($ultraFastFrontend, array(
-            "prefix" => $di->getShared('site')->domain_name . '-',
-        )),
-        // new \Phalcon\Cache\Backend\Memcache($fastFrontend, array(
-        //     "prefix" => 'cache',
-        //     "host" => "localhost",
-        //     "port" => "11211"
-        // )),
-        new \Phalcon\Cache\Backend\File($slowFrontend, array(
-            "prefix" => $di->getShared('site')->domain_name . '-',
-            "cacheDir" => __CACHEDIR__.'config/',
-        )),
-    ));
-
-    return $cache;
-
-});
-
-/**
- * Register 'Database' component and configure connection
- */
-\ProfitPress\Components\DatabaseService::getLoadedDI();
+$di->setShared('dbapplication', new \ProfitPress\Services\Database('dbapplication'));
 
 /**
  * Provide a list of Modules for the Permalink functionality
@@ -140,11 +82,7 @@ $di->setShared('settings', function () use ($di) {
 /**
  * Register 'Router' component and specify application routes
  */
-$di->set('router', function () {
-
-    return include __CONFIGDIR__.'routes.php';
-
-});
+$di->set('router', new \ProfitPress\Services\Router);
 
 /**
  * Register 'View' component

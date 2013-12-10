@@ -76,16 +76,7 @@ class Accounts extends AccountBaseModel
 			return false;
 		} else {
 
-			$cache_key = 'database_connection_array.cache';
-
-			$array = \Phalcon\DI::getDefault()->getShared('cache')->get($cache_key);
-
-			if ($array === null) {
-
-				$array = $account->database->getDatabaseConnectionArray();
-
-				\Phalcon\DI::getDefault()->getShared('cache')->save($cache_key, $array);
-			}
+			$array = $account->database->getDatabaseConnectionArray();
 
 			return $array;
 		}

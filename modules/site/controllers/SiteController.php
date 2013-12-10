@@ -6,7 +6,7 @@ use Phalcon\Tag as Tag;
 
 use ProfitPress\Site\Models\Settings as Settings,
 	ProfitPress\Offers\Models\Offers as Offers,
-	ProfitPress\Blog\Models\Posts as Posts,
+	ProfitPress\Posts\Models\Posts as Posts,
 	ProfitPress\Site\Models\Users as Users;
 
 use	ProfitPress\Site\Forms\SettingsForm as SettingsForm,
@@ -19,7 +19,7 @@ class SiteController extends \ProfitPress\Components\BaseController
 
 	public function homeAction()
 	{
-		\ProfitPress\Blog\BlogModule::registerAutoloaders();
+		\ProfitPress\Posts\PostsModule::registerAutoloaders();
 
 	    Tag::setTitle('Home');
 
@@ -28,11 +28,12 @@ class SiteController extends \ProfitPress\Components\BaseController
         if (preg_match('/^\d+$/', $this->dispatcher->getParam('page')) === 1)
             $page = $this->dispatcher->getParam('page');
 
-        //Passing a resultset as data
+        $date = date('Y-m-d H:s:i');
+
         $posts = new \Phalcon\Paginator\Adapter\Model(
             array(
-                "data"  => Posts::find('published = 1'),
-                "limit" => 2,
+                "data"  => Posts::find('date_published < NOW()'),
+                "limit" => 5,
                 "page"  => $page,
             )
         );

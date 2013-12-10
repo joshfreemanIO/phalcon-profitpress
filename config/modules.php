@@ -2,11 +2,11 @@
 
 $application->registerModules(
     array(
-        'blog' => array(
-            'className' => 'ProfitPress\Blog\BlogModule',
-            'path'      => '../modules/blog/BlogModule.php',
+        'posts' => array(
+            'className' => 'ProfitPress\Posts\PostsModule',
+            'path'      => '../modules/posts/PostsModule.php',
             'metadata'  => array(
-                'controllersNamespace' => 'ProfitPress\Blog\Controllers'
+                'controllersNamespace' => 'ProfitPress\Posts\Controllers'
                 ),
         ),
         'offers'  => array(

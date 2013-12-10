@@ -1,0 +1,9 @@
+{
+	"prefix":"og",
+	"required_properties" : ["title", "type", "image", "url"],
+	"properties":
+	[
+		{"title": ""},
+
+	]
+}

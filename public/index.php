@@ -4,7 +4,6 @@
 use Phalcon\Mvc\Router as Router,
     Phalcon\Mvc\Application as Application,
     Phalcon\DI\FactoryDefault as FactoryDefault;
-
 /**
  * Error Reporting (disable in production)
  */
@@ -34,7 +33,6 @@ $di = $cache->get('di.cache');
 $application = $cache->get('application.cache');
 
 if ($di === null || $application === null) {
-	$cache->start('bobobo.ini');
 	/**
 	 * Create Dependency Injector
 	 */

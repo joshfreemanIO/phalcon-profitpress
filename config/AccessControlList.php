@@ -1,5 +1,4 @@
 <?php
-
 $acl = new \Phalcon\Acl\Adapter\Memory();
 
 // Default action is deny access
@@ -27,7 +26,7 @@ $acl->addRole($roleAdmins, $roleTier3);
 
 
 require_once __APPSDIR__.'account/config/AccessControlList.php';
-require_once __APPSDIR__.'blog/config/AccessControlList.php';
+require_once __APPSDIR__.'posts/config/AccessControlList.php';
 require_once __APPSDIR__.'offers/config/AccessControlList.php';
 require_once __APPSDIR__.'permalink/config/AccessControlList.php';
 require_once __APPSDIR__.'site/config/AccessControlList.php';
