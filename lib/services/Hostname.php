@@ -7,6 +7,8 @@ class Hostname
 
     public $domain_name;
 
+    public $base_url;
+
     public $hostname;
 
     public $protocol = 'https';

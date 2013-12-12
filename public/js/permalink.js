@@ -6,7 +6,13 @@ function sync(sourceElement, targetElement, copy_html)
 
 	if (target.attr('data-copy-html') === 'true') {
 		text = source.html();
+		syncScrollPostion(source, target);
 	}
+
+	if (target.attr('data-update-scrollbar') === 'true') {
+		// target.customScrollbar();
+	};
+
 
 	if (target.attr('data-update') == 'false') {
 		return false;
@@ -55,3 +61,75 @@ $(document).ready(function(){
 		}
 	);
 });
+
+
+$(document).ready(function(){
+
+	var hash = window.location.hash.substring(1);
+
+	if (hash) {
+		$('[href="'+hash+'"]').trigger('click');
+	}
+
+});
+
+function syncHeight(sourceElement, targetElement) {
+
+	var $sourceElement = $(sourceElement);
+	var $targetElement = $(targetElement);
+	var newHeight = $sourceElement.height();
+
+	$targetElement.animate({height:newHeight});
+
+}
+
+function tinyMCEinit() {
+
+	var $tinyMCE = $('[data-height-target="tiny-mce"]');
+	var $source = $('[data-height-source="tiny-mce"]');
+
+	var interval = setInterval(function () {
+
+		if ($source.height() > 200) {
+			syncHeight($source,$tinyMCE);
+			clearInterval(interval);
+		} else {
+			return false;
+		}
+	}, 25);
+}
+
+function syncScrollPostion(sourceElement, targetElement) {
+
+	var $sourceElement = $(sourceElement);
+	var $targetElement = $(targetElement);
+
+	var sourceHeight = $sourceElement[0].scrollHeight;
+	var sourcePosition = $sourceElement.scrollTop();
+
+	var targetHeight = $targetElement[0].scrollHeight;
+	var targetPosition = $targetElement.scrollTop();
+
+	var relativePosition = sourcePosition / sourceHeight * targetHeight;
+
+	targetElement.scrollTop(relativePosition);
+}
+
+$(document).ready(function(){
+
+	$('[data-copy-input]').each(
+		function(index, element) {
+			$(element).click(function() {
+				var attr = $(this).attr('data-copy-input');
+				console.log(attr);
+				console.log($('input[name="'+attr+'"]'));
+
+				$('input[name="'+attr+'"]').trigger('change');
+			})
+		}
+	);
+});
+
+function createNewInput() {
+
+}

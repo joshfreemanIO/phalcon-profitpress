@@ -31,14 +31,21 @@ class PostForm extends \ProfitPress\Components\BaseForm
            $this->setEntity($entity);
         }
 
-        $title = new Text('title', array('data-copy-source' => 'title'));
-        $title->setLabel('Title');
+        $title = new Text('title', array('data-copy-source' => 'title', 'placeholder' => 'Title'));
+        // $title->setLabel('Title');
+        $title->setUserOption('no_label', true);
+        $title->setUserOption('element_wrapper_attributes', array('class' => 'col-md-12'));
         $title->addValidator(new PresenceOf(array('message' => 'Title Required')));
         $this->add($title);
 
 
-        $permalink = new Text('permalink',array('data-copy-target' => 'title', 'data-copy-linkify' => 'true'));
-        $permalink->setLabel('Permanent Url');
+        $permalink = new Text('permalink',array('class' => 'form-control', 'data-copy-target' => 'title', 'data-copy-linkify' => 'true'));
+        // $permalink->setLabel();
+        $permalink->setUserOption('label_attributes', array('class' => 'col-md-6 small text-right'));
+        // $permalink->setUserOption('element_wrapper_attributes', array('class' => 'col-md-6'));
+        $permalink->setUserOption('no_label', true);
+        $permalink->setUserOption('no_element_wrapper', true);
+        // $permalink->setUserOption('element_wrapper_attributes', array('class' => 'col-md-6'));
         $permalink->addValidator(new Regex(array(
             'message' => 'Only use letters, numbers, underscores, or hyphens',
             'pattern' => '/[a-zA-Z0-9\_\-]+/',
@@ -48,8 +55,11 @@ class PostForm extends \ProfitPress\Components\BaseForm
 
 
         $content = new TextArea('content');
-        $content->setLabel('Content');
+        // $content->setLabel('Content');
         $content->addValidator(new PresenceOf(array('message' => 'Please, write something!')));
+        $content->setUserOption('no_label', true);
+        $content->setUserOption('no_element_wrapper', true);
+        // $content->setUserOption('form_group_attributes', array('class' => 'col-md-12'));
         $this->add($content);
 
 
@@ -119,13 +129,19 @@ class PostForm extends \ProfitPress\Components\BaseForm
 
     protected function registerAssets()
     {
+
+        $this->assets->addCss('lib/jquery-custom-scrollbar/jquery.custom-scrollbar.css');
+
         $this->assets->collection('head')
             // ->addJs('//tinymce.cachefly.net/4.0/tinymce.min.js', false);
+            // ->addCss('lib/jquery-custom-scrollbar/jquery.custom-scrollbar.css')
             ->addJs('lib/tinymce/js/tinymce/tinymce.min.js');
 
         $this->assets->collection('footer')
             ->addJs('js/permalink.js')
-            ->addJs('js/advanced.js');
+            ->addJs('js/advanced.js')
+            ->addJs('js/shiv.placeholder.js')
+            ->addJs('lib/jquery-custom-scrollbar/jquery.custom-scrollbar.js');
 
     }
 }

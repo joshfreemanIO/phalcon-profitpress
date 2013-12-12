@@ -21,8 +21,8 @@ $form->renderFormStart();
         <ul id="nav-tab" class="nav nav-tabs">
           <li class="active"><a href="#content-holder" >Content</a></li>
           <li><a href="#excerpt">Summary</a></li>
+          <li><a href="#category">Discovery</a></li>
           <li><a href="#general-options">Comment Options</a></li>
-          <li><a href="#category">Categories</a></li>
           <li><a href="#metadata">Metadata</a></li>
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Social Graphs</a>
@@ -33,34 +33,72 @@ $form->renderFormStart();
               </ul>
           </li>
         </ul>
+        <br>
         <div class="tab-content">
         <section id="content-holder" class="tab-pane fade in active">
-            <h3>Content</h3>
-              <div class="row">
-                <div class="col-md-6">
-                <?php
-                $form->renderFormGroup('title');
-                $form->renderFormGroup('permalink');
-                $form->renderFormGroup('content');
-                 ?>
+          <div class="row"></div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <?php $form->renderFormGroup('title'); ?>
+                    </div>
                 </div>
-                <div class="col-md-6 jumbotron" data-copy-iframe-target="tinymce-content" data-copy-html="true"></div>
-              </div>
-
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="col-md-12"  data-height-source="tiny-mce">
+                        <?php
+                          $form->renderFormGroup('content');
+                         ?>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="col-md-12 content-viewer" data-copy-iframe-target="tinymce-content" data-copy-html="true"  data-height-target="tiny-mce"></div>
+                    </div>
+                </div>
         </section>
         <section id="excerpt" class="tab-pane fade in">
             <h3>Summarize your Post</h3>
-            <p>This excerpt will display with each post where a short description is preferred.</p>
+            <p>This excerpt will display with each post where a short description is required.</p>
             <?php
                 $form->renderFormGroup('excerpt');
             ?>
         </section>
         <section id="category" class="tab-pane fade in">
-            <h3>Categorize your Post</h3>
-            <p>Place your post into existing categories or create new categories.</p>
-            <?php
-                $form->renderFormGroup('excerpt');
-            ?>
+            <h3>Help people find your post</h3>
+            <div class="row">
+                <h4>Permanent Url</h4>
+                <div class="col-md-10">
+                    <div class="input-group">
+                        <span class="input-group-addon"><?php echo $this->getDi()->getShared('site')->base_url . '/';; ?></span>
+                    <?php
+                        echo $form->render('permalink');
+                          // $form->renderFormGroup('permalink');
+                     ?>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <button data-copy-input="title" class="btn btn-info" type='button'>Copy From Title</button>
+                </div>
+            </div>
+            <div class="row">
+                <h4>Categories</h4>
+                <div class="col-md-4">
+                    <h5>Select the applicable categories</h5>
+                        <div class="checkbox"><label><input type="checkbox" name="Personal" value="q">&nbsp;Personal</label></div>
+                        <div class="checkbox"><label><input type="checkbox" name="Technology" value="q">&nbsp;Technology</label></div>
+                        <div class="checkbox"><label><input type="checkbox" name="Politics" value="q">&nbsp;Politics</label></div>
+                </div>
+                <div class="col-md-4">
+                    <h5>Create new category</h5>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="col-md-4">
+                            <button type="button" class="btn btn-info">Add Category</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
         <section id="general-options" class="tab-pane fade in">
             <h3>Comment Options for Post</h3>
@@ -113,7 +151,8 @@ tinymce.init({
          "table contextmenu directionality emoticons paste textcolor responsivefilemanager"
 	],
   setup: function (ed) {
-        ed.on('init', function(args) {
+        ed.on('postRender', function(args) {
+
         tinyMCE.activeEditor.dom.select('body')[0].setAttribute('data-copy-iframe-source','tinymce-content');
 
         $('#content_ifr').contents().find('[data-copy-iframe-source]').each(
@@ -121,6 +160,9 @@ tinymce.init({
               copyTargetToSource(index, element);
             }
           );
+
+        tinyMCEinit();
+
         });
     },
 	image_advtab: true ,
