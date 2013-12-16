@@ -1,5 +1,16 @@
 <?php
 
+/**
+ * Contains Database class
+ *
+ * @author     Josh Freeman <jdfreeman@satx.rr.com>
+ * @package    ProfitPress\Services
+ * @copyright  2013 Help Yourself Today LLC
+ * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
+ * @version    1.0.0
+ * @since      File available since Release 1.0.0
+ */
+
 namespace ProfitPress\Services;
 
 use \Phalcon\Mvc\User\Component,
@@ -17,11 +28,13 @@ class Database extends \Phalcon\Db\Adapter\Pdo\Mysql
 		if (is_array($config_array)) {
 			parent::__construct($config_array);
 		}
+
 	}
 
 
 	public function getConnectionArray($connection_type)
 	{
+
 		switch ($connection_type) {
 			case 'dbbackend':
 				return $this->getBackendDatabaseConfiguration();
@@ -57,16 +70,15 @@ class Database extends \Phalcon\Db\Adapter\Pdo\Mysql
 
 	protected function getBackendDatabaseConfiguration()
 	{
-		$config = require_once(__CONFIGDIR__."config.php");
 
 		$domain_parts = explode('.', $_SERVER['SERVER_NAME']);
 
 		$tld = end($domain_parts);
 
 		if ($tld === 'localhost' ) {
-		    $database = $config->database_1720;
+		    $database = $this->getDi()->getShared('config')->database_1720;
 		} elseif ($tld === 'server' ) {
-		    $database = $config->database_pp;
+		    $database = $this->getDi()->getShared('config')->database_pp;
 		}
 
 		return (array) $database;
@@ -74,7 +86,6 @@ class Database extends \Phalcon\Db\Adapter\Pdo\Mysql
 
 	protected function getApplicationDatabaseConfiguration()
 	{
-
 		$dbarray = \ProfitPress\Account\Models\Accounts::getAccountDatabaseConnection();
 
 		if ($dbarray === false) {
@@ -98,7 +109,8 @@ class Database extends \Phalcon\Db\Adapter\Pdo\Mysql
 
 		$configuration_array = $this->getDi()->getShared('cache')->get($cache_key, $cache_id);
 
-		if (!is_array($configuration_array)) {
+		if (empty($configuration_array) || !is_array($configuration_array)) {
+
 			$configuration_array = $this->{$method_name}();
 			$this->getDi()->getShared('cache')->save($cache_key, $configuration_array, $cache_id);
 		}

@@ -128,8 +128,37 @@ $(document).ready(function(){
 			})
 		}
 	);
+	markDownInit();
 });
 
-function createNewInput() {
 
+function markDownInit() {
+
+
+	$('[data-markdown-source]').each(function(index,element) {
+
+		$(element).on('load change input', function() {
+
+			var $sourceElement = $(this)
+			var $targetElement = $('[data-markdown-target="'+$sourceElement.attr('data-markdown-source')+'"]');
+
+			markDown($sourceElement,$targetElement);
+
+		});
+
+		$(element).trigger('load');
+
+	});
+
+}
+
+function markDown(sourceElement,targetElement) {
+
+	var converter = new Showdown.converter();
+
+	var html = converter.makeHtml(sourceElement.val());
+
+
+	targetElement.val(html);
+	targetElement.html(html);
 }

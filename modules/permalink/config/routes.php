@@ -4,8 +4,8 @@
  * Handle Permalinks
  */
 $router->add("/([a-zA-Z0-9_\-]*)", array(
-    'module'     => 'permalink',
-    'controller' => 'permalink',
-    'action'     => 'forward',
+    'module'     => 'posts',
+    'controller' => 'posts',
+    'action'     => 'view',
     'permalink'  => 1
 ));

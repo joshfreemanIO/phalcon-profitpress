@@ -18,3 +18,6 @@ $acl->allow("Tier 1", $resourceName, "create");
 
 $acl->addResource($resourceOffers, "edit");
 $acl->allow("Tier 1", $resourceName, "edit");
+
+$acl->addResource($resourceOffers, "createcategory");
+$acl->allow("Tier 1", $resourceName, "createcategory");

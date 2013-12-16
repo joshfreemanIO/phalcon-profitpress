@@ -1,13 +1,11 @@
 <?php
 
+
+$di->setShared('config', new \ProfitPress\Services\Config(__CONFIGDIR__.'config.php'));
+
 $di->setShared('site', new \ProfitPress\Services\Hostname);
 
-$config_array = array(
-    'Apc' => array('lifetime' => 15, 'prefix' => 'site-'),
-    'File' => array('lifetime' => 15, 'prefix' => 'site-', 'cacheDir' => __CACHEDIR__.'config/',)
-    );
-
-$di->setShared('cache', new \ProfitPress\Services\Cache($config_array));
+$di->setShared('cache', new \ProfitPress\Services\Cache);
 
 $di->setShared('dbbackend',  new \ProfitPress\Services\Database('dbbackend'));
 
@@ -27,7 +25,7 @@ $di->setShared('session', function() use ($di) {
 
     $session = new \Phalcon\Session\Adapter\Files();
 
-    $shared_session = new \ProfitPress\Components\SharedSessions();
+    $shared_session = new \ProfitPress\Components\SharedSessions($di->getShared('site')->hostname);
 
     $return_url = $di->getSite()->protocol . '://' . $di->getSite()->domain_name .  $_SERVER['REQUEST_URI'];
 
@@ -35,7 +33,7 @@ $di->setShared('session', function() use ($di) {
 
         $key = $shared_session->startSlaveSession($return_url);
 
-        $location = 'https://auth.profitpress.localhost/cookiebaker/'.$key;
+        $location = $di->getShared('config')->session->auth_url.'/cookiebaker/'.$key;
 
         $shared_session->redirect($location);
 

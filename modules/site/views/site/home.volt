@@ -6,7 +6,7 @@ use \ProfitPress\Components\Tag as Tag;
 	<article class='thumbnail'>
 		<h3>{{post.get('title')}}</h3>
 		{{post.getTruncated('content')}}
-		<p><?php echo Tag::anchor(array('uri' => 'blog/posts/show/'. $post->get('id'), 'text' => 'Read Post &rarr;')); ?></p>
+		<p><?php echo Tag::anchor(array('uri' => $post->get('permalink'), 'text' => 'Read Post &rarr;')); ?></p>
 	</article>
 <?php endforeach ?>
 

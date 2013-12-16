@@ -51,7 +51,7 @@ $form->renderFormStart();
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="col-md-12 content-viewer" data-copy-iframe-target="tinymce-content" data-copy-html="true"  data-height-target="tiny-mce"></div>
+                        <div class="col-md-12 content-viewer" data-markdown-target="content" data-copy-iframe-target="tinymce-content" data-copy-html="true"  data-height-target="tiny-mce"></div>
                     </div>
                 </div>
         </section>
@@ -91,10 +91,11 @@ $form->renderFormStart();
                     <h5>Create new category</h5>
                     <div class="row">
                         <div class="col-md-8">
-                            <input type="text" class="form-control">
+                            <?php echo $form->render('category_name') ?>
                         </div>
                         <div class="col-md-4">
-                            <button type="button" class="btn btn-info">Add Category</button>
+                          <button type="button" data-ajax-route="/posts/createcategory" data-ajax-input="category_name" class="btn btn-info">Add Category</button>
+                            <?php //echo $form->render('Add Category') ?>
                         </div>
                     </div>
                 </div>
@@ -140,36 +141,36 @@ $form->renderFormEnd();
  ?>
 
 <script type="text/javascript">
-tinymce.init({
-    selector: "#content",
-    menu:{},
-    theme_advanced_buttons3_add: 'code',
-    height: 300,
-    plugins: [
-         "advlist autolink link image lists charmap print preview hr anchor pagebreak",
-         "searchreplace wordcount visualblocks visualchars insertdatetime media nonbreaking",
-         "table contextmenu directionality emoticons paste textcolor responsivefilemanager"
-	],
-  setup: function (ed) {
-        ed.on('postRender', function(args) {
+// tinymce.init({
+//     selector: "#content",
+//     menu:{},
+//     theme_advanced_buttons3_add: 'code',
+//     height: 300,
+//     plugins: [
+//          "advlist autolink link image lists charmap print preview hr anchor pagebreak",
+//          "searchreplace wordcount visualblocks visualchars insertdatetime media nonbreaking",
+//          "table contextmenu directionality emoticons paste textcolor responsivefilemanager"
+// 	],
+//   setup: function (ed) {
+//         ed.on('postRender', function(args) {
 
-        tinyMCE.activeEditor.dom.select('body')[0].setAttribute('data-copy-iframe-source','tinymce-content');
+//         tinyMCE.activeEditor.dom.select('body')[0].setAttribute('data-copy-iframe-source','tinymce-content');
 
-        $('#content_ifr').contents().find('[data-copy-iframe-source]').each(
-            function(index, element) {
-              copyTargetToSource(index, element);
-            }
-          );
+//         $('#content_ifr').contents().find('[data-copy-iframe-source]').each(
+//             function(index, element) {
+//               copyTargetToSource(index, element);
+//             }
+//           );
 
-        tinyMCEinit();
+//         tinyMCEinit();
 
-        });
-    },
-	image_advtab: true ,
-	external_filemanager_path:"/lib/ResponsiveFilemanager/filemanager/",
-	filemanager_title:"Responsive Filemanager" ,
-    toolbar2: "| filemanager | link unlink anchor | image media | forecolor backcolor  | print preview code ",
-   	external_plugins: { "filemanager" : "/lib/ResponsiveFilemanager/filemanager/plugin.min.js"},
-   	image_advtab: true ,
- });
+//         });
+//     },
+// 	image_advtab: true ,
+// 	external_filemanager_path:"/lib/ResponsiveFilemanager/filemanager/",
+// 	filemanager_title:"Responsive Filemanager" ,
+//     toolbar2: "| filemanager | link unlink anchor | image media | forecolor backcolor  | print preview code ",
+//    	external_plugins: { "filemanager" : "/lib/ResponsiveFilemanager/filemanager/plugin.min.js"},
+//    	image_advtab: true ,
+//  });
 </script>

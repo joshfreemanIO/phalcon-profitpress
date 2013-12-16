@@ -33,7 +33,7 @@ class SiteController extends \ProfitPress\Components\BaseController
         $posts = new \Phalcon\Paginator\Adapter\Model(
             array(
                 "data"  => Posts::find('date_published < NOW()'),
-                "limit" => 5,
+                "limit" => 3,
                 "page"  => $page,
             )
         );

@@ -1,6 +1,5 @@
 <?php
 
-
 use Phalcon\Mvc\Router as Router,
     Phalcon\Mvc\Application as Application,
     Phalcon\DI\FactoryDefault as FactoryDefault;
@@ -10,7 +9,7 @@ use Phalcon\Mvc\Router as Router,
 error_reporting(E_ALL);
 
 $debug = new Phalcon\Debug();
-$debug->setUri('https://static.phalconphp.com/debug/1.2.0/');
+$debug->setUri('http://static.phalconphp.com/debug/1.2.0/');
 $debug->listen();
 
 /**
@@ -75,3 +74,4 @@ if ($di === null || $application === null) {
  * Execute Application
  */
 echo $application->handle()->getContent();
+// echo memory_get_peak_usage();

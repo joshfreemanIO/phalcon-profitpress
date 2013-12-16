@@ -7,7 +7,9 @@ class SharedSessions
 
 	protected $_master_hostname = 'profitpress.localhost';
 
-	protected $_master_url = 'https://auth.profitpress.localhost/cookiebaker/';
+	protected $_master_url = 'http://auth.profitpress.localhost/cookiebaker/';
+
+	protected $_domain = 'http://auth.profitpress.localhost';
 
 	protected $_session_name = 'auth_cookie';
 
@@ -15,14 +17,16 @@ class SharedSessions
 
 	protected $_cookie_jar;
 
-	protected $_domain;
-
 	protected $_max_lifetime = '+2 days';
 
 
-	public function __construct()
+	public function __construct($domain = null)
 	{
 		session_name($this->_session_name);
+
+		if (!empty($domain)) {
+			$this->_domain = $domain;
+		}
 
 		$this->loadCookieJar();
 	}
@@ -149,6 +153,11 @@ class SharedSessions
 		$string = base64_encode($bytes);
 
 		return preg_replace('/[^a-zA-Z0-9]/', '', $string );
+	}
+
+	public function getDomain()
+	{
+		return $this->_domain;
 	}
 
 }

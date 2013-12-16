@@ -1,11 +1,39 @@
 <?php
 
+/**
+ * Contains the Acl class
+ *
+ * @author     Josh Freeman <jdfreeman@satx.rr.com>
+ * @package    ProfitPress\Services
+ * @copyright  2013 Help Yourself Today LLC
+ * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
+ * @version    1.0.0
+ * @since      File available since Release 1.0.0
+ */
 namespace ProfitPress\Services;
 
+/**
+ * The Acl (Access Control List) Class
+ *
+ * This class is designed to be a Phalcon services that
+ * loads access control lists and provide access control based
+ * upon those lists.
+ */
 class Acl extends \Phalcon\Mvc\User\Component
 {
+    /**
+     * The access control list adapter object
+     *
+     * @var object
+     * @see Phalcon\Acl\Adapter\Memory
+     * @see Acl::initialize()
+     */
     protected $_acl;
 
+    /**
+     * Acl constructor
+     * @param boolean $get_cached Use caching when...
+     */
     public function __construct($get_cached = true)
     {
         if ($get_cached) {
@@ -15,6 +43,10 @@ class Acl extends \Phalcon\Mvc\User\Component
         }
     }
 
+    /**
+     * Calls required methods to setup the object
+     *
+     */
     public function initialize()
     {
         $this->_acl = new \Phalcon\Acl\Adapter\Memory;

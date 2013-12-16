@@ -31,16 +31,23 @@ class PostForm extends \ProfitPress\Components\BaseForm
            $this->setEntity($entity);
         }
 
-        $title = new Text('title', array('data-copy-source' => 'title', 'placeholder' => 'Title'));
-        // $title->setLabel('Title');
+        $title = new Text('title');
+
+        $title->setAttribute('placeholder', 'Title');
+        $title->setAttribute('data-copy-source', 'title');
+
         $title->setUserOption('no_label', true);
         $title->setUserOption('element_wrapper_attributes', array('class' => 'col-md-12'));
         $title->addValidator(new PresenceOf(array('message' => 'Title Required')));
         $this->add($title);
 
 
-        $permalink = new Text('permalink',array('class' => 'form-control', 'data-copy-target' => 'title', 'data-copy-linkify' => 'true'));
-        // $permalink->setLabel();
+        $permalink = new Text('permalink');
+
+        $permalink->setAttribute('class', 'form-control');
+        $permalink->setAttribute('data-copy-target', 'title');
+        $permalink->setAttribute('data-copy-linkify', 'true');
+
         $permalink->setUserOption('label_attributes', array('class' => 'col-md-6 small text-right'));
         // $permalink->setUserOption('element_wrapper_attributes', array('class' => 'col-md-6'));
         $permalink->setUserOption('no_label', true);
@@ -54,7 +61,7 @@ class PostForm extends \ProfitPress\Components\BaseForm
         $this->add($permalink);
 
 
-        $content = new TextArea('content');
+        $content = new TextArea('content', array('data-markdown-source' => 'content'));
         // $content->setLabel('Content');
         $content->addValidator(new PresenceOf(array('message' => 'Please, write something!')));
         $content->setUserOption('no_label', true);
@@ -86,7 +93,33 @@ class PostForm extends \ProfitPress\Components\BaseForm
         $this->add($save_draft);
 
 
-        $publish = new Submit('Publish New Post', array('name' => 'publish', 'class' => 'btn btn-block btn-success'));
+        $category_name = new Text('category_name');
+        $category_name->setAttribute('placeholder', 'Category Name');
+        $category_name->setAttribute('class', 'form-control');
+
+
+        $category_name->addValidator(new PresenceOf(array('message' => 'Please, write something!')));
+
+        $this->add($category_name);
+
+
+        $add_category = new Submit('Add Category');
+
+        $add_category->setAttribute('name', 'add_category');
+        $add_category->setAttribute('class', 'btn btn-info');
+        $add_category->setAttribute('type', 'button');
+        
+        $add_category->setAttribute('data-ajax-route', '/posts/createcategory');
+        $add_category->setAttribute('data-ajax-input', 'category_name');
+
+        $this->add($add_category);
+
+
+        $publish = new Submit('Publish New Post');
+
+        $publish->setAttribute('name', 'submit');
+        $publish->setAttribute('class', 'btn btn-block btn-success');
+
         $publish->setUserOption('element_attributes', array('class' => 'btn btn-block btn-success'));
         $publish->setUserOption('no_element_wrapper', true);
         $publish->setUserOption('no_label', true);
@@ -138,7 +171,9 @@ class PostForm extends \ProfitPress\Components\BaseForm
             ->addJs('lib/tinymce/js/tinymce/tinymce.min.js');
 
         $this->assets->collection('footer')
+            ->addJs('js/markdown.js')
             ->addJs('js/permalink.js')
+            ->addJs('js/ajax-PostForm.js')
             ->addJs('js/advanced.js')
             ->addJs('js/shiv.placeholder.js')
             ->addJs('lib/jquery-custom-scrollbar/jquery.custom-scrollbar.js');

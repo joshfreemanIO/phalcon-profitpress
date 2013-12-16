@@ -25,7 +25,6 @@ abstract class BaseForm extends Form
 
     public function __construct($entity = null, $options = null)
     {
-
         $this->defaultFormUri();
 
         // $this->add($this->setCsrf());

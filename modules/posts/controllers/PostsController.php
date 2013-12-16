@@ -2,8 +2,11 @@
 
 namespace ProfitPress\Posts\Controllers;
 
+use ProfitPress\Posts\Forms\PostForm as PostForm;
+
 use Phalcon\Tag as Tag,
     ProfitPress\Posts\Models\Posts as Posts,
+    ProfitPress\Posts\Models\PostsCategories as PostsCategories,
     ProfitPress\Posts\Models\Users as Users,
     ProfitPress\Posts\Models\Categories as Categories,
     ProfitPress\Permalink\PermalinkModule as PermalinkModule,
@@ -37,16 +40,21 @@ class PostsController extends \ProfitPress\Components\BaseController
         $this->view->posts_paginater = $posts->getPaginate();
     }
 
-    /**
-     * Let’s read that record from the database. When using MySQL adapter,
-     * like we do in this tutorial, $slug variable will be escaped so
-     * we don’t have to deal with it.
-     */
-    public function viewAction($post_id)
+
+    public function viewAction($post_identifier)
     {
 
-        $condition = 'id = :id:';
-        $bind = array('id' => $post_id);
+        if (preg_match('/^\d+$/', $post_identifier)) {
+
+            $condition = 'post_id = :post_id:';
+            $bind = array('post_id' => $post_identifier);
+
+        } else {
+
+            $condition = 'permalink = :permalink:';
+            $bind = array('permalink' => $post_identifier);
+
+        }
 
         $post = Posts::findFirst(array($condition, 'bind' => $bind));
 
@@ -68,29 +76,9 @@ class PostsController extends \ProfitPress\Components\BaseController
 
         $post = new Posts();
 
-        $form = new \ProfitPress\Posts\Forms\PostForm($post);
+        $form = new PostForm($post);
 
-        if ( $this->request->isPost() && $form->isValid($this->request->getPost()) ) {
-
-            $form->bind($this->request->getPost(), $post);
-
-            if ($post->save()) {
-                $this->flash->success("\"$post->get('title')\" was successfully updated!");
-
-                $permalinkModule = new PermalinkModule();
-                $permalinkModule->registerAutoloaders();
-
-                PermalinkController::createPermalink($this->request->getPost('permalink'),'blog','posts','show',$post->id);
-
-                $response = new \Phalcon\Http\Response();
-                return $response->redirect("dashboard");
-            } else {
-                foreach ($post->getMessages() as $message) {
-
-                    $this->flash->error($message);
-                }
-            }
-        }
+        $form = $this->actBasedUponSubmitType($post, $form);
 
         $this->view->pick('posts/form');
 
@@ -107,40 +95,131 @@ class PostsController extends \ProfitPress\Components\BaseController
 
         $post = Posts::findFirst(array($condition, 'bind' => $bind));
 
-        $form = new \ProfitPress\Posts\Forms\PostForm($post);
+        $form = new PostForm($post);
 
-        if ( $this->request->isPost() && $form->isValid($this->request->getPost()) ) {
+        $form = $this->actBasedUponSubmitType($post, $form);
 
-            $form->bind($this->request->getPost(), $post);
-
-            if ($post->save()) {
-                $this->flash->success("You have created a new blog post!");
-
-                $permalinkModule = new PermalinkModule();
-                $permalinkModule->registerAutoloaders();
-
-                PermalinkController::createPermalink($this->request->getPost('permalink'),'blog','posts','show',$post->id);
-
-                $response = new \Phalcon\Http\Response();
-                return $response->redirect("dashboard");
-            } else {
-                foreach ($post->getMessages() as $message) {
-
-                    $this->flash->error($message);
-                }
-            }
-        }
         $this->view->pick('posts/form');
         $this->view->form = $form;
     }
 
-    public function workForm(\ProfitPress\Posts\Forms\PostForm $form)
+    public function createcategoryAction()
     {
+        $content = array();
 
+        $response = new \Phalcon\Http\Response();
+
+        $response->setStatusCode(200, 'OK');
+
+        if (!$this->request->isAjax()) {
+           
+            $content['error'][] = "Invalid Ajax Request";
+        }
+
+        $name = $this->request->getPost('value');
+        $result = $this->addCategory($name);
+
+        if ($result !== true) {
+
+            foreach ($result as $error) {
+                $content['error'][] = $error;
+            }
+        }
+
+        $content['name'] = $name;
+
+        $response->setContentType('application/json', 'UTF-8');
+        $response->setContent(json_encode($content));
+
+        $this->view->disable;
+
+        return $response;
     }
 
-    public function deleteAction($slug)
+    protected function actBasedUponSubmitType(Posts $post, PostForm $form)
     {
+        $add_category = $this->request->getPost('add_category');
+
+        if (!empty($add_category)) {
+            $this->addCategory($this->request->getPost('category_name'));
+        }
+
+        $submit = $this->request->getPost('submit');
+
+        if (!empty($submit)) {
+            $form = $this->managePostModelAndForm($post, $form);
+        }
+
+        return $form;
+    }
+
+    protected function managePostModelAndForm(Posts $post, PostForm $form)
+    {
+
+        if ( !$this->request->isPost() ) {
+            return $form;
+        }
+
+        $form->bind($this->request->getPost(), $post);
+
+        if ( !$form->isValid() ) {
+
+            foreach ($form->getMessages() as $message) {
+
+                $this->flash->error($message);
+            }
+            
+            return $form;
+        }
+
+        $add_category = $this->request->getPost('add_category');
+
+        if (!empty($add_category)) {
+            $this->addCategory($this->request->getPost('category_name'));
+
+        }
+
+        if ( !$post->save() ) {
+
+            foreach ($post->getMessages() as $message) {
+
+                $this->flash->error($message);
+            }
+
+            return $form;
+
+        } else {
+            
+            $this->flash->success("\"$post->get('title')\" was successfully updated!");
+            
+            // $permalinkModule = new PermalinkModule();
+            // $permalinkModule->registerAutoloaders();
+
+            // PermalinkController::createPermalink($this->request->getPost('permalink'),'blog','posts','show',$post->id);
+            
+            $response = new \Phalcon\Http\Response();
+            return $response->redirect("dashboard");
+        }
+        
+    }
+
+    public function addCategory($name)
+    {
+        $posts_category = new PostsCategories;
+
+        $posts_category->set('name', $name);
+
+        if (!$posts_category->validateModel() && !$posts_category->save()) {
+        
+            $messages = array();
+            foreach ($posts_category->getMessages() as $message) {
+
+                $messages[] = $message;
+            }
+            return $messages;
+        }
+
+        return true;
     }
 
 }

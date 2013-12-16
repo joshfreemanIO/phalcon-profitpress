@@ -1,10 +1,21 @@
 <?php
 
+/**
+ * Contains Cache class
+ *
+ * @author     Josh Freeman <jdfreeman@satx.rr.com>
+ * @package    ProfitPress\Services
+ * @copyright  2013 Help Yourself Today LLC
+ * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
+ * @version    1.0.0
+ * @since      File available since Release 1.0.0
+ */
+
 namespace ProfitPress\Services;
 
 use \Phalcon\Cache\Frontend\Data as Data;
 
-class Cache
+class Cache extends \Phalcon\Mvc\User\Component
 {
 
     protected $_default_prefix;
@@ -15,13 +26,17 @@ class Cache
 
     protected $_stored_caches = array();
 
-    public function __construct($default_config_array = null)
+    public function __construct()
     {
-        if ($default_config_array !== null) {
-            $this->_default_config = $default_config_array;
+        $this->initialize();
+    }
 
-            $this->_default_cache = $this->buildBackendCache($default_config_array);
-        }
+    public function initialize()
+    {
+
+        $this->_default_config = $this->getDi()->getShared('config')->getConfigPropertyAsArray('cache');
+
+        $this->_default_cache = $this->buildBackendCache($this->_default_config);
     }
 
     protected function cacheMemcache($config_array)
