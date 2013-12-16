@@ -71,8 +71,14 @@ class Posts extends \ProfitPress\Components\BaseModel
     protected $post_type = 'blog';
 
     /**
+     * Template For Post
      * @var string
-     *
+     */
+    protected $template;
+
+    /**
+     * 
+     * @var string
      */
     protected $theme;
 
@@ -93,6 +99,7 @@ class Posts extends \ProfitPress\Components\BaseModel
      *
      */
     protected $authorize_comments = 0;
+
 
     /**
      * @var  array

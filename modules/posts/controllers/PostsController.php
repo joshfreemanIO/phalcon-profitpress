@@ -66,6 +66,8 @@ class PostsController extends \ProfitPress\Components\BaseController
             ));
         }
 
+        $template = $post->get('template');
+
         $this->view->setVar('post', $post);
     }
 
