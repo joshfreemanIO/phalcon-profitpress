@@ -12,8 +12,6 @@ use Phalcon\Tag as Tag,
     ProfitPress\Permalink\PermalinkModule as PermalinkModule,
     ProfitPress\Permalink\Controllers\PermalinkController as PermalinkController;
 
-
-
 class PostsController extends \ProfitPress\Components\BaseController
 {
 
@@ -67,6 +65,11 @@ class PostsController extends \ProfitPress\Components\BaseController
         }
 
         $template = $post->get('template');
+
+        if (!empty($template) || $template === 'default') {
+            $this->view->pick('posts/templates/'.$template);
+        }
+
 
         $this->view->setVar('post', $post);
     }

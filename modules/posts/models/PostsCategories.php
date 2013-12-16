@@ -32,7 +32,21 @@ class PostsCategories extends \ProfitPress\Components\BaseModel
             ));
 
         if ($this->validationHasFailed() == true) {
-          return false;
+            return false;
+        }
+    }
+
+    public static function addFormElements(\ProfitPress\Posts\Forms\PostForm $form)
+    {
+        $categories = self::find();
+
+        foreach ($categories as $category) {
+
+            $name = "category['$category->name']";
+
+            $check = new \Phalcon\Forms\Element\Check($name);
+            $check->setLabel($category->name);
+            $form->add($check);
         }
     }
 }

@@ -97,6 +97,7 @@ class PostForm extends \ProfitPress\Components\BaseForm
         $category_name->setAttribute('placeholder', 'Category Name');
         $category_name->setAttribute('class', 'form-control');
 
+        \ProfitPress\Posts\Models\PostsCategories::addFormElements($this);
 
         $category_name->addValidator(new PresenceOf(array('message' => 'Please, write something!')));
 
@@ -108,7 +109,7 @@ class PostForm extends \ProfitPress\Components\BaseForm
         $add_category->setAttribute('name', 'add_category');
         $add_category->setAttribute('class', 'btn btn-info');
         $add_category->setAttribute('type', 'button');
-        
+
         $add_category->setAttribute('data-ajax-route', '/posts/createcategory');
         $add_category->setAttribute('data-ajax-input', 'category_name');
 
@@ -179,4 +180,15 @@ class PostForm extends \ProfitPress\Components\BaseForm
             ->addJs('lib/jquery-custom-scrollbar/jquery.custom-scrollbar.js');
 
     }
+
+    protected function getArrayedInputs($input)
+    {
+        $pattern = "/^$input\[.*\]$/";
+
+        $elements = $this->getElements();
+
+        return preg_grep($pattern, array_keys($elements));
+    }
+
+    public function renderArrayedInputs($input)
 }

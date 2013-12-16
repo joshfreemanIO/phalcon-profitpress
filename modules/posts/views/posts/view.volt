@@ -2,11 +2,11 @@
 	
 	/**
 	 * To get information about a post, use
-	 * {{ post.get($attribute) }}, eg
+	 * {{ post.get('attribute') }}, eg
 	 *
 	 * {{ post.get('title') }}
 	 *
-	 * This corresponds to an echo $model->$attribute
+	 * This corresponds directly to echo $model->$attribute
 	 *
 	 * http://docs.phalconphp.com/en/latest/reference/volt.html
 	 */
