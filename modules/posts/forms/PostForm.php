@@ -3,6 +3,7 @@
 namespace ProfitPress\Posts\Forms;
 
 use ProfitPress\Posts\Models\Posts as PostsModel;
+use ProfitPress\Posts\Models\PostsCategories as PostsCategoriesModel;
 
 use Phalcon\Forms\Element\Hidden,
     Phalcon\Forms\Element\Submit,
@@ -17,18 +18,25 @@ use Phalcon\Validation\Validator\Regex,
 class PostForm extends \ProfitPress\Components\BaseForm
 {
 
-    public function __construct(PostsModel $entity = null)
+    public function __construct(PostsModel $post_entity = null, PostsCategoriesModel $post_categories_entity = null)
     {
 
-        parent::__construct($entity);
+        parent::__construct($post_entity,$post_categories_entity);
 
     }
 
-    public function initialize(PostsModel $entity = null)
+    public function initialize(PostsModel $post_entity = null, PostsCategoriesModel $post_categories_entity = null)
     {
+        // if (empty($post_entity)) {
+        //     $post_entity = new PostsModel();
+        // }
+
+        // if (empty($post_categories_entity)) {
+        //     $post_entity = new PostsCategoriesModel();
+        // }
 
         if (!empty($entity)) {
-           $this->setEntity($entity);
+           $this->setEntity($post_entity);//,array($post_entity, $post_categories_entity));
         }
 
         $title = new Text('title');
@@ -47,6 +55,9 @@ class PostForm extends \ProfitPress\Components\BaseForm
         $permalink->setAttribute('class', 'form-control');
         $permalink->setAttribute('data-copy-target', 'title');
         $permalink->setAttribute('data-copy-linkify', 'true');
+        $permalink->setAttribute('data-ajax-validate-route', '/post/validate');
+        $permalink->setAttribute('data-ajax-validate-model', get_class($post_entity));
+        $permalink->setAttribute('data-copy-target', 'title');
 
         $permalink->setUserOption('label_attributes', array('class' => 'col-md-6 small text-right'));
         // $permalink->setUserOption('element_wrapper_attributes', array('class' => 'col-md-6'));
@@ -65,6 +76,7 @@ class PostForm extends \ProfitPress\Components\BaseForm
         // $content->setLabel('Content');
         $content->addValidator(new PresenceOf(array('message' => 'Please, write something!')));
         $content->setUserOption('no_label', true);
+        $content->setAttribute('class', 'form-control text-height');
         $content->setUserOption('no_element_wrapper', true);
         // $content->setUserOption('form_group_attributes', array('class' => 'col-md-12'));
         $this->add($content);
@@ -190,5 +202,13 @@ class PostForm extends \ProfitPress\Components\BaseForm
         return preg_grep($pattern, array_keys($elements));
     }
 
-    public function renderArrayedInputs($input)
+    public function renderCheckboxList($input)
+    {
+
+        $list = $this->getArrayedInputs($input);
+
+        foreach ($list as $value) {
+            $this->renderCheckbox($this->get($value));
+        }
+    }
 }

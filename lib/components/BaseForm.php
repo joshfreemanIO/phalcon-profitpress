@@ -180,4 +180,18 @@ abstract class BaseForm extends Form
 
         echo $html;
     }
+
+    public function renderCheckbox($element)
+    {
+        $div_attributes = array('class' => 'checkbox', 'data-checkbox-name' => $element->getName());
+
+        $html  = Tag::tagHtml('div', $div_attributes);
+            $html .= Tag::tagHtml('label');
+                $html .= $element;
+                $html .= $element->getLabel();
+            $html .= Tag::tagHtmlClose('label');
+        $html .= '</div>';
+
+        echo $html;
+    }
 }

@@ -67,6 +67,8 @@ class Hostname
 
     /**
      * Class constructor. Calls property-setting methods
+     *
+     * @return void
      */
     public function __construct()
     {

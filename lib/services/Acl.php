@@ -10,6 +10,7 @@
  * @version    1.0.0
  * @since      File available since Release 1.0.0
  */
+
 namespace ProfitPress\Services;
 
 /**

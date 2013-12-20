@@ -106,6 +106,28 @@ class PostsController extends \ProfitPress\Components\BaseController
 
         $this->view->pick('posts/form');
         $this->view->form = $form;
+   
+    }
+
+    protected function actBasedUponSubmitType(Posts $post, PostForm $form)
+    {
+        $add_category = $this->request->getPost('add_category');
+
+        if ($this->request->isAjax()) {
+            $this->validateAjax($form);
+        }
+
+        if (!empty($add_category)) {
+            $this->addCategory($this->request->getPost('category_name'));
+        }
+
+        $submit = $this->request->getPost('submit');
+
+        if (!empty($submit)) {
+            $form = $this->managePostModelAndForm($post, $form);
+        }
+
+        return $form;
     }
 
     public function createcategoryAction()
@@ -141,22 +163,6 @@ class PostsController extends \ProfitPress\Components\BaseController
         return $response;
     }
 
-    protected function actBasedUponSubmitType(Posts $post, PostForm $form)
-    {
-        $add_category = $this->request->getPost('add_category');
-
-        if (!empty($add_category)) {
-            $this->addCategory($this->request->getPost('category_name'));
-        }
-
-        $submit = $this->request->getPost('submit');
-
-        if (!empty($submit)) {
-            $form = $this->managePostModelAndForm($post, $form);
-        }
-
-        return $form;
-    }
 
     protected function managePostModelAndForm(Posts $post, PostForm $form)
     {
@@ -177,6 +183,15 @@ class PostsController extends \ProfitPress\Components\BaseController
             return $form;
         }
 
+        $categories = $this->request->getPost('category');
+
+        if ($categories) {
+            
+            foreach ($categories as $key => $value) {
+                // code...
+            }
+        }
+
         $add_category = $this->request->getPost('add_category');
 
         if (!empty($add_category)) {
@@ -184,7 +199,7 @@ class PostsController extends \ProfitPress\Components\BaseController
 
         }
 
-        if ( !$post->save() ) {
+        if ( true ) {//!$post->save() ) {
 
             foreach ($post->getMessages() as $message) {
 
@@ -207,6 +222,8 @@ class PostsController extends \ProfitPress\Components\BaseController
         }
         
     }
+
+    public function validate
 
     public function addCategory($name)
     {

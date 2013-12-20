@@ -31,6 +31,14 @@ class PostsCategories extends \ProfitPress\Components\BaseModel
 
             ));
 
+        $this->validate(new Uniqueness(
+            array(
+                'field' => 'name',
+                'message' => "\"$this->name\" already exists",
+                )
+
+            ));
+
         if ($this->validationHasFailed() == true) {
             return false;
         }
@@ -42,10 +50,12 @@ class PostsCategories extends \ProfitPress\Components\BaseModel
 
         foreach ($categories as $category) {
 
-            $name = "category['$category->name']";
+            $name = "category[$category->name]";
 
             $check = new \Phalcon\Forms\Element\Check($name);
             $check->setLabel($category->name);
+            $attributes = $check->prepareAttributes(array('value' => $category->category_id), true);
+            $check->setAttributes($attributes);
             $form->add($check);
         }
     }

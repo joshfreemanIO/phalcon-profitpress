@@ -54,4 +54,19 @@ class PostsRelationships extends \ProfitPress\Components\BaseModel
           return false;
         }
     }
+
+    public function addRelationship($post_id, $category_id) {
+
+        $this->post_id = $post_id;
+
+        $this->category_id = $category_id;
+
+        if ( !$this->validateModel() || !$this->save() ) {
+
+            foreach ($this->getMessages() as $message) {
+
+                $this->flash->error($message);
+            }
+        }
+    }
 }

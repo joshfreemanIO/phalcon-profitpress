@@ -28,6 +28,12 @@ $posts->add("/:action/:params", array(
     'params'  => 2,
     ));
 
+$posts->add("/category/:action/:params", array(
+	'controller' => 'categories',
+    'action'  => 1,
+    'params'  => 2,
+	));
+
 // $router->add('/posts/posts/viewall', array(
 //     'namespace' => 'ProfitPress\Posts\Controllers\PostsController',
 //     'module' => 'posts',

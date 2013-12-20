@@ -83,9 +83,9 @@ $form->renderFormStart();
                 <h4>Categories</h4>
                 <div class="col-md-4">
                     <h5>Select the applicable categories</h5>
-                        <div class="checkbox"><label><input type="checkbox" name="Personal" value="q">&nbsp;Personal</label></div>
-                        <div class="checkbox"><label><input type="checkbox" name="Technology" value="q">&nbsp;Technology</label></div>
-                        <div class="checkbox"><label><input type="checkbox" name="Politics" value="q">&nbsp;Politics</label></div>
+                        <?php 
+                            $form->renderCheckboxList('category');
+                        ?>
                 </div>
                 <div class="col-md-4">
                     <h5>Create new category</h5>
@@ -121,7 +121,7 @@ $form->renderFormStart();
              ?>
              <div class="col-md-4">
                 <p>&lt;meta name="description" value="<span id="head-description-viewer" data-copy-target="head-description"></span>" /&gt;</p>
-             </div>
+             </div>s
         </section>
         <section id="twitter-cards" class="tab-pane fade">
             <h3>Twitter Card</h3>
