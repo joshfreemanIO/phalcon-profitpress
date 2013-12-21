@@ -29,11 +29,9 @@ return array(
         'dbname'   => 'pp_creator',
     ),
 
-    'models' => array(
-        'metadata' => array(
-                'adapter' => 'Memory'
-        )
-    ),
+    // 'model' => array(
+    //     'table_name_prefix' => 'profitpress_',
+    // ),
 
     'cache' => array(
         'Apc' => array(

@@ -1,23 +1,16 @@
 <?php
+
 /**
- * FunctionalTestCase.php
- * Phalcon_Test_FunctionalTestCase
+ * Contains the FunctionalTestCase class
  *
- * Functional Test Helper
- *
- * PhalconPHP Framework
- *
- * @copyright (c) 2011-2012 Phalcon Team
- * @link      http://www.phalconphp.com
- * @author    Andres Gutierrez <andres@phalconphp.com>
- * @author    Nikolaos Dimopoulos <nikos@phalconphp.com>
- *
- * The contents of this file are subject to the New BSD License that is
- * bundled with this package in the file docs/LICENSE.txt
- *
- * If you did not receive a copy of the license and are unable to obtain it
- * through the world-wide-web, please send an email to license@phalconphp.com
- * so that we can send you a copy immediately.
+ * @category  ProfitPress
+ * @package   Phalcon\Test
+ * @author    Josh Freeman <jdfreeman@satx.rr.com>
+ * @copyright 2013 Help Yourself Today LLC
+ * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
+ * @version   1.0.0
+ * @link      http://documentation.profitpress.com
+ * @since     File available since Release 1.0.0
  */
 
 namespace Phalcon\Test;

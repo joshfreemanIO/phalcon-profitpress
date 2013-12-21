@@ -1,9 +1,22 @@
 <?php
 
+/**
+ * Contains the PostForm class
+ *
+ * @category  ProfitPress
+ * @package   ProfitPress\Posts\Forms
+ * @author    Josh Freeman <jdfreeman@satx.rr.com>
+ * @copyright 2013 Help Yourself Today LLC
+ * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
+ * @version   1.0.0
+ * @link      http://documentation.profitpress.com
+ * @since     File available since Release 1.0.0
+ */
+
 namespace ProfitPress\Posts\Forms;
 
-use ProfitPress\Posts\Models\Posts as PostsModel;
-use ProfitPress\Posts\Models\PostsCategories as PostsCategoriesModel;
+use ProfitPress\Posts\Models\Posts as PostsModel,
+    ProfitPress\Posts\Models\PostsCategories as PostsCategoriesModel;
 
 use Phalcon\Forms\Element\Hidden,
     Phalcon\Forms\Element\Submit,

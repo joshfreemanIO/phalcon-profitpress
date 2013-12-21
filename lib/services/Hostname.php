@@ -1,14 +1,16 @@
 <?php
 
 /**
- * Contains Hostname class
+ * Contains the Hostname class
  *
- * @author     Josh Freeman <jdfreeman@satx.rr.com>
- * @package    ProfitPress\Services
- * @copyright  2013 Help Yourself Today LLC
- * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
- * @version    1.0.0
- * @since      File available since Release 1.0.0
+ * @category  ProfitPress
+ * @package   ProfitPress\Services
+ * @author    Josh Freeman <jdfreeman@satx.rr.com>
+ * @copyright 2013 Help Yourself Today LLC
+ * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
+ * @version   1.0.0
+ * @link      http://documentation.profitpress.com
+ * @since     File available since Release 1.0.0
  */
 
 namespace ProfitPress\Services;
@@ -18,6 +20,10 @@ namespace ProfitPress\Services;
  *
  * This class is designed to be a Phalcon service that parses the $_SERVER
  * global variable and sets properties for the application's later use.
+ *
+ * <code>
+ * $di->setShared(new \ProfitPress\Services\Hostname)
+ * </code>
  */
 class Hostname
 {
@@ -66,9 +72,8 @@ class Hostname
     public $protocol = 'https';
 
     /**
-     * Class constructor. Calls property-setting methods
+     * Class constructor calls property-setting methods.
      *
-     * @return void
      */
     public function __construct()
     {

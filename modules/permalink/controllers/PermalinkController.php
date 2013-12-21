@@ -1,5 +1,18 @@
 <?php
 
+/**
+ * Contains the PermalinkController class
+ *
+ * @category  ProfitPress
+ * @package   ProfitPress\Permalink\Controllers
+ * @author    Josh Freeman <jdfreeman@satx.rr.com>
+ * @copyright 2013 Help Yourself Today LLC
+ * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
+ * @version   1.0.0
+ * @link      http://documentation.profitpress.com
+ * @since     File available since Release 1.0.0
+ */
+
 namespace ProfitPress\Permalink\Controllers;
 
 use  ProfitPress\Permalink\Models\Permalinks as Permalinks;

@@ -1,29 +1,39 @@
+import os, re, fileinput
 
 def fileblock(filename):
 	fileblock = """
-	/**
-	 * Contains the %s class
-	 *
-	 * @author     Josh Freeman <jdfreeman@satx.rr.com>
-	 * @package    %s
-	 * @copyright  2013 Help Yourself Today LLC
-	 * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
-	 * @version    1.0.0
-	 * @since      File available since Release 1.0.0
-	 */"""
+/**
+ * Contains the %s class
+ *
+ * @category  ProfitPress
+ * @package   %s
+ * @author    Josh Freeman <jdfreeman@satx.rr.com>
+ * @copyright 2013 Help Yourself Today LLC
+ * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
+ * @version   1.0.0
+ * @link      http://documentation.profitpress.com
+ * @since     File available since Release 1.0.0
+ */"""
 
 	namespace = ''
 	classname = ''
+
+	namespace_regex = '^namespace\s+\\\\?(.*)\;';
+	classname_regex = '^\s*?(abstract\s|final\s)?class\s+(\w+)';
+
+	class_starts_with = 'abstract class', 'final class', 'class'
 
 	file = open(filename);
 
 	for line in file.readlines():
 
-		if line.startswith('namespace'):
-			namespace = re.search( '^namespace\s+\\\\?(.*)\;', line).groups()[0]
+		line.strip()
 
-		elif line.startswith('class'):
-			classname = re.search('^class\s+(\w+)', line).groups()[0]
+		if line.startswith('namespace'):
+			namespace = re.search(namespace_regex, line).groups()[0]
+
+		elif line.startswith(class_starts_with):
+			classname = re.search(classname_regex, line).groups()[1]
 		
 		elif namespace != '' and classname != '':
 			file.close()
@@ -49,15 +59,15 @@ def fileblock(filename):
 
 			print line,
 
-import os
+
 
 rootdir = '.'
+exlude_dir = ['tests', 'documentation']
 for root, subFolders, files in os.walk(rootdir):
     for name in files:
     	path = os.path.join(root, name)
-    
+    	# print subFolders
     	filename, ext = os.path.splitext(path)
 
     	if ext == '.php':
-    		# fileblock(filename)
-    		print path
+    		fileblock(path)
