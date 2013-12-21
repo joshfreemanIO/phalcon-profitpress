@@ -16,6 +16,20 @@
 namespace ProfitPress\Permalink\Models;
 
 
+
+/**
+ * [Short description]
+ *
+ * [Long description]
+ *
+ * @category ProfitPress
+ * @package  ProfitPress\Permalink\Models
+ * @author   Josh Freeman <jdfreeman@satx.rr.com>
+ * @license  http://www.php.net/license/3_01.txt  PHP License 3.01
+ * @version  1.0.0
+ * @link     http://developer.profitpress.com
+ * @since    1.0.0
+ */
 class Permalinks extends \ProfitPress\Components\BaseModel
 {
 

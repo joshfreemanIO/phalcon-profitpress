@@ -20,6 +20,20 @@ use \Phalcon\Loader,
     \Phalcon\Mvc\View,
     \Phalcon\Mvc\ModuleDefinitionInterface;
 
+
+/**
+ * [Short description]
+ *
+ * [Long description]
+ *
+ * @category ProfitPress
+ * @package  ProfitPress\Posts
+ * @author   Josh Freeman <jdfreeman@satx.rr.com>
+ * @license  http://www.php.net/license/3_01.txt  PHP License 3.01
+ * @version  1.0.0
+ * @link     http://developer.profitpress.com
+ * @since    1.0.0
+ */
 class PostsModule implements ModuleDefinitionInterface
 {
 

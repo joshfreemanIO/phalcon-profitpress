@@ -25,6 +25,20 @@ use \Phalcon\Validation\Validator\Regex,
     \Phalcon\Validation\Validator\PresenceOf,
     \Phalcon\Validation\Validator\Identical;
 
+
+/**
+ * [Short description]
+ *
+ * [Long description]
+ *
+ * @category ProfitPress
+ * @package  ProfitPress\Blog\Forms
+ * @author   Josh Freeman <jdfreeman@satx.rr.com>
+ * @license  http://www.php.net/license/3_01.txt  PHP License 3.01
+ * @version  1.0.0
+ * @link     http://developer.profitpress.com
+ * @since    1.0.0
+ */
 class PostForm extends \ProfitPress\Components\BaseForm
 {
 

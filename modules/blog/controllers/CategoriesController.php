@@ -20,6 +20,20 @@ use \Phalcon\Mvc\Model\Criteria,
     \ProfitPress\Blog\Models\Users as Users,
     \ProfitPress\Blog\Models\Categories as Categories;
 
+
+/**
+ * [Short description]
+ *
+ * [Long description]
+ *
+ * @category ProfitPress
+ * @package  ProfitPress\Blog\Controllers
+ * @author   Josh Freeman <jdfreeman@satx.rr.com>
+ * @license  http://www.php.net/license/3_01.txt  PHP License 3.01
+ * @version  1.0.0
+ * @link     http://developer.profitpress.com
+ * @since    1.0.0
+ */
 class CategoriesController extends \ProfitPress\Components\BaseController
 {
 

@@ -99,7 +99,7 @@ $di->set('view', function() {
  */
 $di->setShared('volt', function($view, $di) {
 
-        $volt = new \ProfitPress\Components\Volt($view, $di);
+        $volt = new \Phalcon\Mvc\View\Engine\Volt($view, $di);
 
         $volt->setOptions(array(
                 "compiledPath" => __ROOTDIR__."cache/volt/",

@@ -21,6 +21,20 @@ use ProfitPress\Account\Models\Users as UsersModel,
 
 use ProfitPress\Account\Forms\AccountForm as AccountForm;
 
+
+/**
+ * [Short description]
+ *
+ * [Long description]
+ *
+ * @category ProfitPress
+ * @package  ProfitPress\Account\Controllers
+ * @author   Josh Freeman <jdfreeman@satx.rr.com>
+ * @license  http://www.php.net/license/3_01.txt  PHP License 3.01
+ * @version  1.0.0
+ * @link     http://developer.profitpress.com
+ * @since    1.0.0
+ */
 class AccountController extends \ProfitPress\Components\BaseController
 {
 

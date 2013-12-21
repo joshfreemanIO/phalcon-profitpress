@@ -23,6 +23,20 @@ namespace ProfitPress\Vendor;
  *
  * @copyright Jeremy Lindblom 2010-2013
  */
+
+/**
+ * [Short description]
+ *
+ * [Long description]
+ *
+ * @category ProfitPress
+ * @package  ProfitPress\Vendor
+ * @author   Josh Freeman <jdfreeman@satx.rr.com>
+ * @license  http://www.php.net/license/3_01.txt  PHP License 3.01
+ * @version  1.0.0
+ * @link     http://developer.profitpress.com
+ * @since    1.0.0
+ */
 class SerializableClosure implements \Serializable
 {
     /**

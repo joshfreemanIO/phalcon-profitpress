@@ -29,9 +29,9 @@ return array(
         'dbname'   => 'pp_creator',
     ),
 
-    // 'model' => array(
-    //     'table_name_prefix' => 'profitpress_',
-    // ),
+    'model' => array(
+        'table_name_prefix' => 'profitpress_',
+    ),
 
     'cache' => array(
         'Apc' => array(

@@ -17,8 +17,27 @@ namespace ProfitPress\Components;
 
 use Phalcon\Mvc\Controller;
 
+/**
+ * BaseController provides basic methods required by child controllers
+ *
+ * This controller is abstract, therefore it cannot be instantiated
+ * directly and must be extended instead.
+ *
+ * @category ProfitPress
+ * @package  ProfitPress\Components
+ * @author   Josh Freeman <jdfreeman@satx.rr.com>
+ * @license  http://www.php.net/license/3_01.txt  PHP License 3.01
+ * @version  1.0.0
+ * @link     http://developer.profitpress.com
+ * @since    1.0.0
+ */
 abstract class BaseController extends Controller
 {
+
+    public function onConstruct()
+    {
+
+    }
 
     public function beforeExecuteRoute(\ProfitPress\Dispatcher\Dispatcher $dispatcher)
     {
@@ -27,14 +46,13 @@ abstract class BaseController extends Controller
 
     public function afterExecuteRoute(\ProfitPress\Dispatcher\Dispatcher $dispatcher)
     {
-        \Phalcon\Tag::appendTitle(' | ProfitPress.com');
+        Tag::appendTitle(' | ProfitPress.com');
 
     }
 
     protected function initialize()
     {
-
-        \Phalcon\Tag::appendTitle('ProfitPress | ');
+        Tag::appendTitle('ProfitPress | ');
 
         $this->setCss();
     }

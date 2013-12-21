@@ -1,4 +1,4 @@
-import os, re, fileinput
+# import os, re, fileinput
 
 def fileblock(filename):
     fileblock = """
@@ -49,7 +49,7 @@ def fileblock(filename):
 
         elif line.startswith(class_starts_with):
             classname = re.search(classname_regex, line).groups()[1]
-        
+
         elif namespace != '' and classname != '':
             file.close()
             break
@@ -74,8 +74,6 @@ def fileblock(filename):
 
             elif line.startswith(class_starts_with):
                 print classblock % namespace
-                print line
-                continue
 
             print line,
 

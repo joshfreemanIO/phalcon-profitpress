@@ -18,6 +18,20 @@ namespace Phalcon\Test;
 use \Phalcon\Mvc\Dispatcher as PhDispatcher;
 use \Phalcon\Escaper as PhEscaper;
 
+
+/**
+ * [Short description]
+ *
+ * [Long description]
+ *
+ * @category ProfitPress
+ * @package  Phalcon\Test
+ * @author   Josh Freeman <jdfreeman@satx.rr.com>
+ * @license  http://www.php.net/license/3_01.txt  PHP License 3.01
+ * @version  1.0.0
+ * @link     http://developer.profitpress.com
+ * @since    1.0.0
+ */
 abstract class FunctionalTestCase extends ModelTestCase
 {
     protected $application;

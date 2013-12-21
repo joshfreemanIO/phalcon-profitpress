@@ -20,6 +20,20 @@ use \Phalcon\Loader,
     \Phalcon\Mvc\View,
     \Phalcon\Mvc\ModuleDefinitionInterface;
 
+
+/**
+ * [Short description]
+ *
+ * [Long description]
+ *
+ * @category ProfitPress
+ * @package  ProfitPress\Site
+ * @author   Josh Freeman <jdfreeman@satx.rr.com>
+ * @license  http://www.php.net/license/3_01.txt  PHP License 3.01
+ * @version  1.0.0
+ * @link     http://developer.profitpress.com
+ * @since    1.0.0
+ */
 class SiteModule implements ModuleDefinitionInterface
 {
 

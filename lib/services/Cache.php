@@ -15,24 +15,56 @@
 
 namespace ProfitPress\Services;
 
-use \Phalcon\Cache\Frontend\Data as Data;
+use \Phalcon\Mvc\User\Component;
 
+use \Phalcon\Cache\Frontend\Data;
+
+/**
+ * Abstract the Phalcon caching into simple setter/getters
+ *
+ * @category ProfitPress
+ * @package  ProfitPress\Services
+ * @author   Josh Freeman <jdfreeman@satx.rr.com>
+ * @license  http://www.php.net/license/3_01.txt  PHP License 3.01
+ * @version  1.0.0
+ * @link     http://developer.profitpress.com
+ * @since    1.0.0
+ */
 class Cache extends \Phalcon\Mvc\User\Component
 {
 
-    protected $_default_prefix;
-
+    /**
+     * Cache object built from default configuration
+     *
+     * @var object Phalcon cache object
+     */
     protected $_default_cache;
 
+    /**
+     * Associative configuration array from the Config service
+     *
+     * @var array
+     */
     protected $_default_config;
 
+    /**
+     * Array of non-default cache objects other services need
+     *
+     * @var array
+     */
     protected $_stored_caches = array();
 
+    /**
+     * Cache constructor
+     */
     public function __construct()
     {
         $this->initialize();
     }
 
+    /**
+     * Initialize cache object with default property values
+     */
     public function initialize()
     {
 
@@ -41,8 +73,13 @@ class Cache extends \Phalcon\Mvc\User\Component
         $this->_default_cache = $this->buildBackendCache($this->_default_config);
     }
 
-    protected function cacheMemcache($config_array)
-    {
+    /**
+     * Builds and returns a Memcache object
+     *
+     * @param  array $config_array Configuration array
+     * @return object Memcache object
+     */
+    protected function cacheMemcache($config_array) {
         $front_cache = new Data (array(
             "lifetime" => $config_array['lifetime']
         ));
@@ -52,6 +89,12 @@ class Cache extends \Phalcon\Mvc\User\Component
         return new \Phalcon\Cache\Backend\Memcache($front_cache, $config_array);
     }
 
+    /**
+     * Builds and returns an Apc object
+     *
+     * @param  array $config_array Configuration array
+     * @return object Apc object
+     */
     protected function cacheApc($config_array)
     {
         $front_cache = new Data (array(
@@ -63,6 +106,12 @@ class Cache extends \Phalcon\Mvc\User\Component
         return new \Phalcon\Cache\Backend\Apc($front_cache, $config_array);
     }
 
+    /**
+     * Builds and returns a File cache object
+     *
+     * @param  array $config_array Configuration array
+     * @return object File object
+     */
     protected function cacheFile($config_array)
     {
         $front_cache = new Data (array(
@@ -74,6 +123,12 @@ class Cache extends \Phalcon\Mvc\User\Component
         return new \Phalcon\Cache\Backend\File($front_cache, $config_array);
     }
 
+    /**
+     * Parses a configuration array and builds necessary caches
+     *
+     * @param  array $config_array Configuration array
+     * @return object Multiple object
+     */
     protected function buildBackendCache($config_array)
     {
         $cache_array = array();
@@ -101,7 +156,6 @@ class Cache extends \Phalcon\Mvc\User\Component
 
     public function save($cache_key, $cache_value, $cache_index = null)
     {
-
         if ($cache_index === null) {
             $this->_default_cache->save($cache_key, $cache_value);
         } else if (!empty($this->_stored_caches[$cache_index])) {

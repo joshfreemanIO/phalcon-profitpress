@@ -18,6 +18,19 @@ namespace ProfitPress\Services;
 use \Phalcon\Mvc\User\Component,
     \ProfitPress\Backend\Models\DatabaseConnections;
 
+/**
+ * [Short description]
+ *
+ * [Long description]
+ *
+ * @category ProfitPress
+ * @package  ProfitPress\Services
+ * @author   Josh Freeman <jdfreeman@satx.rr.com>
+ * @license  http://www.php.net/license/3_01.txt  PHP License 3.01
+ * @version  1.0.0
+ * @link     http://developer.profitpress.com
+ * @since    1.0.0
+ */
 class Database extends \Phalcon\Db\Adapter\Pdo\Mysql
 {
 
@@ -33,21 +46,23 @@ class Database extends \Phalcon\Db\Adapter\Pdo\Mysql
 
     }
 
-
     public function getConnectionArray($connection_type)
     {
 
         switch ($connection_type) {
-        
-        case 'dbbackend':
+
+            case 'dbbackend':
+
                 return $this->getBackendDatabaseConfiguration();
                 break;
 
             case 'dbapplication':
+
                 return $this->getApplicationDatabaseConfiguration();
                 break;
 
             default:
+
                 return false;
                 break;
         }
@@ -62,6 +77,7 @@ class Database extends \Phalcon\Db\Adapter\Pdo\Mysql
 
             case 'dbapplication':
                 $site = $this->getDi()->getSite()->domain_name;
+
                 return $this->getCachedConfiguration('dbapplication-'.$site, 'getApplicationDatabaseConfiguration');
                 break;
 
@@ -78,9 +94,9 @@ class Database extends \Phalcon\Db\Adapter\Pdo\Mysql
 
         $tld = end($domain_parts);
 
-        if ($tld === 'localhost' ) {
+        if ($tld === 'localhost') {
             $database = $this->getDi()->getShared('config')->database_1720;
-        } elseif ($tld === 'server' ) {
+        } elseif ($tld === 'server') {
             $database = $this->getDi()->getShared('config')->database_pp;
         }
 
@@ -93,6 +109,7 @@ class Database extends \Phalcon\Db\Adapter\Pdo\Mysql
 
         if ($dbarray === false) {
             $response = new \Phalcon\Http\Response();
+
             return $response->redirect("http://profitpress.localhost");
         } else {
             return (array) $dbarray;

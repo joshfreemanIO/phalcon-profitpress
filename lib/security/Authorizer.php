@@ -16,12 +16,26 @@
 namespace ProfitPress\Security;
 
 use Phalcon\Mvc\User\Component,
-		Phalcon\DiInterface,
-		Phalcon\Acl as PhAcl,
-		Phalcon\Acl\Resource as AclResource,
-		Phalcon\Acl\Adapter\Memory as AclMemory,
-		Phalcon\Events\EventsAwareInterface;
+	Phalcon\DiInterface,
+	Phalcon\Acl as PhAcl,
+	Phalcon\Acl\Resource as AclResource,
+	Phalcon\Acl\Adapter\Memory as AclMemory,
+	Phalcon\Events\EventsAwareInterface;
 
+
+/**
+ * [Short description]
+ *
+ * [Long description]
+ *
+ * @category ProfitPress
+ * @package  ProfitPress\Security
+ * @author   Josh Freeman <jdfreeman@satx.rr.com>
+ * @license  http://www.php.net/license/3_01.txt  PHP License 3.01
+ * @version  1.0.0
+ * @link     http://developer.profitpress.com
+ * @since    1.0.0
+ */
 class Authorizer extends Component implements EventsAwareInterface
 {
 	protected $_di;

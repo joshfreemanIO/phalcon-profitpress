@@ -19,31 +19,27 @@ use Phalcon\Mvc\Model,
     ProfitPress\Components\Dispatcher;
 
 /**
- * BaseModel provides common methods required by extended models.
+ * BaseModel provides common methods required by child models
  *
- * This model is abstract, and cannot not be instantiated directly.
+ * This model is abstract, therefore it cannot be instantiated
+ * directly and must be extended instead.
  *
  * @category ProfitPress
  * @package  ProfitPress\Components
  * @author   Josh Freeman <jdfreeman@satx.rr.com>
  * @license  http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version  1.0.0
- * @link     http://documentation.profitpress.com
+ * @link     http://developer.profitpress.com
  * @since    1.0.0
  */
 abstract class BaseModel extends Model
 {
-
-    protected $table_name_prefix = '';
-
     /**
-     * Base model constructor
+     * Table name prefix
+     *
+     * @var string
      */
-    public function __construct()
-    {
-        // $this->_configuration = $this->getDi()->getShared('config')->model;
-
-    }
+    protected $_table_name_prefix = '';
 
     /**
      * Parses the model name and returns the associated table name
@@ -58,14 +54,32 @@ abstract class BaseModel extends Model
         $class = preg_replace('/([a-z0-9])([A-Z])/', "$1_$2", $class);
         $class = strtolower($class);
 
-        return 'profitpress_'.$class;
+        return $this->_table_name_prefix.$class;
     }
 
+    /**
+     * Additional procedures during construct
+     *
+     * Phalcon\Mvc\Model constructer is final, however, it provides a
+     * secondary method, onConstruct(), for child classes to use as in
+     * lieu of an extendable constructor.
+     *
+     */
     public function onConstruct()
     {
+        $this->setTableNameFromConfiguration();
         $this->setConnectionService('dbapplication');
     }
 
+    /**
+     * Set a model property
+     *
+     * Sets a model propery that has been formally declared.  Trying to set an
+     * undeclared will throw an exception.
+     *
+     * @param string $property Property name to be set
+     * @param mixed $value Property value to be stored
+     */
     public function set($property, $value)
     {
         if(!property_exists($this, $property))
@@ -74,6 +88,15 @@ abstract class BaseModel extends Model
         $this->$property = $value;
     }
 
+    /**
+     * Get a model property
+     *
+     * Gets a model propery that has been formally declared.  Trying to access an
+     * undeclared will throw an exception.
+     *
+     * @param string $property Property name to be accessed
+     * @return mixed
+     */
     public function get($property)
     {
         if(!property_exists($this, $property))
@@ -82,6 +105,14 @@ abstract class BaseModel extends Model
         return $this->$property;
     }
 
+    /**
+     * Returns the current time as a MySQL formatted Time Stamp
+     *
+     * A MySQL Time Stamp format 1970-01-01 20:45:15 is created
+     * from a PHP DateTime object.
+     *
+     * @return string MySQL formatted current stamp
+     */
     public function createCurrentTimeStamp()
     {
         $date_created = new \DateTime();
@@ -108,11 +139,16 @@ abstract class BaseModel extends Model
         return $text;
     }
 
+    /**
+     * Sets table name prefix from configuration
+     *
+     * Reads the shared services configuration object and sets the
+     * table name prefix for all models extending off this base class.
+     */
     protected function setTableNameFromConfiguration()
     {
-        // if (!empty($this->_configuration->table_name_prefix)) {
-        //  $this->_table_name_prefix = $this->_configuration->table_name_prefix;
-        // }
+        if (!empty($this->getDi()->getShared('config')->model->table_name_prefix)) {
+            $this->_table_name_prefix = $this->getDi()->getShared('config')->model->table_name_prefix;
+        }
     }
-
 }

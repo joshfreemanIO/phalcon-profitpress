@@ -20,6 +20,20 @@ use \Phalcon\Forms\Form,
     \Phalcon\Forms\Element\Submit,
     \Phalcon\Validation\Validator\Identical;
 
+
+/**
+ * [Short description]
+ *
+ * [Long description]
+ *
+ * @category ProfitPress
+ * @package  ProfitPress\Offers\Forms
+ * @author   Josh Freeman <jdfreeman@satx.rr.com>
+ * @license  http://www.php.net/license/3_01.txt  PHP License 3.01
+ * @version  1.0.0
+ * @link     http://developer.profitpress.com
+ * @since    1.0.0
+ */
 class BaseForm extends \ProfitPress\Components\BaseForm
 {
     public $formClass = '';

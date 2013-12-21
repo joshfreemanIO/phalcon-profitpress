@@ -20,6 +20,20 @@ use ProfitPress\Posts\Models\Posts as Posts,
     ProfitPress\Posts\Models\Users as Users,
     ProfitPress\Posts\Models\Categories as Categories;
 
+
+/**
+ * [Short description]
+ *
+ * [Long description]
+ *
+ * @category ProfitPress
+ * @package  ProfitPress\Posts\Controllers
+ * @author   Josh Freeman <jdfreeman@satx.rr.com>
+ * @license  http://www.php.net/license/3_01.txt  PHP License 3.01
+ * @version  1.0.0
+ * @link     http://developer.profitpress.com
+ * @since    1.0.0
+ */
 class UsersController extends \ProfitPress\Components\BaseController
 {
 

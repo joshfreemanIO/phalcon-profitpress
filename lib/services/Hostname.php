@@ -24,6 +24,14 @@ namespace ProfitPress\Services;
  * <code>
  * $di->setShared(new \ProfitPress\Services\Hostname)
  * </code>
+ * 
+ * @category ProfitPress
+ * @package  ProfitPress\Services
+ * @author   Josh Freeman <jdfreeman@satx.rr.com>
+ * @license  http://www.php.net/license/3_01.txt  PHP License 3.01
+ * @version  1.0.0
+ * @link     http://developer.profitpress.com
+ * @since    1.0.0
  */
 class Hostname
 {
