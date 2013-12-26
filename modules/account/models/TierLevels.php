@@ -48,4 +48,7 @@ class TierLevels extends AccountBaseModel
 
 		return $array;
 	}
+
+    public function validation(){}
+
 }

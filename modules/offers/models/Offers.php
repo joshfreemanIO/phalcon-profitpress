@@ -287,4 +287,7 @@ class Offers extends \ProfitPress\Components\BaseModel
 
         return 'Modified ' . $diff . $unit . $s . ' ago';
     }
+
+    public function validation(){}
+
 }

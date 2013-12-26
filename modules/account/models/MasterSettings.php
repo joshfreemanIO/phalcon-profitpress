@@ -41,4 +41,7 @@ class MasterSettings extends AccountBaseModel
 
 	protected $minimum_tier_level;
 
+    public function validation(){}
+
+
 }

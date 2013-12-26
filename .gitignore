@@ -1,3 +1,5 @@
 cache/*
 compass/.sass-cache/*
 documentation/*
+node_modules/*
+.tags*

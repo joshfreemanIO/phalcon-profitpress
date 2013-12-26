@@ -15,15 +15,17 @@
 
 namespace ProfitPress\Posts\Controllers;
 
-use ProfitPress\Posts\Forms\PostForm as PostForm;
+use ProfitPress\Posts\Forms\PostForm;
+// use ProfitPress\Posts\Forms\PostForm;
+use ProfitPress\Components\Multiform;
 
-use Phalcon\Tag as Tag,
-    ProfitPress\Posts\Models\Posts as Posts,
-    ProfitPress\Posts\Models\PostsCategories as PostsCategories,
-    ProfitPress\Posts\Models\Users as Users,
-    ProfitPress\Posts\Models\Categories as Categories,
-    ProfitPress\Permalink\PermalinkModule as PermalinkModule,
-    ProfitPress\Permalink\Controllers\PermalinkController as PermalinkController;
+use Phalcon\Tag,
+    ProfitPress\Posts\Models\Posts,
+    ProfitPress\Posts\Models\PostsCategories,
+    ProfitPress\Posts\Models\Users,
+    ProfitPress\Posts\Models\Categories,
+    ProfitPress\Permalink\PermalinkModule,
+    ProfitPress\Permalink\Controllers\PermalinkController;
 
 
 /**
@@ -101,6 +103,15 @@ class PostsController extends \ProfitPress\Components\BaseController
         $this->view->setVar('post', $post);
     }
 
+    public function createnAction()
+    {
+        $multiform = new Multiform();
+
+        $multiform->addForm('Post', new PostForm);
+        $multiform->addForm('PostsCategory', new PostsCategoryForm);
+
+    }
+
     public function createAction($post_type)
     {
 
@@ -133,7 +144,7 @@ class PostsController extends \ProfitPress\Components\BaseController
 
         $this->view->pick('posts/form');
         $this->view->form = $form;
-   
+
     }
 
     protected function actBasedUponSubmitType(Posts $post, PostForm $form)
@@ -166,7 +177,7 @@ class PostsController extends \ProfitPress\Components\BaseController
         $response->setStatusCode(200, 'OK');
 
         if (!$this->request->isAjax()) {
-           
+
             $content['error'][] = "Invalid Ajax Request";
         }
 
@@ -200,20 +211,16 @@ class PostsController extends \ProfitPress\Components\BaseController
 
         $form->bind($this->request->getPost(), $post);
 
-        if ( !$form->isValid() ) {
+        $form_is_valid = $this->validateForm($form);
 
-            foreach ($form->getMessages() as $message) {
-
-                $this->flash->error($message);
-            }
-            
+        if ( !$form_is_valid ) {
             return $form;
         }
 
         $categories = $this->request->getPost('category');
 
         if ($categories) {
-            
+
             foreach ($categories as $key => $value) {
                 // code...
             }
@@ -226,7 +233,7 @@ class PostsController extends \ProfitPress\Components\BaseController
 
         }
 
-        if ( true ) {//!$post->save() ) {
+        if ( !$post->save() ) {
 
             foreach ($post->getMessages() as $message) {
 
@@ -236,21 +243,22 @@ class PostsController extends \ProfitPress\Components\BaseController
             return $form;
 
         } else {
-            
-            $this->flash->success("\"$post->get('title')\" was successfully updated!");
-            
+
+            $title = $post->get('title');
+            $this->flash->success("$title was successfully updated!");
+
             // $permalinkModule = new PermalinkModule();
             // $permalinkModule->registerAutoloaders();
 
             // PermalinkController::createPermalink($this->request->getPost('permalink'),'blog','posts','show',$post->id);
-            
-            $response = new \Phalcon\Http\Response();
-            return $response->redirect("dashboard");
+            // $this->view->disable();
+            // $response = new \Phalcon\Http\Response();
+            $this->response->redirect("dashboard");
         }
-        
+
     }
 
-    public function validate
+    // public function validate
 
     public function addCategory($name)
     {
@@ -259,7 +267,7 @@ class PostsController extends \ProfitPress\Components\BaseController
         $posts_category->set('name', $name);
 
         if (!$posts_category->validateModel() && !$posts_category->save()) {
-        
+
             $messages = array();
             foreach ($posts_category->getMessages() as $message) {
 

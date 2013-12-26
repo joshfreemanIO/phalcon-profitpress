@@ -11,7 +11,7 @@ function sync(sourceElement, targetElement, copy_html)
 
 	if (target.attr('data-update-scrollbar') === 'true') {
 		// target.customScrollbar();
-	};
+	}
 
 
 	if (target.attr('data-update') == 'false') {
@@ -125,7 +125,7 @@ $(document).ready(function(){
 				console.log($('input[name="'+attr+'"]'));
 
 				$('input[name="'+attr+'"]').trigger('change');
-			})
+			});
 		}
 	);
 	markDownInit();
@@ -139,7 +139,7 @@ function markDownInit() {
 
 		$(element).on('load change input', function() {
 
-			var $sourceElement = $(this)
+			var $sourceElement = $(this);
 			var $targetElement = $('[data-markdown-target="'+$sourceElement.attr('data-markdown-source')+'"]');
 
 			markDown($sourceElement,$targetElement);

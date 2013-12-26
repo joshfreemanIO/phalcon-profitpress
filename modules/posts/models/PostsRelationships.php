@@ -58,7 +58,7 @@ class PostsRelationships extends \ProfitPress\Components\BaseModel
         );
     }
 
-    public function validateModel()
+    public function validation()
     {
 
         $this->validate(new PresenceOf(

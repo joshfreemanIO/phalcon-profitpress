@@ -46,7 +46,7 @@ $form->renderFormStart();
                     <div class="col-md-6">
                         <div class="col-md-12"  data-height-source="tiny-mce">
                         <?php
-                          $form->renderFormGroup('content');
+                          $form->renderFormGroup('prerendered_content');
                          ?>
                         </div>
                     </div>
@@ -83,7 +83,7 @@ $form->renderFormStart();
                 <h4>Categories</h4>
                 <div class="col-md-4">
                     <h5>Select the applicable categories</h5>
-                        <?php 
+                        <?php
                             $form->renderCheckboxList('category');
                         ?>
                 </div>

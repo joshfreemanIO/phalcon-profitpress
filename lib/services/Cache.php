@@ -73,6 +73,8 @@ class Cache extends \Phalcon\Mvc\User\Component
         $this->_default_cache = $this->buildBackendCache($this->_default_config);
     }
 
+
+
     /**
      * Builds and returns a Memcache object
      *

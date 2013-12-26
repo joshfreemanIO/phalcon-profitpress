@@ -20,6 +20,8 @@ use ProfitPress\Components\Tag as Tag;
 use Phalcon\Mvc\Model\Validator\InclusionIn,
     Phalcon\Mvc\Model\Validator\Uniqueness;
 
+use Michelf\Markdown;
+
 
 /**
  * [Short description]
@@ -48,6 +50,12 @@ class Posts extends \ProfitPress\Components\BaseModel
      *
      */
     protected $title;
+
+    /**
+     * @var string
+     *
+     */
+    protected $prerendered_content;
 
     /**
      * @var string
@@ -104,7 +112,7 @@ class Posts extends \ProfitPress\Components\BaseModel
     protected $template;
 
     /**
-     * 
+     *
      * @var string
      */
     protected $theme;
@@ -238,15 +246,22 @@ class Posts extends \ProfitPress\Components\BaseModel
         $this->set('date_modified', $this->createCurrentTimeStamp());
     }
 
+    public function beforeValidationOnSave()
+    {
+        $this->set('content', Markdown::defaultTransform($this->prerendered_content));
+
+        var_dump(Markdown::defaultTransform($this->prerendered_content));
+    }
+
     public function validation()
     {
-        $this->validate(new InclusionIn(
-            array(
-                'field' => 'post_type',
-                'domain' => $this->valid_post_types,
-                )
+        // $this->validate(new InclusionIn(
+        //     array(
+        //         'field' => 'post_type',
+        //         'domain' => $this->valid_post_types,
+        //         )
 
-            ));
+        //     ));
 
         $this->validate(new Uniqueness(array(
             'field' => 'permalink',

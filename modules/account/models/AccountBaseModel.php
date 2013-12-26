@@ -15,6 +15,7 @@
 
 namespace ProfitPress\Account\Models;
 
+use ProfitPress\Components\BaseModel;
 
 /**
  * [Short description]
@@ -29,7 +30,7 @@ namespace ProfitPress\Account\Models;
  * @link     http://developer.profitpress.com
  * @since    1.0.0
  */
-class AccountBaseModel extends \ProfitPress\Components\BaseModel
+abstract class AccountBaseModel extends BaseModel
 {
 
 	public function getSource()
@@ -53,4 +54,5 @@ class AccountBaseModel extends \ProfitPress\Components\BaseModel
 	{
 		$this->validation();
 	}
+
 }

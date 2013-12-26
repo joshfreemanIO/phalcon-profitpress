@@ -145,4 +145,7 @@ class OfferTemplates extends \ProfitPress\Components\BaseModel
 
         $this->fields = serialize(array_keys($fields));
     }
+
+    public function validation(){}
+
 }

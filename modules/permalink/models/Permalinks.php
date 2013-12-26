@@ -129,4 +129,7 @@ class Permalinks extends \ProfitPress\Components\BaseModel
         		'resource_id' => $permalink->resource_id,
     	);
     }
+
+    public function validation(){}
+
 }

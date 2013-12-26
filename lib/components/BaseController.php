@@ -67,4 +67,35 @@ abstract class BaseController extends Controller
 
 	    $this->view->css = 'css/'.$css;
     }
+
+    protected function validateModelAndFlashMessages($model)
+    {
+        $validation_successful = $model->validation();
+
+        if ($validation_successful !== true) {
+            $this->flashMessages($model->getMessages(), 'error');
+            return false;
+        }
+
+        return true;
+    }
+
+    protected function validateFormAndFlashMessages($form)
+    {
+        $validation_successful = $form->isValid();
+
+        if ($validation_successful !== true) {
+            $this->flashMessages($form->getMessages(), 'error');
+            return false;
+        }
+
+        return true;
+    }
+
+    protected function flashMessages($messages, $flash_type)
+    {
+        foreach ($messages as $message) {
+            $this->flash->{$flash_type}($message);
+        }
+    }
 }

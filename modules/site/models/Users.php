@@ -79,4 +79,6 @@ class Users extends \ProfitPress\Security\BaseSecurityModel
 
         return $this->getDi()->getShared('security')->checkHash($password,$hash);
     }
+
+    public function validation(){}
 }

@@ -158,4 +158,5 @@ class DatabaseConnections extends AccountBaseModel
 		$connection->execute($sql);
 
 	}
+
 }

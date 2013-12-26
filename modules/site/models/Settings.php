@@ -130,5 +130,7 @@ class Settings extends \ProfitPress\Components\BaseModel
     {
         self::updateSettingsVersion($this->getDI()->getShared('settings')->get('settings_version'));
     }
+    public function validation(){}
+
 }
 

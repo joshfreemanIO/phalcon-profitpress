@@ -99,15 +99,23 @@ class PostForm extends \ProfitPress\Components\BaseForm
         $this->add($permalink);
 
 
-        $content = new TextArea('content', array('data-markdown-source' => 'content'));
-        // $content->setLabel('Content');
-        $content->addValidator(new PresenceOf(array('message' => 'Please, write something!')));
-        $content->setUserOption('no_label', true);
-        $content->setAttribute('class', 'form-control text-height');
-        $content->setUserOption('no_element_wrapper', true);
-        // $content->setUserOption('form_group_attributes', array('class' => 'col-md-12'));
-        $this->add($content);
+        $prerendered_content = new TextArea('prerendered_content', array('data-markdown-source' => 'content'));
+        // $prerendered_content->setLabel('prerendered_Content');
+        $prerendered_content->addValidator(new PresenceOf(array('message' => 'Please, write something!')));
+        $prerendered_content->setUserOption('no_label', true);
+        $prerendered_content->setAttribute('class', 'form-control text-height');
+        $prerendered_content->setUserOption('no_element_wrapper', true);
+        // $prerendered_content->setUserOption('form_group_attributes', array('class' => 'col-md-12'));
+        $this->add($prerendered_content);
 
+        // $content = new TextArea('content', array('data-markdown-source' => 'content'));
+        // // $content->setLabel('Content');
+        // $content->addValidator(new PresenceOf(array('message' => 'Please, write something!')));
+        // $content->setUserOption('no_label', true);
+        // $content->setAttribute('class', 'form-control text-height');
+        // $content->setUserOption('no_element_wrapper', true);
+        // // $content->setUserOption('form_group_attributes', array('class' => 'col-md-12'));
+        // $this->add($content);
 
         $allow_comments = new Check('allow_comments', array('value' => 1, 'checked' => 'checked'));
         $allow_comments->setLabel('Allow Comments for this Post');
@@ -138,7 +146,7 @@ class PostForm extends \ProfitPress\Components\BaseForm
 
         \ProfitPress\Posts\Models\PostsCategories::addFormElements($this);
 
-        $category_name->addValidator(new PresenceOf(array('message' => 'Please, write something!')));
+        // $category_name->addValidator(new PresenceOf(array('message' => 'Please, write something!')));
 
         $this->add($category_name);
 
@@ -206,17 +214,18 @@ class PostForm extends \ProfitPress\Components\BaseForm
         $this->assets->addCss('lib/jquery-custom-scrollbar/jquery.custom-scrollbar.css');
 
         $this->assets->collection('head')
+            ->addJs('//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js', false);
             // ->addJs('//tinymce.cachefly.net/4.0/tinymce.min.js', false);
             // ->addCss('lib/jquery-custom-scrollbar/jquery.custom-scrollbar.css')
-            ->addJs('lib/tinymce/js/tinymce/tinymce.min.js');
+            // ->addJs('lib/tinymce/js/tinymce/tinymce.min.js');
 
         $this->assets->collection('footer')
             ->addJs('js/markdown.js')
-            ->addJs('js/permalink.js')
-            ->addJs('js/ajax-PostForm.js')
-            ->addJs('js/advanced.js')
-            ->addJs('js/shiv.placeholder.js')
-            ->addJs('lib/jquery-custom-scrollbar/jquery.custom-scrollbar.js');
+            ->addJs('lib/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.js')
+            ->addJs('js/profitpress.js')
+            ->addJs('js/shiv.placeholder.js');
+
+            // ->addJs('lib/jquery-custom-scrollbar/jquery.custom-scrollbar.js');
 
     }
 

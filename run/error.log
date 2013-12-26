@@ -302,3 +302,622 @@ PHP message: PHP  99. ProfitPress\Components\Volt->getCompiler() /var/www/helpyo
 PHP message: PHP Stack trace:
 PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
 PHP message: PHP   2. Phalcon\Mvc\Application->handle() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:78" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET /test-title HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/page/1"
+2013/12/21 14:14:13 [error] 13292#0: *137 FastCGI sent in stderr: "PHP message: PHP Parse error:  syntax error, unexpected T_RETURN in /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Cache.php on line 93
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. require_once() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:73" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost"
+2013/12/21 14:14:13 [error] 13292#0: *137 FastCGI sent in stderr: "PHP message: PHP Parse error:  syntax error, unexpected T_RETURN in /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Cache.php on line 93
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. require_once() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:73" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET /favicon.ico HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost"
+2013/12/21 23:02:29 [error] 13292#0: *144 FastCGI sent in stderr: "PHP message: PHP Parse error:  syntax error, unexpected T_CLASS, expecting ',' or ';' in /var/www/helpyourselftoday.com/site.profitpress.com/lib/components/Tag.php on line 34
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. require_once() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:62" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost"
+2013/12/21 23:02:30 [error] 13292#0: *144 FastCGI sent in stderr: "PHP message: PHP Parse error:  syntax error, unexpected T_CLASS, expecting ',' or ';' in /var/www/helpyourselftoday.com/site.profitpress.com/lib/components/Tag.php on line 34
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. require_once() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:62" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET /favicon.ico HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost"
+2013/12/21 23:02:38 [error] 13292#0: *144 FastCGI sent in stderr: "PHP message: PHP Parse error:  syntax error, unexpected T_CLASS, expecting ',' or ';' in /var/www/helpyourselftoday.com/site.profitpress.com/lib/components/Tag.php on line 34
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. require_once() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:62" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost"
+2013/12/21 23:02:38 [error] 13292#0: *144 FastCGI sent in stderr: "PHP message: PHP Parse error:  syntax error, unexpected T_CLASS, expecting ',' or ';' in /var/www/helpyourselftoday.com/site.profitpress.com/lib/components/Tag.php on line 34
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. require_once() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:62" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET /favicon.ico HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost"
+2013/12/21 23:02:47 [error] 13292#0: *144 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Cannot declare class ProfitPress\Components\Tag because the name is already in use in /var/www/helpyourselftoday.com/site.profitpress.com/lib/components/Tag.php on line 35
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. require_once() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:62" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost"
+2013/12/21 23:02:47 [error] 13292#0: *144 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Cannot declare class ProfitPress\Components\Tag because the name is already in use in /var/www/helpyourselftoday.com/site.profitpress.com/lib/components/Tag.php on line 35
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. require_once() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:62" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET /favicon.ico HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost"
+2013/12/21 23:03:08 [error] 13292#0: *144 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Cannot declare class ProfitPress\Components\Tag because the name is already in use in /var/www/helpyourselftoday.com/site.profitpress.com/lib/components/Tag.php on line 35
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. require_once() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:62" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost"
+2013/12/21 23:03:08 [error] 13292#0: *144 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Cannot declare class ProfitPress\Components\Tag because the name is already in use in /var/www/helpyourselftoday.com/site.profitpress.com/lib/components/Tag.php on line 35
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. require_once() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:62" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET /favicon.ico HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost"
+2013/12/21 23:03:20 [error] 13292#0: *144 FastCGI sent in stderr: "PHP message: PHP Parse error:  syntax error, unexpected T_RETURN in /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Cache.php on line 93
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. require_once() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:73" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost"
+2013/12/21 23:03:20 [error] 13292#0: *144 FastCGI sent in stderr: "PHP message: PHP Parse error:  syntax error, unexpected T_RETURN in /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Cache.php on line 93
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. require_once() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:73" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET /favicon.ico HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost"
+2013/12/21 23:03:25 [error] 13292#0: *144 FastCGI sent in stderr: "PHP message: PHP Parse error:  syntax error, unexpected T_RETURN in /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Cache.php on line 93
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. require_once() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:73" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost"
+2013/12/21 23:03:25 [error] 13292#0: *144 FastCGI sent in stderr: "PHP message: PHP Parse error:  syntax error, unexpected T_RETURN in /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Cache.php on line 93
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. require_once() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:73" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET /favicon.ico HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost"
+2013/12/21 23:03:59 [error] 13292#0: *144 FastCGI sent in stderr: "PHP message: PHP Notice:  Undefined variable: css in /var/www/helpyourselftoday.com/site.profitpress.com/cache/volt/%%var%%www%%helpyourselftoday.com%%site.profitpress.com%%modules%%site%%views%%layouts%%main.volt.php on line 7
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. Phalcon\Mvc\Application->handle() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:78
+PHP message: PHP   3. Phalcon\Mvc\View\Engine\Volt->render() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET /dashboard HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/"
+2013/12/21 23:04:03 [error] 13292#0: *144 FastCGI sent in stderr: "PHP message: PHP Parse error:  syntax error, unexpected T_PUBLIC, expecting '(' in /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/controllers/PostsController.php on line 255
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. Phalcon\Mvc\Application->handle() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:78" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET /posts/create/blog HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/dashboard"
+2013/12/21 23:55:05 [error] 13295#0: *175 FastCGI sent in stderr: "PHP message: PHP Parse error:  syntax error, unexpected T_PUBLIC, expecting '(' in /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/controllers/PostsController.php on line 255
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. Phalcon\Mvc\Application->handle() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:78" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET /posts/create/blog HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/dashboard"
+2013/12/22 18:48:42 [error] 13294#0: *196 FastCGI sent in stderr: "PHP message: PHP Notice:  Undefined variable: css in /var/www/helpyourselftoday.com/site.profitpress.com/cache/volt/%%var%%www%%helpyourselftoday.com%%site.profitpress.com%%modules%%site%%views%%layouts%%main.volt.php on line 7
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. Phalcon\Mvc\Application->handle() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:78
+PHP message: PHP   3. Phalcon\Mvc\View\Engine\Volt->render() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET /dashboard HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/"
+2013/12/22 18:49:04 [error] 13295#0: *207 FastCGI sent in stderr: "PHP message: PHP Parse error:  syntax error, unexpected T_PUBLIC, expecting '(' in /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/controllers/PostsController.php on line 255
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. Phalcon\Mvc\Application->handle() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:78" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET /posts/create/blog HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/dashboard"
+2013/12/22 19:43:51 [error] 13293#0: *215 FastCGI sent in stderr: "PHP message: PHP Notice:  Undefined variable: css in /var/www/helpyourselftoday.com/site.profitpress.com/cache/volt/%%var%%www%%helpyourselftoday.com%%site.profitpress.com%%modules%%site%%views%%layouts%%main.volt.php on line 7
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. Phalcon\Mvc\Application->handle() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:78
+PHP message: PHP   3. Phalcon\Mvc\View\Engine\Volt->render() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET /dashboard HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/login"
+2013/12/22 19:43:56 [error] 13293#0: *215 FastCGI sent in stderr: "PHP message: PHP Parse error:  syntax error, unexpected T_PUBLIC, expecting '(' in /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/controllers/PostsController.php on line 255
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. Phalcon\Mvc\Application->handle() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:78" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET /posts/create/blog HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/dashboard"
+2013/12/22 20:46:23 [error] 13293#0: *287 FastCGI sent in stderr: "PHP message: PHP Parse error:  syntax error, unexpected '(', expecting T_STRING or T_VARIABLE or '$' in /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/models/Posts.php on line 247
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. Phalcon\Mvc\Application->handle() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:78
+PHP message: PHP   3. ProfitPress\Posts\Controllers\PostsController->createAction() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET /posts/create/blog HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/dashboard"
+2013/12/22 20:50:49 [error] 13293#0: *333 FastCGI sent in stderr: "PHP message: PHP Warning:  Invalid argument supplied for foreach() in /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/controllers/PostsController.php on line 231
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. Phalcon\Mvc\Application->handle() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:78
+PHP message: PHP   3. ProfitPress\Posts\Controllers\PostsController->createAction() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   4. ProfitPress\Posts\Controllers\PostsController->actBasedUponSubmitType() /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/controllers/PostsController.php:113
+PHP message: PHP   5. ProfitPress\Posts\Controllers\PostsController->managePostModelAndForm() /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/controllers/PostsController.php:154" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "POST /posts/create/blog HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/posts/create/blog"
+2013/12/22 20:51:16 [error] 13293#0: *333 FastCGI sent in stderr: "PHP message: PHP Warning:  Invalid argument supplied for foreach() in /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/controllers/PostsController.php on line 231
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. Phalcon\Mvc\Application->handle() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:78
+PHP message: PHP   3. ProfitPress\Posts\Controllers\PostsController->createAction() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   4. ProfitPress\Posts\Controllers\PostsController->actBasedUponSubmitType() /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/controllers/PostsController.php:113
+PHP message: PHP   5. ProfitPress\Posts\Controllers\PostsController->managePostModelAndForm() /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/controllers/PostsController.php:154" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "POST /posts/create/blog HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/posts/create/blog"
+2013/12/22 20:52:01 [error] 13293#0: *333 FastCGI sent in stderr: "PHP message: PHP Warning:  Invalid argument supplied for foreach() in /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/controllers/PostsController.php on line 231
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. Phalcon\Mvc\Application->handle() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:78
+PHP message: PHP   3. ProfitPress\Posts\Controllers\PostsController->createAction() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   4. ProfitPress\Posts\Controllers\PostsController->actBasedUponSubmitType() /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/controllers/PostsController.php:113
+PHP message: PHP   5. ProfitPress\Posts\Controllers\PostsController->managePostModelAndForm() /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/controllers/PostsController.php:154" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "POST /posts/create/blog HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/posts/create/blog"
+2013/12/22 20:54:16 [error] 13293#0: *350 FastCGI sent in stderr: "PHP message: PHP Warning:  Invalid argument supplied for foreach() in /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/controllers/PostsController.php on line 231
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. Phalcon\Mvc\Application->handle() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:78
+PHP message: PHP   3. ProfitPress\Posts\Controllers\PostsController->createAction() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   4. ProfitPress\Posts\Controllers\PostsController->actBasedUponSubmitType() /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/controllers/PostsController.php:113
+PHP message: PHP   5. ProfitPress\Posts\Controllers\PostsController->managePostModelAndForm() /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/controllers/PostsController.php:154" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "POST /posts/create/blog HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/posts/create/blog"
+2013/12/22 20:55:37 [error] 13293#0: *356 FastCGI sent in stderr: "PHP message: PHP Notice:  Access to undefined property ProfitPress\Posts\Models\Posts::get in /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/controllers/PostsController.php on line 240
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. Phalcon\Mvc\Application->handle() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:78
+PHP message: PHP   3. ProfitPress\Posts\Controllers\PostsController->createAction() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   4. ProfitPress\Posts\Controllers\PostsController->actBasedUponSubmitType() /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/controllers/PostsController.php:113
+PHP message: PHP   5. ProfitPress\Posts\Controllers\PostsController->managePostModelAndForm() /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/controllers/PostsController.php:154
+PHP message: PHP Fatal error:  Call to undefined method Phalcon\Http\Response::renderFormStart() in /var/www/helpyourselftoday.com/site.profitpress.com/cache/volt/%%var%%www%%helpyourselftoday.com%%site.profitpress.com%%modules%%posts%%views%%posts%%form.volt.php on line 2
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. Phalcon\Mvc\Application->handle() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:78
+PHP message: PHP   3. Phalcon\Mvc\View\Engine\Volt->render() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "POST /posts/create/blog HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/posts/create/blog"
+2013/12/23 14:13:25 [error] 12257#0: *7 FastCGI sent in stderr: "PHP message: PHP Notice:  Undefined variable: css in /var/www/helpyourselftoday.com/site.profitpress.com/cache/volt/%%var%%www%%helpyourselftoday.com%%site.profitpress.com%%modules%%site%%views%%layouts%%main.volt.php on line 7
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. Phalcon\Mvc\Application->handle() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:78
+PHP message: PHP   3. Phalcon\Mvc\View\Engine\Volt->render() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET /dashboard HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/"
+2013/12/23 14:13:34 [error] 12257#0: *7 FastCGI sent in stderr: "PHP message: PHP Notice:  Access to undefined property ProfitPress\Posts\Models\Posts::published in /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/models/Posts.php on line 227
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. Phalcon\Mvc\Application->handle() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:78
+PHP message: PHP   3. Phalcon\Mvc\View\Engine\Volt->render() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   4. ProfitPress\Posts\Models\Posts->getNotices() /var/www/helpyourselftoday.com/site.profitpress.com/cache/volt/%%var%%www%%helpyourselftoday.com%%site.profitpress.com%%modules%%posts%%views%%posts%%viewall.volt.php:23
+PHP message: PHP Notice:  Access to undefined property ProfitPress\Posts\Models\Posts::published in /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/models/Posts.php on line 227
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. Phalcon\Mvc\Application->handle() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:78
+PHP message: PHP   3. Phalcon\Mvc\View\Engine\Volt->render() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   4. ProfitPress\Posts\Models\Posts->getNotices() /var/www/helpyourselftoday.com/site.profitpress.com/cache/volt/%%var%%www%%helpyourselftoday.com%%site.profitpress.com%%modules%%posts%%views%%posts%%viewall.volt.php:23
+PHP message: PHP Notice:  Access to undefined property ProfitPress\Posts\Models\Posts::published in /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/models/Posts.php on line 227
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP mes
+2013/12/23 14:13:34 [error] 12257#0: *7 FastCGI sent in stderr: "ews%%posts%%viewall.volt.php:23
+PHP message: PHP Notice:  Access to undefined property ProfitPress\Posts\Models\Posts::published in /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/models/Posts.php on line 227
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. Phalcon\Mvc\Application->handle() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:78
+PHP message: PHP   3. Phalcon\Mvc\View\Engine\Volt->render() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   4. ProfitPress\Posts\Models\Posts->getNotices() /var/www/helpyourselftoday.com/site.profitpress.com/cache/volt/%%var%%www%%helpyourselftoday.com%%site.profitpress.com%%modules%%posts%%views%%posts%%viewall.volt.php:23
+PHP message: PHP Notice:  Access to undefined property ProfitPress\Posts\Models\Posts::published in /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/models/Posts.php on line 227
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. Phalcon\Mvc\Application->handle() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:78
+PHP message: PHP   3. Phalcon\Mvc\View\Engine\Volt->render() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   4. ProfitPress\Posts\Models\Posts->getNotices() /var/www/helpyourselftoday.com/site.profitpress.com/cache/volt/%%var%%www%%helpyourselftoday.com%%site.profitpress.com%%modules%%posts%%views%%posts%%viewall.volt.php:23" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET /posts/viewall HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/dashboard"
+2013/12/23 14:16:34 [error] 12254#0: *35 FastCGI sent in stderr: "PHP message: PHP Notice:  Access to undefined property ProfitPress\Posts\Models\Posts::published in /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/models/Posts.php on line 227
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. Phalcon\Mvc\Application->handle() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:78
+PHP message: PHP   3. Phalcon\Mvc\View\Engine\Volt->render() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   4. ProfitPress\Posts\Models\Posts->getNotices() /var/www/helpyourselftoday.com/site.profitpress.com/cache/volt/%%var%%www%%helpyourselftoday.com%%site.profitpress.com%%modules%%posts%%views%%posts%%viewall.volt.php:23
+PHP message: PHP Notice:  Access to undefined property ProfitPress\Posts\Models\Posts::published in /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/models/Posts.php on line 227
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. Phalcon\Mvc\Application->handle() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:78
+PHP message: PHP   3. Phalcon\Mvc\View\Engine\Volt->render() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   4. ProfitPress\Posts\Models\Posts->getNotices() /var/www/helpyourselftoday.com/site.profitpress.com/cache/volt/%%var%%www%%helpyourselftoday.com%%site.profitpress.com%%modules%%posts%%views%%posts%%viewall.volt.php:23
+PHP message: PHP Notice:  Access to undefined property ProfitPress\Posts\Models\Posts::published in /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/models/Posts.php on line 227
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP me
+2013/12/23 14:16:34 [error] 12254#0: *35 FastCGI sent in stderr: "ews%%posts%%viewall.volt.php:23
+PHP message: PHP Notice:  Access to undefined property ProfitPress\Posts\Models\Posts::published in /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/models/Posts.php on line 227
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. Phalcon\Mvc\Application->handle() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:78
+PHP message: PHP   3. Phalcon\Mvc\View\Engine\Volt->render() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   4. ProfitPress\Posts\Models\Posts->getNotices() /var/www/helpyourselftoday.com/site.profitpress.com/cache/volt/%%var%%www%%helpyourselftoday.com%%site.profitpress.com%%modules%%posts%%views%%posts%%viewall.volt.php:23
+PHP message: PHP Notice:  Access to undefined property ProfitPress\Posts\Models\Posts::published in /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/models/Posts.php on line 227
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. Phalcon\Mvc\Application->handle() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:78
+PHP message: PHP   3. Phalcon\Mvc\View\Engine\Volt->render() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   4. ProfitPress\Posts\Models\Posts->getNotices() /var/www/helpyourselftoday.com/site.profitpress.com/cache/volt/%%var%%www%%helpyourselftoday.com%%site.profitpress.com%%modules%%posts%%views%%posts%%viewall.volt.php:23" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET /posts/viewall HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/dashboard"
+2013/12/23 14:17:32 [error] 12254#0: *36 FastCGI sent in stderr: "PHP message: PHP Catchable fatal error:  Argument 1 passed to ProfitPress\Posts\Forms\PostForm::__construct() must be an instance of ProfitPress\Posts\Models\Posts, boolean given, called in /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/controllers/PostsController.php on line 130 and defined in /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/forms/PostForm.php on line 48
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. Phalcon\Mvc\Application->handle() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:78
+PHP message: PHP   3. ProfitPress\Posts\Controllers\PostsController->editAction() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   4. ProfitPress\Posts\Forms\PostForm->__construct() /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/controllers/PostsController.php:130" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET /posts/edit/H HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/posts/edit/1"
+2013/12/23 14:17:33 [error] 12254#0: *36 FastCGI sent in stderr: "PHP message: PHP Catchable fatal error:  Argument 1 passed to ProfitPress\Posts\Forms\PostForm::__construct() must be an instance of ProfitPress\Posts\Models\Posts, boolean given, called in /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/controllers/PostsController.php on line 130 and defined in /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/forms/PostForm.php on line 48
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. Phalcon\Mvc\Application->handle() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:78
+PHP message: PHP   3. ProfitPress\Posts\Controllers\PostsController->editAction() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   4. ProfitPress\Posts\Forms\PostForm->__construct() /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/controllers/PostsController.php:130" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET /posts/edit/h HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/posts/edit/1"
+2013/12/23 14:17:33 [error] 12254#0: *36 FastCGI sent in stderr: "PHP message: PHP Catchable fatal error:  Argument 1 passed to ProfitPress\Posts\Forms\PostForm::__construct() must be an instance of ProfitPress\Posts\Models\Posts, boolean given, called in /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/controllers/PostsController.php on line 130 and defined in /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/forms/PostForm.php on line 48
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. Phalcon\Mvc\Application->handle() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:78
+PHP message: PHP   3. ProfitPress\Posts\Controllers\PostsController->editAction() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   4. ProfitPress\Posts\Forms\PostForm->__construct() /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/controllers/PostsController.php:130" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET /posts/edit/ht HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/posts/edit/1"
+2013/12/23 14:17:34 [error] 12254#0: *36 FastCGI sent in stderr: "PHP message: PHP Catchable fatal error:  Argument 1 passed to ProfitPress\Posts\Forms\PostForm::__construct() must be an instance of ProfitPress\Posts\Models\Posts, boolean given, called in /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/controllers/PostsController.php on line 130 and defined in /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/forms/PostForm.php on line 48
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. Phalcon\Mvc\Application->handle() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:78
+PHP message: PHP   3. ProfitPress\Posts\Controllers\PostsController->editAction() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   4. ProfitPress\Posts\Forms\PostForm->__construct() /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/controllers/PostsController.php:130" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET /posts/edit/htt HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/posts/edit/1"
+2013/12/23 14:17:34 [error] 12254#0: *36 FastCGI sent in stderr: "PHP message: PHP Catchable fatal error:  Argument 1 passed to ProfitPress\Posts\Forms\PostForm::__construct() must be an instance of ProfitPress\Posts\Models\Posts, boolean given, called in /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/controllers/PostsController.php on line 130 and defined in /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/forms/PostForm.php on line 48
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. Phalcon\Mvc\Application->handle() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:78
+PHP message: PHP   3. ProfitPress\Posts\Controllers\PostsController->editAction() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   4. ProfitPress\Posts\Forms\PostForm->__construct() /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/controllers/PostsController.php:130" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET /posts/edit/httt HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/posts/edit/1"
+2013/12/23 14:17:35 [error] 12254#0: *36 FastCGI sent in stderr: "PHP message: PHP Catchable fatal error:  Argument 1 passed to ProfitPress\Posts\Forms\PostForm::__construct() must be an instance of ProfitPress\Posts\Models\Posts, boolean given, called in /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/controllers/PostsController.php on line 130 and defined in /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/forms/PostForm.php on line 48
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. Phalcon\Mvc\Application->handle() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:78
+PHP message: PHP   3. ProfitPress\Posts\Controllers\PostsController->editAction() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   4. ProfitPress\Posts\Forms\PostForm->__construct() /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/controllers/PostsController.php:130" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET /posts/edit/htttp HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/posts/edit/1"
+2013/12/23 14:17:36 [error] 12254#0: *36 FastCGI sent in stderr: "PHP message: PHP Catchable fatal error:  Argument 1 passed to ProfitPress\Posts\Forms\PostForm::__construct() must be an instance of ProfitPress\Posts\Models\Posts, boolean given, called in /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/controllers/PostsController.php on line 130 and defined in /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/forms/PostForm.php on line 48
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. Phalcon\Mvc\Application->handle() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:78
+PHP message: PHP   3. ProfitPress\Posts\Controllers\PostsController->editAction() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   4. ProfitPress\Posts\Forms\PostForm->__construct() /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/controllers/PostsController.php:130" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET /posts/edit/httt HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/posts/edit/1"
+2013/12/23 14:17:36 [error] 12254#0: *36 FastCGI sent in stderr: "PHP message: PHP Catchable fatal error:  Argument 1 passed to ProfitPress\Posts\Forms\PostForm::__construct() must be an instance of ProfitPress\Posts\Models\Posts, boolean given, called in /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/controllers/PostsController.php on line 130 and defined in /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/forms/PostForm.php on line 48
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. Phalcon\Mvc\Application->handle() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:78
+PHP message: PHP   3. ProfitPress\Posts\Controllers\PostsController->editAction() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   4. ProfitPress\Posts\Forms\PostForm->__construct() /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/controllers/PostsController.php:130" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET /posts/edit/htt HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/posts/edit/1"
+2013/12/23 14:18:07 [error] 12254#0: *36 FastCGI sent in stderr: "PHP message: PHP Catchable fatal error:  Argument 1 passed to ProfitPress\Posts\Forms\PostForm::__construct() must be an instance of ProfitPress\Posts\Models\Posts, boolean given, called in /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/controllers/PostsController.php on line 130 and defined in /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/forms/PostForm.php on line 48
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. Phalcon\Mvc\Application->handle() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:78
+PHP message: PHP   3. ProfitPress\Posts\Controllers\PostsController->editAction() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   4. ProfitPress\Posts\Forms\PostForm->__construct() /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/controllers/PostsController.php:130" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET /posts/edit/ht HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/posts/edit/1"
+2013/12/23 14:20:15 [error] 12254#0: *56 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Call to undefined method Phalcon\Http\Response::renderFormStart() in /var/www/helpyourselftoday.com/site.profitpress.com/cache/volt/%%var%%www%%helpyourselftoday.com%%site.profitpress.com%%modules%%posts%%views%%posts%%form.volt.php on line 2
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. Phalcon\Mvc\Application->handle() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:78
+PHP message: PHP   3. Phalcon\Mvc\View\Engine\Volt->render() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "POST /posts/edit/1 HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/posts/edit/1"
+2013/12/23 14:20:39 [error] 12254#0: *56 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Call to undefined method Phalcon\Http\Response::renderFormStart() in /var/www/helpyourselftoday.com/site.profitpress.com/cache/volt/%%var%%www%%helpyourselftoday.com%%site.profitpress.com%%modules%%posts%%views%%posts%%form.volt.php on line 2
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. Phalcon\Mvc\Application->handle() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:78
+PHP message: PHP   3. Phalcon\Mvc\View\Engine\Volt->render() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "POST /posts/edit/1 HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/posts/edit/1"
+2013/12/23 14:29:51 [error] 12254#0: *96 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Call to a member function renderFormStart() on a non-object in /var/www/helpyourselftoday.com/site.profitpress.com/cache/volt/%%var%%www%%helpyourselftoday.com%%site.profitpress.com%%modules%%posts%%views%%posts%%form.volt.php on line 2
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. Phalcon\Mvc\Application->handle() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:78
+PHP message: PHP   3. Phalcon\Mvc\View\Engine\Volt->render() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "POST /posts/edit/1 HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/posts/edit/1"
+2013/12/24 15:28:12 [error] 1699#0: *10 FastCGI sent in stderr: "PHP message: PHP Parse error:  syntax error, unexpected '}', expecting ';' or '{' in /var/www/helpyourselftoday.com/site.profitpress.com/lib/components/BaseModel.php on line 156
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. require_once() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:73
+PHP message: PHP   3. ProfitPress\Services\Database->__construct() /var/www/helpyourselftoday.com/site.profitpress.com/config/services.php:12
+PHP message: PHP   4. ProfitPress\Services\Database->getCachedConnectionArray() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:41
+PHP message: PHP   5. ProfitPress\Services\Database->getCachedConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:81
+PHP message: PHP   6. ProfitPress\Services\Database->getApplicationDatabaseConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:134
+PHP message: PHP   7. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0
+PHP message: PHP   8. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/"
+2013/12/24 15:28:12 [error] 1699#0: *10 FastCGI sent in stderr: "PHP message: PHP Parse error:  syntax error, unexpected '}', expecting ';' or '{' in /var/www/helpyourselftoday.com/site.profitpress.com/lib/components/BaseModel.php on line 156
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. require_once() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:73
+PHP message: PHP   3. ProfitPress\Services\Database->__construct() /var/www/helpyourselftoday.com/site.profitpress.com/config/services.php:12
+PHP message: PHP   4. ProfitPress\Services\Database->getCachedConnectionArray() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:41
+PHP message: PHP   5. ProfitPress\Services\Database->getCachedConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:81
+PHP message: PHP   6. ProfitPress\Services\Database->getApplicationDatabaseConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:134
+PHP message: PHP   7. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0
+PHP message: PHP   8. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET /favicon.ico HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost"
+2013/12/24 15:28:27 [error] 1699#0: *10 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Abstract function ProfitPress\Components\BaseModel::validation() cannot contain body in /var/www/helpyourselftoday.com/site.profitpress.com/lib/components/BaseModel.php on line 155
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. require_once() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:73
+PHP message: PHP   3. ProfitPress\Services\Database->__construct() /var/www/helpyourselftoday.com/site.profitpress.com/config/services.php:12
+PHP message: PHP   4. ProfitPress\Services\Database->getCachedConnectionArray() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:41
+PHP message: PHP   5. ProfitPress\Services\Database->getCachedConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:81
+PHP message: PHP   6. ProfitPress\Services\Database->getApplicationDatabaseConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:134
+PHP message: PHP   7. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0
+PHP message: PHP   8. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/"
+2013/12/24 15:28:27 [error] 1699#0: *10 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Abstract function ProfitPress\Components\BaseModel::validation() cannot contain body in /var/www/helpyourselftoday.com/site.profitpress.com/lib/components/BaseModel.php on line 155
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. require_once() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:73
+PHP message: PHP   3. ProfitPress\Services\Database->__construct() /var/www/helpyourselftoday.com/site.profitpress.com/config/services.php:12
+PHP message: PHP   4. ProfitPress\Services\Database->getCachedConnectionArray() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:41
+PHP message: PHP   5. ProfitPress\Services\Database->getCachedConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:81
+PHP message: PHP   6. ProfitPress\Services\Database->getApplicationDatabaseConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:134
+PHP message: PHP   7. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0
+PHP message: PHP   8. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET /favicon.ico HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost"
+2013/12/24 15:28:50 [error] 1699#0: *10 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Class ProfitPress\Account\Models\AccountBaseModel contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (ProfitPress\Components\BaseModel::validation) in /var/www/helpyourselftoday.com/site.profitpress.com/modules/account/models/AccountBaseModel.php on line 33
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. require_once() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:73
+PHP message: PHP   3. ProfitPress\Services\Database->__construct() /var/www/helpyourselftoday.com/site.profitpress.com/config/services.php:12
+PHP message: PHP   4. ProfitPress\Services\Database->getCachedConnectionArray() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:41
+PHP message: PHP   5. ProfitPress\Services\Database->getCachedConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:81
+PHP message: PHP   6. ProfitPress\Services\Database->getApplicationDatabaseConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:134
+PHP message: PHP   7. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0
+PHP message: PHP   8. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/"
+2013/12/24 15:28:50 [error] 1699#0: *10 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Class ProfitPress\Account\Models\AccountBaseModel contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (ProfitPress\Components\BaseModel::validation) in /var/www/helpyourselftoday.com/site.profitpress.com/modules/account/models/AccountBaseModel.php on line 33
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. require_once() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:73
+PHP message: PHP   3. ProfitPress\Services\Database->__construct() /var/www/helpyourselftoday.com/site.profitpress.com/config/services.php:12
+PHP message: PHP   4. ProfitPress\Services\Database->getCachedConnectionArray() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:41
+PHP message: PHP   5. ProfitPress\Services\Database->getCachedConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:81
+PHP message: PHP   6. ProfitPress\Services\Database->getApplicationDatabaseConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:134
+PHP message: PHP   7. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0
+PHP message: PHP   8. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET /favicon.ico HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost"
+2013/12/24 15:30:49 [error] 1699#0: *21 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Class ProfitPress\Account\Models\AccountBaseModel contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (ProfitPress\Components\BaseModel::validation) in /var/www/helpyourselftoday.com/site.profitpress.com/modules/account/models/AccountBaseModel.php on line 33
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. require_once() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:73
+PHP message: PHP   3. ProfitPress\Services\Database->__construct() /var/www/helpyourselftoday.com/site.profitpress.com/config/services.php:12
+PHP message: PHP   4. ProfitPress\Services\Database->getCachedConnectionArray() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:41
+PHP message: PHP   5. ProfitPress\Services\Database->getCachedConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:81
+PHP message: PHP   6. ProfitPress\Services\Database->getApplicationDatabaseConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:134
+PHP message: PHP   7. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0
+PHP message: PHP   8. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/"
+2013/12/24 15:30:49 [error] 1699#0: *21 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Class ProfitPress\Account\Models\AccountBaseModel contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (ProfitPress\Components\BaseModel::validation) in /var/www/helpyourselftoday.com/site.profitpress.com/modules/account/models/AccountBaseModel.php on line 33
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. require_once() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:73
+PHP message: PHP   3. ProfitPress\Services\Database->__construct() /var/www/helpyourselftoday.com/site.profitpress.com/config/services.php:12
+PHP message: PHP   4. ProfitPress\Services\Database->getCachedConnectionArray() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:41
+PHP message: PHP   5. ProfitPress\Services\Database->getCachedConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:81
+PHP message: PHP   6. ProfitPress\Services\Database->getApplicationDatabaseConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:134
+PHP message: PHP   7. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0
+PHP message: PHP   8. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET /favicon.ico HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost"
+2013/12/24 15:31:56 [error] 1699#0: *24 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Abstract function ProfitPress\Account\Models\AccountBaseModel::validation() cannot contain body in /var/www/helpyourselftoday.com/site.profitpress.com/modules/account/models/AccountBaseModel.php on line 57
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. require_once() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:73
+PHP message: PHP   3. ProfitPress\Services\Database->__construct() /var/www/helpyourselftoday.com/site.profitpress.com/config/services.php:12
+PHP message: PHP   4. ProfitPress\Services\Database->getCachedConnectionArray() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:41
+PHP message: PHP   5. ProfitPress\Services\Database->getCachedConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:81
+PHP message: PHP   6. ProfitPress\Services\Database->getApplicationDatabaseConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:134
+PHP message: PHP   7. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/"
+2013/12/24 15:31:57 [error] 1699#0: *24 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Abstract function ProfitPress\Account\Models\AccountBaseModel::validation() cannot contain body in /var/www/helpyourselftoday.com/site.profitpress.com/modules/account/models/AccountBaseModel.php on line 57
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. require_once() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:73
+PHP message: PHP   3. ProfitPress\Services\Database->__construct() /var/www/helpyourselftoday.com/site.profitpress.com/config/services.php:12
+PHP message: PHP   4. ProfitPress\Services\Database->getCachedConnectionArray() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:41
+PHP message: PHP   5. ProfitPress\Services\Database->getCachedConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:81
+PHP message: PHP   6. ProfitPress\Services\Database->getApplicationDatabaseConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:134
+PHP message: PHP   7. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET /favicon.ico HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost"
+2013/12/24 15:32:22 [error] 1699#0: *24 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Class ProfitPress\Account\Models\AccountBaseModel contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (ProfitPress\Account\Models\AccountBaseModel::validation) in /var/www/helpyourselftoday.com/site.profitpress.com/modules/account/models/AccountBaseModel.php on line 59
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. require_once() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:73
+PHP message: PHP   3. ProfitPress\Services\Database->__construct() /var/www/helpyourselftoday.com/site.profitpress.com/config/services.php:12
+PHP message: PHP   4. ProfitPress\Services\Database->getCachedConnectionArray() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:41
+PHP message: PHP   5. ProfitPress\Services\Database->getCachedConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:81
+PHP message: PHP   6. ProfitPress\Services\Database->getApplicationDatabaseConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:134
+PHP message: PHP   7. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/"
+2013/12/24 15:32:22 [error] 1699#0: *24 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Class ProfitPress\Account\Models\AccountBaseModel contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (ProfitPress\Account\Models\AccountBaseModel::validation) in /var/www/helpyourselftoday.com/site.profitpress.com/modules/account/models/AccountBaseModel.php on line 59
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. require_once() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:73
+PHP message: PHP   3. ProfitPress\Services\Database->__construct() /var/www/helpyourselftoday.com/site.profitpress.com/config/services.php:12
+PHP message: PHP   4. ProfitPress\Services\Database->getCachedConnectionArray() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:41
+PHP message: PHP   5. ProfitPress\Services\Database->getCachedConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:81
+PHP message: PHP   6. ProfitPress\Services\Database->getApplicationDatabaseConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:134
+PHP message: PHP   7. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET /favicon.ico HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost"
+2013/12/24 15:32:51 [error] 1699#0: *24 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Class ProfitPress\Account\Models\AccountBaseModel contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (ProfitPress\Account\Models\AccountBaseModel::validation) in /var/www/helpyourselftoday.com/site.profitpress.com/modules/account/models/AccountBaseModel.php on line 59
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. require_once() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:73
+PHP message: PHP   3. ProfitPress\Services\Database->__construct() /var/www/helpyourselftoday.com/site.profitpress.com/config/services.php:12
+PHP message: PHP   4. ProfitPress\Services\Database->getCachedConnectionArray() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:41
+PHP message: PHP   5. ProfitPress\Services\Database->getCachedConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:81
+PHP message: PHP   6. ProfitPress\Services\Database->getApplicationDatabaseConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:134
+PHP message: PHP   7. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/"
+2013/12/24 15:32:51 [error] 1699#0: *24 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Class ProfitPress\Account\Models\AccountBaseModel contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (ProfitPress\Account\Models\AccountBaseModel::validation) in /var/www/helpyourselftoday.com/site.profitpress.com/modules/account/models/AccountBaseModel.php on line 59
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. require_once() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:73
+PHP message: PHP   3. ProfitPress\Services\Database->__construct() /var/www/helpyourselftoday.com/site.profitpress.com/config/services.php:12
+PHP message: PHP   4. ProfitPress\Services\Database->getCachedConnectionArray() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:41
+PHP message: PHP   5. ProfitPress\Services\Database->getCachedConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:81
+PHP message: PHP   6. ProfitPress\Services\Database->getApplicationDatabaseConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:134
+PHP message: PHP   7. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET /favicon.ico HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost"
+2013/12/24 15:33:24 [error] 1699#0: *24 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Class ProfitPress\Account\Models\AccountBaseModel contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (ProfitPress\Account\Models\AccountBaseModel::validation) in /var/www/helpyourselftoday.com/site.profitpress.com/modules/account/models/AccountBaseModel.php on line 59
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. require_once() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:73
+PHP message: PHP   3. ProfitPress\Services\Database->__construct() /var/www/helpyourselftoday.com/site.profitpress.com/config/services.php:12
+PHP message: PHP   4. ProfitPress\Services\Database->getCachedConnectionArray() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:41
+PHP message: PHP   5. ProfitPress\Services\Database->getCachedConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:81
+PHP message: PHP   6. ProfitPress\Services\Database->getApplicationDatabaseConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:134
+PHP message: PHP   7. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/"
+2013/12/24 15:33:24 [error] 1699#0: *24 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Class ProfitPress\Account\Models\AccountBaseModel contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (ProfitPress\Account\Models\AccountBaseModel::validation) in /var/www/helpyourselftoday.com/site.profitpress.com/modules/account/models/AccountBaseModel.php on line 59
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. require_once() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:73
+PHP message: PHP   3. ProfitPress\Services\Database->__construct() /var/www/helpyourselftoday.com/site.profitpress.com/config/services.php:12
+PHP message: PHP   4. ProfitPress\Services\Database->getCachedConnectionArray() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:41
+PHP message: PHP   5. ProfitPress\Services\Database->getCachedConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:81
+PHP message: PHP   6. ProfitPress\Services\Database->getApplicationDatabaseConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:134
+PHP message: PHP   7. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET /favicon.ico HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost"
+2013/12/24 15:35:55 [error] 1699#0: *33 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Class ProfitPress\Account\Models\AccountBaseModel contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (ProfitPress\Components\BaseModel::validation) in /var/www/helpyourselftoday.com/site.profitpress.com/modules/account/models/AccountBaseModel.php on line 33
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. require_once() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:73
+PHP message: PHP   3. ProfitPress\Services\Database->__construct() /var/www/helpyourselftoday.com/site.profitpress.com/config/services.php:12
+PHP message: PHP   4. ProfitPress\Services\Database->getCachedConnectionArray() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:41
+PHP message: PHP   5. ProfitPress\Services\Database->getCachedConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:81
+PHP message: PHP   6. ProfitPress\Services\Database->getApplicationDatabaseConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:134
+PHP message: PHP   7. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0
+PHP message: PHP   8. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/"
+2013/12/24 15:35:55 [error] 1699#0: *33 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Class ProfitPress\Account\Models\AccountBaseModel contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (ProfitPress\Components\BaseModel::validation) in /var/www/helpyourselftoday.com/site.profitpress.com/modules/account/models/AccountBaseModel.php on line 33
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. require_once() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:73
+PHP message: PHP   3. ProfitPress\Services\Database->__construct() /var/www/helpyourselftoday.com/site.profitpress.com/config/services.php:12
+PHP message: PHP   4. ProfitPress\Services\Database->getCachedConnectionArray() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:41
+PHP message: PHP   5. ProfitPress\Services\Database->getCachedConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:81
+PHP message: PHP   6. ProfitPress\Services\Database->getApplicationDatabaseConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:134
+PHP message: PHP   7. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0
+PHP message: PHP   8. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET /favicon.ico HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost"
+2013/12/24 15:36:40 [error] 1699#0: *33 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Class ProfitPress\Account\Models\AccountBaseModel contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (ProfitPress\Components\BaseModel::validation) in /var/www/helpyourselftoday.com/site.profitpress.com/modules/account/models/AccountBaseModel.php on line 33
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. require_once() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:73
+PHP message: PHP   3. ProfitPress\Services\Database->__construct() /var/www/helpyourselftoday.com/site.profitpress.com/config/services.php:12
+PHP message: PHP   4. ProfitPress\Services\Database->getCachedConnectionArray() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:41
+PHP message: PHP   5. ProfitPress\Services\Database->getCachedConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:81
+PHP message: PHP   6. ProfitPress\Services\Database->getApplicationDatabaseConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:134
+PHP message: PHP   7. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0
+PHP message: PHP   8. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/"
+2013/12/24 15:36:41 [error] 1699#0: *33 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Class ProfitPress\Account\Models\AccountBaseModel contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (ProfitPress\Components\BaseModel::validation) in /var/www/helpyourselftoday.com/site.profitpress.com/modules/account/models/AccountBaseModel.php on line 33
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. require_once() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:73
+PHP message: PHP   3. ProfitPress\Services\Database->__construct() /var/www/helpyourselftoday.com/site.profitpress.com/config/services.php:12
+PHP message: PHP   4. ProfitPress\Services\Database->getCachedConnectionArray() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:41
+PHP message: PHP   5. ProfitPress\Services\Database->getCachedConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:81
+PHP message: PHP   6. ProfitPress\Services\Database->getApplicationDatabaseConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:134
+PHP message: PHP   7. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0
+PHP message: PHP   8. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET /favicon.ico HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost"
+2013/12/24 15:40:17 [error] 1699#0: *38 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Class ProfitPress\Account\Models\AccountBaseModel contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (ProfitPress\Account\Models\AccountBaseModel::validation) in /var/www/helpyourselftoday.com/site.profitpress.com/modules/account/models/AccountBaseModel.php on line 59
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. require_once() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:73
+PHP message: PHP   3. ProfitPress\Services\Database->__construct() /var/www/helpyourselftoday.com/site.profitpress.com/config/services.php:12
+PHP message: PHP   4. ProfitPress\Services\Database->getCachedConnectionArray() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:41
+PHP message: PHP   5. ProfitPress\Services\Database->getCachedConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:81
+PHP message: PHP   6. ProfitPress\Services\Database->getApplicationDatabaseConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:134
+PHP message: PHP   7. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/"
+2013/12/24 15:40:17 [error] 1699#0: *38 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Class ProfitPress\Account\Models\AccountBaseModel contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (ProfitPress\Account\Models\AccountBaseModel::validation) in /var/www/helpyourselftoday.com/site.profitpress.com/modules/account/models/AccountBaseModel.php on line 59
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. require_once() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:73
+PHP message: PHP   3. ProfitPress\Services\Database->__construct() /var/www/helpyourselftoday.com/site.profitpress.com/config/services.php:12
+PHP message: PHP   4. ProfitPress\Services\Database->getCachedConnectionArray() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:41
+PHP message: PHP   5. ProfitPress\Services\Database->getCachedConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:81
+PHP message: PHP   6. ProfitPress\Services\Database->getApplicationDatabaseConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:134
+PHP message: PHP   7. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET /favicon.ico HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost"
+2013/12/24 15:41:48 [error] 1699#0: *41 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Class ProfitPress\Account\Models\AccountBaseModel contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (ProfitPress\Account\Models\AccountBaseModel::validation) in /var/www/helpyourselftoday.com/site.profitpress.com/modules/account/models/AccountBaseModel.php on line 59
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. require_once() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:73
+PHP message: PHP   3. ProfitPress\Services\Database->__construct() /var/www/helpyourselftoday.com/site.profitpress.com/config/services.php:12
+PHP message: PHP   4. ProfitPress\Services\Database->getCachedConnectionArray() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:41
+PHP message: PHP   5. ProfitPress\Services\Database->getCachedConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:81
+PHP message: PHP   6. ProfitPress\Services\Database->getApplicationDatabaseConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:134
+PHP message: PHP   7. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/"
+2013/12/24 15:41:49 [error] 1699#0: *41 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Class ProfitPress\Account\Models\AccountBaseModel contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (ProfitPress\Account\Models\AccountBaseModel::validation) in /var/www/helpyourselftoday.com/site.profitpress.com/modules/account/models/AccountBaseModel.php on line 59
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. require_once() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:73
+PHP message: PHP   3. ProfitPress\Services\Database->__construct() /var/www/helpyourselftoday.com/site.profitpress.com/config/services.php:12
+PHP message: PHP   4. ProfitPress\Services\Database->getCachedConnectionArray() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:41
+PHP message: PHP   5. ProfitPress\Services\Database->getCachedConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:81
+PHP message: PHP   6. ProfitPress\Services\Database->getApplicationDatabaseConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:134
+PHP message: PHP   7. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET /favicon.ico HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost"
+2013/12/24 15:42:59 [error] 1699#0: *44 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Class ProfitPress\Account\Models\AccountBaseModel contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (ProfitPress\Account\Models\AccountBaseModel::validation) in /var/www/helpyourselftoday.com/site.profitpress.com/modules/account/models/AccountBaseModel.php on line 59
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. require_once() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:73
+PHP message: PHP   3. ProfitPress\Services\Database->__construct() /var/www/helpyourselftoday.com/site.profitpress.com/config/services.php:12
+PHP message: PHP   4. ProfitPress\Services\Database->getCachedConnectionArray() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:41
+PHP message: PHP   5. ProfitPress\Services\Database->getCachedConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:81
+PHP message: PHP   6. ProfitPress\Services\Database->getApplicationDatabaseConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:134
+PHP message: PHP   7. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/"
+2013/12/24 15:43:00 [error] 1699#0: *44 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Class ProfitPress\Account\Models\AccountBaseModel contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (ProfitPress\Account\Models\AccountBaseModel::validation) in /var/www/helpyourselftoday.com/site.profitpress.com/modules/account/models/AccountBaseModel.php on line 59
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. require_once() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:73
+PHP message: PHP   3. ProfitPress\Services\Database->__construct() /var/www/helpyourselftoday.com/site.profitpress.com/config/services.php:12
+PHP message: PHP   4. ProfitPress\Services\Database->getCachedConnectionArray() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:41
+PHP message: PHP   5. ProfitPress\Services\Database->getCachedConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:81
+PHP message: PHP   6. ProfitPress\Services\Database->getApplicationDatabaseConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:134
+PHP message: PHP   7. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET /favicon.ico HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost"
+2013/12/24 15:44:40 [error] 1699#0: *47 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Can't inherit abstract function ProfitPress\Components\BaseModel::validation() (previously declared abstract in ProfitPress\Account\Models\AccountBaseModel) in /var/www/helpyourselftoday.com/site.profitpress.com/modules/account/models/AccountBaseModel.php on line 33
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. require_once() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:73
+PHP message: PHP   3. ProfitPress\Services\Database->__construct() /var/www/helpyourselftoday.com/site.profitpress.com/config/services.php:12
+PHP message: PHP   4. ProfitPress\Services\Database->getCachedConnectionArray() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:41
+PHP message: PHP   5. ProfitPress\Services\Database->getCachedConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:81
+PHP message: PHP   6. ProfitPress\Services\Database->getApplicationDatabaseConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:134
+PHP message: PHP   7. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0
+PHP message: PHP   8. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/"
+2013/12/24 15:44:40 [error] 1699#0: *47 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Can't inherit abstract function ProfitPress\Components\BaseModel::validation() (previously declared abstract in ProfitPress\Account\Models\AccountBaseModel) in /var/www/helpyourselftoday.com/site.profitpress.com/modules/account/models/AccountBaseModel.php on line 33
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. require_once() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:73
+PHP message: PHP   3. ProfitPress\Services\Database->__construct() /var/www/helpyourselftoday.com/site.profitpress.com/config/services.php:12
+PHP message: PHP   4. ProfitPress\Services\Database->getCachedConnectionArray() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:41
+PHP message: PHP   5. ProfitPress\Services\Database->getCachedConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:81
+PHP message: PHP   6. ProfitPress\Services\Database->getApplicationDatabaseConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:134
+PHP message: PHP   7. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0
+PHP message: PHP   8. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET /favicon.ico HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost"
+2013/12/24 15:44:41 [error] 1699#0: *47 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Can't inherit abstract function ProfitPress\Components\BaseModel::validation() (previously declared abstract in ProfitPress\Account\Models\AccountBaseModel) in /var/www/helpyourselftoday.com/site.profitpress.com/modules/account/models/AccountBaseModel.php on line 33
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. require_once() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:73
+PHP message: PHP   3. ProfitPress\Services\Database->__construct() /var/www/helpyourselftoday.com/site.profitpress.com/config/services.php:12
+PHP message: PHP   4. ProfitPress\Services\Database->getCachedConnectionArray() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:41
+PHP message: PHP   5. ProfitPress\Services\Database->getCachedConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:81
+PHP message: PHP   6. ProfitPress\Services\Database->getApplicationDatabaseConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:134
+PHP message: PHP   7. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0
+PHP message: PHP   8. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/"
+2013/12/24 15:44:41 [error] 1699#0: *47 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Can't inherit abstract function ProfitPress\Components\BaseModel::validation() (previously declared abstract in ProfitPress\Account\Models\AccountBaseModel) in /var/www/helpyourselftoday.com/site.profitpress.com/modules/account/models/AccountBaseModel.php on line 33
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. require_once() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:73
+PHP message: PHP   3. ProfitPress\Services\Database->__construct() /var/www/helpyourselftoday.com/site.profitpress.com/config/services.php:12
+PHP message: PHP   4. ProfitPress\Services\Database->getCachedConnectionArray() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:41
+PHP message: PHP   5. ProfitPress\Services\Database->getCachedConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:81
+PHP message: PHP   6. ProfitPress\Services\Database->getApplicationDatabaseConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:134
+PHP message: PHP   7. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0
+PHP message: PHP   8. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET /favicon.ico HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost"
+2013/12/24 15:51:41 [error] 1699#0: *52 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Can't inherit abstract function ProfitPress\Components\BaseModel::validation() (previously declared abstract in ProfitPress\Account\Models\AccountBaseModel) in /var/www/helpyourselftoday.com/site.profitpress.com/modules/account/models/AccountBaseModel.php on line 34
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. require_once() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:73
+PHP message: PHP   3. ProfitPress\Services\Database->__construct() /var/www/helpyourselftoday.com/site.profitpress.com/config/services.php:12
+PHP message: PHP   4. ProfitPress\Services\Database->getCachedConnectionArray() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:41
+PHP message: PHP   5. ProfitPress\Services\Database->getCachedConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:81
+PHP message: PHP   6. ProfitPress\Services\Database->getApplicationDatabaseConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:134
+PHP message: PHP   7. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0
+PHP message: PHP   8. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/"
+2013/12/24 15:51:41 [error] 1699#0: *52 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Can't inherit abstract function ProfitPress\Components\BaseModel::validation() (previously declared abstract in ProfitPress\Account\Models\AccountBaseModel) in /var/www/helpyourselftoday.com/site.profitpress.com/modules/account/models/AccountBaseModel.php on line 34
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. require_once() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:73
+PHP message: PHP   3. ProfitPress\Services\Database->__construct() /var/www/helpyourselftoday.com/site.profitpress.com/config/services.php:12
+PHP message: PHP   4. ProfitPress\Services\Database->getCachedConnectionArray() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:41
+PHP message: PHP   5. ProfitPress\Services\Database->getCachedConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:81
+PHP message: PHP   6. ProfitPress\Services\Database->getApplicationDatabaseConfiguration() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:134
+PHP message: PHP   7. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0
+PHP message: PHP   8. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/lib/services/Database.php:0" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET /favicon.ico HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost"
+2013/12/24 15:52:21 [error] 1699#0: *52 FastCGI sent in stderr: "PHP message: PHP Parse error:  syntax error, unexpected '}' in /var/www/helpyourselftoday.com/site.profitpress.com/lib/components/BaseController.php on line 75
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. Phalcon\Mvc\Application->handle() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:78
+PHP message: PHP   3. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/"
+2013/12/24 15:52:29 [error] 1699#0: *52 FastCGI sent in stderr: "PHP message: PHP Parse error:  syntax error, unexpected '}' in /var/www/helpyourselftoday.com/site.profitpress.com/lib/components/BaseController.php on line 75
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. Phalcon\Mvc\Application->handle() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:78
+PHP message: PHP   3. Phalcon\Loader->autoLoad() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/"
+2013/12/24 15:55:04 [error] 1699#0: *64 FastCGI sent in stderr: "PHP message: PHP Notice:  Undefined variable: css in /var/www/helpyourselftoday.com/site.profitpress.com/cache/volt/%%var%%www%%helpyourselftoday.com%%site.profitpress.com%%modules%%site%%views%%layouts%%main.volt.php on line 7
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. Phalcon\Mvc\Application->handle() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:78
+PHP message: PHP   3. Phalcon\Mvc\View\Engine\Volt->render() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET /dashboard HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/"
+2013/12/25 20:02:46 [error] 1550#0: *8 FastCGI sent in stderr: "PHP message: PHP Notice:  Undefined variable: css in /var/www/helpyourselftoday.com/site.profitpress.com/cache/volt/%%var%%www%%helpyourselftoday.com%%site.profitpress.com%%modules%%site%%views%%layouts%%main.volt.php on line 7
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. Phalcon\Mvc\Application->handle() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:78
+PHP message: PHP   3. Phalcon\Mvc\View\Engine\Volt->render() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET /dashboard HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/"
+2013/12/25 20:02:50 [error] 1547#0: *2 FastCGI sent in stderr: "PHP message: PHP Notice:  Access to undefined property ProfitPress\Posts\Models\Posts::published in /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/models/Posts.php on line 227
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. Phalcon\Mvc\Application->handle() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:78
+PHP message: PHP   3. Phalcon\Mvc\View\Engine\Volt->render() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   4. ProfitPress\Posts\Models\Posts->getNotices() /var/www/helpyourselftoday.com/site.profitpress.com/cache/volt/%%var%%www%%helpyourselftoday.com%%site.profitpress.com%%modules%%posts%%views%%posts%%viewall.volt.php:23
+PHP message: PHP Notice:  Access to undefined property ProfitPress\Posts\Models\Posts::published in /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/models/Posts.php on line 227
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. Phalcon\Mvc\Application->handle() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:78
+PHP message: PHP   3. Phalcon\Mvc\View\Engine\Volt->render() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   4. ProfitPress\Posts\Models\Posts->getNotices() /var/www/helpyourselftoday.com/site.profitpress.com/cache/volt/%%var%%www%%helpyourselftoday.com%%site.profitpress.com%%modules%%posts%%views%%posts%%viewall.volt.php:23
+PHP message: PHP Notice:  Access to undefined property ProfitPress\Posts\Models\Posts::published in /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/models/Posts.php on line 227
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP mess
+2013/12/25 20:02:50 [error] 1547#0: *2 FastCGI sent in stderr: "ews%%posts%%viewall.volt.php:23
+PHP message: PHP Notice:  Access to undefined property ProfitPress\Posts\Models\Posts::published in /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/models/Posts.php on line 227
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. Phalcon\Mvc\Application->handle() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:78
+PHP message: PHP   3. Phalcon\Mvc\View\Engine\Volt->render() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   4. ProfitPress\Posts\Models\Posts->getNotices() /var/www/helpyourselftoday.com/site.profitpress.com/cache/volt/%%var%%www%%helpyourselftoday.com%%site.profitpress.com%%modules%%posts%%views%%posts%%viewall.volt.php:23
+PHP message: PHP Notice:  Access to undefined property ProfitPress\Posts\Models\Posts::published in /var/www/helpyourselftoday.com/site.profitpress.com/modules/posts/models/Posts.php on line 227
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   2. Phalcon\Mvc\Application->handle() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:78
+PHP message: PHP   3. Phalcon\Mvc\View\Engine\Volt->render() /var/www/helpyourselftoday.com/site.profitpress.com/public/index.php:0
+PHP message: PHP   4. ProfitPress\Posts\Models\Posts->getNotices() /var/www/helpyourselftoday.com/site.profitpress.com/cache/volt/%%var%%www%%helpyourselftoday.com%%site.profitpress.com%%modules%%posts%%views%%posts%%viewall.volt.php:23" while reading response header from upstream, client: 127.0.0.1, server: *.profitpress.localhost, request: "GET /posts/viewall HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "alpha.profitpress.localhost", referrer: "http://alpha.profitpress.localhost/dashboard"

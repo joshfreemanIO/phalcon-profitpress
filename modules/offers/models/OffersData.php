@@ -146,5 +146,7 @@ class OffersData extends \ProfitPress\Components\BaseModel
         $this->belongsTo("offer_id", "Offers", "offer_id");
     }
 
+    public function validation(){}
+
 
 }

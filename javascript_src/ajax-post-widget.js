@@ -1,11 +1,11 @@
 (function($) {
 
-	$.widget("ProfitPress.ajaxValidator", {
+	$.widget("ProfitPress.ajax-form", {
 
 		options: {
 
-			dataRoute : 'data-ajax-validator-route',
-			dataModel : 'data-ajax-validator-model',
+			dataRoute : 'data-ajax-post-route',
+			dataElement : 'data-ajax-post-element',
 		},
 
 		_create: function() {
@@ -15,22 +15,16 @@
 		},
 
 		_bind: function() {
-			
-			$(document).on('input change', this.options.dataRoute, function(eventObject) {
+
+			$(document).on('click', this.options.dataRoute, function(eventObject) {
 
 				var route = $(this).data(this.options.dataRoute);
-				var model = $(this).data(this.options.dataModel);
-				var attr  = $(this).attr('name');
-				var data  = $(this).data(this.options.dataAttr).val();
+				var data = $(this).data(this.options.dataElement).val();
 
-				var postData = { 
-					model: model,
-					attr:  attr
-					value: data,
-				};
+				var postData = {value: data};
 
 				this.ajaxPost(route, postData);
-			
+
 			});
 		},
 
@@ -43,7 +37,7 @@
 				console.log(jqXHR);
 
 			}, 'json');
-		}
+		},
 
 
 		HTTP200: function() {
@@ -59,10 +53,10 @@
 
 
 
-$(document).ajaxValidator();
+
 // Initialization of Attributes
 
 
 
 
-})(jQuery); 
+})(jQuery);

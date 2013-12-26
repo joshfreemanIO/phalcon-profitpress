@@ -21,7 +21,7 @@ $(document).ready(
 		$('[data-meta-copy]').each(
 			function(){
 				target = $(this).attr('data-meta-copy');
-				that = this
+				that = this;
 
 				$('[name="'+target+'"]').keyup(function(){
 					innerHtml =  $(this).val();
@@ -32,6 +32,6 @@ $(document).ready(
 	}
 );
 $('#nav-tab a').click(function (e) {
-  e.preventDefault()
-  $(this).tab('show')
+  e.preventDefault();
+  $(this).tab('show');
 });

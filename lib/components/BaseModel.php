@@ -151,4 +151,6 @@ abstract class BaseModel extends Model
             $this->_table_name_prefix = $this->getDi()->getShared('config')->model->table_name_prefix;
         }
     }
+
+    abstract public function validation();
 }

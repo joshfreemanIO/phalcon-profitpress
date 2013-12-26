@@ -17,7 +17,8 @@ $loader->registerNamespaces(
         'ProfitPress\Site' => __APPSDIR__.'site',
         'ProfitPress\Site\Models' => __APPSDIR__.'site/models',
         'ProfitPress\Permalink' => __APPSDIR__.'permalink',
-        'ProfitPress\Vendor' => __LIBDIR__.'vendor',
+        // 'ProfitPress\Vendor' => __LIBDIR__.'vendor',
+        'Michelf' => __LIBDIR__.'vendor/php-markdown/Michelf',
     )
 );
 

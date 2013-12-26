@@ -87,4 +87,7 @@ class SecurityTokens extends \ProfitPress\Components\BaseModel
 
         $this->save();
     }
+
+    public function validation(){}
+
 }

@@ -47,7 +47,7 @@ class PostsCategories extends \ProfitPress\Components\BaseModel
     public $name;
 
 
-    public function validateModel()
+    public function validation()
     {
 
         $this->validate(new PresenceOf(
