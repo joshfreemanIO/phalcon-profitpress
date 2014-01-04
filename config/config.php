@@ -15,9 +15,9 @@ return array(
         'adapter'  => 'Mysql',
         'host'     => 'localhost',
         'port'     => '3306',
-        'username' => 'profitpress_main',
-        'password' => 'EBBFhDv2NMpVc59h',
-        'dbname'   => 'profitpress_main',
+        'username' => 'pp_main',
+        'password' => '3b75YK4p7BWDJNGs',
+        'dbname'   => 'pp_main',
     ),
 
     'database_creator' => array(

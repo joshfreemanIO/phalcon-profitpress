@@ -193,4 +193,9 @@ class SiteController extends \ProfitPress\Components\BaseController
 		$response = new \Phalcon\Http\Response();
     	return $response->redirect($url,true);
     }
+
+    public function blah()
+    {
+
+    }
 }

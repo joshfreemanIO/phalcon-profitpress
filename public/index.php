@@ -3,6 +3,7 @@
 use Phalcon\Mvc\Router as Router,
     Phalcon\Mvc\Application as Application,
     Phalcon\DI\FactoryDefault as FactoryDefault;
+
 /**
  * Error Reporting (disable in production)
  */
@@ -18,22 +19,22 @@ $debug->listen();
 require_once '../config/definitions.php';
 
 
-$frontCache = new \Phalcon\Cache\Frontend\Output(
-    array(
-        'lifetime' => 15,
-    )
-);
+// $frontCache = new \Phalcon\Cache\Frontend\Output(
+//     array(
+//         'lifetime' => 15,
+//     )
+// );
 
 
-$cache = new \Phalcon\Cache\Backend\File($frontCache, array(
-    'cacheDir' => __CACHEDIR__.'config/',
-));
+// $cache = new \Phalcon\Cache\Backend\File($frontCache, array(
+//     'cacheDir' => __CACHEDIR__.'config/',
+// ));
 
 
-$di = $cache->get('di.cache');
-$application = $cache->get('application.cache');
+// $di = $cache->get('di.cache');
+// $application = $cache->get('application.cache');
 
-if ($di === null || $application === null) {
+// if ($di === null || $application === null) {
     /**
      * Create Dependency Injector
      */
@@ -61,11 +62,11 @@ if ($di === null || $application === null) {
      */
     require_once __CONFIGDIR__.'tags.php';
 
-    $cache->stop();
-    $cache->save();
-    // $cache->save('di.cache', $di);
-    // $cache->save('application.cache', $application);
-}
+//     $cache->stop();
+//     $cache->save();
+//     // $cache->save('di.cache', $di);
+//     // $cache->save('application.cache', $application);
+// }
 
     /**
      * Register Services for Dependency Injection

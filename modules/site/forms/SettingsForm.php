@@ -106,4 +106,9 @@ class SettingsForm extends \ProfitPress\Components\BaseForm
 
         }
     }
+
+    private function getCSS()
+    {
+        return \ProfitPress\Site\Models\Settings::getSetting('global_css');
+    }
 }
