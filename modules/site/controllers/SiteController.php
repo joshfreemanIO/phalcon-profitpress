@@ -46,7 +46,9 @@ class SiteController extends \ProfitPress\Components\BaseController
 
 	public function homeAction()
 	{
-		\ProfitPress\Posts\PostsModule::registerAutoloaders();
+
+        $PostsModule = new \ProfitPress\Posts\PostsModule;
+        $PostsModule->registerAutoloaders();
 
 	    Tag::setTitle('Home');
 
@@ -191,11 +193,12 @@ class SiteController extends \ProfitPress\Components\BaseController
         $url = 'https://auth.profitpress.localhost/cookieeater/'. $this->site->protocol .'/'.$this->site->domain_name;
 
 		$response = new \Phalcon\Http\Response();
+        return $response->redirect('/');
     	return $response->redirect($url,true);
     }
 
-    public function blah()
+    public function businesstoolsAction()
     {
-
+        $this->view->setLayout('admin');
     }
 }

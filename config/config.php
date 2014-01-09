@@ -43,11 +43,16 @@ return array(
             'lifetime' => 15,
             'prefix' => 'site-',
             'cacheDir' => __CACHEDIR__.'config/',
-            )
-        ),
+        )
+    ),
 
     'session' => array(
         'auth_url' => 'http://auth.profitpress.localhost',
+    ),
 
-        )
+    'restricted_subdomains' => array(
+        'auth',
+        'blog',
+        'forum',
+    ),
 );

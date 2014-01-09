@@ -123,7 +123,10 @@ class PostsController extends \ProfitPress\Components\BaseController
 
         $form = $this->actBasedUponSubmitType($post, $form);
 
+        $this->view->footer_editor = true;
+
         $this->view->pick('posts/form');
+
 
         $this->view->form = $form;
     }
@@ -143,6 +146,8 @@ class PostsController extends \ProfitPress\Components\BaseController
         $form = $this->actBasedUponSubmitType($post, $form);
 
         $this->view->pick('posts/form');
+        $this->view->footer_editor = true;
+
         $this->view->form = $form;
 
     }

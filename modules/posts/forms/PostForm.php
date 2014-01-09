@@ -133,7 +133,7 @@ class PostForm extends \ProfitPress\Components\BaseForm
         $this->add($authorize_comments);
 
 
-        $save_draft = new Submit('Save in Drafts', array('name' => 'save_draft', 'class' => 'btn btn-block btn-primary'));
+        $save_draft = new Submit('Save in Drafts', array('name' => 'save_draft', 'class' => 'btn btn-block btn-block-no-margin btn-primary'));
         $save_draft->setUserOption('element_attributes', array('class' => 'btn btn-block btn-info'));
         $save_draft->setUserOption('no_element_wrapper', true);
         $save_draft->setUserOption('no_label', true);
@@ -166,7 +166,7 @@ class PostForm extends \ProfitPress\Components\BaseForm
         $publish = new Submit('Publish New Post');
 
         $publish->setAttribute('name', 'submit');
-        $publish->setAttribute('class', 'btn btn-block btn-success');
+        $publish->setAttribute('class', 'btn btn-block btn-block-no-margin btn-success');
 
         $publish->setUserOption('element_attributes', array('class' => 'btn btn-block btn-success'));
         $publish->setUserOption('no_element_wrapper', true);

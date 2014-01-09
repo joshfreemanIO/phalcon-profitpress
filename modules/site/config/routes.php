@@ -25,6 +25,12 @@ $router->add("/accountinfo", array(
     'action' => 'accountinfo',
     ));
 
+$router->add("/businesstools", array(
+    'module' => 'site',
+    'controller' => 'site',
+    'action' => 'businesstools',
+    ));
+
 $router->add("/logout", array(
     'module' => 'site',
     'controller' => 'site',

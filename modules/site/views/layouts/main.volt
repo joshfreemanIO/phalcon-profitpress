@@ -17,13 +17,14 @@
     <body>
         <div id="wrap">
             <?php $this->partial(__LAYOUTDIR__."header-admin"); ?>
-            <div class='container'>
+            <div class='container push-down'>
                 <?php $this->flash->output(); ?>
 
                 {{ content() }}
             </div>
         <div id="push"></div>
         </div>
+
         <footer id="footer">
 
         </footer>

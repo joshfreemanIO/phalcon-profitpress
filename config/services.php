@@ -35,7 +35,7 @@ $di->setShared('session', function() use ($di) {
 
         $location = $di->getShared('config')->session->auth_url.'/cookiebaker/'.$key;
 
-        $shared_session->redirect($location);
+        // $shared_session->redirect($location);
 
     } else {
 

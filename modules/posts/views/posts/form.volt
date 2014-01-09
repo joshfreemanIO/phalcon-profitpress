@@ -2,38 +2,11 @@
 $form->renderFormStart();
 ?>
 <div class="row">
-    <div class="col-md-4">
-        <div class="form-group">
-            <button data-role="advanced-options-toggle" class='btn btn-block btn-warning' type="button">Advanced Options</button>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <?php $form->renderFormGroup('Save in Drafts');  ?>
-    </div>
-    <div class="col-md-4">
-        <?php $form->renderFormGroup('Publish New Post');  ?>
-    </div>
 </div>
 <div class="col-md-12">
 
      <div data-role='advanced-options'>
      <!-- <div data-role='advanced-options' class="hidden"> -->
-        <ul id="nav-tab" class="nav nav-tabs">
-          <li class="active"><a href="#content-holder" >Content</a></li>
-          <li><a href="#excerpt">Summary</a></li>
-          <li><a href="#category">Discovery</a></li>
-          <li><a href="#general-options">Comment Options</a></li>
-          <li><a href="#metadata">Metadata</a></li>
-          <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Social Graphs</a>
-              <ul class="dropdown-menu">
-                <li><a href="#twitter-cards">Twitter Cards</a></li>
-                <li><a href="#facebook-og">Facebook Open Graph</a></li>
-                <li><a href="#google+">Google+ Graph</a></li>
-              </ul>
-          </li>
-        </ul>
-        <br>
         <div class="tab-content">
         <section id="content-holder" class="tab-pane fade in active">
           <div class="row"></div>
@@ -55,7 +28,7 @@ $form->renderFormStart();
                     </div>
                 </div>
         </section>
-        <section id="excerpt" class="tab-pane fade in">
+        <section id="excerpt-container" class="tab-pane fade in">
             <h3>Summarize your Post</h3>
             <p>This excerpt will display with each post where a short description is required.</p>
             <?php
@@ -135,42 +108,31 @@ $form->renderFormStart();
         </div>
      </div>
 </div>
-
+<footer class="editor navbar navbar-default">
+    <ul id="nav-tab" class="nav navbar-nav">
+        <li class="active"><a href="#content-holder" >Content</a></li>
+        <li><a href="#excerpt-container">Summary</a></li>
+        <li><a href="#category">Discovery</a></li>
+        <li><a href="#general-options">Comment Options</a></li>
+        <li><a href="#metadata">Metadata</a></li>
+        <li class="dropdown dropup">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Social Graphs</a>
+            <ul class="dropdown-menu">
+                <li><a href="#twitter-cards">Twitter Cards</a></li>
+                <li><a href="#facebook-og">Facebook Open Graph</a></li>
+                <li><a href="#google+">Google+ Graph</a></li>
+            </ul>
+        </li>
+    </ul>
+    <div class="nav navbar-nav navbar-right">
+        <button type="button" class="btn btn-default dropdown-toggle dropup pseudo-navbar-button" data-toggle="dropdown">Publishing&nbsp;<span class="caret"></span></button>
+        <div class="dropdown-menu dropup-menu publishing-menu">
+        <button type="button" class="btn btn-block btn-block-no-margin btn-danger">Advanced Options</button>
+            <?php echo $form->render('Save in Drafts'); ?>
+            <?php echo $form->render('Publish New Post'); ?>
+        </div>
+    </div>
+</footer>
 <?php
 $form->renderFormEnd();
  ?>
-
-<script type="text/javascript">
-// tinymce.init({
-//     selector: "#content",
-//     menu:{},
-//     theme_advanced_buttons3_add: 'code',
-//     height: 300,
-//     plugins: [
-//          "advlist autolink link image lists charmap print preview hr anchor pagebreak",
-//          "searchreplace wordcount visualblocks visualchars insertdatetime media nonbreaking",
-//          "table contextmenu directionality emoticons paste textcolor responsivefilemanager"
-// 	],
-//   setup: function (ed) {
-//         ed.on('postRender', function(args) {
-
-//         tinyMCE.activeEditor.dom.select('body')[0].setAttribute('data-copy-iframe-source','tinymce-content');
-
-//         $('#content_ifr').contents().find('[data-copy-iframe-source]').each(
-//             function(index, element) {
-//               copyTargetToSource(index, element);
-//             }
-//           );
-
-//         tinyMCEinit();
-
-//         });
-//     },
-// 	image_advtab: true ,
-// 	external_filemanager_path:"/lib/ResponsiveFilemanager/filemanager/",
-// 	filemanager_title:"Responsive Filemanager" ,
-//     toolbar2: "| filemanager | link unlink anchor | image media | forecolor backcolor  | print preview code ",
-//    	external_plugins: { "filemanager" : "/lib/ResponsiveFilemanager/filemanager/plugin.min.js"},
-//    	image_advtab: true ,
-//  });
-</script>

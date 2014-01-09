@@ -13,6 +13,9 @@ $acl->allow("Tier 1", $controller, "dashboard");
 $acl->addResource($resource, "accountinfo");
 $acl->allow("Tier 1", $controller, "accountinfo");
 
+$acl->addResource($resource, "businesstools");
+$acl->allow("Tier 1", $controller, "businesstools");
+
 $acl->addResource($resource, "login");
 $acl->allow("Guest", $controller, "login");
 
