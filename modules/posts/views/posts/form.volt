@@ -1,5 +1,9 @@
 <?php
 $form->renderFormStart();
+// $form->renderFormStart(array('class' => 'dropzone'));
+var_dump($form);
+die();
+
 ?>
 <div class="row">
 </div>
@@ -27,6 +31,8 @@ $form->renderFormStart();
                         <div class="col-md-12 content-viewer" data-markdown-target="content" data-copy-iframe-target="tinymce-content" data-copy-html="true"  data-height-target="tiny-mce"></div>
                     </div>
                 </div>
+                <div id="previews" class="dropzone-previews"></div>
+                <button type="button" id="clickable">Click me to select files</button>
         </section>
         <section id="excerpt-container" class="tab-pane fade in">
             <h3>Summarize your Post</h3>

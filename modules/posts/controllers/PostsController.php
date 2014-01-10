@@ -284,4 +284,35 @@ class PostsController extends \ProfitPress\Components\BaseController
         return true;
     }
 
+    public function fileuploadAction()
+    {
+        if ($this->request->hasFiles() == true) {
+
+            foreach ($this->request->getUploadedFiles() as $file){
+
+                $url = new \Phalcon\Mvc\Url();
+
+                $pub_path = 'files/test/' . preg_replace('/[^a-zA-Z0-9\-\_\:\.]/', '_', $file->getName());
+                $markdown = '![Describe Your Image](';
+                $markdown .= '/' . $pub_path;
+                $markdown .= ' "Title Your Image")';
+
+                $file_details['path'] = $pub_path;
+                $file_details['markdown'] = $markdown;
+
+                $content[] = $file_details;
+
+                $file->moveTo( __PUBDIR__ . $pub_path);
+            }
+
+            $response = new \Phalcon\Http\Response();
+
+            $response->setStatusCode(200, 'OK');
+
+            $response->setContentType('application/json', 'UTF-8');
+            $response->setContent(json_encode($content));
+
+            return $response;
+        }
+    }
 }

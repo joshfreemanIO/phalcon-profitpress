@@ -50,6 +50,8 @@ abstract class BaseForm extends Form
 
     public $elements;
 
+    protected $namespace = '';
+
     public function __construct($entity = null, $options = null)
     {
         $this->defaultFormUri();
@@ -57,6 +59,8 @@ abstract class BaseForm extends Form
         // $this->add($this->setCsrf());
 
         parent::__construct($entity, $options);
+
+        $this->namespaceForm(get_class($entity));
 
     }
 
@@ -71,9 +75,18 @@ abstract class BaseForm extends Form
         $this->renderFormEnd();
     }
 
-    public function renderFormStart()
+    public function renderFormStart($attributes = array())
     {
         $form_attributes = $this->form_attributes;
+
+        foreach ($attributes as $key => $value) {
+
+            if (!empty($form_attributes[$key])) {
+                $value = trim($form_attributes[$key] . ' ' . $value);
+            }
+
+            $form_attributes[$key] =  $value;
+        }
 
         $form_attributes['action'] =  $this->getAction();
 
@@ -220,5 +233,40 @@ abstract class BaseForm extends Form
         $html .= '</div>';
 
         echo $html;
+    }
+
+    /**
+     * Renders a specific item in the form
+     *
+     * @param string name
+     * @param array attributes
+     * @return string
+     */
+    public function render($name, $attributes = null)
+    {
+        if (empty($this->_elements[$name])) {
+            throw new \Phalcon\Forms\Exception("Element with ID=" . $name . " is not part of the form");
+        }
+
+        return $this->_elements[$this->_namespace . $name]->render($attributes);
+    }
+
+    public function namespaceForm($form_name = null)
+    {
+        if ($form_name === null) {
+            $form_name = get_class($this);
+        }
+
+        if (gettype($form_name) !== 'string') {
+            throw new \Phalcon\Forms\Exception("Parameter $form_name must be empty, null, or a string");
+        }
+
+        $this->_namespace = "[$form_name]";
+
+        foreach ($this->_elements as $element) {
+
+            $element->setName($this->_namespace . $element->getName());
+
+        }
     }
 }

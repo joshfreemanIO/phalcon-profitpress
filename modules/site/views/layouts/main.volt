@@ -6,9 +6,12 @@
         {{ assets.outputCss() }}
         {{ stylesheet_link(css) }}
         {{ stylesheet_link('css/bootstrap.override.css') }}
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="javascript/vendor/jquery-1.10.2.min.js"><\/script>')</script>
         <?php $this->assets->outputJs('head'); ?>
         <!--[if lt IE 9]>
-        {{ javascript_include('http://html5shiv.googlecode.com/svn/trunk/html5.js', false) }}
+            {{ javascript_include("javascript/vendor/html5shiv.js", true) }}
         <![endif]-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="Profit Press">
@@ -28,11 +31,9 @@
         <footer id="footer">
 
         </footer>
-        <!-- {{ javascript_include('//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js', false) }} -->
-        <script type="text/javascript">if (typeof jQuery == 'undefined') {document.write(unescape("%3Cscript src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js' type='text/javascript'%3E%3C/script%3E"));}</script>
+
         {{ javascript_include('bootstrap/js/bootstrap.min.js') }}
         <?php $this->assets->outputJs('footer') ?>
-    <?php $this->partial(__LAYOUTDIR__."piwik"); ?>
     <script type="text/javascript"></script>
     </body>
 </html>

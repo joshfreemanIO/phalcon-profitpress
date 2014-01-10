@@ -113,3 +113,8 @@ body {
   padding:0;
   right: -2px !important;
 }
+
+img {
+  max-width: 100%;
+
+}

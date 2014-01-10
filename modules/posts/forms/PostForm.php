@@ -45,26 +45,10 @@ use Phalcon\Validation\Validator\Regex,
 class PostForm extends \ProfitPress\Components\BaseForm
 {
 
-    public function __construct(PostsModel $post_entity = null, PostsCategoriesModel $post_categories_entity = null)
+
+
+    public function initialize(PostsModel $post_entity = null)
     {
-
-        parent::__construct($post_entity,$post_categories_entity);
-
-    }
-
-    public function initialize(PostsModel $post_entity = null, PostsCategoriesModel $post_categories_entity = null)
-    {
-        // if (empty($post_entity)) {
-        //     $post_entity = new PostsModel();
-        // }
-
-        // if (empty($post_categories_entity)) {
-        //     $post_entity = new PostsCategoriesModel();
-        // }
-
-        if (!empty($entity)) {
-           $this->setEntity($post_entity);//,array($post_entity, $post_categories_entity));
-        }
 
         $title = new Text('title');
 
@@ -220,10 +204,11 @@ class PostForm extends \ProfitPress\Components\BaseForm
             // ->addJs('lib/tinymce/js/tinymce/tinymce.min.js');
 
         $this->assets->collection('footer')
-            ->addJs('js/markdown.js')
+            ->addJs('javascript/vendor/markdown.js')
+            ->addJs('javascript/vendor/shiv.placeholder.js')
+            ->addJs('javascript/vendor/dropzone.js')
             ->addJs('lib/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.js')
-            ->addJs('js/profitpress.js')
-            ->addJs('js/shiv.placeholder.js');
+            ->addJs('javascript/lib/profitpress.js');
 
             // ->addJs('lib/jquery-custom-scrollbar/jquery.custom-scrollbar.js');
 

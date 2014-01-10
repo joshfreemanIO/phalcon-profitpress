@@ -21,3 +21,6 @@ $acl->allow("Tier 1", $resourceName, "edit");
 
 $acl->addResource($resourceOffers, "createcategory");
 $acl->allow("Tier 1", $resourceName, "createcategory");
+
+$acl->addResource($resourceOffers, "fileupload");
+$acl->allow("Tier 1", $resourceName, "fileupload");
