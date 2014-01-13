@@ -17,7 +17,7 @@
 	</div>
     <div class="flex-container">
         <div class="flex-element-20 flex-element">
-            <button class="btn btn-lg btn-block btn-default">SEO Tracker</button>
+            <a class="btn btn-lg btn-block btn-default" href="/seotracker">SEO Tracker</a>
         </div>
         <div class="flex-element-60 flex-element">
             <div class="well">

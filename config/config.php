@@ -55,4 +55,24 @@ return array(
         'blog',
         'forum',
     ),
+
+    'bootstrap_themes' => array(
+        'amelia.bootstrap.min.css' => 'Amelia',
+        'bootstrap.min.css' => 'Basic',
+        'cerulean.bootstrap.min.css' => 'Cerulean',
+        'cosmo.bootstrap.min.css' => 'Cosmo',
+        'cyborg.bootstrap.min.css' => 'Cyborg',
+        'flatly.bootstrap.min.css' => 'Flatly',
+        'journal.bootstrap.min.css' => 'Journal',
+        'readable.bootstrap.min.css' => 'Readable',
+        'readable.bootstrap.min.css' => 'Readable',
+        'simplex.bootstrap.min.css' => 'Simplex',
+        'slate.bootstrap.min.css' => 'Slate',
+        'spacelab.bootstrap.min.css' => 'Spacelab',
+        'united.bootstrap.min.css' => 'United',
+    ),
+
+    'default_settings' => array(
+        'global_css' => 'bootstrap.min.css',
+    ),
 );

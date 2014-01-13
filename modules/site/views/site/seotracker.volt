@@ -1,0 +1,1 @@
+<iframe src="http://seopanel.localhost" data-iframe="full-height" frameborder="0" style="width: 100%;height: 100%"></iframe>

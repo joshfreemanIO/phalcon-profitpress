@@ -48,8 +48,9 @@ class SiteModule implements ModuleDefinitionInterface
         $loader->registerNamespaces(
             array(
                 'ProfitPress\Site\Controllers' => __DIR__.'/controllers',
-                'ProfitPress\Site\Models'      => __DIR__.'/models',
+                'ProfitPress\Site\Entities'       => __DIR__.'/entities',
                 'ProfitPress\Site\Forms'       => __DIR__.'/forms',
+                'ProfitPress\Site\Models'      => __DIR__.'/models',
             )
         );
 

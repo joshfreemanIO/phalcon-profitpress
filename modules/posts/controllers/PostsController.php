@@ -16,7 +16,7 @@
 namespace ProfitPress\Posts\Controllers;
 
 use ProfitPress\Posts\Forms\PostForm;
-// use ProfitPress\Posts\Forms\PostForm;
+
 use ProfitPress\Components\Multiform;
 
 use Phalcon\Tag,
@@ -44,6 +44,12 @@ use Phalcon\Tag,
 class PostsController extends \ProfitPress\Components\BaseController
 {
 
+    public function onConstruct()
+    {
+        $this->view->setLayoutsDir('../../site/views/layouts/');
+        $this->view->setLayout('layout-admin');
+
+    }
 
 	/**
 	 * We simply pass all the posts created to the view
@@ -105,16 +111,35 @@ class PostsController extends \ProfitPress\Components\BaseController
 
     public function createnAction()
     {
-        $multiform = new Multiform();
+        Tag::setTitle("Create Blog Post");
 
-        $multiform->addForm('Post', new PostForm);
-        $multiform->addForm('PostsCategory', new PostsCategoryForm);
 
+    }
+
+    public function postManager(Posts $posts_model, PostsCategories $posts_categories_model)
+    {
+        $post_form = new PostForm;
+
+        $post_form->bindData($this->request->getPost(), $posts_model);
+
+        $posts_categories_form = new PostsCategoriesForm;
+
+        $posts_categories_form->bindData($this->request->getPost(), $posts_categories_model);
+
+        if (!$post_form->isValid()) {
+            $this->flashMessages($post_form, 'error');
+        }
+
+        if (!$posts_categories_form->isValid()) {
+            $this->flashMessages($post_form, 'error');
+        }
+
+        $posts_categories_form->isValid();
     }
 
     public function createAction($post_type)
     {
-
+        $this->view->setLayout('layout-admin');
     	Tag::setTitle("Create Blog Post");
 
         $post = new Posts();
@@ -126,7 +151,6 @@ class PostsController extends \ProfitPress\Components\BaseController
         $this->view->footer_editor = true;
 
         $this->view->pick('posts/form');
-
 
         $this->view->form = $form;
     }

@@ -42,3 +42,9 @@ $router->add("/login", array(
     'controller' => 'site',
     'action' => 'login',
     ));
+
+$router->add("/seotracker", array(
+    'module' => 'site',
+    'controller' => 'site',
+    'action' => 'seotracker',
+    ));

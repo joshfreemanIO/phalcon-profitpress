@@ -12,13 +12,20 @@ module.exports = function(grunt) {
         watch: {
 
             scripts: {
-                files: source_dir+'*.js',
+                files: 'javascript/lib/*.js',
                 exclude: 'javascript/vendor',
-                tasks: ['jshint','concat','uglify'],
+                tasks: ['copy', 'jshint','concat','uglify'],
             },
         },
 
         copy: {
+
+            lib: {
+              expand: true,
+              cwd: 'javascript',
+              src: ['lib/**'],
+              dest: 'public/javascript/'
+            },
 
             vendor: {
               expand: true,

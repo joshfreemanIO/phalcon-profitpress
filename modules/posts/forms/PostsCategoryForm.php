@@ -44,17 +44,9 @@ class PostsCategoryForm extends \ProfitPress\Components\BaseForm
         'Phalcon\Forms\Element\Hidden',
         'Phalcon\Forms\Element\Submit');
 
-    public function __construct()
-    {
-        parent::__construct();
 
-    }
     public function initialize($entity = null)
     {
-
-        if (!empty($entity)) {
-           $this->setEntity($entity);
-        }
 
         $name = new Text("name");
         $name->setLabel("Category Name");

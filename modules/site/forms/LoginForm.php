@@ -49,14 +49,17 @@ class LoginForm extends \ProfitPress\Components\BaseForm
 
         $email = new Text('email_address');
         $email->setLabel('Email');
+        // $email->add
         $this->add($email);
 
         $password = new Password('password');
         $password->setLabel('Password');
-
         $this->add($password);
 
-        $this->add(new Submit('Login'));
+        $submit = new Submit('Login');
+        $submit->setAttribute('value', 'Login');
+
+        $this->add($submit);
 
     }
 }

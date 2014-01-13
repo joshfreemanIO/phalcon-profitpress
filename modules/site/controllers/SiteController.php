@@ -15,6 +15,8 @@
 
 namespace ProfitPress\Site\Controllers;
 
+use ProfitPress\Site\Entities\Settings as SettingsEntity;
+
 use Phalcon\Tag as Tag;
 
 use ProfitPress\Site\Models\Settings as Settings,
@@ -76,7 +78,7 @@ class SiteController extends \ProfitPress\Components\BaseController
 		$this->session->set("username", "Michael");
 		$this->session->set("authenticated", true);
 
-        $this->view->setLayout('admin');
+        $this->view->setLayout('layout-admin');
 		$this->view->username = $this->session->get('username');
 		$this->view->links = $this->getTieredAccessLinks();
 	}
@@ -118,33 +120,32 @@ class SiteController extends \ProfitPress\Components\BaseController
 
 	public function accountinfoAction()
 	{
-        $form = new SettingsForm();
 
-        $user = Users::findFirst(2);
+        $settings_entity = new SettingsEntity;
 
-        $user->set('email_address', 'admin@admin.com');
-        $user->set('first_name', 'First Name');
-        $user->set('last_name', 'Last Name');
+        $form = new SettingsForm($settings_entity);
 
 
         if ( $this->request->isPost() && $form->isValid($this->request->getPost()) ) {
 
-            $setting = new Settings();
+            $form->bind($this->request->getPost(), $settings_entity);
 
-            $setting->settings['global_css'] =  $this->request->getPost('global_css');
+            $settings = new Settings();
 
-            foreach ($setting->settings as $key => $value) {
-            	Settings::setSetting($key,$value);
+            if ($settings->setSettings($form->getPost(),$form->getElementNames())) {
+
+                $this->flash->success('You have successfully updated your settings!');
+
+                $response = new \Phalcon\Http\Response();
+
+                return $response->redirect('accountinfo');
+
+            } else {
+
             }
-
-            $this->flash->success('You have successfully updated your theme!');
-
-	        $response = new \Phalcon\Http\Response();
-	        return $response->redirect('accountinfo');
-
         }
 
-        $this->view->setLayout('admin');
+        $this->view->setLayout('layout-admin');
         $this->view->form = $form;
     }
 
@@ -154,14 +155,12 @@ class SiteController extends \ProfitPress\Components\BaseController
 
         if ( $this->request->isPost() && $form->isValid($this->request->getPost()) ) {
 
-        	$user = \ProfitPress\Site\Models\Users::findByEmail($this->request->getPost('email_address'));
+            $email_address = $form->getSubmittedInputValue('email_address');
+            $password = $form->getSubmittedInputValue('password');
 
-        	$valid_password = $user->validatePassword($this->request->getPost('password'));
+            $user = \ProfitPress\Site\Models\Users::findByEmail($email_address);
 
-
-        	if (!$valid_password) {
-        		$this->flash->warning('Invalid email or password');
-        	} else {
+            if ( !empty($user) && $user->validatePassword($password) ) {
 
         		$this->flash->success('Successfully Logged In');
 
@@ -170,13 +169,19 @@ class SiteController extends \ProfitPress\Components\BaseController
         		$this->session->set('role',$tier_level);
 
         		$response = new \Phalcon\Http\Response();
-	        	return $response->redirect('dashboard');
 
-        	}
+                return $response->redirect('dashboard');
+
+            } else {
+
+                $this->flash->warning('Invalid email or password');
+            }
+
+        } else {
+            $this->flashMessages($form, 'error');
         }
 
-
-        $this->view->setLayout('admin');
+        $this->view->setLayout('layout-admin');
  		$this->view->form = $form;
     }
 
@@ -199,6 +204,12 @@ class SiteController extends \ProfitPress\Components\BaseController
 
     public function businesstoolsAction()
     {
-        $this->view->setLayout('admin');
+        $this->view->setLayout('layout-admin');
+    }
+
+    public function seotrackerAction()
+    {
+        $this->assets->collection('footer')->addJs('javascript/lib/iframe.js');
+        $this->view->setLayout('layout-empty');
     }
 }

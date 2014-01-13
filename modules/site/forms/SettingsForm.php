@@ -49,39 +49,17 @@ class SettingsForm extends \ProfitPress\Components\BaseForm
         'Phalcon\Forms\Element\Hidden',
         'Phalcon\Forms\Element\Submit');
 
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    public function initialize()
+    public function initialize($entity)
     {
 
-        $css = new Select('global_css', array(
-
-        'amelia.bootstrap.min.css' => 'Amelia',
-        'bootstrap.min.css' => 'Basic',
-        'cerulean.bootstrap.min.css' => 'Cerulean',
-        'cosmo.bootstrap.min.css' => 'Cosmo',
-        'cyborg.bootstrap.min.css' => 'Cyborg',
-        'flatly.bootstrap.min.css' => 'Flatly',
-        'journal.bootstrap.min.css' => 'Journal',
-        'readable.bootstrap.min.css' => 'Readable',
-        'readable.bootstrap.min.css' => 'Readable',
-        'simplex.bootstrap.min.css' => 'Simplex',
-        'slate.bootstrap.min.css' => 'Slate',
-        'spacelab.bootstrap.min.css' => 'Spacelab',
-        'united.bootstrap.min.css' => 'United',
-            ));
-
-
-
-        $css->setLabel('Theme');
-        $css->setAttribute('value' , $this->getCss());
-
-
+        $css = new Select('global_css', (array) $this->config->bootstrap_themes);
+        $css->setLabel("Theme");
         $this->add($css);
-        $this->add(new Submit('Update Information'));
+
+
+        $submit = new Submit('Update Information');
+        $submit->setAttribute('value', 'Update Information');
+        $this->add($submit);
 
     }
 

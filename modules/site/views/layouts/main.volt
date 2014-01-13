@@ -20,11 +20,9 @@
     <body>
         <div id="wrap">
             <?php $this->partial(__LAYOUTDIR__."header-admin"); ?>
-            <div class='container push-down'>
-                <?php $this->flash->output(); ?>
+            <?php $this->flash->output(); ?>
 
-                {{ content() }}
-            </div>
+            {{ content() }}
         <div id="push"></div>
         </div>
 

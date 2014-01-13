@@ -34,11 +34,6 @@ use Phalcon\Mvc\Controller;
 abstract class BaseController extends Controller
 {
 
-    public function onConstruct()
-    {
-
-    }
-
     public function beforeExecuteRoute(\ProfitPress\Dispatcher\Dispatcher $dispatcher)
     {
 
@@ -92,9 +87,9 @@ abstract class BaseController extends Controller
         return true;
     }
 
-    protected function flashMessages($messages, $flash_type)
+    protected function flashMessages($entity, $flash_type)
     {
-        foreach ($messages as $message) {
+        foreach ($entity->getMessages() as $message) {
             $this->flash->{$flash_type}($message);
         }
     }

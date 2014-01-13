@@ -50,7 +50,7 @@ abstract class BaseForm extends Form
 
     public $elements;
 
-    protected $namespace = '';
+    protected $_namespace = '';
 
     public function __construct($entity = null, $options = null)
     {
@@ -60,8 +60,19 @@ abstract class BaseForm extends Form
 
         parent::__construct($entity, $options);
 
-        $this->namespaceForm(get_class($entity));
+        $this->namespaceForm();
 
+    }
+
+    public function getValue($element_name)
+    {
+        preg_match("/\[(.*)\]/", $element_name, $matches);
+
+        if (!empty($matches)) {
+            $element_name = $matches[1];
+        }
+
+        return parent::getValue($element_name);
     }
 
     public function renderFullForm()
@@ -235,22 +246,6 @@ abstract class BaseForm extends Form
         echo $html;
     }
 
-    /**
-     * Renders a specific item in the form
-     *
-     * @param string name
-     * @param array attributes
-     * @return string
-     */
-    public function render($name, $attributes = null)
-    {
-        if (empty($this->_elements[$name])) {
-            throw new \Phalcon\Forms\Exception("Element with ID=" . $name . " is not part of the form");
-        }
-
-        return $this->_elements[$this->_namespace . $name]->render($attributes);
-    }
-
     public function namespaceForm($form_name = null)
     {
         if ($form_name === null) {
@@ -261,12 +256,69 @@ abstract class BaseForm extends Form
             throw new \Phalcon\Forms\Exception("Parameter $form_name must be empty, null, or a string");
         }
 
-        $this->_namespace = "[$form_name]";
+        $this->_namespace = "$form_name";
 
         foreach ($this->_elements as $element) {
 
-            $element->setName($this->_namespace . $element->getName());
-
+            $element->setName($this->getNamespacedName($element->getName()));
         }
     }
+
+    public function getNamespace()
+    {
+        return get_class($this);
+    }
+
+    public function getNamespacedName($name)
+    {
+        if (gettype($name) !== 'string') {
+            throw new \Phalcon\Forms\Exception("Parameter $name must be non-empty and a string");
+        }
+
+        return $this->_namespace . '[' . $name . ']';
+    }
+
+    public function bind($data, $entity, $whitelist = null)
+    {
+        if (!empty($data[$this->_namespace])) {
+            $data = $data[$this->_namespace];
+        }
+
+        return parent::bind($data, $entity, $whitelist = null);
+    }
+
+    public function isValid($data = null, $entity = null)
+    {
+        if ($data !== null && !empty($data[$this->_namespace])) {
+            $data = $data[$this->_namespace];
+        }
+
+        return parent::isValid($data, $entity);
+    }
+
+    public function getSubmittedInputValue($name)
+    {
+        if (gettype($name) !== 'string') {
+            throw new \Phalcon\Forms\Exception("Parameter $name must be non-empty and a string");
+        }
+
+        $data = $this->request->getPost($this->getNamespace());
+
+        if (!empty($data[$name])) {
+            return $data[$name];
+        }
+
+        return '';
+    }
+
+    public function getPost()
+    {
+        return $this->_data;
+    }
+
+    public function getElementNames()
+    {
+        return array_keys($this->getElements());
+    }
+
 }

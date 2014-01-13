@@ -15,13 +15,13 @@
 
 namespace ProfitPress\Posts\Forms;
 
-use \Phalcon\Forms\Element\Hidden,
-    \Phalcon\Forms\Element\Submit,
-    \Phalcon\Forms\Element\Text,
-    \Phalcon\Forms\Element\TextArea,
-    \Phalcon\Validation\Validator\Regex,
-    \Phalcon\Validation\Validator\PresenceOf,
-    \Phalcon\Validation\Validator\Identical;
+use Phalcon\Forms\Element\Hidden,
+    Phalcon\Forms\Element\Submit,
+    Phalcon\Forms\Element\Text,
+    Phalcon\Forms\Element\TextArea,
+    Phalcon\Validation\Validator\Regex,
+    Phalcon\Validation\Validator\PresenceOf,
+    Phalcon\Validation\Validator\Identical;
 
 
 /**
@@ -44,11 +44,7 @@ class CommentsForm extends \ProfitPress\Components\BaseForm
         'Phalcon\Forms\Element\Hidden',
         'Phalcon\Forms\Element\Submit');
 
-    public function __construct()
-    {
-        parent::__construct();
 
-    }
     public function initialize()
     {
         $title = new Text("title");

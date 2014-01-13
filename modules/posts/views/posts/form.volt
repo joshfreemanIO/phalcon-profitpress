@@ -1,8 +1,6 @@
 <?php
 $form->renderFormStart();
 // $form->renderFormStart(array('class' => 'dropzone'));
-var_dump($form);
-die();
 
 ?>
 <div class="row">

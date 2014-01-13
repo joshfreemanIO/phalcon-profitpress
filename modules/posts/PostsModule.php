@@ -20,7 +20,6 @@ use \Phalcon\Loader,
     \Phalcon\Mvc\View,
     \Phalcon\Mvc\ModuleDefinitionInterface;
 
-
 /**
  * [Short description]
  *

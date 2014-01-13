@@ -45,8 +45,6 @@ use Phalcon\Validation\Validator\Regex,
 class PostForm extends \ProfitPress\Components\BaseForm
 {
 
-
-
     public function initialize(PostsModel $post_entity = null)
     {
 

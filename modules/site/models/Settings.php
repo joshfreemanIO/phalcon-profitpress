@@ -48,7 +48,14 @@ class Settings extends \ProfitPress\Components\BaseModel
 
     public static function getSetting($setting)
     {
-        return self::findFirst("setting_name = '$setting'")->setting_value;
+
+        $value = self::findFirst("setting_name = '$setting'")->setting_value;
+
+        if (empty($value) && !empty(self::getConfig()->default_settings->$setting)) {
+            $value = self::getConfig()->default_settings->$setting;
+        }
+
+        return $value;
     }
 
     public static function setSetting($setting_name, $setting_value)
@@ -65,7 +72,19 @@ class Settings extends \ProfitPress\Components\BaseModel
 
         $model->setting_value = $setting_value;
 
-        $model->save();
+        return $model->save();
+    }
+
+    public static function setSettings($settings_array, $white_list)
+    {
+
+        foreach ($settings_array as $setting_name  => $setting_value) {
+            if (in_array($setting_name, $white_list)) {
+                self::setSetting($setting_name, $setting_value);
+            }
+        }
+
+        return true;
     }
 
     public static function getSettings()
@@ -130,6 +149,12 @@ class Settings extends \ProfitPress\Components\BaseModel
     {
         self::updateSettingsVersion($this->getDI()->getShared('settings')->get('settings_version'));
     }
+
+    public static function getConfig()
+    {
+        return \Phalcon\DI::getDefault()->getConfig();
+    }
+
     public function validation(){}
 
 }
