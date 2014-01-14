@@ -83,22 +83,6 @@ function syncHeight(sourceElement, targetElement) {
 
 }
 
-function tinyMCEinit() {
-
-	var $tinyMCE = $('[data-height-target="tiny-mce"]');
-	var $source = $('[data-height-source="tiny-mce"]');
-
-	var interval = setInterval(function () {
-
-		if ($source.height() > 200) {
-			syncHeight($source,$tinyMCE);
-			clearInterval(interval);
-		} else {
-			return false;
-		}
-	}, 25);
-}
-
 function syncScrollPostion(sourceElement, targetElement) {
 
 	var $sourceElement = $(sourceElement);
@@ -130,7 +114,6 @@ $(document).ready(function(){
 	);
 	markDownInit();
 });
-
 
 function markDownInit() {
 

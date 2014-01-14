@@ -58,7 +58,6 @@ class SettingsForm extends \ProfitPress\Components\BaseForm
 
 
         $submit = new Submit('Update Information');
-        $submit->setAttribute('value', 'Update Information');
         $this->add($submit);
 
     }

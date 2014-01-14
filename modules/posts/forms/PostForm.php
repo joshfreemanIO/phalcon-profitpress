@@ -20,6 +20,7 @@ use ProfitPress\Posts\Models\Posts as PostsModel,
 
 use Phalcon\Forms\Element\Hidden,
     Phalcon\Forms\Element\Submit,
+    Phalcon\Forms\Element\Date,
     Phalcon\Forms\Element\Text,
     Phalcon\Forms\Element\TextArea,
     Phalcon\Forms\Element\Check;
@@ -106,6 +107,10 @@ class PostForm extends \ProfitPress\Components\BaseForm
         $allow_comments->setUserOption('element_wrapper_attributes', array('class' => 'col-md-4'));
         $this->add($allow_comments);
 
+        $publish_date = new Date('publish_date');
+        $publish_date->setLabel("Future Publish Date");
+        $this->add($publish_date);
+
 
         $authorize_comments = new Check('authorize_comments', array('value' => 1));
         $authorize_comments->setLabel('Every Comment Must be Authorized');
@@ -115,7 +120,7 @@ class PostForm extends \ProfitPress\Components\BaseForm
         $this->add($authorize_comments);
 
 
-        $save_draft = new Submit('Save in Drafts', array('name' => 'save_draft', 'class' => 'btn btn-block btn-block-no-margin btn-primary'));
+        $save_draft = new Submit('Save in Drafts', array( 'class' => 'btn btn-block btn-block-no-margin btn-primary'));
         $save_draft->setUserOption('element_attributes', array('class' => 'btn btn-block btn-info'));
         $save_draft->setUserOption('no_element_wrapper', true);
         $save_draft->setUserOption('no_label', true);
@@ -146,7 +151,6 @@ class PostForm extends \ProfitPress\Components\BaseForm
 
 
         $publish = new Submit('Publish New Post');
-
         $publish->setAttribute('name', 'submit');
         $publish->setAttribute('class', 'btn btn-block btn-block-no-margin btn-success');
 
@@ -202,8 +206,10 @@ class PostForm extends \ProfitPress\Components\BaseForm
             // ->addJs('lib/tinymce/js/tinymce/tinymce.min.js');
 
         $this->assets->collection('footer')
-            ->addJs('javascript/vendor/markdown.js')
             ->addJs('javascript/vendor/shiv.placeholder.js')
+            ->addJs('javascript/vendor/markdown.js')
+            ->addJs('javascript/vendor/modernizr/modernizr.html5.inputtypes.js')
+            ->addJs('javascript/lib/datetimepicker.yepnope.js')
             ->addJs('javascript/vendor/dropzone.js')
             ->addJs('lib/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.js')
             ->addJs('javascript/lib/profitpress.js');
@@ -211,8 +217,7 @@ class PostForm extends \ProfitPress\Components\BaseForm
             // ->addJs('lib/jquery-custom-scrollbar/jquery.custom-scrollbar.js');
 
     }
-
-    protected function getArrayedInputs($input)
+   protected function getArrayedInputs($input)
     {
         $pattern = "/^$input\[.*\]$/";
 

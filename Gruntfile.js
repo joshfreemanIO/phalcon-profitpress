@@ -1,6 +1,6 @@
 module.exports = function(grunt) {
 
-    var source_dir = 'javascript/lib/**/';
+    var source_dir = 'javascript/lib/';
     var dest_dir = 'public/javascript/lib';
 
 
@@ -43,10 +43,14 @@ module.exports = function(grunt) {
 
         concat: {
             options: {
-                separator: ';'
+                separator: ';',
+                dot: true
             },
             dist: {
-                src: source_dir+'*.js',
+                src: [
+                    'javascript/lib/*?(.js)',
+                    '!javascript/lib/datetimepicker.init.js',
+                    ],
                 dest: dest_dir+'/<%= pkg.name %>.js'
             }
         },

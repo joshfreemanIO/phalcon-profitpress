@@ -15,9 +15,10 @@
 
 namespace ProfitPress\Posts\Controllers;
 
-use ProfitPress\Posts\Forms\PostForm;
+use ProfitPress\Posts\Forms\PostForm,
+    ProfitPress\Posts\Forms\PostsCategoryForm;
 
-use ProfitPress\Components\Multiform;
+use ProfitPress\Components\MultiForm;
 
 use Phalcon\Tag,
     ProfitPress\Posts\Models\Posts,
@@ -109,13 +110,6 @@ class PostsController extends \ProfitPress\Components\BaseController
         $this->view->setVar('post', $post);
     }
 
-    public function createnAction()
-    {
-        Tag::setTitle("Create Blog Post");
-
-
-    }
-
     public function postManager(Posts $posts_model, PostsCategories $posts_categories_model)
     {
         $post_form = new PostForm;
@@ -137,9 +131,9 @@ class PostsController extends \ProfitPress\Components\BaseController
         $posts_categories_form->isValid();
     }
 
-    public function createAction($post_type)
+    public function createnAction($post_type)
     {
-        $this->view->setLayout('layout-admin');
+
     	Tag::setTitle("Create Blog Post");
 
         $post = new Posts();
@@ -150,7 +144,7 @@ class PostsController extends \ProfitPress\Components\BaseController
 
         $this->view->footer_editor = true;
 
-        $this->view->pick('posts/form');
+        $this->view->pick(array('posts/form', 'layout-admin'));
 
         $this->view->form = $form;
     }
@@ -339,4 +333,29 @@ class PostsController extends \ProfitPress\Components\BaseController
             return $response;
         }
     }
+
+    public function createAction($post_model = null, $post_category_model = null)
+    {
+
+        $form = new MultiForm;
+
+        $post_model = new Posts;
+        $post_category_model = new PostsCategories;
+
+        $form->addForm('post', new PostForm($post_model));
+        $form->addForm('post_category', new PostsCategoryForm($post_category_model));
+
+        if ($this->request->isPost()) {
+            if ($form->isValid()) {
+
+            } else {
+                $this->flashMessages( $form, 'error');
+            }
+        }
+
+        $this->view->form = $form;
+        $this->view->pick(array('posts/formdemo', 'layout-admin'));
+    }
+
+
 }

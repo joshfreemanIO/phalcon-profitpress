@@ -31,11 +31,10 @@ $(document).ready(
 		);
 	}
 );
-$('#nav-tab a').click(function (e) {
+$('[data-toggle-section="true"]').click(function (e) {
   e.preventDefault();
   $(this).tab('show');
-});
-;$(document).ready(function(){
+});;$(document).ready(function(){
 
     $('[data-ajax-route]').each(function() {
 
@@ -280,7 +279,13 @@ function ajaxPost(uri, data) {
 
 
 // })(jQuery);
-;new Dropzone(document.body, { // Make the whole body a dropzone
+;yepnope({
+  test : Modernizr.inputtypes && Modernizr.inputtypes.date,
+  nope : [
+  'javascript/vendor/date-timepicker/jquery.datetimepicker.css',
+    'javascript/vendor/date-timepicker/jquery.datetimepicker.js'
+  ]
+});;new Dropzone(document.body, { // Make the whole body a dropzone
 	url: "/posts/fileupload", // Set the url
 	previewsContainer: "#previews", // Define the container to display the previews
 	clickable: "#clickable", // Define the element that should be used as click trigger to select files.
@@ -405,22 +410,6 @@ function syncHeight(sourceElement, targetElement) {
 
 }
 
-function tinyMCEinit() {
-
-	var $tinyMCE = $('[data-height-target="tiny-mce"]');
-	var $source = $('[data-height-source="tiny-mce"]');
-
-	var interval = setInterval(function () {
-
-		if ($source.height() > 200) {
-			syncHeight($source,$tinyMCE);
-			clearInterval(interval);
-		} else {
-			return false;
-		}
-	}, 25);
-}
-
 function syncScrollPostion(sourceElement, targetElement) {
 
 	var $sourceElement = $(sourceElement);
@@ -452,7 +441,6 @@ $(document).ready(function(){
 	);
 	markDownInit();
 });
-
 
 function markDownInit() {
 

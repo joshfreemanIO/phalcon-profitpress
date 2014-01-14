@@ -57,7 +57,6 @@ class LoginForm extends \ProfitPress\Components\BaseForm
         $this->add($password);
 
         $submit = new Submit('Login');
-        $submit->setAttribute('value', 'Login');
 
         $this->add($submit);
 

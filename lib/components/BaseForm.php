@@ -258,9 +258,14 @@ abstract class BaseForm extends Form
 
         $this->_namespace = "$form_name";
 
-        foreach ($this->_elements as $element) {
+        foreach ($this->_elements as $element_name => $element) {
 
             $element->setName($this->getNamespacedName($element->getName()));
+
+            if (get_class($element) === "Phalcon\Forms\Element\Submit") {
+                $element->setAttribute('value', $element_name);
+                $element->setAttribute('name', $this->getNamespacedName($element_name));
+            }
         }
     }
 

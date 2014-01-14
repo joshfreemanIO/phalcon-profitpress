@@ -31,7 +31,7 @@ $(document).ready(
 		);
 	}
 );
-$('#nav-tab a').click(function (e) {
+$('[data-toggle-section="true"]').click(function (e) {
   e.preventDefault();
   $(this).tab('show');
 });
