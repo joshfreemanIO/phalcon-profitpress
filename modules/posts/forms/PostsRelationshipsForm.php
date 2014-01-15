@@ -1,92 +1,92 @@
 <?php
 
-/**
- * Contains the PostsCategoryForm class
- *
- * @category  ProfitPress
- * @package   ProfitPress\Posts\Forms
- * @author    Josh Freeman <jdfreeman@satx.rr.com>
- * @copyright 2013 Help Yourself Today LLC
- * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
- * @version   1.0.0
- * @link      http://documentation.profitpress.com
- * @since     File available since Release 1.0.0
- */
+// /**
+//  * Contains the PostsCategoryForm class
+//  *
+//  * @category  ProfitPress
+//  * @package   ProfitPress\Posts\Forms
+//  * @author    Josh Freeman <jdfreeman@satx.rr.com>
+//  * @copyright 2013 Help Yourself Today LLC
+//  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
+//  * @version   1.0.0
+//  * @link      http://documentation.profitpress.com
+//  * @since     File available since Release 1.0.0
+//  */
 
-namespace ProfitPress\Posts\Forms;
+// namespace ProfitPress\Posts\Forms;
 
-use \Phalcon\Forms\Element\Hidden,
-    \Phalcon\Forms\Element\Submit,
-    \Phalcon\Forms\Element\Text,
-    \Phalcon\Forms\Element\TextArea,
-    \Phalcon\Validation\Validator\Regex,
-    \Phalcon\Validation\Validator\PresenceOf,
-    \Phalcon\Validation\Validator\Identical;
-
-
-/**
- * [Short description]
- *
- * [Long description]
- *
- * @category ProfitPress
- * @package  ProfitPress\Posts\Forms
- * @author   Josh Freeman <jdfreeman@satx.rr.com>
- * @license  http://www.php.net/license/3_01.txt  PHP License 3.01
- * @version  1.0.0
- * @link     http://developer.profitpress.com
- * @since    1.0.0
- */
-class PostsCategoryForm extends \ProfitPress\Components\BaseForm
-{
-
-    public $noLabel = array(
-        'Phalcon\Forms\Element\Hidden',
-        'Phalcon\Forms\Element\Submit');
+// use \Phalcon\Forms\Element\Hidden,
+//     \Phalcon\Forms\Element\Submit,
+//     \Phalcon\Forms\Element\Text,
+//     \Phalcon\Forms\Element\TextArea,
+//     \Phalcon\Validation\Validator\Regex,
+//     \Phalcon\Validation\Validator\PresenceOf,
+//     \Phalcon\Validation\Validator\Identical;
 
 
-    public function initialize($entity = null)
-    {
+// /**
+//  * [Short description]
+//  *
+//  * [Long description]
+//  *
+//  * @category ProfitPress
+//  * @package  ProfitPress\Posts\Forms
+//  * @author   Josh Freeman <jdfreeman@satx.rr.com>
+//  * @license  http://www.php.net/license/3_01.txt  PHP License 3.01
+//  * @version  1.0.0
+//  * @link     http://developer.profitpress.com
+//  * @since    1.0.0
+//  */
+// class PostsCategoryForm extends \ProfitPress\Components\BaseForm
+// {
 
-        $name = new Text("name");
-        $name->setLabel("Category Name");
-        $name->addValidator(new PresenceOf(array('message' => 'Title Required')));
+//     public $noLabel = array(
+//         'Phalcon\Forms\Element\Hidden',
+//         'Phalcon\Forms\Element\Submit');
 
-        $submit = new Submit('Create New Category');
 
-        $this->add($name);
-        $this->add($submit);
+//     public function initialize($entity = null)
+//     {
 
-        $this->registerAssets();
-    }
+//         $name = new Text("name");
+//         $name->setLabel("Category Name");
+//         $name->addValidator(new PresenceOf(array('message' => 'Title Required')));
 
-    protected function registerAssets()
-    {
-        // $this->assets->collection('head')
-            // ->addJs('//tinymce.cachefly.net/4.0/tinymce.min.js', false);
-            // ->addJs('lib/tinymce/js/tinymce/tinymce.min.js');
+//         $submit = new Submit('Create New Category');
 
-        $this->assets->collection('footer')
-            ->addJs('js/permalink.js');
+//         $this->add($name);
+//         $this->add($submit);
 
-    }
+//         $this->registerAssets();
+//     }
 
-    protected function getArrayedInputs($input)
-    {
-        $pattern = "/^$input\[.*\]$/";
+//     protected function registerAssets()
+//     {
+//         // $this->assets->collection('head')
+//             // ->addJs('//tinymce.cachefly.net/4.0/tinymce.min.js', false);
+//             // ->addJs('lib/tinymce/js/tinymce/tinymce.min.js');
 
-        $elements = $this->getElements();
+//         $this->assets->collection('footer')
+//             ->addJs('js/permalink.js');
 
-        return preg_grep($pattern, array_keys($elements));
-    }
+//     }
 
-    public function renderCheckboxList($input)
-    {
+//     protected function getArrayedInputs($input)
+//     {
+//         $pattern = "/^$input\[.*\]$/";
 
-        $list = $this->getArrayedInputs($input);
+//         $elements = $this->getElements();
 
-        foreach ($list as $value) {
-            $this->renderCheckbox($this->get($value));
-        }
-    }
-}
+//         return preg_grep($pattern, array_keys($elements));
+//     }
+
+//     public function renderCheckboxList($input)
+//     {
+
+//         $list = $this->getArrayedInputs($input);
+
+//         foreach ($list as $value) {
+//             $this->renderCheckbox($this->get($value));
+//         }
+//     }
+// }

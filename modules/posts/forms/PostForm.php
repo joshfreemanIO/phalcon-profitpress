@@ -82,23 +82,17 @@ class PostForm extends \ProfitPress\Components\BaseForm
         $this->add($permalink);
 
 
-        $prerendered_content = new TextArea('prerendered_content', array('data-markdown-source' => 'content'));
-        // $prerendered_content->setLabel('prerendered_Content');
-        $prerendered_content->addValidator(new PresenceOf(array('message' => 'Please, write something!')));
-        $prerendered_content->setUserOption('no_label', true);
-        $prerendered_content->setAttribute('class', 'form-control text-height');
-        $prerendered_content->setUserOption('no_element_wrapper', true);
-        // $prerendered_content->setUserOption('form_group_attributes', array('class' => 'col-md-12'));
-        $this->add($prerendered_content);
+        $markdown = new TextArea('markdown', array('data-markdown-source' => 'content'));
+        // $markdown->setLabel('markdown');
+        $markdown->addValidator(new PresenceOf(array('message' => 'Please, write something!')));
+        $markdown->setUserOption('no_label', true);
+        $markdown->setAttribute('class', 'form-control text-height');
+        $markdown->setUserOption('no_element_wrapper', true);
+        // $markdown->setUserOption('form_group_attributes', array('class' => 'col-md-12'));
+        $this->add($markdown);
 
-        // $content = new TextArea('content', array('data-markdown-source' => 'content'));
-        // // $content->setLabel('Content');
-        // $content->addValidator(new PresenceOf(array('message' => 'Please, write something!')));
-        // $content->setUserOption('no_label', true);
-        // $content->setAttribute('class', 'form-control text-height');
-        // $content->setUserOption('no_element_wrapper', true);
-        // // $content->setUserOption('form_group_attributes', array('class' => 'col-md-12'));
-        // $this->add($content);
+        $content = new Hidden('content');
+        $this->add($content);
 
         $allow_comments = new Check('allow_comments', array('value' => 1, 'checked' => 'checked'));
         $allow_comments->setLabel('Allow Comments for this Post');
@@ -120,38 +114,27 @@ class PostForm extends \ProfitPress\Components\BaseForm
         $this->add($authorize_comments);
 
 
-        $save_draft = new Submit('Save in Drafts', array( 'class' => 'btn btn-block btn-block-no-margin btn-primary'));
-        $save_draft->setUserOption('element_attributes', array('class' => 'btn btn-block btn-info'));
-        $save_draft->setUserOption('no_element_wrapper', true);
-        $save_draft->setUserOption('no_label', true);
-        $this->add($save_draft);
 
 
         $category_name = new Text('category_name');
         $category_name->setAttribute('placeholder', 'Category Name');
         $category_name->setAttribute('class', 'form-control');
 
-        \ProfitPress\Posts\Models\PostsCategories::addFormElements($this);
+        // \ProfitPress\Posts\Models\PostsCategories::addFormElements($this);
 
         // $category_name->addValidator(new PresenceOf(array('message' => 'Please, write something!')));
 
         $this->add($category_name);
 
+        $save_draft = new Submit('save_draft', array( 'class' => 'btn btn-block btn-block-no-margin btn-primary'));
+        $save_draft->setAttribute('value', 'Save in Drafts');
+        $save_draft->setUserOption('element_attributes', array('class' => 'btn btn-block btn-info'));
+        $save_draft->setUserOption('no_element_wrapper', true);
+        $save_draft->setUserOption('no_label', true);
+        $this->add($save_draft);
 
-        $add_category = new Submit('Add Category');
-
-        $add_category->setAttribute('name', 'add_category');
-        $add_category->setAttribute('class', 'btn btn-info');
-        $add_category->setAttribute('type', 'button');
-
-        $add_category->setAttribute('data-ajax-route', '/posts/createcategory');
-        $add_category->setAttribute('data-ajax-input', 'category_name');
-
-        $this->add($add_category);
-
-
-        $publish = new Submit('Publish New Post');
-        $publish->setAttribute('name', 'submit');
+        $publish = new Submit('publish_immediately');
+        $publish->setAttribute('value', 'Publish Post');
         $publish->setAttribute('class', 'btn btn-block btn-block-no-margin btn-success');
 
         $publish->setUserOption('element_attributes', array('class' => 'btn btn-block btn-success'));
@@ -216,23 +199,5 @@ class PostForm extends \ProfitPress\Components\BaseForm
 
             // ->addJs('lib/jquery-custom-scrollbar/jquery.custom-scrollbar.js');
 
-    }
-   protected function getArrayedInputs($input)
-    {
-        $pattern = "/^$input\[.*\]$/";
-
-        $elements = $this->getElements();
-
-        return preg_grep($pattern, array_keys($elements));
-    }
-
-    public function renderCheckboxList($input)
-    {
-
-        $list = $this->getArrayedInputs($input);
-
-        foreach ($list as $value) {
-            $this->renderCheckbox($this->get($value));
-        }
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Contains the PostsRelationships class
+ * Contains the Categories class
  *
  * @category  ProfitPress
  * @package   ProfitPress\Posts\Models
@@ -15,7 +15,8 @@
 
 namespace ProfitPress\Posts\Models;
 
-use Phalcon\Mvc\Model\Validator\PresenceOf;
+use Phalcon\Mvc\Model\Validator\PresenceOf,
+    Phalcon\Mvc\Model\Validator\Uniqueness;
 
 
 /**
@@ -31,69 +32,57 @@ use Phalcon\Mvc\Model\Validator\PresenceOf;
  * @link     http://developer.profitpress.com
  * @since    1.0.0
  */
-class PostsRelationships extends \ProfitPress\Components\BaseModel
+class Categories extends \ProfitPress\Components\BaseModel
 {
 
     /**
      * @var integer
      *
      */
-    public $post_id;
+    public $category_id;
 
     /**
      * @var string
      *
      */
-    public $category_id;
+    public $name;
 
-    public function initialize()
-    {
-        $this->hasManyToMany(
-           'post_id',
-           '\ProfitPress\Posts\Models\Posts',
-           'post_id',
-           'category_id',
-           '\ProfitPress\Posts\Models\PostsCategories',
-           'category_id'
-        );
-    }
 
     public function validation()
     {
 
         $this->validate(new PresenceOf(
             array(
-                'field' => 'post_id',
+                'field' => 'name',
                 'message' => 'Category name cannot be empty when adding a new category'
                 )
 
             ));
 
-        $this->validate(new PresenceOf(
+        $this->validate(new Uniqueness(
             array(
-                'field' => 'category_id',
-                'message' => 'Category name cannot be empty when adding a new category'
+                'field' => 'name',
+                'message' => "\"$this->name\" already exists",
                 )
 
             ));
 
-        if ($this->validationHasFailed() == true) {
-          return false;
-        }
+        return $this->validationHasFailed() !== true;
     }
 
-    public function addRelationship($post_id, $category_id) {
+    public static function addFormElements(\ProfitPress\Posts\Forms\PostForm $form)
+    {
+        $categories = self::find();
 
-        $this->post_id = $post_id;
+        foreach ($categories as $category) {
 
-        $this->category_id = $category_id;
+            $name = "category[$category->name]";
 
-        if ( !$this->validateModel() || !$this->save() ) {
-
-            foreach ($this->getMessages() as $message) {
-
-                $this->flash->error($message);
-            }
+            $check = new \Phalcon\Forms\Element\Check($name);
+            $check->setLabel($category->name);
+            $attributes = $check->prepareAttributes(array('value' => $category->category_id), true);
+            $check->setAttributes($attributes);
+            $form->add($check);
         }
     }
 }

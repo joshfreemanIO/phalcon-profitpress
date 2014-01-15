@@ -55,7 +55,7 @@ class Posts extends \ProfitPress\Components\BaseModel
      * @var string
      *
      */
-    protected $prerendered_content;
+    protected $markdown;
 
     /**
      * @var string

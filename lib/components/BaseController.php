@@ -34,6 +34,9 @@ use Phalcon\Mvc\Controller;
 abstract class BaseController extends Controller
 {
 
+    use \ProfitPress\Traits\FlashMessages;
+
+
     public function beforeExecuteRoute(\ProfitPress\Dispatcher\Dispatcher $dispatcher)
     {
 
@@ -87,10 +90,10 @@ abstract class BaseController extends Controller
         return true;
     }
 
-    protected function flashMessages($entity, $flash_type)
+
+
+    public function formAndModelValidationAndSaving($form, $model)
     {
-        foreach ($entity->getMessages() as $message) {
-            $this->flash->{$flash_type}($message);
-        }
+
     }
 }

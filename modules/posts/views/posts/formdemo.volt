@@ -1,7 +1,6 @@
 <?php
 
 $form->post->renderFormStart();
-// $form->post->renderFormStart(array('class' => 'dropzone'));
 
 ?>
 <div class="row">
@@ -46,7 +45,7 @@ $form->post->renderFormStart();
                 <h4>Permanent Url</h4>
                 <div class="col-md-10">
                     <div class="input-group">
-                        <span class="input-group-addon"><?php echo $this->getDi()->getShared('site')->base_url . '/';; ?></span>
+                        <label class="input-group-addon"><?php echo $this->getDi()->getShared('site')->base_url . '/';; ?></label>
                     <?php
                         echo $form->post->render('permalink');
                           // $form->post->renderFormGroup('permalink');
@@ -62,18 +61,20 @@ $form->post->renderFormStart();
                 <div class="col-md-4">
                     <h5>Select the applicable categories</h5>
                         <?php
-                            $form->post_category->renderCheckboxList('category');
+                            echo $form->post_category->renderCheckboxList();
+                            // var_dump($form->post_category);
                         ?>
                 </div>
                 <div class="col-md-4">
                     <h5>Create new category</h5>
                     <div class="row">
                         <div class="col-md-8">
-                            <?php echo $form->post_category->render('name') ?>
-                        </div>
-                        <div class="col-md-4">
-                          <button type="button" data-ajax-route="/posts/createcategory" data-ajax-input="category_name" class="btn btn-info">Add Category</button>
-                            <?php //echo $form->post->render('Add Category') ?>
+                            <div class="row">
+                                <?php echo $form->category->render('name') ?>
+                            </div>
+                            <div class="row">
+                                <?php echo $form->category->render('Create New Category') ?>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -86,7 +87,7 @@ $form->post->renderFormStart();
              $form->post->renderFormGroup('authorize_comments');
           ?>
         </section>
-        <section id="metadata" class="tab-pane fade">
+        <section id="metadata" class="tab-pane fade in">
             <h3>Metadata Editor</h3>
             <?php
             $form->post->renderFormGroup("head-title");
@@ -101,16 +102,16 @@ $form->post->renderFormStart();
                 <p>&lt;meta name="description" value="<span id="head-description-viewer" data-copy-target="head-description"></span>" /&gt;</p>
              </div>
         </section>
-        <section id="twitter-cards" class="tab-pane fade">
+        <section id="twitter-cards" class="tab-pane fade in">
             <h3>Twitter Card</h3>
         </section>
-        <section id="facebook-og" class="tab-pane fade">
+        <section id="facebook-og" class="tab-pane fade in">
             <h3>Facebook Open Graph</h3>
         </section>
-        <section id="google+" class="tab-pane fade">
+        <section id="google-plus" class="tab-pane fade in">
             <h3>Google+ Graph</h3>
         </section>
-        <section id="publishing-options" class="tab-pane fade">
+        <section id="publishing-options" class="tab-pane fade in">
             <h3>Publishing Options</h3>
             <p>You can choose to publish your post at a specific time and you can let your post expire so that it is no longer visible after a certain period.</p>
             <?php $form->post->renderFormGroup('publish_date'); ?>
@@ -120,7 +121,7 @@ $form->post->renderFormStart();
 </div>
 <footer class="editor navbar navbar-default">
     <ul id="nav-tab" class="nav navbar-nav">
-        <li class="active"><a data-toggle-option="true" href="#content-holder" >Content</a></li>
+        <li class="active"><a data-toggle-section="true" href="#content-holder" >Content</a></li>
         <li><a data-toggle-section="true" href="#excerpt-container">Summary</a></li>
         <li><a data-toggle-section="true" href="#category">Discovery</a></li>
         <li><a data-toggle-section="true" href="#general-options">Comment Options</a></li>
@@ -130,7 +131,7 @@ $form->post->renderFormStart();
             <ul class="dropdown-menu">
                 <li><a data-toggle-section="true" href="#twitter-cards">Twitter Cards</a></li>
                 <li><a data-toggle-section="true" href="#facebook-og">Facebook Open Graph</a></li>
-                <li><a data-toggle-section="true" href="#google+">Google+ Graph</a></li>
+                <li><a data-toggle-section="true" href="#google-plus">Google+ Graph</a></li>
             </ul>
         </li>
     </ul>
@@ -138,8 +139,8 @@ $form->post->renderFormStart();
         <button type="button" class="btn btn-default dropdown-toggle dropup pseudo-navbar-button" data-toggle="dropdown">Publishing&nbsp;<span class="caret"></span></button>
         <div class="dropdown-menu dropup-menu publishing-menu">
             <a data-toggle-section="true" class="btn btn-block btn-block-no-margin btn-danger" href="#publishing-options">Advanced Options</a>
-            <?php echo $form->post->render('Save in Drafts'); ?>
-            <?php echo $form->post->render('Publish New Post'); ?>
+            <?php echo $form->post->render('save_draft'); ?>
+            <?php echo $form->post->render('publish_immediately'); ?>
         </div>
     </div>
 </footer>

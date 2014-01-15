@@ -50,6 +50,8 @@ abstract class BaseForm extends Form
 
     public $elements;
 
+    protected $_submit_actions = array();
+
     protected $_namespace = '';
 
     public function __construct($entity = null, $options = null)
@@ -59,8 +61,6 @@ abstract class BaseForm extends Form
         // $this->add($this->setCsrf());
 
         parent::__construct($entity, $options);
-
-        $this->namespaceForm();
 
     }
 
@@ -159,11 +159,12 @@ abstract class BaseForm extends Form
         $element->setAttributes($element_attributes);
 
         if ($element->getUserOption('no_element_wrapper') === true) {
-            echo $element;
+            echo $this->render($element->getName());
             return true;
         }
+
         echo Tag::tagHtml('div', $element_wrapper_attributes);
-        echo $element;
+        echo $this->render($element->getName());
         echo Tag::tagHtmlClose('div');
     }
 
@@ -234,11 +235,15 @@ abstract class BaseForm extends Form
 
     public function renderCheckbox($element)
     {
+        if (gettype($element) === "string" && !empty($this->_elements[$element])) {
+            $element = $this->_elements[$element];
+        }
+
         $div_attributes = array('class' => 'checkbox', 'data-checkbox-name' => $element->getName());
 
         $html  = Tag::tagHtml('div', $div_attributes);
             $html .= Tag::tagHtml('label');
-                $html .= $element;
+                $html .= $this->render($element->getName());
                 $html .= $element->getLabel();
             $html .= Tag::tagHtmlClose('label');
         $html .= '</div>';
@@ -246,32 +251,72 @@ abstract class BaseForm extends Form
         echo $html;
     }
 
-    public function namespaceForm($form_name = null)
+
+    public function renderCheckboxList()
     {
-        if ($form_name === null) {
-            $form_name = get_class($this);
+        $html = '';
+
+        foreach ($this->getElements() as $element) {
+            $html .= $this->renderCheckbox($element);
         }
 
-        if (gettype($form_name) !== 'string') {
-            throw new \Phalcon\Forms\Exception("Parameter $form_name must be empty, null, or a string");
+        return $html;
+    }
+
+    /**
+     * Renders a specific item in the form
+     *
+     * @param string name
+     * @param array attributes
+     * @return string
+     */
+    public function render($name, $attributes=null)
+    {
+        if (empty($this->_elements[$name])) {
+            throw new \Phalcon\Forms\Exception("Element with ID=" . $name . " is not part of the form");
         }
 
-        $this->_namespace = "$form_name";
+        $attributes['name'] = $this->getNamespacedName($name);
 
-        foreach ($this->_elements as $element_name => $element) {
+        return $this->_elements[$name]->render($attributes);
+    }
 
-            $element->setName($this->getNamespacedName($element->getName()));
+    // public function namespaceForm($form_name = null)
+    // {
+    //     if ($form_name === null) {
+    //         $form_name = get_class($this);
+    //     }
 
-            if (get_class($element) === "Phalcon\Forms\Element\Submit") {
-                $element->setAttribute('value', $element_name);
-                $element->setAttribute('name', $this->getNamespacedName($element_name));
-            }
-        }
+    //     if (gettype($form_name) !== 'string') {
+    //         throw new \Phalcon\Forms\Exception("Parameter $form_name must be empty, null, or a string");
+    //     }
+
+    //     $this->_namespace = "$form_name";
+
+    //     foreach ($this->_elements as $element_name => $element) {
+
+    //         $element->setName($this->getNamespacedName($element->getName()));
+
+    //         if (get_class($element) === "Phalcon\Forms\Element\Submit") {
+    //             $element->setAttribute('value', $element_name);
+    //             $element->setAttribute('name', $this->getNamespacedName($element_name));
+    //         }
+    //     }
+    // }
+    public function setNamespace()
+    {
+        $this->_namespace = get_class($this);
+
+        return $this->_namespace;
     }
 
     public function getNamespace()
     {
-        return get_class($this);
+        if (!empty($this->_namespace)) {
+            return $this->_namespace;
+        } else {
+            return $this->setNamespace();
+        }
     }
 
     public function getNamespacedName($name)
@@ -280,7 +325,7 @@ abstract class BaseForm extends Form
             throw new \Phalcon\Forms\Exception("Parameter $name must be non-empty and a string");
         }
 
-        return $this->_namespace . '[' . $name . ']';
+        return $this->getNamespace() . '[' . $name . ']';
     }
 
     public function bind($data, $entity, $whitelist = null)
@@ -294,8 +339,9 @@ abstract class BaseForm extends Form
 
     public function isValid($data = null, $entity = null)
     {
-        if ($data !== null && !empty($data[$this->_namespace])) {
-            $data = $data[$this->_namespace];
+        $namespace = $this->getNamespace();
+        if ($data !== null && !empty($data[$namespace])) {
+            $data = $data[$namespace];
         }
 
         return parent::isValid($data, $entity);
@@ -326,4 +372,18 @@ abstract class BaseForm extends Form
         return array_keys($this->getElements());
     }
 
+    public function add($element)
+    {
+        if (strpos(get_class($element), 'Submit')) {
+
+            $this->_submit_actions[] = $element->getName();
+        }
+
+        parent::add($element);
+    }
+
+    public function getSubmitActions()
+    {
+        return $this->_submit_actions;
+    }
 }

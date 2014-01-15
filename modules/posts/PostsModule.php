@@ -46,6 +46,7 @@ class PostsModule implements ModuleDefinitionInterface
         $loader->registerNamespaces(
             array(
                 'ProfitPress\Posts\Controllers' => __DIR__.'/controllers',
+                'ProfitPress\Posts\Entities'      => __DIR__.'/entities',
                 'ProfitPress\Posts\Models'      => __DIR__.'/models',
                 'ProfitPress\Posts\Forms'       => __DIR__.'/forms',
             )
@@ -88,5 +89,4 @@ class PostsModule implements ModuleDefinitionInterface
         });
 
     }
-
 }

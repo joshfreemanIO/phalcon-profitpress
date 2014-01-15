@@ -16,12 +16,14 @@
 namespace ProfitPress\Posts\Controllers;
 
 use ProfitPress\Posts\Forms\PostForm,
+    ProfitPress\Posts\Forms\CategoryForm,
     ProfitPress\Posts\Forms\PostsCategoryForm;
 
 use ProfitPress\Components\MultiForm;
 
 use Phalcon\Tag,
     ProfitPress\Posts\Models\Posts,
+    ProfitPress\Posts\Entities\PostsCategoriesEntity,
     ProfitPress\Posts\Models\PostsCategories,
     ProfitPress\Posts\Models\Users,
     ProfitPress\Posts\Models\Categories,
@@ -334,28 +336,60 @@ class PostsController extends \ProfitPress\Components\BaseController
         }
     }
 
-    public function createAction($post_model = null, $post_category_model = null)
+    public function createAction($post_model = null, $category_model = null)
     {
 
         $form = new MultiForm;
 
+
         $post_model = new Posts;
-        $post_category_model = new PostsCategories;
+        $category_model = new Categories;
+        $post_categories_entity = new PostsCategoriesEntity;
 
         $form->addForm('post', new PostForm($post_model));
-        $form->addForm('post_category', new PostsCategoryForm($post_category_model));
+        $form->addForm('category', new CategoryForm($category_model));
+        $form->addForm('post_category', new PostsCategoryForm($post_categories_entity));
 
         if ($this->request->isPost()) {
-            if ($form->isValid()) {
 
-            } else {
-                $this->flashMessages( $form, 'error');
+            $data = $this->request->getPost();
+
+            switch ($form->getSubmitAction()) {
+                case 'Create New Category':
+                    $category_controller = new \ProfitPress\Posts\Controllers\CategoryController;
+                    $category_controller->addCategory($form->post_category);
+                    break;
+
+                case 'publish_immediately':
+                case 'save_draft':
+
+                    if ($form->post->isValid($data, $post_model) && $form->post->getEntity()->save()) {
+                        // var_dump($form->post->getEntity()->save());
+                        $post_id = $form->post->getEntity()->post_id;
+                    } else {
+                        $this->flashMessages($form->post, 'error');
+                        $this->flashMessages($form->post->getEntity(), 'error');
+                        // return false;
+                    }
+
+                    // var_dump($post_id);
+                    // die();
+
+                    if (!empty($post_id) && $form->post_category->isValid($data, $post_categories_entity)) {
+                        $form->post_category->getEntity()->save($post_id);
+                    } else {
+                        $this->flashMessages($form->post_category, 'error');
+                        // return false;
+                    }
+
+                break;
+
+                default:
+                    break;
             }
         }
 
         $this->view->form = $form;
         $this->view->pick(array('posts/formdemo', 'layout-admin'));
     }
-
-
 }

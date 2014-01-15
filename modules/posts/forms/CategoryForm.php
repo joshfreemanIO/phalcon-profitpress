@@ -17,13 +17,11 @@ namespace ProfitPress\Posts\Forms;
 
 use \Phalcon\Forms\Element\Hidden,
     \Phalcon\Forms\Element\Submit,
-    \Phalcon\Forms\Element\Check,
     \Phalcon\Forms\Element\Text,
     \Phalcon\Forms\Element\TextArea,
     \Phalcon\Validation\Validator\Regex,
     \Phalcon\Validation\Validator\PresenceOf,
     \Phalcon\Validation\Validator\Identical;
-
 
 /**
  * [Short description]
@@ -38,7 +36,7 @@ use \Phalcon\Forms\Element\Hidden,
  * @link     http://developer.profitpress.com
  * @since    1.0.0
  */
-class PostsCategoryForm extends \ProfitPress\Components\BaseForm
+class CategoryForm extends \ProfitPress\Components\BaseForm
 {
 
     public $noLabel = array(
@@ -49,24 +47,18 @@ class PostsCategoryForm extends \ProfitPress\Components\BaseForm
     public function initialize($entity = null)
     {
 
-        $entity->getCategories();
+        $name = new Text("name");
+        $name->setLabel("Category Name");
+        $name->addValidator(new PresenceOf(array('message' => 'The category name cannot be empty')));
+        $name->setAttribute('class', 'form-control');
 
-        foreach ($entity->getCategories() as $category_id => $name) {
+        $submit = new Submit('Create New Category');
+        $submit->setAttribute('class', 'btn btn-block btn-info');
+        $submit->setAttribute('data-ajax-route', '/posts/createcategory');
+        $submit->setAttribute('data-ajax-input', 'category_name');
 
-            $check = new Check($name);
+        $this->add($name);
+        $this->add($submit);
 
-            if ($entity->$name === true) {
-               $check->setAttribute('checked', 'checked');
-            }
-
-            $check->setAttribute('value', $category_id);
-
-            $check->setLabel($name);
-            $check->setUserOption('form_group_attributes', array('class' => 'col-md-6'));
-            $check->setUserOption('label_attributes', array('class' => 'col-md-8'));
-            $check->setUserOption('element_wrapper_attributes', array('class' => 'col-md-4'));
-            $this->add($check);
-
-        }
     }
 }

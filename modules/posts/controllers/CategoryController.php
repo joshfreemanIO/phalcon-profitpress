@@ -20,6 +20,9 @@ use \Phalcon\Mvc\Model\Criteria,
     \ProfitPress\Posts\Models\Users as Users,
     \ProfitPress\Posts\Models\Categories as Categories;
 
+use ProfitPress\Posts\Forms\PostsCategoryForm;
+
+use ProfitPress\Posts\Models\PostsCategories;
 
 /**
  * [Short description]
@@ -37,43 +40,71 @@ use \Phalcon\Mvc\Model\Criteria,
 class CategoryController extends \ProfitPress\Components\BaseController
 {
 
-    public function addAction()
+    public function addCategory(PostsCategoryForm $form = null, PostsCategories $model = null)
     {
+        if (empty($form)) {
+            $form = new PostCategoryForm;
+        }
 
-        $content = array();
+        if (empty($model)) {
+            $model = new PostsCategories;
+        }
 
+        $messages = array();
+
+        $form->bind($this->request->getPost(), $model);
+
+        if ($form->isValid() ) {
+
+            if ($model->validation() && $model->save()) {
+
+            } else {
+                array_merge($messages, $model->getMessages());
+            }
+
+        } else {
+            $this->flashMessages($form, 'error');
+            array_merge($messages, $form->getMessages());
+        }
+
+        if ($this->request->isAjax()) {
+            return $this->ajaxResponse($model->get('name'), $messages);
+        }
+
+        if ($this->request->isPost()) {
+            return $this->postResponse($model->get('name'), $messages);
+        }
+
+    }
+
+    protected function ajaxResponse($name, $messages = null)
+    {
         $response = new \Phalcon\Http\Response();
 
         $response->setStatusCode(200, 'OK');
 
-        if (!$this->request->isAjax()) {
-           
-            $content['errors'][] = "Invalid Ajax Request";
-        }
-
-        $name = $this->request->getPost('value');
-        $result = $this->addCategory($name);
-
-        if ($result !== true) {
-
-            foreach ($result as $error) {
-                $content['errors'][] = $error;
-            }
-        }
+        $response->setContentType('application/json', 'UTF-8');
 
         $content['name'] = $name;
 
-        if (!empty($content['errors'])) {
-            $response->setStatusCode(409, 'Conflict: Category Errors');
+        if (!empty($messages)) {
+
+            $response->setStatusCode(409, 'An Error Has Occurred');
+
+            $content['error'] = $messages;
         }
 
-        $response->setContentType('application/json', 'UTF-8');
         $response->setContent(json_encode($content));
 
-        $this->view->disable;
-
         return $response;
+
     }
+
+    protected function postResponse($name, $messages = null)
+    {
+
+    }
+
 
     public function updateAction()
     {

@@ -38,52 +38,62 @@ class PostsCategories extends \ProfitPress\Components\BaseModel
      * @var integer
      *
      */
-    public $category_id;
+    public $post_id;
 
     /**
      * @var string
      *
      */
-    public $name;
+    public $category_id;
 
+    public function initialize()
+    {
+        $this->hasManyToMany(
+           'post_id',
+           '\ProfitPress\Posts\Models\Posts',
+           'post_id',
+           'category_id',
+           '\ProfitPress\Posts\Models\PostsCategories',
+           'category_id'
+        );
+    }
 
     public function validation()
     {
 
         $this->validate(new PresenceOf(
             array(
-                'field' => 'name',
-                'message' => 'Category name cannot be empty when adding a new category'
+                'field' => 'post_id',
+                'message' => 'Post ID cannot be empty'
                 )
 
             ));
 
-        $this->validate(new Uniqueness(
+        $this->validate(new PresenceOf(
             array(
-                'field' => 'name',
-                'message' => "\"$this->name\" already exists",
+                'field' => 'category_id',
+                'message' => 'category_id cannot be empty'
                 )
 
             ));
 
         if ($this->validationHasFailed() == true) {
-            return false;
+          return false;
         }
     }
 
-    public static function addFormElements(\ProfitPress\Posts\Forms\PostForm $form)
-    {
-        $categories = self::find();
+    public function addRelationship($post_id, $category_id) {
 
-        foreach ($categories as $category) {
+        $this->post_id = $post_id;
 
-            $name = "category[$category->name]";
+        $this->category_id = $category_id;
 
-            $check = new \Phalcon\Forms\Element\Check($name);
-            $check->setLabel($category->name);
-            $attributes = $check->prepareAttributes(array('value' => $category->category_id), true);
-            $check->setAttributes($attributes);
-            $form->add($check);
+        if ( !$this->validateModel() || !$this->save() ) {
+
+            foreach ($this->getMessages() as $message) {
+
+                $this->flash->error($message);
+            }
         }
     }
 }

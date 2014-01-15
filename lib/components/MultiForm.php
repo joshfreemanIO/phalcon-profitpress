@@ -44,10 +44,21 @@ class MultiForm extends Component
 
 	protected $_data = array();
 
+	protected $_messages = array();
+
 	public function __construct()
 	{
 		if ($this->getDI()->getRequest()->isPost()) {
-			$this->_data = $this->request->getPost();
+			$this->_data = $this->getDI()->getRequest()->getPost();
+		}
+	}
+
+	public function __get($form_name)
+	{
+		if (array_key_exists($form_name, $this->_forms)) {
+			return $this->_forms[$form_name];
+		} else {
+			throw new Exception("'$form_name' does not exist in the '$form_name' array");
 		}
 	}
 
@@ -59,15 +70,6 @@ class MultiForm extends Component
 			throw new Exception(get_class($form) . " does not extend ". $this->_base_form_class_name);
 		}
 
-	}
-
-	public function __get($form_name)
-	{
-		if (array_key_exists($form_name, $this->_forms)) {
-			return $this->_forms[$form_name];
-		} else {
-			throw new Exception("'$form_name' does not exist in the $_forms array");
-		}
 	}
 
 	public function isValid()
@@ -94,4 +96,21 @@ class MultiForm extends Component
 		return $this->_messages;
 	}
 
+	public function getSubmitAction()
+	{
+		foreach ($this->_forms as $form) {
+
+			$data = $this->_data[$form->getNamespace()];
+
+			$submits = $form->getSubmitActions();
+
+			$action = array_intersect(array_keys($data), $submits);
+
+			if (!empty($action)) {
+				return array_shift($action);
+			}
+		}
+
+		return null;
+	}
 }
