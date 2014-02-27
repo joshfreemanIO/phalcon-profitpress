@@ -22,7 +22,7 @@ use \Phalcon\Mvc\Model\Criteria,
 
 use ProfitPress\Posts\Forms\PostsCategoryForm;
 
-use ProfitPress\Posts\Models\PostsCategories;
+// use ProfitPress\Posts\Models\Categories;
 
 /**
  * [Short description]
@@ -40,14 +40,14 @@ use ProfitPress\Posts\Models\PostsCategories;
 class CategoryController extends \ProfitPress\Components\BaseController
 {
 
-    public function addCategory(PostsCategoryForm $form = null, PostsCategories $model = null)
+    public function addCategory(PostsCategoryForm $form = null, Categories $model = null)
     {
         if (empty($form)) {
             $form = new PostCategoryForm;
         }
 
         if (empty($model)) {
-            $model = new PostsCategories;
+            $model = new Categories;
         }
 
         $messages = array();

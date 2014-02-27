@@ -32,13 +32,14 @@ function linkify(string) {
 	return a.replace(/^[^a-zA-Z0-9]|[^a-zA-Z0-9]$/gi, '');
 }
 
-function copySourceToTarget(index, element) {
-	var id = $(element).attr('data-copy-target');
+function copySourceToTarget(index, target) {
+	var id = $(target).attr('data-copy-target');
 
 	var source = '[data-copy-source="'+id+'"]';
+
 	$(source).on('change input',function(e){
-		sync(source, element);
-		$(element).trigger('change');
+		sync(source, target);
+		$(target).trigger('change');
 	});
 }
 
@@ -126,6 +127,8 @@ function markDownInit() {
 			var $targetElement = $('[data-markdown-target="'+$sourceElement.attr('data-markdown-source')+'"]');
 
 			markDown($sourceElement,$targetElement);
+
+			$targetElement.trigger('change');
 
 		});
 

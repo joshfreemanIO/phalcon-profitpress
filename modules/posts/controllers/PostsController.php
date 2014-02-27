@@ -112,65 +112,45 @@ class PostsController extends \ProfitPress\Components\BaseController
         $this->view->setVar('post', $post);
     }
 
-    public function postManager(Posts $posts_model, PostsCategories $posts_categories_model)
-    {
-        $post_form = new PostForm;
+    // public function postManager(Posts $posts_model, PostsCategories $posts_categories_model)
+    // {
+    //     $post_form = new PostForm;
 
-        $post_form->bindData($this->request->getPost(), $posts_model);
+    //     $post_form->bindData($this->request->getPost(), $posts_model);
 
-        $posts_categories_form = new PostsCategoriesForm;
+    //     $posts_categories_form = new PostsCategoriesForm;
 
-        $posts_categories_form->bindData($this->request->getPost(), $posts_categories_model);
+    //     $posts_categories_form->bindData($this->request->getPost(), $posts_categories_model);
 
-        if (!$post_form->isValid()) {
-            $this->flashMessages($post_form, 'error');
-        }
+    //     if (!$post_form->isValid()) {
+    //         $this->flashMessages($post_form, 'error');
+    //     }
 
-        if (!$posts_categories_form->isValid()) {
-            $this->flashMessages($post_form, 'error');
-        }
+    //     if (!$posts_categories_form->isValid()) {
+    //         $this->flashMessages($post_form, 'error');
+    //     }
 
-        $posts_categories_form->isValid();
-    }
+    //     $posts_categories_form->isValid();
+    // }
 
-    public function createnAction($post_type)
-    {
+    // public function createnAction($post_type)
+    // {
 
-    	Tag::setTitle("Create Blog Post");
+    // 	Tag::setTitle("Create Blog Post");
 
-        $post = new Posts();
+    //     $post = new Posts();
 
-        $form = new PostForm($post);
+    //     $form = new PostForm($post);
 
-        $form = $this->actBasedUponSubmitType($post, $form);
+    //     $form = $this->actBasedUponSubmitType($post, $form);
 
-        $this->view->footer_editor = true;
+    //     $this->view->footer_editor = true;
 
-        $this->view->pick(array('posts/form', 'layout-admin'));
+    //     $this->view->pick(array('posts/form', 'layout-admin'));
 
-        $this->view->form = $form;
-    }
+    //     $this->view->form = $form;
+    // }
 
-    public function editAction($post_id)
-    {
-
-        Tag::setTitle("Edit Post");
-
-        $condition = 'post_id = :post_id:';
-        $bind = array('post_id' => $post_id);
-
-        $post = Posts::findFirst(array($condition, 'bind' => $bind));
-
-        $form = new PostForm($post);
-
-        $form = $this->actBasedUponSubmitType($post, $form);
-
-        $this->view->pick('posts/form');
-        $this->view->footer_editor = true;
-
-        $this->view->form = $form;
-
-    }
 
     protected function actBasedUponSubmitType(Posts $post, PostForm $form)
     {
@@ -336,18 +316,50 @@ class PostsController extends \ProfitPress\Components\BaseController
         }
     }
 
-    public function createAction($post_model = null, $category_model = null)
+    public function createAction()
     {
+        $form = $this->postManager();
 
+        $this->view->form = $form;
+        $this->view->pick(array('posts/formdemo', 'layout-admin'));
+    }
+
+    public function editAction($post_id)
+    {
+        Tag::setTitle("Edit Post");
+
+        if (ctype_digit($post_id)) {
+            $column = 'post_id';
+            $condition = 'post_id = :post_id:';
+        } else {
+            $column = 'slug';
+            $condition = 'slug = :slug:';
+        }
+
+        $condition = "$column = :$column:";
+        $bind = array('post_id' => $post_id);
+
+        $post_model = Posts::findFirst(array($condition, 'bind' => $bind));
+
+        $form = $this->postManager($post_model);
+
+        $this->view->form = $form;
+        $this->view->pick(array('posts/formdemo', 'layout-admin'));
+
+    }
+
+    protected function postManager($post_model = null)
+    {
         $form = new MultiForm;
 
 
-        $post_model = new Posts;
-        $category_model = new Categories;
+        $post_model = !empty($post_model) ? $post_model : new Posts;
+        $category_model = !empty($category_model) ? $category_model : new Categories;
+
         $post_categories_entity = new PostsCategoriesEntity;
 
         $form->addForm('post', new PostForm($post_model));
-        $form->addForm('category', new CategoryForm($category_model));
+        $form->addForm('category', new CategoryForm);
         $form->addForm('post_category', new PostsCategoryForm($post_categories_entity));
 
         if ($this->request->isPost()) {
@@ -389,7 +401,6 @@ class PostsController extends \ProfitPress\Components\BaseController
             }
         }
 
-        $this->view->form = $form;
-        $this->view->pick(array('posts/formdemo', 'layout-admin'));
+        return $form;
     }
 }

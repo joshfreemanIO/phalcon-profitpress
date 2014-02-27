@@ -92,6 +92,8 @@ class PostForm extends \ProfitPress\Components\BaseForm
         $this->add($markdown);
 
         $content = new Hidden('content');
+        $content->setAttribute('data-copy-target', 'rendered-markdown');
+        $content->setAttribute('data-copy-html', 'true');
         $this->add($content);
 
         $allow_comments = new Check('allow_comments', array('value' => 1, 'checked' => 'checked'));

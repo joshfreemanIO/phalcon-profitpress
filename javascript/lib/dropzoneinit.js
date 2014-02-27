@@ -9,7 +9,7 @@ new Dropzone(document.body, { // Make the whole body a dropzone
 
         this.on("success", function(file, messages) {
 
-            var textarea = document.getElementById("prerendered_content");
+            var textarea = document.getElementById("markdown");
 
             var content = textarea.value;
 

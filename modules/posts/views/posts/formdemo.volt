@@ -21,12 +21,13 @@ $form->post->renderFormStart();
                     <div class="col-md-6">
                         <div class="col-md-12"  data-height-source="tiny-mce">
                         <?php
-                          $form->post->renderFormGroup('prerendered_content');
+                            echo $form->post->renderFormGroup('markdown');
+                            echo $form->post->render('content');
                          ?>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="col-md-12 content-viewer" data-markdown-target="content" data-copy-iframe-target="tinymce-content" data-copy-html="true"  data-height-target="tiny-mce"></div>
+                        <div class="col-md-12 content-viewer" data-markdown-target="content" data-copy-source='rendered-markdown'></div>
                     </div>
                 </div>
                 <div id="previews" class="dropzone-previews"></div>
