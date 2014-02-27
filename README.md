@@ -1,4 +1,4 @@
 phalcon-profitpress
 ===================
 
-Repository for profitpress project using the Phalcon framework
+Repository for ProfitPress project using the Phalcon framework
